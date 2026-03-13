@@ -37,7 +37,7 @@ jobs:
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Rector Cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: /tmp/rector
           key: ${{ runner.os }}-rector-${{ hashFiles('rector.php', 'composer.lock') }}
@@ -45,7 +45,7 @@ jobs:
             ${{ runner.os }}-rector-
 
       - name: Pint Cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ./storage/pint.cache
           key: ${{ runner.os }}-pint-${{ hashFiles('pint.json', 'composer.lock') }}
@@ -89,7 +89,7 @@ jobs:
         run: pnpm lint:css
 
       - name: PHPStan Result Cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: /tmp/phpstan
           key: phpstan-results-${{ hashFiles('phpstan.neon', 'composer.lock') }}
@@ -131,7 +131,7 @@ jobs:
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: PHPUnit Cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ./.phpunit.cache
           key: ${{ runner.os }}-phpunit-php${{ matrix.php }}-${{ hashFiles('phpunit.xml', 'composer.lock') }}
