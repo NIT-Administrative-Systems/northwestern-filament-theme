@@ -10,6 +10,16 @@ updates:
     schedule:
       interval: monthly
 
+  - package-ecosystem: npm
+    directory: "/"
+    groups:
+      patch:
+        update-types:
+          - patch
+          - minor
+    schedule:
+      interval: monthly
+
   - package-ecosystem: "github-actions"
     directory: "/"
     groups:

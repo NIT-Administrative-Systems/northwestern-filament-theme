@@ -18,3 +18,4 @@
 /.stylelintrc.json export-ignore
 /package.json export-ignore
 /pnpm-lock.yaml export-ignore
+/CHANGELOG.md export-ignore
