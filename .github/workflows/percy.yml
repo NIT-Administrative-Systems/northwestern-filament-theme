@@ -31,25 +31,51 @@ jobs:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
 
+      - name: Composer Dependencies Cache
+        uses: actions/cache@v5
+        with:
+          path: demo/vendor
+          key: ${{ runner.os }}-demo-vendor-${{ hashFiles('demo/composer.json') }}
+
       - name: Install Composer Dependencies
         working-directory: demo
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+        run: composer install --no-interaction --prefer-dist --no-progress --optimize-autoloader
+
+      - name: Setup pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: demo/pnpm-lock.yaml
 
-      - name: Install pnpm
-        run: corepack enable && corepack prepare pnpm@latest --activate
+      - name: pnpm Dependencies Cache
+        uses: actions/cache@v5
+        with:
+          path: demo/node_modules
+          key: ${{ runner.os }}-demo-pnpm-${{ hashFiles('demo/pnpm-lock.yaml') }}
 
       - name: Install Node Dependencies
         working-directory: demo
-        run: pnpm install
+        run: pnpm install --frozen-lockfile --prefer-offline
 
-      - name: Build Vite Assets
+      - name: Playwright Browser Cache
+        id: playwright-cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('demo/pnpm-lock.yaml') }}
+
+      - name: Install Playwright Browser
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         working-directory: demo
-        run: pnpm build
+        run: pnpm exec playwright install chromium
+
+      - name: Install Playwright System Dependencies
+        working-directory: demo
+        run: pnpm exec playwright install-deps chromium
 
       - name: Prepare Environment
         working-directory: demo
@@ -62,12 +88,12 @@ jobs:
         working-directory: demo
         run: php artisan filament:assets
 
-      - name: Install Playwright Browsers
+      - name: Build Vite Assets
         working-directory: demo
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm build
 
       - name: Run Percy Snapshots
         working-directory: demo
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-        run: pnpm exec percy exec -- pnpm exec playwright test
+        run: pnpm exec percy exec --allowed-hostnames "common.northwestern.edu" -- pnpm exec playwright test
