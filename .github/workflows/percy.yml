@@ -96,4 +96,4 @@ jobs:
         working-directory: demo
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-        run: pnpm exec percy exec --allowed-hostnames "common.northwestern.edu" -- pnpm exec playwright test
+        run: pnpm exec percy exec --allowed-hostname "common.northwestern.edu" -- pnpm exec playwright test
