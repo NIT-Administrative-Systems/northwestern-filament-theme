@@ -1,0 +1,13 @@
+vendor/
+node_modules/
+bootstrap/cache/
+public/build/
+public/css/
+public/js/
+public/fonts/
+public/hot
+storage/*.key
+.env
+composer.lock
+test-results/
+playwright-report/

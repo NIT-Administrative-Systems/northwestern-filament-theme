@@ -1,0 +1,73 @@
+name: Percy Visual Review
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * 1"
+
+concurrency:
+  group: percy-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PHP_VERSION: "8.2"
+  NODE_VERSION: "24"
+
+jobs:
+  percy:
+    name: Visual Snapshots
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          coverage: none
+
+      - name: Install Composer Dependencies
+        working-directory: demo
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
+
+      - name: Install Node Dependencies
+        working-directory: demo
+        run: pnpm install
+
+      - name: Build Vite Assets
+        working-directory: demo
+        run: pnpm build
+
+      - name: Prepare Environment
+        working-directory: demo
+        run: |
+          cp .env.example .env
+          touch database/database.sqlite
+          php artisan key:generate
+
+      - name: Publish Filament Assets
+        working-directory: demo
+        run: php artisan filament:assets
+
+      - name: Install Playwright Browsers
+        working-directory: demo
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Percy Snapshots
+        working-directory: demo
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+        run: pnpm exec percy exec -- pnpm exec playwright test
