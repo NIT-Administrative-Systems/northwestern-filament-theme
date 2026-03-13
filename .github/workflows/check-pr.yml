@@ -102,7 +102,7 @@ jobs:
 
       - name: Publish PHPStan Report
         if: github.actor != 'dependabot[bot]' && always()
-        uses: lcollins/checkstyle-github-action@v3.1.0
+        uses: lcollins/checkstyle-github-action@v3.2.0
         with:
           name: "PHPStan Analysis Report"
           path: "phpstan-report.xml"
