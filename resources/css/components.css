@@ -1,0 +1,112 @@
+/* ==========================================================================
+   Components — Modals, Dropdowns, Badges, Notifications, Widgets, Sections
+   ========================================================================== */
+
+.fi-modal-window {
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: 0 4px 24px rgb(0 0 0 / 15%) !important;
+}
+
+.fi-modal-header {
+    border-bottom: 1px solid var(--nu-border-color);
+    padding: 1rem 1.5rem;
+}
+
+.fi-modal-heading {
+    color: var(--nu-purple-100);
+}
+
+.dark .fi-modal-heading {
+    color: var(--nu-purple-40);
+}
+
+.fi-modal-content {
+    padding: 1rem 1.5rem;
+}
+
+.fi-modal-footer {
+    border-top: 1px solid var(--nu-border-color);
+    padding: 1rem 1.5rem;
+}
+
+.fi-dropdown-panel {
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 10%) !important;
+    border: 1px solid var(--nu-border-color);
+}
+
+.fi-dropdown-list-item-button {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-badge {
+    border-radius: var(--nu-border-radius) !important;
+    border: 1px solid #e0e0e0 !important;
+    box-shadow: none !important;
+}
+
+.dark .fi-badge {
+    border-color: #555 !important;
+}
+
+.fi-no-notification {
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 10%) !important;
+}
+
+.fi-wi-stats-overview-stat {
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: none !important;
+    border: 1px solid var(--nu-border-color);
+}
+
+.fi-section {
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: none !important;
+    border: 1px solid var(--nu-border-color);
+}
+
+.fi-section-header {
+    border-bottom: 1px solid var(--nu-border-color);
+}
+
+.fi-in-entry-wrp {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-ac-panel {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.dark .fi-modal-window {
+    box-shadow: 0 4px 24px rgb(0 0 0 / 40%) !important;
+}
+
+.dark .fi-modal-header {
+    border-bottom-color: var(--nu-border-color);
+}
+
+.dark .fi-modal-footer {
+    border-top-color: var(--nu-border-color);
+}
+
+.dark .fi-dropdown-panel {
+    border-color: var(--nu-border-color);
+    box-shadow: 0 4px 16px rgb(0 0 0 / 30%) !important;
+}
+
+.dark .fi-wi-stats-overview-stat {
+    border-color: var(--nu-border-color);
+}
+
+.dark .fi-section {
+    border-color: var(--nu-border-color);
+}
+
+.dark .fi-section-header {
+    border-bottom-color: var(--nu-border-color);
+}
+
+.dark .fi-no-notification {
+    box-shadow: 0 4px 16px rgb(0 0 0 / 30%) !important;
+}

@@ -1,0 +1,12 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - src
+    level: 10
+    tmpDir: /tmp/phpstan
+    treatPhpDocTypesAsCertain: false
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        - '#Parameter \#1 \$view of function view expects view-string\|null, string given#'

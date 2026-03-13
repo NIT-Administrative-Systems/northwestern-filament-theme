@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Typography — Northwestern Brand Fonts
+   ========================================================================== */
+
+@font-face {
+    font-family: 'Akkurat Pro';
+    src: url('https://common.northwestern.edu/v8/css/fonts/AkkuratProLight.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akkurat Pro';
+    src: url('https://common.northwestern.edu/v8/css/fonts/AkkuratProRegular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akkurat Pro';
+    src: url('https://common.northwestern.edu/v8/css/fonts/AkkuratProBold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url('https://common.northwestern.edu/v8/css/fonts/Poppins-ExtraLight.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url('https://common.northwestern.edu/v8/css/fonts/Poppins-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url('https://common.northwestern.edu/v8/css/fonts/Poppins-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url('https://common.northwestern.edu/v8/css/fonts/Poppins-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+body.fi-body {
+    font-family: var(--nu-font-body);
+}
+
+.fi-header-heading,
+.fi-modal-heading,
+.fi-section-header-heading,
+.fi-sidebar-header {
+    font-family: var(--nu-font-heading);
+}
+
+.fi-ta-header-cell-label {
+    font-family: var(--nu-font-body);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.fi-fo-field-wrp-label label {
+    font-family: var(--nu-font-body);
+    font-weight: 700;
+}
+
+.fi-body .fi-main a:not([class*="fi-"], .filament-breadcrumbs-link) {
+    text-decoration: underline;
+    transition: color 0.15s ease;
+}
+
+.fi-body .fi-main a:not([class*="fi-"], .filament-breadcrumbs-link):hover {
+    text-decoration: underline;
+}
+

@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Northwestern Design Tokens
+   ========================================================================== */
+
+:root {
+    --nu-purple-10: #E4E0EE;
+    --nu-purple-20: #CCC4DF;
+    --nu-purple-30: #B6ACD1;
+    --nu-purple-40: #A495C3;
+    --nu-purple-50: #9380B6;
+    --nu-purple-60: #836EAA;
+    --nu-purple-70: #765DA0;
+    --nu-purple-80: #684C96;
+    --nu-purple-90: #5B3B90;
+    --nu-purple-100: #4E2A84;
+    --nu-purple-110: #482476;
+    --nu-purple-120: #401F68;
+    --nu-purple-130: #38175A;
+    --nu-purple-140: #30104E;
+    --nu-purple-150: #260841;
+    --nu-purple-160: #1D0235;
+
+    --nu-black-100: #000;
+    --nu-black-80: #342F2E;
+    --nu-black-50: #716C6B;
+    --nu-black-20: #BBB8B8;
+    --nu-black-10: #D8D6D6;
+
+    --nu-green: #58B947;
+    --nu-teal: #7FCECD;
+    --nu-blue: #5091CD;
+    --nu-yellow: #EDE93B;
+    --nu-gold: #FFC520;
+    --nu-orange: #EF553F;
+
+    --nu-dark-green: #008656;
+    --nu-dark-teal: #007FA4;
+    --nu-dark-blue: #0D2D6C;
+    --nu-dark-yellow: #D9C826;
+    --nu-dark-gold: #CA7C1B;
+    --nu-dark-orange: #D85820;
+
+    --radius-xs: 0;
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
+    --radius-xl: 0;
+    --radius-2xl: 0;
+    --radius-3xl: 0;
+    --radius-4xl: 0;
+    --radius-full: 0;
+
+    --nu-body-bg: #f8fafc;
+    --nu-sidebar-bg: #fff;
+    --nu-topbar-bg: #401F68;
+    --nu-topbar-text: #fff;
+    --nu-border-color: #ccc;
+    --nu-border-radius: 0;
+
+    --nu-font-body: 'Akkurat Pro', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;
+    --nu-font-heading: 'Poppins', 'Akkurat Pro', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;
+}
+
+.dark {
+    --nu-body-bg: #18181b;
+    --nu-sidebar-bg: #1e1e1e;
+    --nu-border-color: #3a3a3a;
+}

@@ -1,0 +1,139 @@
+name: Check PR
+
+env:
+  PHP_VERSION: '8.2'
+  NODE_VERSION: '24'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  lint-and-format:
+    name: Lint, Format & Analyse
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          coverage: none
+
+      - name: Install Composer Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Rector Cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/rector
+          key: ${{ runner.os }}-rector-${{ hashFiles('rector.php', 'composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-rector-
+
+      - name: Pint Cache
+        uses: actions/cache@v4
+        with:
+          path: ./storage/pint.cache
+          key: ${{ runner.os }}-pint-${{ hashFiles('pint.json', 'composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pint-
+
+      - name: Run Rector
+        run: composer rector
+
+      - name: Run Laravel Pint
+        run: composer format
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
+
+      - name: Install Node Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Stylelint
+        run: pnpm lint:css:fix
+
+      - name: Check for Uncommitted Changes
+        id: file-changes
+        run: echo "changes=$(if git diff --quiet; then echo 'false'; else echo 'true'; fi)" >> $GITHUB_OUTPUT
+
+      - name: Auto-Commit Code Style Fixes
+        if: steps.file-changes.outputs.changes == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -a -m "style: apply automated formatting"
+          git push
+          exit 1
+
+      - name: PHPStan Result Cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/phpstan
+          key: phpstan-results-${{ hashFiles('phpstan.neon', 'composer.lock') }}
+          restore-keys: |
+            phpstan-results-${{ hashFiles('phpstan.neon') }}-
+            phpstan-results-
+
+      - name: PHPStan
+        run: ./vendor/bin/phpstan analyse --no-progress --error-format=checkstyle > phpstan-report.xml
+
+      - name: Publish PHPStan Report
+        if: github.actor != 'dependabot[bot]' && always()
+        uses: lcollins/checkstyle-github-action@v3.1.0
+        with:
+          name: "PHPStan Analysis Report"
+          path: "phpstan-report.xml"
+          title: "PHPStan Analysis Report"
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: true
+      matrix:
+        php: ['8.2', '8.3', '8.4', '8.5']
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Install Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: PHPUnit Cache
+        uses: actions/cache@v4
+        with:
+          path: ./.phpunit.cache
+          key: ${{ runner.os }}-phpunit-php${{ matrix.php }}-${{ hashFiles('phpunit.xml', 'composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-phpunit-php${{ matrix.php }}-
+
+      - name: Run Pest
+        run: ./vendor/bin/pest --cache-result --cache-directory=.phpunit.cache

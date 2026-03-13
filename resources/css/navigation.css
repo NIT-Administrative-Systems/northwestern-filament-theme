@@ -1,0 +1,76 @@
+/* ==========================================================================
+   Navigation — Sidebar Items, Breadcrumbs, Tabs
+   ========================================================================== */
+
+.fi-sidebar-item-button {
+    border-radius: var(--nu-border-radius) !important;
+    transition: background-color 150ms ease;
+}
+
+.fi-sidebar-item-button:hover {
+    background-color: var(--nu-purple-10) !important;
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-button {
+    background-color: var(--nu-purple-10) !important;
+    color: var(--nu-purple-100);
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-button .fi-sidebar-item-icon {
+    color: var(--nu-purple-100);
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-button .fi-sidebar-item-label {
+    color: var(--nu-purple-100);
+    font-weight: 700;
+}
+
+.fi-sidebar-group-label {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--nu-black-50);
+}
+
+.fi-breadcrumbs-item a {
+    color: var(--nu-purple-100);
+}
+
+.fi-breadcrumbs-item a:hover {
+    color: var(--nu-purple-120);
+}
+
+.fi-tabs-item-button {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-tabs-item-active .fi-tabs-item-button {
+    border-color: var(--nu-purple-100);
+}
+
+.dark .fi-sidebar-item-button:hover {
+    background-color: rgb(78 42 132 / 15%) !important;
+}
+
+.dark .fi-sidebar-item-active .fi-sidebar-item-button {
+    background-color: rgb(78 42 132 / 20%) !important;
+    color: var(--nu-purple-30);
+}
+
+.dark .fi-sidebar-item-active .fi-sidebar-item-button .fi-sidebar-item-icon,
+.dark .fi-sidebar-item-active .fi-sidebar-item-button .fi-sidebar-item-label {
+    color: var(--nu-purple-30);
+}
+
+.dark .fi-sidebar-group-label {
+    color: var(--nu-black-20);
+}
+
+.dark .fi-breadcrumbs-item a {
+    color: var(--nu-purple-40);
+}
+
+.dark .fi-breadcrumbs-item a:hover {
+    color: var(--nu-purple-30);
+}

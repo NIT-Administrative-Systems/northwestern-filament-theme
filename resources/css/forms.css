@@ -1,0 +1,124 @@
+/* ==========================================================================
+   Forms — Inputs, Selects, Checkboxes, Radios, Toggles
+   ========================================================================== */
+
+.fi-input-wrp {
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: none !important;
+    border: 1px solid var(--nu-border-color);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.fi-input-wrp:focus-within {
+    border-color: #a795c2 !important;
+    box-shadow: 0 0 0 0.25rem rgb(78 42 132 / 25%) !important;
+}
+
+.fi-select-input {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-checkbox-input {
+    border-radius: var(--nu-border-radius) !important;
+    --tw-ring-color: #BBB8B8 !important;
+}
+
+.fi-checkbox-input:checked {
+    background-color: var(--nu-purple-100) !important;
+    --tw-ring-color: var(--nu-purple-100) !important;
+}
+
+.fi-checkbox-input:focus {
+    --tw-ring-color: var(--nu-purple-100) !important;
+    --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor) !important;
+    box-shadow: var(--tw-ring-shadow), 0 0 0 0.25rem rgb(78 42 132 / 25%) !important;
+}
+
+.fi-radio-input {
+    --tw-ring-color: #BBB8B8 !important;
+}
+
+.fi-radio-input:checked {
+    background-color: var(--nu-purple-100) !important;
+    --tw-ring-color: var(--nu-purple-100) !important;
+}
+
+.fi-radio-input:focus {
+    --tw-ring-color: var(--nu-purple-100) !important;
+    --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor) !important;
+    box-shadow: var(--tw-ring-shadow), 0 0 0 0.25rem rgb(78 42 132 / 25%) !important;
+}
+
+.dark .fi-checkbox-input,
+.dark .fi-radio-input {
+    --tw-ring-color: #716C6B !important;
+}
+
+.dark .fi-checkbox-input:checked,
+.dark .fi-radio-input:checked {
+    background-color: var(--nu-purple-50) !important;
+    --tw-ring-color: var(--nu-purple-50) !important;
+}
+
+.fi-checkbox-input:disabled,
+.fi-radio-input:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+}
+
+.fi-checkbox-input:disabled + label,
+.fi-radio-input:disabled + label {
+    cursor: not-allowed !important;
+    opacity: 0.5 !important;
+}
+
+.fi-toggle-input {
+    box-shadow: none !important;
+}
+
+.fi-toggle.fi-toggle-on {
+    background-color: var(--nu-purple-100) !important;
+}
+
+.dark .fi-toggle.fi-toggle-on {
+    background-color: var(--nu-purple-50) !important;
+}
+
+.fi-toggle:disabled {
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+    opacity: 0.5 !important;
+}
+
+.fi-fo-file-upload {
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: none !important;
+}
+
+.fi-textarea-input {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-fo-rich-editor {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-fo-rich-editor .fi-fo-rich-editor-toolbar {
+    border-radius: var(--nu-border-radius) var(--nu-border-radius) 0 0 !important;
+}
+
+.dark .fi-input-wrp {
+    border-color: #4d5356;
+}
+
+.dark .fi-input-wrp:focus-within {
+    border-color: #a795c2 !important;
+    box-shadow: 0 0 0 0.25rem rgb(147 128 182 / 40%) !important;
+}
+
+.dark .fi-checkbox-input:focus,
+.dark .fi-radio-input:focus {
+    --tw-ring-color: var(--nu-purple-50) !important;
+    box-shadow: var(--tw-ring-shadow), 0 0 0 0.25rem rgb(147 128 182 / 40%) !important;
+}

@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Layout — Body, Sidebar, Topbar, Content Area
+   ========================================================================== */
+
+body.fi-body {
+    background-color: var(--nu-body-bg);
+}
+
+.fi-sidebar {
+    background-color: var(--nu-sidebar-bg);
+    border-right: 1px solid var(--nu-border-color);
+}
+
+.fi-sidebar-header {
+    border-bottom: 1px solid var(--nu-border-color);
+}
+
+.fi-topbar {
+    background-color: var(--nu-topbar-bg);
+}
+
+.fi-topbar nav {
+    background-color: var(--nu-topbar-bg);
+}
+
+.fi-topbar nav > div > button,
+.fi-topbar nav > div > a,
+.fi-topbar nav > div > div > button,
+.fi-topbar nav > div > div > a,
+.fi-topbar .fi-icon-btn,
+.fi-topbar .fi-topbar-item-btn,
+.fi-topbar .fi-topbar-item-btn > .fi-icon,
+.fi-topbar .fi-topbar-item-label,
+.fi-topbar .fi-user-menu-trigger {
+    color: var(--nu-topbar-text) !important;
+}
+
+.fi-topbar .fi-global-search-field input::placeholder {
+    color: rgb(255 255 255 / 70%);
+}
+
+
+.fi-topbar-item.fi-active .fi-topbar-item-btn {
+    background-color: rgb(255 255 255 / 15%) !important;
+}
+
+.fi-topbar-item .fi-topbar-item-btn:hover {
+    background-color: rgb(255 255 255 / 10%) !important;
+}
+
+.fi-topbar-item.fi-active .fi-topbar-item-btn:hover {
+    background-color: rgb(255 255 255 / 20%) !important;
+}
+
+.fi-topbar-group-toggle-icon {
+    color: var(--nu-topbar-text) !important;
+}
+
+.fi-topbar .fi-dropdown-panel,
+.fi-topbar .fi-dropdown-panel * {
+    color: unset;
+}
+
+.fi-topbar .fi-dropdown-panel button,
+.fi-topbar .fi-dropdown-panel a {
+    color: inherit;
+}
+
+.fi-main {
+    background-color: var(--nu-body-bg);
+}
+
+.dark body.fi-body,
+.dark .fi-main {
+    background-color: var(--nu-body-bg);
+}
+
+.dark .fi-sidebar {
+    background-color: var(--nu-sidebar-bg);
+    border-right-color: var(--nu-border-color);
+}
+
+.dark .fi-sidebar-header {
+    border-bottom-color: var(--nu-border-color);
+}
+
+.dark .fi-topbar,
+.dark .fi-topbar nav {
+    background-color: var(--nu-topbar-bg);
+}

@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+.fi-ta-ctn {
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: none !important;
+    border: 1px solid var(--nu-border-color);
+}
+
+.fi-ta-header-cell,
+.fi-ta-actions-header-cell {
+    background-color: #f9fafb;
+    border-bottom: 2px solid var(--nu-border-color);
+}
+
+.fi-ta-row {
+    border-bottom: 1px solid var(--nu-border-color);
+}
+
+.fi-ta-row:last-child {
+    border-bottom: none;
+}
+
+.fi-ta-row-striped:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+.fi-ta-paginator {
+    border-top: 1px solid var(--nu-border-color);
+}
+
+.fi-ta-search-input {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-ta-filters {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-ta-empty-state {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.dark .fi-ta-ctn {
+    border-color: var(--nu-border-color);
+}
+
+.dark .fi-ta-header-cell,
+.dark .fi-ta-actions-header-cell {
+    background-color: rgb(255 255 255 / 5%);
+    border-bottom-color: var(--nu-border-color);
+}
+
+.dark .fi-ta-row {
+    border-bottom-color: var(--nu-border-color);
+}
+
+.dark .fi-ta-row-striped:nth-child(even) {
+    background-color: rgb(255 255 255 / 3%);
+}
+
+.dark .fi-ta-paginator {
+    border-top-color: var(--nu-border-color);
+}
