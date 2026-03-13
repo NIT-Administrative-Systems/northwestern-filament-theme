@@ -85,6 +85,9 @@ jobs:
           git push
           exit 1
 
+      - name: Verify Stylelint
+        run: pnpm lint:css
+
       - name: PHPStan Result Cache
         uses: actions/cache@v4
         with:

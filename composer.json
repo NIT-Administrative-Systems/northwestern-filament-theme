@@ -1,6 +1,6 @@
 {
     "name": "northwestern-sysdev/filament-theme",
-    "description": "Northwestern University branded theme for Filament admin panels",
+    "description": "Northwestern University branded theme for Filament panels",
     "keywords": [
         "northwestern",
         "filament",
@@ -29,7 +29,13 @@
         "rector": "vendor/bin/rector process --ansi",
         "rector:dry": "vendor/bin/rector process --dry-run --ansi",
         "analyse": "vendor/bin/phpstan analyse --memory-limit=2G",
-        "test": "vendor/bin/pest"
+        "test": "vendor/bin/pest",
+        "check": [
+            "@rector",
+            "@format",
+            "@analyse",
+            "@test"
+        ]
     },
     "autoload": {
         "psr-4": {
