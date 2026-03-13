@@ -30,9 +30,13 @@
         "rector:dry": "vendor/bin/rector process --dry-run --ansi",
         "analyse": "vendor/bin/phpstan analyse --memory-limit=2G",
         "test": "vendor/bin/pest",
+        "lint:css:fix": "pnpm lint:css:fix",
+        "lint:css": "pnpm lint:css",
         "check": [
             "@rector",
             "@format",
+            "@lint:css:fix",
+            "@lint:css",
             "@analyse",
             "@test"
         ]
