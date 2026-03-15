@@ -54,6 +54,11 @@
     transform: none !important;
 }
 
+.fi-link:focus-visible {
+    outline: 2px solid #4E2A84;
+    outline-offset: 2px;
+}
+
 .fi-icon-btn {
     border-radius: var(--nu-border-radius) !important;
     box-shadow: none !important;
@@ -62,6 +67,11 @@
 .fi-icon-btn:hover {
     transform: none !important;
     box-shadow: none !important;
+}
+
+.fi-icon-btn:focus-visible {
+    outline: 2px solid #4E2A84;
+    outline-offset: 2px;
 }
 
 .fi-btn-group {
@@ -78,5 +88,13 @@
 }
 
 .dark .fi-btn:focus-visible {
+    outline-color: #A495C3;
+}
+
+.dark .fi-link:focus-visible {
+    outline-color: #A495C3;
+}
+
+.dark .fi-icon-btn:focus-visible {
     outline-color: #A495C3;
 }

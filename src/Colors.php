@@ -35,7 +35,7 @@ final class Colors
 
     public const PURPLE_80 = '#684C96';
 
-    public const PURPLE_90 = '#5B3B90';
+    public const PURPLE_90 = '#5B3B8C';
 
     public const PURPLE_100 = '#4E2A84';
 

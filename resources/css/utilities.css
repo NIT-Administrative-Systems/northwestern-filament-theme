@@ -39,13 +39,86 @@
     border: 1px solid var(--nu-border-color);
 }
 
-.fi-body [class*="fi-"] {
+.fi-btn,
+.fi-icon-btn,
+.fi-badge,
+.fi-section,
+.fi-wi-stats-overview-stat,
+.fi-ta-ctn,
+.fi-fo-file-upload,
+.fi-input-wrp,
+.fi-toggle-input,
+.fi-ac-panel {
     --tw-shadow: 0 0 #0000;
     --tw-ring-offset-shadow: 0 0 #0000;
 }
 
-.rounded-full {
+.fi-badge.rounded-full,
+.fi-btn.rounded-full,
+.fi-icon-btn.rounded-full {
     border-radius: 0 !important;
+}
+
+.fi-avatar,
+.fi-user-avatar,
+.fi-tenant-avatar {
+    border-radius: 50% !important;
+}
+
+.fi-sidebar-item-button:focus-visible {
+    outline: 2px solid #4E2A84;
+    outline-offset: -2px;
+}
+
+.fi-dropdown-list-item-button:focus-visible {
+    outline: 2px solid #4E2A84;
+    outline-offset: -2px;
+}
+
+.fi-tabs-item-button:focus-visible {
+    outline: 2px solid #4E2A84;
+    outline-offset: 2px;
+}
+
+.fi-pagination-item-btn:focus-visible {
+    outline: 2px solid #4E2A84;
+    outline-offset: 2px;
+}
+
+.fi-ta-header-cell-sort-btn:focus-visible {
+    outline: 2px solid #4E2A84;
+    outline-offset: 2px;
+}
+
+.fi-select-input:focus-visible {
+    outline: 2px solid #4E2A84;
+    outline-offset: 2px;
+}
+
+.fi-toggle-input:focus-visible {
+    outline: 2px solid #4E2A84;
+    outline-offset: 2px;
+}
+
+.fi-tabs-item-button {
+    transition: background-color var(--nu-transition-fast), color var(--nu-transition-fast);
+}
+
+.fi-ta-header-cell-sort-btn {
+    transition: color var(--nu-transition-fast);
+}
+
+.dark .fi-sidebar-item-button:focus-visible,
+.dark .fi-dropdown-list-item-button:focus-visible {
+    outline-color: #A495C3;
+}
+
+.dark .fi-tabs-item-button:focus-visible,
+.dark .fi-pagination-item-btn:focus-visible,
+.dark .fi-ta-header-cell-sort-btn:focus-visible,
+.dark .fi-select-input:focus-visible,
+.dark .fi-toggle-input:focus-visible {
+    outline-color: #A495C3;
 }
 
 .dark .fi-simple-layout {

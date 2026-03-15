@@ -15,6 +15,11 @@ body.fi-body {
     border-bottom: 1px solid var(--nu-border-color);
 }
 
+.fi-sidebar-footer {
+    border-top: 1px solid var(--nu-border-color);
+    padding: 0.75rem 1rem;
+}
+
 .fi-topbar {
     background-color: var(--nu-topbar-bg);
 }
@@ -39,7 +44,6 @@ body.fi-body {
     color: rgb(255 255 255 / 70%);
 }
 
-
 .fi-topbar-item.fi-active .fi-topbar-item-btn {
     background-color: rgb(255 255 255 / 15%) !important;
 }
@@ -52,18 +56,77 @@ body.fi-body {
     background-color: rgb(255 255 255 / 20%) !important;
 }
 
+.fi-topbar-item-btn {
+    transition: background-color var(--nu-transition-fast);
+}
+
 .fi-topbar-group-toggle-icon {
     color: var(--nu-topbar-text) !important;
 }
 
-.fi-topbar .fi-dropdown-panel,
-.fi-topbar .fi-dropdown-panel * {
-    color: unset;
+.fi-topbar .fi-dropdown-panel {
+    color: var(--nu-color-text);
 }
 
 .fi-topbar .fi-dropdown-panel button,
 .fi-topbar .fi-dropdown-panel a {
-    color: inherit;
+    color: var(--nu-color-text);
+}
+
+.dark .fi-topbar .fi-dropdown-panel {
+    color: #e5e7eb;
+}
+
+.dark .fi-topbar .fi-dropdown-panel button,
+.dark .fi-topbar .fi-dropdown-panel a {
+    color: #e5e7eb;
+}
+
+.fi-global-search-results-ctn {
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: var(--nu-shadow-lg) !important;
+    border: 1px solid var(--nu-border-color);
+}
+
+.fi-global-search-result:hover {
+    background-color: var(--nu-purple-10);
+}
+
+.fi-global-search-result-heading {
+    font-family: var(--nu-font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.fi-global-search-no-results-message {
+    color: var(--nu-color-text-muted);
+}
+
+.fi-simple-header-heading {
+    font-family: var(--nu-font-heading);
+    font-weight: 700;
+    color: var(--nu-purple-100);
+}
+
+.fi-simple-header-subheading {
+    font-family: var(--nu-font-body);
+    color: var(--nu-color-text-muted);
+}
+
+.fi-header-heading {
+    font-family: var(--nu-font-heading);
+    font-weight: 700;
+    color: var(--nu-purple-100);
+}
+
+.fi-header-subheading {
+    font-family: var(--nu-font-body);
+    color: var(--nu-color-text-muted);
+}
+
+.fi-topbar .fi-user-menu-trigger:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
 }
 
 .fi-main {
@@ -87,4 +150,24 @@ body.fi-body {
 .dark .fi-topbar,
 .dark .fi-topbar nav {
     background-color: var(--nu-topbar-bg);
+}
+
+.dark .fi-global-search-results-ctn {
+    border-color: var(--nu-border-color);
+}
+
+.dark .fi-global-search-result:hover {
+    background-color: rgb(78 42 132 / 15%);
+}
+
+.dark .fi-header-heading {
+    color: var(--nu-purple-40);
+}
+
+.dark .fi-header-subheading {
+    color: var(--nu-black-20);
+}
+
+.dark .fi-simple-header-heading {
+    color: var(--nu-purple-40);
 }
