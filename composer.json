@@ -1,5 +1,5 @@
 {
-    "name": "northwestern-sysdev/filament-theme",
+    "name": "northwestern-sysdev/northwestern-filament-theme",
     "description": "Northwestern University branded theme for Filament panels",
     "keywords": [
         "northwestern",
@@ -7,7 +7,7 @@
         "theme",
         "laravel"
     ],
-    "homepage": "https://github.com/NIT-Administrative-Systems/filament-theme",
+    "homepage": "https://github.com/NIT-Administrative-Systems/northwestern-filament-theme",
     "license": "MIT",
     "type": "library",
     "require": {

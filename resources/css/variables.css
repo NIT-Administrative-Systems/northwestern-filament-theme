@@ -11,7 +11,7 @@
     --nu-purple-60: #836EAA;
     --nu-purple-70: #765DA0;
     --nu-purple-80: #684C96;
-    --nu-purple-90: #5B3B90;
+    --nu-purple-90: #5B3B8C;
     --nu-purple-100: #4E2A84;
     --nu-purple-110: #482476;
     --nu-purple-120: #401F68;
@@ -40,6 +40,23 @@
     --nu-dark-gold: #CA7C1B;
     --nu-dark-orange: #D85820;
 
+    --nu-color-success: #008656;
+    --nu-color-info: #5091CD;
+    --nu-color-warning: #FFC520;
+    --nu-color-danger: #EF553F;
+    --nu-color-text: #342F2E;
+    --nu-color-text-muted: #716C6B;
+    --nu-color-link: #4E2A84;
+    --nu-color-link-hover: #401F68;
+
+    --nu-shadow-sm: 0 1px 2px rgb(0 0 0 / 6%);
+    --nu-shadow-md: 0 2px 8px rgb(0 0 0 / 10%);
+    --nu-shadow-lg: 0 4px 16px rgb(0 0 0 / 12%);
+    --nu-shadow-xl: 0 8px 24px rgb(0 0 0 / 15%);
+    --nu-transition-fast: 150ms ease;
+    --nu-transition-default: 200ms ease;
+    --nu-transition-slow: 300ms ease-in-out;
+
     --radius-xs: 0;
     --radius-sm: 0;
     --radius-md: 0;
@@ -48,7 +65,7 @@
     --radius-2xl: 0;
     --radius-3xl: 0;
     --radius-4xl: 0;
-    --radius-full: 0;
+    --radius-full: 9999px;
 
     --nu-body-bg: #f8fafc;
     --nu-sidebar-bg: #fff;

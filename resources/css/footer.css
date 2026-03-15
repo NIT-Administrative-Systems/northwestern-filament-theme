@@ -51,11 +51,11 @@
 .nu-contact-group {
     display: flex;
     justify-content: flex-start;
-    margin: 0 0 1.5rem;
+    margin: 0 0 2rem;
 }
 
 .nu-contact-group + .nu-contact-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .nu-address {
@@ -110,7 +110,7 @@
 }
 
 .nu-footer .nu-footer-col p {
-    margin: 0 0 1.5rem;
+    margin: 0 0 1rem;
 }
 
 .nu-footer .social {

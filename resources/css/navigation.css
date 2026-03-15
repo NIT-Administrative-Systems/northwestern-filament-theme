@@ -49,6 +49,16 @@
     border-color: var(--nu-purple-100);
 }
 
+.fi-tenant-menu-trigger {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-tenant-menu-trigger-tenant-name {
+    font-family: var(--nu-font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
 .dark .fi-sidebar-item-button:hover {
     background-color: rgb(78 42 132 / 15%) !important;
 }

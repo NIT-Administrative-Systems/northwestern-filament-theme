@@ -17,7 +17,7 @@
 ## Installation
 
 ```bash
-composer require northwestern-sysdev/filament-theme
+composer require northwestern-sysdev/northwestern-filament-theme
 ```
 
 ## Usage
@@ -57,7 +57,7 @@ The plugin automatically sets a Northwestern favicon and brand logo when the pan
 The brand logo is resolved in the following order:
 
 1. Panel-level `->brandLogo()` (if set, the plugin does not override it)
-2. `config('northwestern-theme.lockup')` (from `northwestern-sysdev/northwestern-laravel-ui`, if installed)
+2. `config('northwestern-theme.lockup')` (from [`northwestern-sysdev/northwestern-laravel-ui`](https://github.com/NIT-Administrative-Systems/northwestern-laravel-ui), if installed)
 3. The default Northwestern wordmark SVG from the Northwestern CDN
 
 If your application uses [`northwestern-sysdev/northwestern-laravel-ui`](https://github.com/NIT-Administrative-Systems/northwestern-laravel-ui), the `northwestern-theme.lockup` config value is already published for you. The Filament theme plugin reads it automatically, no additional configuration is needed.
@@ -120,4 +120,4 @@ This publishes to `resources/views/vendor/northwestern-filament-theme/footer.bla
 
 ## License
 
-MIT. See [LICENSE.md](LICENSE.md) for details.
+The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.

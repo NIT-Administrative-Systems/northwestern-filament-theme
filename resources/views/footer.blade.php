@@ -9,7 +9,6 @@
 
 <footer class="nu-footer">
     <div class="nu-footer-grid">
-        {{-- Column 1: Branding & Links --}}
         <div class="nu-footer-col">
             <a href="https://www.northwestern.edu">
                 <img
@@ -26,11 +25,11 @@
                 <li><a href="https://www.northwestern.edu/disclaimer.html">Disclaimer</a></li>
                 <li><a href="https://www.northwestern.edu/emergency/index.html">Campus Emergency Information</a></li>
                 <li><a href="https://policies.northwestern.edu/">University Policies</a></li>
-                <li><a href="https://www.northwestern.edu/accessibility/about/report-accessibility-issue.html">Report an Accessibility Issue</a></li>
+                <li><a href="https://www.northwestern.edu/accessibility/about/report-accessibility-issue.html">Report an
+                        Accessibility Issue</a></li>
             </ul>
         </div>
 
-        {{-- Column 2: Office Info --}}
         <div class="nu-footer-col">
             <dl class="nu-contact-group">
                 <dt class="nu-pin address-pin"><span class="sr-only">Office Address</span></dt>
@@ -54,7 +53,6 @@
             </dl>
         </div>
 
-        {{-- Column 3: Social Media --}}
         <div class="nu-footer-col">
             <p>Social Media</p>
             <a href="https://www.facebook.com/NorthwesternU" class="social facebook">Facebook</a>

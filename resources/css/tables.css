@@ -10,7 +10,7 @@
 
 .fi-ta-header-cell,
 .fi-ta-actions-header-cell {
-    background-color: #f9fafb;
+    background-color: #f3f0f7;
     border-bottom: 2px solid var(--nu-border-color);
 }
 
@@ -23,7 +23,7 @@
 }
 
 .fi-ta-row-striped:nth-child(even) {
-    background-color: #f9fafb;
+    background-color: #f7f5f9;
 }
 
 .fi-ta-paginator {
@@ -40,6 +40,61 @@
 
 .fi-ta-empty-state {
     border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-ta-col-manager-header {
+    border-bottom: 1px solid var(--nu-border-color);
+}
+
+.fi-ta-col-manager-heading {
+    font-family: var(--nu-font-body);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+}
+
+.fi-ta-filter-indicators {
+    border: 1px solid var(--nu-border-color);
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-ta-filter-indicators-label {
+    font-family: var(--nu-font-body);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.fi-ta-group-header {
+    background-color: #f3f0f7;
+}
+
+.fi-ta-group-heading {
+    font-family: var(--nu-font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.fi-ta-group-description {
+    font-family: var(--nu-font-body);
+    color: var(--nu-color-text-muted);
+    font-size: 0.8125rem;
+}
+
+.fi-ta-selection-indicator {
+    background-color: var(--nu-purple-10);
+    border: 1px solid var(--nu-purple-20);
+}
+
+.fi-ta-reorder-handle {
+    color: var(--nu-black-50);
+    cursor: grab;
+}
+
+.fi-ta-reordering .fi-ta-row {
+    background-color: #f7f5f9;
 }
 
 .dark .fi-ta-ctn {
@@ -62,4 +117,29 @@
 
 .dark .fi-ta-paginator {
     border-top-color: var(--nu-border-color);
+}
+
+.dark .fi-ta-col-manager-header {
+    border-bottom-color: var(--nu-border-color);
+}
+
+.dark .fi-ta-filter-indicators {
+    border-color: var(--nu-border-color);
+}
+
+.dark .fi-ta-group-header {
+    background-color: rgb(255 255 255 / 5%);
+}
+
+.dark .fi-ta-group-description {
+    color: var(--nu-black-20);
+}
+
+.dark .fi-ta-selection-indicator {
+    background-color: rgb(78 42 132 / 15%);
+    border-color: rgb(78 42 132 / 30%);
+}
+
+.dark .fi-ta-reordering .fi-ta-row {
+    background-color: rgb(255 255 255 / 3%);
 }
