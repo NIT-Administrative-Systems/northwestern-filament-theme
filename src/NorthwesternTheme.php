@@ -106,7 +106,7 @@ class NorthwesternTheme implements Plugin
             $assets[] = Css::make('nu-footer', $cssPath . '/footer.css');
         }
 
-        FilamentAsset::register($assets, 'northwestern-sysdev/filament-theme');
+        FilamentAsset::register($assets, 'northwestern-sysdev/northwestern-filament-theme');
     }
 
     /**

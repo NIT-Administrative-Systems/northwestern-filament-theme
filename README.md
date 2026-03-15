@@ -17,7 +17,7 @@
 ## Installation
 
 ```bash
-composer require northwestern-sysdev/filament-theme
+composer require northwestern-sysdev/northwestern-filament-theme
 ```
 
 ## Usage
