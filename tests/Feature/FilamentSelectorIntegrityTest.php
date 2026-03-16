@@ -29,16 +29,16 @@ it('only targets fi-* selectors that exist in Filament source', function () {
         $filamentSource .= $file->getContents() . "\n";
     }
 
-    $missing = [];
+    $missingSelectors = [];
     foreach ($themeSelectors as $selector) {
         if (! str_contains($filamentSource, $selector)) {
-            $missing[] = $selector;
+            $missingSelectors[] = $selector;
         }
     }
 
-    expect($missing)->toBeEmpty(
+    expect($missingSelectors)->toBeEmpty(
         "These fi-* selectors are used by the theme but not found in Filament source:\n  - "
-        . implode("\n  - ", $missing)
+        . implode("\n  - ", $missingSelectors)
         . "\n\nFilament may have renamed or removed these classes. Update the theme CSS to match."
     );
 });

@@ -136,12 +136,12 @@ class NorthwesternTheme implements Plugin
         }
 
         if ($this->footerConfig instanceof FooterConfig) {
-            $config = $this->footerConfig;
+            $footerConfig = $this->footerConfig;
 
             $panel->renderHook(
                 PanelsRenderHook::BODY_END,
-                fn (): string => $config->isEnabled()
-                    ? view('northwestern-filament-theme::footer', ['config' => $config])->render()
+                fn (): string => $footerConfig->isEnabled()
+                    ? view('northwestern-filament-theme::footer', ['config' => $footerConfig])->render()
                     : '',
             );
         }
@@ -164,9 +164,9 @@ class NorthwesternTheme implements Plugin
             return;
         }
 
-        $contents = file_get_contents($themeCssPath);
+        $themeCssContents = file_get_contents($themeCssPath);
 
-        if ($contents !== false && str_contains($contents, 'northwestern-filament-theme')) {
+        if ($themeCssContents !== false && str_contains($themeCssContents, 'northwestern-filament-theme')) {
             Log::warning(
                 "Northwestern theme CSS is imported in your Vite theme [{$themeCssPath}] but asset registration is still active. "
                 . 'This causes styles to load twice. Call ->withoutAssetRegistration() on the NorthwesternTheme plugin to fix this.',

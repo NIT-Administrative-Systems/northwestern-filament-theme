@@ -60,9 +60,9 @@ it('prompts for panel selection when multiple panels exist', function () {
         ->expectsOutputToContain('Setup complete')
         ->assertSuccessful();
 
-    $contents = File::get(resource_path('css/filament/portal/theme.css'));
+    $themeCssContents = File::get(resource_path('css/filament/portal/theme.css'));
 
-    expect($contents)
+    expect($themeCssContents)
         ->toContain("@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';");
 
     File::deleteDirectory(resource_path('css/filament/portal'));
@@ -114,16 +114,16 @@ it('injects theme import after the filament base import', function () {
         ->expectsOutputToContain('Setup complete')
         ->assertSuccessful();
 
-    $contents = File::get($this->themeCssPath);
+    $themeCssContents = File::get($this->themeCssPath);
 
-    expect($contents)
+    expect($themeCssContents)
         ->toContain("@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';")
         ->not->toContain('tailwind-tokens.css')
         ->and(strpos(
-            $contents,
+            $themeCssContents,
             'vendor/filament/filament/resources/css/theme.css'
         ))->toBeLessThan(strpos(
-            $contents,
+            $themeCssContents,
             'northwestern-filament-theme/dist/theme.css'
         ));
 });
@@ -142,9 +142,9 @@ it('injects tokens import when confirmed', function () {
         ->expectsOutputToContain('Setup complete')
         ->assertSuccessful();
 
-    $contents = File::get($this->themeCssPath);
+    $themeCssContents = File::get($this->themeCssPath);
 
-    expect($contents)
+    expect($themeCssContents)
         ->toContain("@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';")
         ->toContain("@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/tailwind-tokens.css';");
 });
@@ -165,9 +165,9 @@ it('skips theme injection when already installed but still offers tokens', funct
         ->expectsOutputToContain('Setup complete')
         ->assertSuccessful();
 
-    $contents = File::get($this->themeCssPath);
+    $themeCssContents = File::get($this->themeCssPath);
 
-    expect($contents)
+    expect($themeCssContents)
         ->toContain("@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/tailwind-tokens.css';");
 });
 
@@ -198,9 +198,9 @@ it('appends import when filament base import is not found', function () {
         ->expectsOutputToContain('Could not find the Filament base theme import')
         ->assertSuccessful();
 
-    $contents = File::get($this->themeCssPath);
+    $themeCssContents = File::get($this->themeCssPath);
 
-    expect($contents)
+    expect($themeCssContents)
         ->toContain("@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';");
 });
 
@@ -218,9 +218,9 @@ it('handles the index.css variant of the filament import', function () {
         ->expectsOutputToContain('Setup complete')
         ->assertSuccessful();
 
-    $contents = File::get($this->themeCssPath);
+    $themeCssContents = File::get($this->themeCssPath);
 
-    expect($contents)
+    expect($themeCssContents)
         ->toContain("@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';");
 });
 
@@ -241,9 +241,9 @@ it('does not duplicate tokens import if already present', function () {
         ->expectsOutputToContain('Nothing to do')
         ->assertSuccessful();
 
-    $contents = File::get($this->themeCssPath);
+    $themeCssContents = File::get($this->themeCssPath);
 
-    expect(substr_count($contents, $tokensImport))->toBe(1);
+    expect(substr_count($themeCssContents, $tokensImport))->toBe(1);
 });
 
 it('removes previously published CSS assets', function () {

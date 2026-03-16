@@ -82,9 +82,9 @@ class InstallCommand extends Command
         }
 
         $themeCss = File::get($themeCssPath);
-        $themeAlreadyInstalled = str_contains($themeCss, $this->themeImport);
+        $isThemeAlreadyInstalled = str_contains($themeCss, $this->themeImport);
 
-        if ($themeAlreadyInstalled) {
+        if ($isThemeAlreadyInstalled) {
             $this->components->twoColumnDetail('Theme CSS', '<fg=blue;options=bold>ALREADY INSTALLED</>');
         } else {
             $this->components->task('Injecting theme CSS import', function () use ($themeCssPath, $themeCss) {
@@ -94,18 +94,18 @@ class InstallCommand extends Command
             });
         }
 
-        $tokensAlreadyInstalled = str_contains(File::get($themeCssPath), $this->tokensImport);
-        $includeTokens = false;
+        $isTokensAlreadyInstalled = str_contains(File::get($themeCssPath), $this->tokensImport);
+        $shouldIncludeTokens = false;
 
-        if ($tokensAlreadyInstalled) {
+        if ($isTokensAlreadyInstalled) {
             $this->components->twoColumnDetail('Design tokens', '<fg=blue;options=bold>ALREADY INSTALLED</>');
         } else {
-            $includeTokens = confirm(
+            $shouldIncludeTokens = confirm(
                 label: 'Include Tailwind v4 design tokens?',
                 hint: 'Enables utilities like bg-nu-purple-100, text-nu-gold, etc.',
             );
 
-            if ($includeTokens) {
+            if ($shouldIncludeTokens) {
                 $this->components->task('Injecting Tailwind v4 design tokens', function () use ($themeCssPath) {
                     $this->injectTokensImport($themeCssPath);
 
@@ -117,17 +117,17 @@ class InstallCommand extends Command
         $this->cleanPublishedAssets();
         $this->newLine();
 
-        if ($themeAlreadyInstalled && ($tokensAlreadyInstalled || ! $includeTokens)) {
+        if ($isThemeAlreadyInstalled && ($isTokensAlreadyInstalled || ! $shouldIncludeTokens)) {
             $this->components->info('Nothing to do, theme is already configured');
 
             return;
         }
 
-        if (! $themeAlreadyInstalled) {
+        if (! $isThemeAlreadyInstalled) {
             $this->components->twoColumnDetail('Theme CSS', '<fg=green;options=bold>INJECTED</>');
         }
 
-        if ($includeTokens) {
+        if ($shouldIncludeTokens) {
             $this->components->twoColumnDetail('Design tokens', '<fg=green;options=bold>INJECTED</>');
         }
 
@@ -170,9 +170,9 @@ class InstallCommand extends Command
 
     protected function injectTokensImport(string $themeCssPath): void
     {
-        $contents = File::get($themeCssPath);
+        $themeCssContents = File::get($themeCssPath);
 
-        if (str_contains($contents, $this->tokensImport)) {
+        if (str_contains($themeCssContents, $this->tokensImport)) {
             return;
         }
 
