@@ -6,7 +6,7 @@ use Symfony\Component\Finder\Finder;
 
 it('only targets fi-* selectors that exist in Filament source', function () {
     $cssDir = __DIR__ . '/../../resources/css';
-    $filamentDir = base_path('vendor/filament');
+    $filamentDir = __DIR__ . '/../../vendor/filament';
 
     $themeSelectors = [];
     foreach (glob($cssDir . '/*.css') as $file) {
