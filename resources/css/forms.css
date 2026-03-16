@@ -73,7 +73,7 @@
     opacity: 0.5 !important;
 }
 
-.fi-toggle-input {
+.fi-fo-toggle {
     box-shadow: none !important;
 }
 
@@ -106,7 +106,7 @@
 }
 /* stylelint-enable selector-class-pattern */
 
-.fi-textarea-input {
+.fi-fo-textarea {
     border-radius: var(--nu-border-radius) !important;
 }
 

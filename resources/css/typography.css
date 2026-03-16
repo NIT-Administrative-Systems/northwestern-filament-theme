@@ -161,7 +161,7 @@ body.fi-body {
     font-variant-numeric: tabular-nums;
 }
 
-.fi-ta-header-cell-label {
+.fi-ta-header-cell {
     font-family: var(--nu-font-body);
     font-weight: 700;
     text-transform: uppercase;
@@ -169,7 +169,7 @@ body.fi-body {
     letter-spacing: 0.05em;
 }
 
-.fi-fo-field-wrp-label label {
+.fi-fo-field-label label {
     font-family: var(--nu-font-body);
     font-weight: 700;
 }
