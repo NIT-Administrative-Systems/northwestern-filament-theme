@@ -15,10 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Northwestern\FilamentTheme\Footer\FooterConfig;
 
 /**
- * Filament plugin that applies Northwestern University branding.
- *
- * Registers brand colors, typography, layout overrides, and an optional
- * footer.
+ * Filament plugin that applies Northwestern branding.
  *
  * @see Colors
  * @see FooterConfig
@@ -44,7 +41,8 @@ class NorthwesternTheme implements Plugin
      * Configure the Northwestern footer.
      *
      * All office parameters default to null, falling back to
-     * `config('northwestern-theme.office.*')` values at render time.
+     * `config('northwestern-theme.office.*')` values at
+     * render time.
      *
      * @param  bool|Closure(): bool  $enabled  Toggle footer rendering.
      * @param  non-empty-string|null  $officeName  Display name for the office block.
@@ -76,9 +74,8 @@ class NorthwesternTheme implements Plugin
     /**
      * Skip CSS asset registration via FilamentAsset.
      *
-     * Use this when the consumer imports the theme CSS directly in
-     * their Vite-compiled panel theme via `@import`. Footer CSS is
-     * still registered when configured via {@see self::footer()}.
+     * Use when importing theme CSS in a Vite panel theme.
+     * Footer CSS is still registered separately.
      */
     public function withoutAssetRegistration(): static
     {
@@ -87,12 +84,7 @@ class NorthwesternTheme implements Plugin
         return $this;
     }
 
-    /**
-     * Register brand colors and CSS assets with the panel.
-     *
-     * Footer CSS is only registered when {@see self::footer()} has been called.
-     * Theme CSS registration is skipped when {@see self::withoutAssetRegistration()} has been called.
-     */
+    /** Register brand colors and CSS assets with the panel. */
     public function register(Panel $panel): void
     {
         $panel
@@ -124,10 +116,10 @@ class NorthwesternTheme implements Plugin
     }
 
     /**
-     * Apply default favicon, brand logo, and footer render hook.
+     * Apply default favicon, brand logo, and footer hook.
      *
-     * Favicon and logo are only set when the panel has not already
-     * configured them, allowing consumer overrides to take precedence.
+     * Skips favicon and logo if the panel already
+     * has its own configured.
      */
     public function boot(Panel $panel): void
     {
@@ -144,20 +136,20 @@ class NorthwesternTheme implements Plugin
         }
 
         if ($this->footerConfig instanceof FooterConfig) {
-            $config = $this->footerConfig;
+            $footerConfig = $this->footerConfig;
 
             $panel->renderHook(
                 PanelsRenderHook::BODY_END,
-                fn (): string => $config->isEnabled()
-                    ? view('northwestern-filament-theme::footer', ['config' => $config])->render()
+                fn (): string => $footerConfig->isEnabled()
+                    ? view('northwestern-filament-theme::footer', ['config' => $footerConfig])->render()
                     : '',
             );
         }
     }
 
     /**
-     * Warn if theme CSS is both registered via FilamentAsset and
-     * likely imported in the consumer's Vite theme.
+     * Warn if theme CSS is registered and also
+     * imported in the panel's Vite theme.
      */
     protected function detectDoubleLoad(Panel $panel): void
     {
@@ -172,9 +164,9 @@ class NorthwesternTheme implements Plugin
             return;
         }
 
-        $contents = file_get_contents($themeCssPath);
+        $themeCssContents = file_get_contents($themeCssPath);
 
-        if ($contents !== false && str_contains($contents, 'northwestern-filament-theme')) {
+        if ($themeCssContents !== false && str_contains($themeCssContents, 'northwestern-filament-theme')) {
             Log::warning(
                 "Northwestern theme CSS is imported in your Vite theme [{$themeCssPath}] but asset registration is still active. "
                 . 'This causes styles to load twice. Call ->withoutAssetRegistration() on the NorthwesternTheme plugin to fix this.',

@@ -51,15 +51,11 @@ php artisan filament:assets
 
 > [!NOTE]
 >
-> If your panel has a [custom theme](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme) via `->viteTheme()`, it will continue to work alongside this plugin. The Northwestern theme is an **additive CSS layer** registered separately through Filament's asset system — it does not replace your custom theme.
+> If your panel has a [custom theme](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme) via `->viteTheme()`, it will continue to work alongside this plugin. The Northwestern theme is an **additive CSS layer** registered separately through Filament's asset system. It does not replace your custom theme.
 
 ## Vite Theme Integration
 
-For tighter control over CSS loading, you can import the theme directly into your panel's Vite-compiled stylesheet instead of loading it as a separate `<link>` tag. This gives you:
-
-- A single compiled CSS bundle instead of an extra `<link>` tag
-- Access to Northwestern design tokens as Tailwind v4 utility classes (e.g., `bg-nu-purple-100`, `text-nu-gold`)
-- The ability to override specific theme styles in your own CSS
+You can also import the theme directly into your panel's Vite-compiled stylesheet instead of loading it as a separate `<link>` tag. This gives you a single compiled CSS bundle, access to Northwestern design tokens as Tailwind v4 utility classes (e.g., `bg-nu-purple-100`, `text-nu-gold`), and the ability to override specific theme styles in your own CSS.
 
 ### Setup
 
@@ -113,7 +109,7 @@ Available token groups:
 
 ## Dark Mode
 
-Dark mode is fully supported out of the box. The theme automatically adapts to Filament's dark mode setting without any additional configuration.
+The theme adapts to Filament's dark mode setting automatically. No extra configuration needed.
 
 ## Favicon & Brand Logo
 
@@ -125,18 +121,18 @@ The brand logo is resolved in the following order:
 2. `config('northwestern-theme.lockup')` (from [`northwestern-sysdev/northwestern-laravel-ui`](https://github.com/NIT-Administrative-Systems/northwestern-laravel-ui), if installed)
 3. The default Northwestern wordmark SVG from the Northwestern CDN
 
-If your application uses [`northwestern-sysdev/northwestern-laravel-ui`](https://github.com/NIT-Administrative-Systems/northwestern-laravel-ui), the `northwestern-theme.lockup` config value is already published for you. The Filament theme plugin reads it automatically, no additional configuration is needed.
+If your application uses [`northwestern-sysdev/northwestern-laravel-ui`](https://github.com/NIT-Administrative-Systems/northwestern-laravel-ui), the `northwestern-theme.lockup` config value is already published for you. The Filament theme plugin reads it automatically.
 
 ## Footer
 
-The footer is disabled by default. Your application may have multiple Filament panels — some internal and staff-facing where a footer would just be noise, others end-user-facing where institutional branding matters. You opt in to the footer on a per-panel basis by chaining `->footer()`:
+The footer is disabled by default. Your application may have multiple Filament panels, some internal where a footer would just be noise, others end-user-facing where institutional branding matters. You opt in per panel by chaining `->footer()`:
 
 ```php
 NorthwesternTheme::make()
     ->footer()
 ```
 
-This renders the standard Northwestern branding, legal links, office contact information, and social media links.
+This renders Northwestern branding, legal links, office contact info, and social media links.
 
 ### Office Information
 
@@ -185,7 +181,7 @@ This publishes to `resources/views/vendor/northwestern-filament-theme/footer.bla
 
 ## External CDN Dependency
 
-This theme loads fonts, icons, the favicon, and the default brand logo from Northwestern's shared asset CDN (`common.northwestern.edu`). Your application requires network access to this CDN at runtime. If your environment restricts external requests or enforces a strict Content Security Policy, you will need to allowlist `https://common.northwestern.edu`.
+This theme loads fonts, icons, the favicon, and the default brand logo from Northwestern's CDN (`common.northwestern.edu`). Your application needs network access to this CDN at runtime. If your environment restricts outbound requests or enforces a strict CSP, allowlist `https://common.northwestern.edu`.
 
 ## Upgrading
 

@@ -79,9 +79,9 @@ it('passes office overrides through the fluent api', function () {
 
 it('returns the plugin instance for chaining', function () {
     $plugin = NorthwesternTheme::make();
-    $result = $plugin->footer();
+    $chainedPlugin = $plugin->footer();
 
-    expect($result)->toBe($plugin);
+    expect($chainedPlugin)->toBe($plugin);
 });
 
 it('has the footer view file', function () {

@@ -9,6 +9,7 @@ use Filament\Facades\Filament;
 use Filament\Panel;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\note;
@@ -66,8 +67,12 @@ class InstallCommand extends Command
             $this->components->task("Creating theme stylesheet for [{$panelId}] panel", function () use ($panelId) {
                 try {
                     $this->callSilently(MakeThemeCommand::class, ['panel' => $panelId]);
-                } catch (\Throwable) {
-                    // MakeThemeCommand may fail — the file-exists check below handles it.
+                } catch (\Throwable $e) {
+                    Log::debug('MakeThemeCommand did not succeed', [
+                        'panel_id' => $panelId,
+                        'exception' => $e->getMessage(),
+                        'exception_class' => get_class($e),
+                    ]);
                 }
 
                 return true;
@@ -82,9 +87,9 @@ class InstallCommand extends Command
         }
 
         $themeCss = File::get($themeCssPath);
-        $themeAlreadyInstalled = str_contains($themeCss, $this->themeImport);
+        $isThemeAlreadyInstalled = str_contains($themeCss, $this->themeImport);
 
-        if ($themeAlreadyInstalled) {
+        if ($isThemeAlreadyInstalled) {
             $this->components->twoColumnDetail('Theme CSS', '<fg=blue;options=bold>ALREADY INSTALLED</>');
         } else {
             $this->components->task('Injecting theme CSS import', function () use ($themeCssPath, $themeCss) {
@@ -94,18 +99,18 @@ class InstallCommand extends Command
             });
         }
 
-        $tokensAlreadyInstalled = str_contains(File::get($themeCssPath), $this->tokensImport);
-        $includeTokens = false;
+        $isTokensAlreadyInstalled = str_contains(File::get($themeCssPath), $this->tokensImport);
+        $shouldIncludeTokens = false;
 
-        if ($tokensAlreadyInstalled) {
+        if ($isTokensAlreadyInstalled) {
             $this->components->twoColumnDetail('Design tokens', '<fg=blue;options=bold>ALREADY INSTALLED</>');
         } else {
-            $includeTokens = confirm(
+            $shouldIncludeTokens = confirm(
                 label: 'Include Tailwind v4 design tokens?',
                 hint: 'Enables utilities like bg-nu-purple-100, text-nu-gold, etc.',
             );
 
-            if ($includeTokens) {
+            if ($shouldIncludeTokens) {
                 $this->components->task('Injecting Tailwind v4 design tokens', function () use ($themeCssPath) {
                     $this->injectTokensImport($themeCssPath);
 
@@ -117,17 +122,17 @@ class InstallCommand extends Command
         $this->cleanPublishedAssets();
         $this->newLine();
 
-        if ($themeAlreadyInstalled && ($tokensAlreadyInstalled || ! $includeTokens)) {
-            $this->components->info('Nothing to do — theme is fully configured');
+        if ($isThemeAlreadyInstalled && ($isTokensAlreadyInstalled || ! $shouldIncludeTokens)) {
+            $this->components->info('Nothing to do, theme is already configured');
 
             return;
         }
 
-        if (! $themeAlreadyInstalled) {
+        if (! $isThemeAlreadyInstalled) {
             $this->components->twoColumnDetail('Theme CSS', '<fg=green;options=bold>INJECTED</>');
         }
 
-        if ($includeTokens) {
+        if ($shouldIncludeTokens) {
             $this->components->twoColumnDetail('Design tokens', '<fg=green;options=bold>INJECTED</>');
         }
 
@@ -164,15 +169,15 @@ class InstallCommand extends Command
 
         File::append($themeCssPath, "\n" . $this->themeImport . "\n");
 
-        warning('Could not find the Filament base theme import — appended to end of file.');
+        warning('Could not find the Filament base theme import. Appended to end of file.');
         note("Please review: {$themeCssPath}\nEnsure the Northwestern import comes after the Filament base import.");
     }
 
     protected function injectTokensImport(string $themeCssPath): void
     {
-        $contents = File::get($themeCssPath);
+        $themeCssContents = File::get($themeCssPath);
 
-        if (str_contains($contents, $this->tokensImport)) {
+        if (str_contains($themeCssContents, $this->tokensImport)) {
             return;
         }
 

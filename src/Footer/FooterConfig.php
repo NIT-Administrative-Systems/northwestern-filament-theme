@@ -7,10 +7,10 @@ namespace Northwestern\FilamentTheme\Footer;
 use Closure;
 
 /**
- * Immutable configuration for the Northwestern footer component.
+ * Configuration for the Northwestern footer.
  *
- * Office fields fall back to `config('northwestern-theme.office.*')` at
- * render time when empty, so consumers only need to specify overrides.
+ * Empty office fields fall back to
+ * config('northwestern-theme.office.*').
  */
 readonly class FooterConfig
 {
@@ -32,7 +32,7 @@ readonly class FooterConfig
     ) {
     }
 
-    /** Resolve the enabled state, evaluating the closure if one was provided. */
+    /** Resolve the enabled state, evaluating closures. */
     public function isEnabled(): bool
     {
         $enabled = $this->enabled;

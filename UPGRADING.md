@@ -2,7 +2,7 @@
 
 ## v1.x to v2.0
 
-v2.0 consolidates the theme's CSS into a single barrel file (`dist/theme.css`) instead of shipping individual module files. This reduces HTTP requests and simplifies asset management.
+v2.0 consolidates the theme's CSS into a single barrel file (`dist/theme.css`) instead of shipping individual module files.
 
 ### Required Steps
 
@@ -28,14 +28,7 @@ That's it for the default integration path. The plugin will register the single 
 
 ### Optional: Vite Theme Integration
 
-If you want tighter control over CSS loading — for example, to use Tailwind v4 utility classes with Northwestern design tokens, or to eliminate the separate `<link>` tag in favor of a single Vite-compiled stylesheet — you can switch to Vite integration.
-
-**When to consider:**
-
-- You have a custom Filament panel theme CSS file (created via `php artisan make:filament-theme`)
-- You want to use Northwestern color tokens as Tailwind utilities (e.g., `bg-nu-purple-100`, `text-nu-gold`)
-- You want a single compiled CSS bundle instead of a separate `<link>` tag for the theme
-- You need to override specific theme styles in your own CSS
+If you already have a custom Filament panel theme (created via `php artisan make:filament-theme`) and want Northwestern color tokens as Tailwind utilities, a single compiled CSS bundle, or the ability to override theme styles in your own CSS, you can switch to Vite integration.
 
 **Steps:**
 
@@ -69,5 +62,5 @@ If you want tighter control over CSS loading — for example, to use Tailwind v4
 
 ### Breaking Changes
 
-- Individual CSS module files (`variables.css`, `typography.css`, etc.) are no longer registered as separate assets. They are concatenated into `dist/theme.css`.
+- Individual CSS module files (`variables.css`, `typography.css`, etc.) are no longer registered separately. They're concatenated into `dist/theme.css`.
 - The `public/css/northwestern-sysdev/` directory from v1 should be removed to avoid stale files.
