@@ -18,6 +18,10 @@
     A branded <a href="https://filamentphp.com">Filament</a> theme plugin for <a href="https://www.northwestern.edu">Northwestern University</a> applications. Applies the official NU color palette, typography, and institutional styling to any Filament panel.
 </p>
 
+<p align="center">
+    <img src="art/preview.gif" alt="Before and after comparison of default Filament vs Northwestern theme" width="720">
+</p>
+
 ## Installation
 
 ```bash
