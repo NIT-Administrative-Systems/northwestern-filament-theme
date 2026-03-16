@@ -1100,8 +1100,8 @@ body.fi-body {
 }
 
 .dark .fi-btn:not(.fi-outlined).fi-color-warning {
-    --dark-text: oklch(0.250 0.08 86.169) !important;
-    --dark-hover-text: oklch(0.250 0.08 86.169) !important;
+    --dark-text: oklch(25% 0.08 86.169deg) !important;
+    --dark-hover-text: oklch(25% 0.08 86.169deg) !important;
 }
 
 .fi-no-notification {
