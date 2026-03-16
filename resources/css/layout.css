@@ -15,6 +15,14 @@ body.fi-body {
     border-bottom: 1px solid var(--nu-border-color);
 }
 
+.fi-sidebar-header img.fi-logo {
+    filter: brightness(0) !important;
+}
+
+.dark .fi-sidebar-header img.fi-logo {
+    filter: none !important;
+}
+
 .fi-sidebar-footer {
     border-top: 1px solid var(--nu-border-color);
     padding: 0.75rem 1rem;

@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-03-16
+
+### Added
+
+- Built-in environment indicator with gold badge and top-border (replaces `pxlrbt/filament-environment-indicator`)
+- `environmentIndicator()` and `withoutEnvironmentIndicator()` fluent methods with optional custom label and visibility
+
+### Fixed
+
+- Improved color contrast for danger and gray color scales to meet WCAG accessibility standards
+- Purple 400 shade adjusted to increase contrast in UI elements
+- Warning button text in dark mode now uses a darker shade for better readability
+
 ## [2.0.0] - 2026-03-16
 
 v2.0 adds optional Vite theme integration as an alternative to the default asset registration approach. Theme CSS is now bundled into a single `dist/theme.css` file, and a new `northwestern-theme:install` command handles setup. Tailwind v4 design tokens are available for projects that want Northwestern brand utilities in their own styles.
@@ -52,7 +65,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v1.0.2...v2.0.0
 [1.0.2]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v1.0.0...v1.0.1

@@ -123,6 +123,43 @@ The brand logo is resolved in the following order:
 
 If your application uses [`northwestern-sysdev/northwestern-laravel-ui`](https://github.com/NIT-Administrative-Systems/northwestern-laravel-ui), the `northwestern-theme.lockup` config value is already published for you. The Filament theme plugin reads it automatically.
 
+## Environment Indicator
+
+The theme includes a built-in environment indicator that displays a gold badge in the topbar and a colored top-border on non-production environments. This is enabled by default.
+
+The indicator automatically hides in production and on small screens.
+
+### Disabling the Indicator
+
+```php
+NorthwesternTheme::make()
+    ->withoutEnvironmentIndicator()
+```
+
+### Custom Visibility
+
+To control when the indicator appears (e.g., only for admins):
+
+```php
+NorthwesternTheme::make()
+    ->environmentIndicator(
+        visible: fn () => ! app()->isProduction() && auth()->user()?->hasRole('admin'),
+    )
+```
+
+### Custom Label
+
+By default, the badge reads "Environment: Local" (or whatever `APP_ENV` is set to). To customize:
+
+```php
+NorthwesternTheme::make()
+    ->environmentIndicator(label: Str::upper(App::environment()))
+```
+
+> [!NOTE]
+>
+> If you are using [`pxlrbt/filament-environment-indicator`](https://github.com/pxlrbt/filament-environment-indicator), you can remove that package. Remove `EnvironmentIndicatorPlugin::make()` from your panel provider and the theme handles the rest.
+
 ## Footer
 
 The footer is disabled by default. Your application may have multiple Filament panels, some internal where a footer would just be noise, others end-user-facing where institutional branding matters. You opt in per panel by chaining `->footer()`:
@@ -169,15 +206,18 @@ NorthwesternTheme::make()
     ->footer(enabled: fn () => auth()->user()?->isStudent())
 ```
 
-### Customizing the Footer View
+## Customizing Views
 
-To modify the footer markup, publish the views and edit the template:
+To modify the environment indicator or footer markup, publish the views:
 
 ```bash
 php artisan vendor:publish --tag=northwestern-filament-theme-views
 ```
 
-This publishes to `resources/views/vendor/northwestern-filament-theme/footer.blade.php`.
+This publishes the following templates to `resources/views/vendor/northwestern-filament-theme/`:
+
+- `environment-indicator.blade.php` — the topbar badge and border
+- `footer.blade.php` — the institutional footer
 
 ## External CDN Dependency
 
