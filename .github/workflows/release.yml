@@ -73,5 +73,5 @@ jobs:
         run: |
           gh release create "$VERSION" \
             --title "$VERSION" \
-            --notes "See [CHANGELOG.md](https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/blob/$VERSION/CHANGELOG.md) for details." \
+            --notes "See [CHANGELOG.md](https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/blob/main/CHANGELOG.md) for details." \
             --verify-tag
