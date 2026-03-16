@@ -1,6 +1,6 @@
-<h2 align="center">
+<h1 align="center">
     Northwestern Filament Theme
-</h2>
+</h1>
 
 <p align="center">
     <img src="https://img.shields.io/badge/PHP-8.2+-blue" alt="PHP Version">
