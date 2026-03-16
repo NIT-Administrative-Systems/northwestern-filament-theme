@@ -54,6 +54,10 @@ php artisan filament:assets
 >
 > The `->viteTheme()` call is still required. It provides the Tailwind build that generates Filament's utility classes. The Northwestern theme is an **additive CSS layer** on top of Tailwind, it does not replace it.
 
+## Dark Mode
+
+Dark mode is fully supported out of the box. The theme automatically adapts to Filament's dark mode setting without any additional configuration.
+
 ## Favicon & Brand Logo
 
 The plugin automatically sets a Northwestern favicon and brand logo when the panel has not already configured them. If you call `->favicon()` or `->brandLogo()` on your panel, your values take precedence.
