@@ -85,7 +85,7 @@ Office contact details displayed in the footer are resolved in the following ord
 2. `config('northwestern-theme.office.*')` values (from `northwestern-sysdev/northwestern-laravel-ui`, if installed)
 3. Hardcoded IT defaults (Information Technology, 1800 Sherman Ave, etc.)
 
-If your application already has [`northwestern-sysdev/northwestern-laravel-ui`](https://github.com/NIT-Administrative-Systems/northwestern-laravel-ui) installed and its config published, the footer will pick up `office.name`, `office.addr`, `office.city`, `office.phone`, and `office.email` automatically.
+If your application already has [`northwestern-sysdev/northwestern-laravel-ui`](https://github.com/NIT-Administrative-Systems/northwestern-laravel-ui) installed, the footer will pick up `office.name`, `office.addr`, `office.city`, `office.phone`, and `office.email` automatically.
 
 To override specific fields:
 
