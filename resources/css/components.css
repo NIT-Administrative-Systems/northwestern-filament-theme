@@ -50,6 +50,11 @@
     border-color: var(--nu-border-color) !important;
 }
 
+.dark .fi-btn:not(.fi-outlined).fi-color-warning {
+    --dark-text: oklch(25% 0.08 86.169deg) !important;
+    --dark-hover-text: oklch(25% 0.08 86.169deg) !important;
+}
+
 .fi-no-notification {
     border-radius: var(--nu-border-radius) !important;
     box-shadow: var(--nu-shadow-md) !important;
