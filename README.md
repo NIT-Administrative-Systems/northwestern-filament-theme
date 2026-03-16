@@ -1,6 +1,10 @@
-<h1 align="center">
-    Northwestern Filament Theme
-</h1>
+<div id="user-content-toc">
+  <ul align="center" style="list-style: none;">
+    <summary>
+      <h1>Northwestern Filament Theme</h1>
+    </summary>
+  </ul>
+</div>
 
 <p align="center">
     <img src="https://img.shields.io/badge/PHP-8.2+-blue" alt="PHP Version">
