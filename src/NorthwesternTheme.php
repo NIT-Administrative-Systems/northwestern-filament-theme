@@ -9,7 +9,6 @@ use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
-use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
 use Northwestern\FilamentTheme\Footer\FooterConfig;
 
@@ -130,7 +129,7 @@ class NorthwesternTheme implements Plugin
         if ($this->footerConfig instanceof FooterConfig) {
             $config = $this->footerConfig;
 
-            FilamentView::registerRenderHook(
+            $panel->renderHook(
                 PanelsRenderHook::BODY_END,
                 fn (): string => $config->isEnabled()
                     ? view('northwestern-filament-theme::footer', ['config' => $config])->render()
