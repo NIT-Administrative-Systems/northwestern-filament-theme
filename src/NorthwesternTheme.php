@@ -10,6 +10,8 @@ use Filament\Panel;
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\View\PanelsRenderHook;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Northwestern\FilamentTheme\Footer\FooterConfig;
 
 /**
@@ -24,6 +26,8 @@ use Northwestern\FilamentTheme\Footer\FooterConfig;
 class NorthwesternTheme implements Plugin
 {
     protected ?FooterConfig $footerConfig = null;
+
+    protected bool $registerAssets = true;
 
     public static function make(): static
     {
@@ -70,9 +74,24 @@ class NorthwesternTheme implements Plugin
     }
 
     /**
+     * Skip CSS asset registration via FilamentAsset.
+     *
+     * Use this when the consumer imports the theme CSS directly in
+     * their Vite-compiled panel theme via `@import`. Footer CSS is
+     * still registered when configured via {@see self::footer()}.
+     */
+    public function withoutAssetRegistration(): static
+    {
+        $this->registerAssets = false;
+
+        return $this;
+    }
+
+    /**
      * Register brand colors and CSS assets with the panel.
      *
      * Footer CSS is only registered when {@see self::footer()} has been called.
+     * Theme CSS registration is skipped when {@see self::withoutAssetRegistration()} has been called.
      */
     public function register(Panel $panel): void
     {
@@ -86,26 +105,22 @@ class NorthwesternTheme implements Plugin
                 'warning' => Colors::WARNING_PALETTE,
             ]);
 
-        $cssPath = __DIR__ . '/../resources/css';
+        $distPath = __DIR__ . '/../dist';
 
         /** @var list<Css> $assets */
-        $assets = [
-            Css::make('nu-variables', $cssPath . '/variables.css'),
-            Css::make('nu-typography', $cssPath . '/typography.css'),
-            Css::make('nu-layout', $cssPath . '/layout.css'),
-            Css::make('nu-buttons', $cssPath . '/buttons.css'),
-            Css::make('nu-forms', $cssPath . '/forms.css'),
-            Css::make('nu-tables', $cssPath . '/tables.css'),
-            Css::make('nu-navigation', $cssPath . '/navigation.css'),
-            Css::make('nu-components', $cssPath . '/components.css'),
-            Css::make('nu-utilities', $cssPath . '/utilities.css'),
-        ];
+        $assets = [];
 
-        if ($this->footerConfig instanceof FooterConfig) {
-            $assets[] = Css::make('nu-footer', $cssPath . '/footer.css');
+        if ($this->registerAssets) {
+            $assets[] = Css::make('nu-theme', $distPath . '/theme.css');
         }
 
-        FilamentAsset::register($assets, 'northwestern-sysdev/northwestern-filament-theme');
+        if ($this->footerConfig instanceof FooterConfig) {
+            $assets[] = Css::make('nu-footer', $distPath . '/footer.css');
+        }
+
+        if ($assets !== []) {
+            FilamentAsset::register($assets, 'northwestern-sysdev/northwestern-filament-theme');
+        }
     }
 
     /**
@@ -116,6 +131,8 @@ class NorthwesternTheme implements Plugin
      */
     public function boot(Panel $panel): void
     {
+        $this->detectDoubleLoad($panel);
+
         if (! $panel->getFavicon()) {
             $panel->favicon('https://common.northwestern.edu/v8/icons/favicon-32.png');
         }
@@ -134,6 +151,33 @@ class NorthwesternTheme implements Plugin
                 fn (): string => $config->isEnabled()
                     ? view('northwestern-filament-theme::footer', ['config' => $config])->render()
                     : '',
+            );
+        }
+    }
+
+    /**
+     * Warn if theme CSS is both registered via FilamentAsset and
+     * likely imported in the consumer's Vite theme.
+     */
+    protected function detectDoubleLoad(Panel $panel): void
+    {
+        if (! $this->registerAssets || ! App::isLocal()) {
+            return;
+        }
+
+        $panelId = $panel->getId();
+        $themeCssPath = resource_path("css/filament/{$panelId}/theme.css");
+
+        if (! file_exists($themeCssPath)) {
+            return;
+        }
+
+        $contents = file_get_contents($themeCssPath);
+
+        if ($contents !== false && str_contains($contents, 'northwestern-filament-theme')) {
+            Log::warning(
+                "Northwestern theme CSS is imported in your Vite theme [{$themeCssPath}] but asset registration is still active. "
+                . 'This causes styles to load twice. Call ->withoutAssetRegistration() on the NorthwesternTheme plugin to fix this.',
             );
         }
     }
