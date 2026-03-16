@@ -145,6 +145,16 @@ body.fi-body {
     font-weight: 600;
 }
 
+.fi-body .fi-main h1:not([class*="fi-"]),
+.fi-body .fi-main h2:not([class*="fi-"]),
+.fi-body .fi-main h3:not([class*="fi-"]),
+.fi-body .fi-main h4:not([class*="fi-"]),
+.fi-body .fi-main h5:not([class*="fi-"]),
+.fi-body .fi-main h6:not([class*="fi-"]) {
+    font-family: var(--nu-font-heading) !important;
+    color: var(--nu-color-text) !important;
+}
+
 .fi-sidebar-item-label {
     font-family: var(--nu-font-body);
     font-size: 0.875rem;

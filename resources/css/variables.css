@@ -93,6 +93,8 @@
     --nu-body-bg: #18181b;
     --nu-sidebar-bg: #1e1e1e;
     --nu-border-color: #3a3a3a;
+    --nu-color-text: #f0f0f0;
+    --nu-color-text-muted: #a1a1aa;
 
     --nu-focus-ring: var(--nu-purple-40);
     --nu-focus-shadow-color: rgb(147 128 182 / 40%);
