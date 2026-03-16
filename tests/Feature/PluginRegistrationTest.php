@@ -109,6 +109,27 @@ it('does not override a panel-configured brand logo', function () {
     expect($panel->getBrandLogo())->toBe('https://example.com/custom-logo.svg');
 });
 
+it('registers footer render hook on the panel not globally', function () {
+    $panelWithFooter = app(Panel::class)->id('test-scoped-footer');
+    $panelWithoutFooter = app(Panel::class)->id('test-no-footer-panel');
+
+    $pluginWithFooter = NorthwesternTheme::make()->footer();
+    $pluginWithFooter->register($panelWithFooter);
+    $pluginWithFooter->boot($panelWithFooter);
+
+    $pluginWithoutFooter = NorthwesternTheme::make();
+    $pluginWithoutFooter->register($panelWithoutFooter);
+    $pluginWithoutFooter->boot($panelWithoutFooter);
+
+    $getHooks = fn (Panel $panel) => (new ReflectionProperty($panel, 'renderHooks'))->getValue($panel);
+
+    $hooksWithFooter = $getHooks($panelWithFooter);
+    $hooksWithoutFooter = $getHooks($panelWithoutFooter);
+
+    expect($hooksWithFooter)->toHaveKey(Filament\View\PanelsRenderHook::BODY_END);
+    expect($hooksWithoutFooter)->not->toHaveKey(Filament\View\PanelsRenderHook::BODY_END);
+});
+
 it('renders the footer view with custom office info', function () {
     $config = new FooterConfig(
         officeName: 'Test Office',
