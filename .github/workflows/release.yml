@@ -33,6 +33,20 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.RELEASE_TOKEN }}
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
+
+      - name: Install Node Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check dist/ is up to date
+        run: pnpm build:css:check
+
       - name: Check version doesn't already exist
         env:
           VERSION: ${{ inputs.version }}

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Northwestern\FilamentTheme;
 
+use Northwestern\FilamentTheme\Console\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 /**
- * Registers the theme's views and publishable assets.
+ * Registers the theme's view, command, and publishable assets.
  */
 class NorthwesternThemeServiceProvider extends PackageServiceProvider
 {
@@ -16,7 +17,8 @@ class NorthwesternThemeServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('northwestern-filament-theme')
-            ->hasViews('northwestern-filament-theme');
+            ->hasViews('northwestern-filament-theme')
+            ->hasCommand(InstallCommand::class);
     }
 
     public function packageBooted(): void

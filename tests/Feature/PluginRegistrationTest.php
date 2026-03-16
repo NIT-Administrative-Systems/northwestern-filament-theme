@@ -20,7 +20,7 @@ it('registers brand colors on the panel', function () {
         ->and($colors)->toHaveKeys(['danger', 'gray', 'info', 'success', 'warning']);
 });
 
-it('registers all core CSS assets', function () {
+it('registers the bundled theme CSS asset', function () {
     $panel = app(Panel::class)->id('test-css');
     $plugin = NorthwesternTheme::make();
     $plugin->register($panel);
@@ -28,21 +28,7 @@ it('registers all core CSS assets', function () {
     $styles = FilamentAsset::getStyles(['northwestern-sysdev/northwestern-filament-theme']);
     $registeredIds = array_map(fn (Filament\Support\Assets\Css $asset) => $asset->getId(), $styles);
 
-    $expectedAssets = [
-        'nu-variables',
-        'nu-typography',
-        'nu-layout',
-        'nu-buttons',
-        'nu-forms',
-        'nu-tables',
-        'nu-navigation',
-        'nu-components',
-        'nu-utilities',
-    ];
-
-    foreach ($expectedAssets as $id) {
-        expect($registeredIds)->toContain($id);
-    }
+    expect($registeredIds)->toContain('nu-theme');
 });
 
 it('does not register footer CSS when footer is not enabled', function () {
@@ -54,6 +40,17 @@ it('does not register footer CSS when footer is not enabled', function () {
     $registeredIds = array_map(fn (Filament\Support\Assets\Css $asset) => $asset->getId(), $styles);
 
     expect($registeredIds)->not->toContain('nu-footer');
+});
+
+it('skips theme CSS when withoutAssetRegistration is called', function () {
+    $panel = app(Panel::class)->id('test-no-asset-reg');
+    $plugin = NorthwesternTheme::make()->withoutAssetRegistration();
+    $plugin->register($panel);
+
+    $styles = FilamentAsset::getStyles(['northwestern-sysdev/northwestern-filament-theme']);
+    $registeredIds = array_map(fn (Filament\Support\Assets\Css $asset) => $asset->getId(), $styles);
+
+    expect($registeredIds)->not->toContain('nu-theme');
 });
 
 it('registers footer CSS when footer is enabled', function () {
@@ -143,6 +140,67 @@ it('renders the footer view with custom office info', function () {
         ->toContain('test@northwestern.edu')
         ->toContain('nu-footer')
         ->toContain(date('Y'));
+});
+
+it('warns when theme CSS is double-loaded in local environment', function () {
+    $panel = app(Panel::class)->id('test-double-load');
+    $plugin = NorthwesternTheme::make();
+    $plugin->register($panel);
+
+    $themeCssDir = resource_path('css/filament/test-double-load');
+    Illuminate\Support\Facades\File::ensureDirectoryExists($themeCssDir);
+    Illuminate\Support\Facades\File::put($themeCssDir . '/theme.css', implode("\n", [
+        "@import 'tailwindcss';",
+        "@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';",
+    ]));
+
+    Illuminate\Support\Facades\App::shouldReceive('isLocal')->andReturn(true);
+    Illuminate\Support\Facades\Log::shouldReceive('warning')
+        ->once()
+        ->withArgs(fn (string $message) => str_contains($message, 'withoutAssetRegistration'));
+
+    $plugin->boot($panel);
+
+    Illuminate\Support\Facades\File::deleteDirectory($themeCssDir);
+});
+
+it('does not warn about double-load when withoutAssetRegistration is called', function () {
+    $panel = app(Panel::class)->id('test-no-double-warn');
+    $plugin = NorthwesternTheme::make()->withoutAssetRegistration();
+    $plugin->register($panel);
+
+    $themeCssDir = resource_path('css/filament/test-no-double-warn');
+    Illuminate\Support\Facades\File::ensureDirectoryExists($themeCssDir);
+    Illuminate\Support\Facades\File::put($themeCssDir . '/theme.css', implode("\n", [
+        "@import 'tailwindcss';",
+        "@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';",
+    ]));
+
+    Illuminate\Support\Facades\Log::shouldReceive('warning')->never();
+
+    $plugin->boot($panel);
+
+    Illuminate\Support\Facades\File::deleteDirectory($themeCssDir);
+});
+
+it('does not warn about double-load in non-local environments', function () {
+    $panel = app(Panel::class)->id('test-prod-no-warn');
+    $plugin = NorthwesternTheme::make();
+    $plugin->register($panel);
+
+    $themeCssDir = resource_path('css/filament/test-prod-no-warn');
+    Illuminate\Support\Facades\File::ensureDirectoryExists($themeCssDir);
+    Illuminate\Support\Facades\File::put($themeCssDir . '/theme.css', implode("\n", [
+        "@import 'tailwindcss';",
+        "@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';",
+    ]));
+
+    Illuminate\Support\Facades\App::shouldReceive('isLocal')->andReturn(false);
+    Illuminate\Support\Facades\Log::shouldReceive('warning')->never();
+
+    $plugin->boot($panel);
+
+    Illuminate\Support\Facades\File::deleteDirectory($themeCssDir);
 });
 
 it('renders the footer view with default office info', function () {
