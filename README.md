@@ -24,7 +24,7 @@
 composer require northwestern-sysdev/northwestern-filament-theme
 ```
 
-## Usage
+## Quick Start
 
 Register the plugin in your Filament panel provider:
 
@@ -52,6 +52,64 @@ php artisan filament:assets
 > [!NOTE]
 >
 > If your panel has a [custom theme](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme) via `->viteTheme()`, it will continue to work alongside this plugin. The Northwestern theme is an **additive CSS layer** registered separately through Filament's asset system — it does not replace your custom theme.
+
+## Vite Theme Integration
+
+For tighter control over CSS loading, you can import the theme directly into your panel's Vite-compiled stylesheet instead of loading it as a separate `<link>` tag. This gives you:
+
+- A single compiled CSS bundle instead of an extra `<link>` tag
+- Access to Northwestern design tokens as Tailwind v4 utility classes (e.g., `bg-nu-purple-100`, `text-nu-gold`)
+- The ability to override specific theme styles in your own CSS
+
+### Setup
+
+Run the install command:
+
+```bash
+php artisan northwestern-theme:install
+```
+
+This will:
+- Create a panel theme CSS file if one doesn't exist
+- Inject the Northwestern theme `@import` after the Filament base import
+- Optionally inject Tailwind v4 design tokens for color utilities
+
+Then disable automatic asset registration in your panel provider to prevent the CSS from loading twice:
+
+```php
+NorthwesternTheme::make()
+    ->withoutAssetRegistration()
+```
+
+Finally, compile your assets:
+
+```bash
+npm run build
+```
+
+### Tailwind v4 Design Tokens
+
+When you opt in to design tokens during `northwestern-theme:install`, the plugin provides Northwestern colors as Tailwind v4 utility classes:
+
+```html
+<div class="bg-nu-purple-100 text-white">Purple background</div>
+<span class="text-nu-gold">Gold accent text</span>
+<div class="border border-nu-black-20">Subtle border</div>
+```
+
+Available token groups:
+
+| Group             | Examples                                                                   |
+|-------------------|----------------------------------------------------------------------------|
+| Purple scale      | `nu-purple-10` through `nu-purple-160`                                     |
+| Grays             | `nu-black-10`, `nu-black-20`, `nu-black-50`, `nu-black-80`, `nu-black-100` |
+| Brand colors      | `nu-green`, `nu-teal`, `nu-blue`, `nu-yellow`, `nu-gold`, `nu-orange`      |
+| Dark brand colors | `nu-dark-green`, `nu-dark-teal`, `nu-dark-blue`, etc.                      |
+| Semantic colors   | `nu-success`, `nu-info`, `nu-warning`, `nu-danger`                         |
+
+> [!NOTE]
+>
+> Design tokens require **Tailwind CSS v4+** (they use the `@theme` syntax). The core theme CSS works with any Tailwind version.
 
 ## Dark Mode
 
@@ -128,6 +186,10 @@ This publishes to `resources/views/vendor/northwestern-filament-theme/footer.bla
 ## External CDN Dependency
 
 This theme loads fonts, icons, the favicon, and the default brand logo from Northwestern's shared asset CDN (`common.northwestern.edu`). Your application requires network access to this CDN at runtime. If your environment restricts external requests or enforces a strict Content Security Policy, you will need to allowlist `https://common.northwestern.edu`.
+
+## Upgrading
+
+See [UPGRADING.md](UPGRADING.md) for migration guides between major versions.
 
 ## License
 

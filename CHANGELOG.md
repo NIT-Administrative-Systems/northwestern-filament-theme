@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-03-16
+
+v2.0 introduces optional Vite theme integration as an alternative to the default asset registration approach. Theme CSS is now bundled into a single `dist/theme.css` file, and a new install command (`northwestern-theme:install`) handles setup automatically. Tailwind v4 design tokens are also available for consumers who want Northwestern brand utilities in their own styles.
+
+This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migration steps.
+
+### Added
+
+- Vite theme integration via `northwestern-theme:install` artisan command
+- `withoutAssetRegistration()` to prevent double-loading when using Vite integration
+- Tailwind v4 design tokens (`bg-nu-purple-100`, `text-nu-gold`, etc.)
+
+### Changed
+
+- Theme CSS is now compiled into `dist/theme.css` instead of registered as individual files
+
 ## [1.0.2] - 2026-03-16
 
 ### Changed
@@ -36,7 +52,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v1.0.2...v2.0.0
 [1.0.2]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/releases/tag/v1.0.0
