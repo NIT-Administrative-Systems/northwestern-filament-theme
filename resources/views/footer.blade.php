@@ -55,9 +55,9 @@
 
         <div class="nu-footer-col">
             <p>Social Media</p>
-            <a href="https://www.facebook.com/NorthwesternU" class="nu-social nu-social--facebook">Facebook</a>
-            <a href="https://instagram.com/northwesternu" class="nu-social nu-social--instagram">Instagram</a>
-            <a href="https://www.youtube.com/user/NorthwesternU" class="nu-social nu-social--youtube">YouTube</a>
+            <a href="https://www.facebook.com/NorthwesternU" class="nu-social nu-social-facebook">Facebook</a>
+            <a href="https://instagram.com/northwesternu" class="nu-social nu-social-instagram">Instagram</a>
+            <a href="https://www.youtube.com/user/NorthwesternU" class="nu-social nu-social-youtube">YouTube</a>
         </div>
     </div>
 </footer>
