@@ -2,25 +2,25 @@
    Navigation — Sidebar Items, Breadcrumbs, Tabs
    ========================================================================== */
 
-.fi-sidebar-item-button {
+.fi-sidebar-item-btn {
     border-radius: var(--nu-border-radius) !important;
     transition: background-color var(--nu-transition-fast);
 }
 
-.fi-sidebar-item-button:hover {
+.fi-sidebar-item-btn:hover {
     background-color: var(--nu-purple-10) !important;
 }
 
-.fi-sidebar-item-active .fi-sidebar-item-button {
+.fi-sidebar-item.fi-active .fi-sidebar-item-btn {
     background-color: var(--nu-purple-10) !important;
     color: var(--nu-purple-100);
 }
 
-.fi-sidebar-item-active .fi-sidebar-item-button .fi-sidebar-item-icon {
+.fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-icon {
     color: var(--nu-purple-100);
 }
 
-.fi-sidebar-item-active .fi-sidebar-item-button .fi-sidebar-item-label {
+.fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-label {
     color: var(--nu-purple-100);
     font-weight: 700;
 }
@@ -41,11 +41,11 @@
     color: var(--nu-purple-120);
 }
 
-.fi-tabs-item-button {
+.fi-tabs-item {
     border-radius: var(--nu-border-radius) !important;
 }
 
-.fi-tabs-item-active .fi-tabs-item-button {
+.fi-tabs-item.fi-active {
     border-color: var(--nu-purple-100);
 }
 
@@ -59,17 +59,17 @@
     font-size: 0.875rem;
 }
 
-.dark .fi-sidebar-item-button:hover {
+.dark .fi-sidebar-item-btn:hover {
     background-color: rgb(78 42 132 / 15%) !important;
 }
 
-.dark .fi-sidebar-item-active .fi-sidebar-item-button {
+.dark .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
     background-color: rgb(78 42 132 / 20%) !important;
     color: var(--nu-purple-30);
 }
 
-.dark .fi-sidebar-item-active .fi-sidebar-item-button .fi-sidebar-item-icon,
-.dark .fi-sidebar-item-active .fi-sidebar-item-button .fi-sidebar-item-label {
+.dark .fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-icon,
+.dark .fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-label {
     color: var(--nu-purple-30);
 }
 

@@ -22,15 +22,15 @@
     border-bottom: none;
 }
 
-.fi-ta-row-striped:nth-child(even) {
+.fi-ta-row.fi-striped:nth-child(even) {
     background-color: var(--nu-purple-surface-subtle);
 }
 
-.fi-ta-paginator {
+.fi-pagination {
     border-top: 1px solid var(--nu-border-color);
 }
 
-.fi-ta-search-input {
+.fi-ta-search-field {
     border-radius: var(--nu-border-radius) !important;
 }
 
@@ -111,11 +111,11 @@
     border-bottom-color: var(--nu-border-color);
 }
 
-.dark .fi-ta-row-striped:nth-child(even) {
+.dark .fi-ta-row.fi-striped:nth-child(even) {
     background-color: var(--nu-purple-surface-subtle);
 }
 
-.dark .fi-ta-paginator {
+.dark .fi-pagination {
     border-top-color: var(--nu-border-color);
 }
 
