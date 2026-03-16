@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/PHP-8.2+-blue" alt="PHP Version">
-    <img src="https://img.shields.io/badge/Laravel-11.x_|_12.x-red" alt="Laravel Version">
-    <img src="https://img.shields.io/badge/Filament-4.x_|_5.x-yellow" alt="Filament Version">
+    <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat&logo=php&logoColor=white" alt="PHP Version"></a>
+    <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-11.x%20|%2012.x-F05340?style=flat&logo=laravel&logoColor=white" alt="Laravel Version"></a>
+    <a href="https://filamentphp.com"><img src="https://img.shields.io/badge/Filament-4.x%20|%205.x-FDAE4B?style=flat&logo=filament&logoColor=white" alt="Filament Version"></a>
 </p>
 
 <hr/>
