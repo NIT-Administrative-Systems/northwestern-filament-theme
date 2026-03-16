@@ -31,7 +31,7 @@
 
 .fi-dropdown-panel {
     border-radius: var(--nu-border-radius) !important;
-    box-shadow: 0 4px 16px rgb(0 0 0 / 10%) !important;
+    box-shadow: var(--nu-shadow-md) !important;
     border: 1px solid var(--nu-border-color);
 }
 
@@ -42,7 +42,7 @@
 
 .fi-badge {
     border-radius: var(--nu-border-radius) !important;
-    border: 1px solid #e0e0e0 !important;
+    border: 1px solid var(--nu-badge-border) !important;
     box-shadow: none !important;
 }
 
@@ -52,7 +52,7 @@
 
 .fi-no-notification {
     border-radius: var(--nu-border-radius) !important;
-    box-shadow: 0 4px 16px rgb(0 0 0 / 10%) !important;
+    box-shadow: var(--nu-shadow-md) !important;
 }
 
 .fi-wi-stats-overview-stat {
@@ -105,7 +105,7 @@
 }
 
 .fi-fieldset-label-required-mark {
-    color: #EF553F;
+    color: var(--nu-color-danger);
 }
 
 .fi-empty-state-heading {
@@ -250,7 +250,7 @@
 }
 
 .dark .fi-empty-state-heading {
-    color: #e5e7eb;
+    color: var(--nu-black-20);
 }
 
 .dark .fi-empty-state-icon-bg {

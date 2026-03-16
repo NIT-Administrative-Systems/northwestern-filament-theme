@@ -10,7 +10,7 @@
 
 .fi-ta-header-cell,
 .fi-ta-actions-header-cell {
-    background-color: #f3f0f7;
+    background-color: var(--nu-purple-surface);
     border-bottom: 2px solid var(--nu-border-color);
 }
 
@@ -23,7 +23,7 @@
 }
 
 .fi-ta-row-striped:nth-child(even) {
-    background-color: #f7f5f9;
+    background-color: var(--nu-purple-surface-subtle);
 }
 
 .fi-ta-paginator {
@@ -68,7 +68,7 @@
 }
 
 .fi-ta-group-header {
-    background-color: #f3f0f7;
+    background-color: var(--nu-purple-surface);
 }
 
 .fi-ta-group-heading {
@@ -94,7 +94,7 @@
 }
 
 .fi-ta-reordering .fi-ta-row {
-    background-color: #f7f5f9;
+    background-color: var(--nu-purple-surface-subtle);
 }
 
 .dark .fi-ta-ctn {
@@ -103,7 +103,7 @@
 
 .dark .fi-ta-header-cell,
 .dark .fi-ta-actions-header-cell {
-    background-color: rgb(255 255 255 / 5%);
+    background-color: var(--nu-purple-surface);
     border-bottom-color: var(--nu-border-color);
 }
 
@@ -112,7 +112,7 @@
 }
 
 .dark .fi-ta-row-striped:nth-child(even) {
-    background-color: rgb(255 255 255 / 3%);
+    background-color: var(--nu-purple-surface-subtle);
 }
 
 .dark .fi-ta-paginator {
@@ -128,7 +128,7 @@
 }
 
 .dark .fi-ta-group-header {
-    background-color: rgb(255 255 255 / 5%);
+    background-color: var(--nu-purple-surface);
 }
 
 .dark .fi-ta-group-description {
@@ -141,5 +141,5 @@
 }
 
 .dark .fi-ta-reordering .fi-ta-row {
-    background-color: rgb(255 255 255 / 3%);
+    background-color: var(--nu-purple-surface-subtle);
 }

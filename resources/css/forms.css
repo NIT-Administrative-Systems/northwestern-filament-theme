@@ -6,12 +6,12 @@
     border-radius: var(--nu-border-radius) !important;
     box-shadow: none !important;
     border: 1px solid var(--nu-border-color);
-    transition: border-color 150ms ease, box-shadow 150ms ease;
+    transition: border-color var(--nu-transition-fast), box-shadow var(--nu-transition-fast);
 }
 
 .fi-input-wrp:focus-within {
-    border-color: #a795c2 !important;
-    box-shadow: 0 0 0 0.25rem rgb(78 42 132 / 25%) !important;
+    border-color: var(--nu-focus-border) !important;
+    box-shadow: 0 0 0 0.25rem var(--nu-focus-shadow-color) !important;
 }
 
 .fi-select-input {
@@ -20,7 +20,7 @@
 
 .fi-checkbox-input {
     border-radius: var(--nu-border-radius) !important;
-    --tw-ring-color: #BBB8B8 !important;
+    --tw-ring-color: var(--nu-black-20) !important;
 }
 
 .fi-checkbox-input:checked {
@@ -31,11 +31,11 @@
 .fi-checkbox-input:focus {
     --tw-ring-color: var(--nu-purple-100) !important;
     --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor) !important;
-    box-shadow: var(--tw-ring-shadow), 0 0 0 0.25rem rgb(78 42 132 / 25%) !important;
+    box-shadow: var(--tw-ring-shadow), 0 0 0 0.25rem var(--nu-focus-shadow-color) !important;
 }
 
 .fi-radio-input {
-    --tw-ring-color: #BBB8B8 !important;
+    --tw-ring-color: var(--nu-black-20) !important;
 }
 
 .fi-radio-input:checked {
@@ -46,12 +46,12 @@
 .fi-radio-input:focus {
     --tw-ring-color: var(--nu-purple-100) !important;
     --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor) !important;
-    box-shadow: var(--tw-ring-shadow), 0 0 0 0.25rem rgb(78 42 132 / 25%) !important;
+    box-shadow: var(--tw-ring-shadow), 0 0 0 0.25rem var(--nu-focus-shadow-color) !important;
 }
 
 .dark .fi-checkbox-input,
 .dark .fi-radio-input {
-    --tw-ring-color: #716C6B !important;
+    --tw-ring-color: var(--nu-black-50) !important;
 }
 
 .dark .fi-checkbox-input:checked,
@@ -143,7 +143,7 @@
 .fi-fo-builder-item-header,
 .fi-fo-repeater-item-header {
     border-bottom: 1px solid var(--nu-border-color);
-    background-color: #f9fafb;
+    background-color: var(--nu-surface-muted);
 }
 
 .fi-fo-builder-item-header-label,
@@ -192,17 +192,6 @@
     border-color: var(--nu-border-color);
 }
 
-.dark .fi-input-wrp:focus-within {
-    border-color: #a795c2 !important;
-    box-shadow: 0 0 0 0.25rem rgb(147 128 182 / 40%) !important;
-}
-
-.dark .fi-checkbox-input:focus,
-.dark .fi-radio-input:focus {
-    --tw-ring-color: var(--nu-purple-50) !important;
-    box-shadow: var(--tw-ring-shadow), 0 0 0 0.25rem rgb(147 128 182 / 40%) !important;
-}
-
 .dark .fi-fo-date-time-picker-panel,
 .dark .fi-fo-color-picker-panel {
     border-color: var(--nu-border-color);
@@ -216,7 +205,7 @@
 .dark .fi-fo-builder-item-header,
 .dark .fi-fo-repeater-item-header {
     border-bottom-color: var(--nu-border-color);
-    background-color: rgb(255 255 255 / 5%);
+    background-color: var(--nu-surface-muted);
 }
 
 .dark .fi-fo-key-value-add-action-ctn {
@@ -233,5 +222,5 @@
 }
 
 .dark .fi-fo-field-wrp-error-message {
-    color: #f87171;
+    color: var(--nu-color-danger);
 }

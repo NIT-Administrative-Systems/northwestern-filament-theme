@@ -4,7 +4,7 @@
 
 .fi-sidebar-item-button {
     border-radius: var(--nu-border-radius) !important;
-    transition: background-color 150ms ease;
+    transition: background-color var(--nu-transition-fast);
 }
 
 .fi-sidebar-item-button:hover {

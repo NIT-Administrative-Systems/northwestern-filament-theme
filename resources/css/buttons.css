@@ -5,16 +5,16 @@
 .fi-btn {
     border-radius: var(--nu-border-radius) !important;
     box-shadow: none !important;
-    transition: background-color 150ms ease, border-color 150ms ease;
+    transition: background-color var(--nu-transition-fast), border-color var(--nu-transition-fast);
 }
 
 .fi-btn:not(.fi-color) {
-    box-shadow: inset 0 0 0 1px #BBB8B8 !important;
+    box-shadow: inset 0 0 0 1px var(--nu-black-20) !important;
 }
 
 .fi-btn:not(.fi-color):hover {
-    box-shadow: inset 0 0 0 1px #716C6B !important;
-    background-color: #f3f4f6 !important;
+    box-shadow: inset 0 0 0 1px var(--nu-black-50) !important;
+    background-color: var(--nu-hover-bg) !important;
 }
 
 .fi-btn.fi-outlined.fi-color {
@@ -26,7 +26,7 @@
 }
 
 .fi-btn:focus-visible {
-    outline: 2px solid #4E2A84;
+    outline: 2px solid var(--nu-focus-ring);
     outline-offset: 2px;
     box-shadow: none !important;
 }
@@ -55,7 +55,7 @@
 }
 
 .fi-link:focus-visible {
-    outline: 2px solid #4E2A84;
+    outline: 2px solid var(--nu-focus-ring);
     outline-offset: 2px;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .fi-icon-btn:focus-visible {
-    outline: 2px solid #4E2A84;
+    outline: 2px solid var(--nu-focus-ring);
     outline-offset: 2px;
 }
 
@@ -79,22 +79,10 @@
 }
 
 .dark .fi-btn:not(.fi-color) {
-    box-shadow: inset 0 0 0 1px #716C6B !important;
+    box-shadow: inset 0 0 0 1px var(--nu-black-50) !important;
 }
 
 .dark .fi-btn:not(.fi-color):hover {
-    box-shadow: inset 0 0 0 1px #BBB8B8 !important;
-    background-color: rgb(255 255 255 / 10%) !important;
-}
-
-.dark .fi-btn:focus-visible {
-    outline-color: #A495C3;
-}
-
-.dark .fi-link:focus-visible {
-    outline-color: #A495C3;
-}
-
-.dark .fi-icon-btn:focus-visible {
-    outline-color: #A495C3;
+    box-shadow: inset 0 0 0 1px var(--nu-black-20) !important;
+    background-color: var(--nu-hover-bg) !important;
 }
