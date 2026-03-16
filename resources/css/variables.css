@@ -76,10 +76,30 @@
 
     --nu-font-body: 'Akkurat Pro', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;
     --nu-font-heading: 'Poppins', 'Akkurat Pro', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;
+
+    --nu-focus-ring: var(--nu-purple-100);
+    --nu-focus-border: #a795c2;
+    --nu-focus-shadow-color: rgb(78 42 132 / 25%);
+
+    --nu-purple-surface: #f3f0f7;
+    --nu-purple-surface-subtle: #f7f5f9;
+    --nu-surface-muted: #f9fafb;
+    --nu-hover-bg: #f3f4f6;
+    --nu-disabled-bg: #e9ecef;
+    --nu-badge-border: #e0e0e0;
 }
 
 .dark {
     --nu-body-bg: #18181b;
     --nu-sidebar-bg: #1e1e1e;
     --nu-border-color: #3a3a3a;
+
+    --nu-focus-ring: var(--nu-purple-40);
+    --nu-focus-shadow-color: rgb(147 128 182 / 40%);
+
+    --nu-purple-surface: rgb(255 255 255 / 5%);
+    --nu-purple-surface-subtle: rgb(255 255 255 / 3%);
+    --nu-surface-muted: rgb(255 255 255 / 5%);
+    --nu-hover-bg: rgb(255 255 255 / 10%);
+    --nu-disabled-bg: #343a40;
 }

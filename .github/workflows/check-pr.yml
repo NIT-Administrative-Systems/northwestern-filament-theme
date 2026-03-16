@@ -109,13 +109,28 @@ jobs:
           title: "PHPStan Analysis Report"
 
   tests:
-    name: Tests
+    name: Tests — PHP ${{ matrix.php }} / Laravel ${{ matrix.laravel }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     strategy:
       fail-fast: true
       matrix:
-        php: ['8.2', '8.3', '8.4', '8.5']
+        include:
+          - php: '8.2'
+            laravel: '11'
+            testbench: '9.*'
+          - php: '8.3'
+            laravel: '11'
+            testbench: '9.*'
+          - php: '8.3'
+            laravel: '12'
+            testbench: '10.*'
+          - php: '8.4'
+            laravel: '12'
+            testbench: '10.*'
+          - php: '8.5'
+            laravel: '12'
+            testbench: '10.*'
 
     steps:
       - name: Checkout Repository
@@ -128,15 +143,17 @@ jobs:
           coverage: none
 
       - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+        run: |
+          composer require "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: PHPUnit Cache
         uses: actions/cache@v5
         with:
           path: ./.phpunit.cache
-          key: ${{ runner.os }}-phpunit-php${{ matrix.php }}-${{ hashFiles('phpunit.xml', 'composer.lock') }}
+          key: ${{ runner.os }}-phpunit-php${{ matrix.php }}-laravel${{ matrix.laravel }}-${{ hashFiles('phpunit.xml', 'composer.lock') }}
           restore-keys: |
-            ${{ runner.os }}-phpunit-php${{ matrix.php }}-
+            ${{ runner.os }}-phpunit-php${{ matrix.php }}-laravel${{ matrix.laravel }}-
 
       - name: Run Pest
         run: ./vendor/bin/pest --cache-result --cache-directory=.phpunit.cache

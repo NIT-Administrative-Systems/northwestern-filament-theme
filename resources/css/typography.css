@@ -110,7 +110,7 @@ body.fi-body {
     font-family: var(--nu-font-body);
     font-size: 0.9rem;
     line-height: 1.6;
-    color: #342F2E;
+    color: var(--nu-color-text);
 }
 
 .fi-header-heading,

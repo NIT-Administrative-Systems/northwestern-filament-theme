@@ -11,7 +11,7 @@
 }
 
 .fi-input-wrp.fi-disabled {
-    background-color: #e9ecef !important;
+    background-color: var(--nu-disabled-bg) !important;
     border: 1px solid var(--nu-border-color) !important;
     opacity: 1 !important;
 }
@@ -25,7 +25,7 @@
 }
 
 .dark .fi-input-wrp.fi-disabled {
-    background-color: #343a40 !important;
+    background-color: var(--nu-disabled-bg) !important;
     border: 1px solid var(--nu-border-color) !important;
 }
 
@@ -66,37 +66,37 @@
 }
 
 .fi-sidebar-item-button:focus-visible {
-    outline: 2px solid #4E2A84;
+    outline: 2px solid var(--nu-focus-ring);
     outline-offset: -2px;
 }
 
 .fi-dropdown-list-item-button:focus-visible {
-    outline: 2px solid #4E2A84;
+    outline: 2px solid var(--nu-focus-ring);
     outline-offset: -2px;
 }
 
 .fi-tabs-item-button:focus-visible {
-    outline: 2px solid #4E2A84;
+    outline: 2px solid var(--nu-focus-ring);
     outline-offset: 2px;
 }
 
 .fi-pagination-item-btn:focus-visible {
-    outline: 2px solid #4E2A84;
+    outline: 2px solid var(--nu-focus-ring);
     outline-offset: 2px;
 }
 
 .fi-ta-header-cell-sort-btn:focus-visible {
-    outline: 2px solid #4E2A84;
+    outline: 2px solid var(--nu-focus-ring);
     outline-offset: 2px;
 }
 
 .fi-select-input:focus-visible {
-    outline: 2px solid #4E2A84;
+    outline: 2px solid var(--nu-focus-ring);
     outline-offset: 2px;
 }
 
 .fi-toggle-input:focus-visible {
-    outline: 2px solid #4E2A84;
+    outline: 2px solid var(--nu-focus-ring);
     outline-offset: 2px;
 }
 
@@ -106,19 +106,6 @@
 
 .fi-ta-header-cell-sort-btn {
     transition: color var(--nu-transition-fast);
-}
-
-.dark .fi-sidebar-item-button:focus-visible,
-.dark .fi-dropdown-list-item-button:focus-visible {
-    outline-color: #A495C3;
-}
-
-.dark .fi-tabs-item-button:focus-visible,
-.dark .fi-pagination-item-btn:focus-visible,
-.dark .fi-ta-header-cell-sort-btn:focus-visible,
-.dark .fi-select-input:focus-visible,
-.dark .fi-toggle-input:focus-visible {
-    outline-color: #A495C3;
 }
 
 .dark .fi-simple-layout {
