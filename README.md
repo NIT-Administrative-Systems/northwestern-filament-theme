@@ -1,10 +1,6 @@
-<div id="user-content-toc">
-  <ul align="center" style="list-style: none;">
-    <summary>
-      <h1>Northwestern Filament Theme</h1>
-    </summary>
-  </ul>
-</div>
+<p align="center">
+    <img src="art/readme-lockup.png" alt="Northwestern Filament Theme" width="650">
+</p>
 
 <p align="center">
     <img src="https://img.shields.io/badge/PHP-8.2+-blue" alt="PHP Version">
