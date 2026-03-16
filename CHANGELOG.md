@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0] - 2026-03-16
 
-v2.0 introduces optional Vite theme integration as an alternative to the default asset registration approach. Theme CSS is now bundled into a single `dist/theme.css` file, and a new install command (`northwestern-theme:install`) handles setup automatically. Tailwind v4 design tokens are also available for consumers who want Northwestern brand utilities in their own styles.
+v2.0 adds optional Vite theme integration as an alternative to the default asset registration approach. Theme CSS is now bundled into a single `dist/theme.css` file, and a new `northwestern-theme:install` command handles setup. Tailwind v4 design tokens are available for projects that want Northwestern brand utilities in their own styles.
 
 This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migration steps.
 

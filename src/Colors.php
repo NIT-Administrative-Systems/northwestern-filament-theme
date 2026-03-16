@@ -7,9 +7,8 @@ namespace Northwestern\FilamentTheme;
 /**
  * Northwestern University brand color constants.
  *
- * Hex constants follow the official brand guidelines. Palette arrays
- * use Filament's 50–950 shade scale and are formatted for
- * {@see \Filament\Panel::colors()}.
+ * Palette arrays use Filament's 50–950 shade scale.
+ * Hex values follow official brand guidelines.
  *
  * @see https://www.northwestern.edu/brand/visual-identity/color/index.html
  */
@@ -102,17 +101,13 @@ final class Colors
     // -------------------------------------------------------------------------
     // Filament palette arrays (50–950 scales)
     //
-    // Color::hex() normalizes all inputs to an identical lightness/chroma curve,
-    // discarding the actual color's saturation and brightness. These explicit
-    // palettes preserve the true Bootstrap/NU color at the anchor shade and
-    // scale proportionally so UI elements match the established NU Laravel
-    // UI look across the board.
+    // Color::hex() normalizes inputs to a uniform lightness curve,
+    // losing the actual saturation and brightness. These palettes
+    // preserve the true NU color at the anchor shade.
     // -------------------------------------------------------------------------
 
     /**
-     * Primary — Northwestern Purple.
-     *
-     * Mapped from the official Purple 10–160 scale (RGB triplets).
+     * Primary — Northwestern Purple 10–160 scale (RGB triplets).
      *
      * @var array<int<50, 950>, non-empty-string>
      */
@@ -169,7 +164,7 @@ final class Colors
     ];
 
     /**
-     * Warning — NU Gold (#FFC520). Anchored at shade 400 where Filament renders button backgrounds.
+     * Warning — NU Gold (#FFC520), anchored at shade 400.
      *
      * @var array<int<50, 950>, non-empty-string>
      */
@@ -188,10 +183,10 @@ final class Colors
     ];
 
     /**
-     * Gray — Based on NU Rich Black, with darker 900/950 for dark mode surfaces.
+     * Gray — NU Rich Black with darker 900/950 for dark mode.
      *
-     * Default Color::hex() produces 900=0.394 / 950=0.278 which is too bright
-     * against the #18181b body background. These are pulled down to match.
+     * Default Color::hex() 900/950 values are too bright
+     * against #18181b. These are pulled down.
      *
      * @var array<int<50, 950>, non-empty-string>
      */

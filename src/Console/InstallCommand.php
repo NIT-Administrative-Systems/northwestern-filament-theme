@@ -67,7 +67,7 @@ class InstallCommand extends Command
                 try {
                     $this->callSilently(MakeThemeCommand::class, ['panel' => $panelId]);
                 } catch (\Throwable) {
-                    // MakeThemeCommand may fail — the file-exists check below handles it.
+                    // MakeThemeCommand may fail; the file-exists check below handles it.
                 }
 
                 return true;
@@ -118,7 +118,7 @@ class InstallCommand extends Command
         $this->newLine();
 
         if ($themeAlreadyInstalled && ($tokensAlreadyInstalled || ! $includeTokens)) {
-            $this->components->info('Nothing to do — theme is fully configured');
+            $this->components->info('Nothing to do, theme is already configured');
 
             return;
         }
@@ -164,7 +164,7 @@ class InstallCommand extends Command
 
         File::append($themeCssPath, "\n" . $this->themeImport . "\n");
 
-        warning('Could not find the Filament base theme import — appended to end of file.');
+        warning('Could not find the Filament base theme import. Appended to end of file.');
         note("Please review: {$themeCssPath}\nEnsure the Northwestern import comes after the Filament base import.");
     }
 
