@@ -1,0 +1,51 @@
+/* Northwestern Filament Theme — Tailwind v4 design tokens */
+/* Auto-generated — do not edit */
+
+@theme {
+    /* Purple scale */
+    --color-nu-purple-10: var(--nu-purple-10);
+    --color-nu-purple-20: var(--nu-purple-20);
+    --color-nu-purple-30: var(--nu-purple-30);
+    --color-nu-purple-40: var(--nu-purple-40);
+    --color-nu-purple-50: var(--nu-purple-50);
+    --color-nu-purple-60: var(--nu-purple-60);
+    --color-nu-purple-70: var(--nu-purple-70);
+    --color-nu-purple-80: var(--nu-purple-80);
+    --color-nu-purple-90: var(--nu-purple-90);
+    --color-nu-purple-100: var(--nu-purple-100);
+    --color-nu-purple-110: var(--nu-purple-110);
+    --color-nu-purple-120: var(--nu-purple-120);
+    --color-nu-purple-130: var(--nu-purple-130);
+    --color-nu-purple-140: var(--nu-purple-140);
+    --color-nu-purple-150: var(--nu-purple-150);
+    --color-nu-purple-160: var(--nu-purple-160);
+
+    /* Grays */
+    --color-nu-black-100: var(--nu-black-100);
+    --color-nu-black-80: var(--nu-black-80);
+    --color-nu-black-50: var(--nu-black-50);
+    --color-nu-black-20: var(--nu-black-20);
+    --color-nu-black-10: var(--nu-black-10);
+
+    /* Brand colors */
+    --color-nu-green: var(--nu-green);
+    --color-nu-teal: var(--nu-teal);
+    --color-nu-blue: var(--nu-blue);
+    --color-nu-yellow: var(--nu-yellow);
+    --color-nu-gold: var(--nu-gold);
+    --color-nu-orange: var(--nu-orange);
+
+    /* Dark brand colors */
+    --color-nu-dark-green: var(--nu-dark-green);
+    --color-nu-dark-teal: var(--nu-dark-teal);
+    --color-nu-dark-blue: var(--nu-dark-blue);
+    --color-nu-dark-yellow: var(--nu-dark-yellow);
+    --color-nu-dark-gold: var(--nu-dark-gold);
+    --color-nu-dark-orange: var(--nu-dark-orange);
+
+    /* Semantic colors */
+    --color-nu-success: var(--nu-color-success);
+    --color-nu-info: var(--nu-color-info);
+    --color-nu-warning: var(--nu-color-warning);
+    --color-nu-danger: var(--nu-color-danger);
+}

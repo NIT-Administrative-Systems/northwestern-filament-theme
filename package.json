@@ -1,10 +1,13 @@
 {
     "private": true,
     "scripts": {
+        "build:css": "node scripts/build-css.mjs",
+        "build:css:check": "node scripts/build-css.mjs --check",
         "lint:css": "stylelint \"resources/css/**/*.css\"",
         "lint:css:fix": "stylelint \"resources/css/**/*.css\" --fix"
     },
     "devDependencies": {
+        "consola": "^3.4.2",
         "stylelint": "^16.0.0",
         "stylelint-config-standard": "^39.0.0"
     },

@@ -1,0 +1,162 @@
+/* ==========================================================================
+   Northwestern Footer
+   ========================================================================== */
+
+.nu-footer {
+    background-color: var(--nu-purple-100);
+    color: #fff;
+    font-family: var(--nu-font-body);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    min-height: 350px;
+    padding-top: 3em;
+    padding-bottom: 2em;
+}
+
+.nu-footer a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.nu-footer a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nu-footer-grid {
+    display: grid;
+    grid-template-columns: 3fr 3fr 2fr;
+    gap: 30px;
+    max-width: 66.666%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.nu-branding {
+    max-width: 170px;
+    height: auto;
+    padding-bottom: 1rem;
+}
+
+.nu-footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nu-footer-links li {
+    padding-bottom: 0.8rem;
+}
+
+.nu-contact-group {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 0 2rem;
+}
+
+.nu-contact-group + .nu-contact-group {
+    margin-bottom: 1.5rem;
+}
+
+.nu-address {
+    font-style: normal;
+}
+
+.nu-address strong,
+.nu-address span {
+    display: block;
+    padding-bottom: 0.8rem;
+}
+
+.nu-address span:last-child {
+    padding-bottom: 0;
+}
+
+.nu-contact-group dd {
+    margin: 0;
+}
+
+.nu-pin {
+    background-repeat: no-repeat;
+    background-size: 18px 24px;
+    height: 24px;
+    width: 18px;
+    min-width: 18px;
+    margin-right: 1rem;
+}
+
+.nu-pin-address {
+    background-image: url('https://common.northwestern.edu/v8/css/images/icons/pin-drop.svg');
+}
+
+.nu-pin-phone {
+    background-image: url('https://common.northwestern.edu/v8/css/images/icons/mobile-phone.svg');
+}
+
+.nu-pin-email {
+    background-image: url('https://common.northwestern.edu/v8/css/images/icons/email.svg');
+}
+
+.nu-footer .nu-footer-col p {
+    margin: 0 0 1rem;
+}
+
+.nu-footer .nu-social {
+    border: 1px solid #fff;
+    display: inline-block;
+    font-size: 0;
+    height: 39px;
+    margin: 4px 6px;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-decoration: none;
+    transition: background 0.3s ease 0s;
+    vertical-align: bottom;
+    width: 39px;
+}
+
+.nu-footer .nu-social-facebook {
+    background: url('https://common.northwestern.edu/v8/css/images/icons/social-media-icons.png');
+    background-position: 0 0;
+}
+
+.nu-footer .nu-social-facebook:hover {
+    background-position: 0 39px;
+}
+
+.nu-footer .nu-social-instagram {
+    background-image: url('https://common.northwestern.edu/v8/css/images/icons/social-media-icons.png');
+    background-position: -78px 0;
+}
+
+.nu-footer .nu-social-instagram:hover {
+    background-position: -78px 39px;
+}
+
+.nu-footer .nu-social-youtube {
+    background-image: url('https://common.northwestern.edu/v8/css/images/icons/social-media-icons.png');
+    background-position: -156px 0;
+}
+
+.nu-footer .nu-social-youtube:hover {
+    background-position: -156px 39px;
+}
+
+@media (width <= 768px) {
+    .nu-footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (width >= 992px) {
+    .nu-pin {
+        margin-left: -1rem;
+    }
+}
+
+@media print {
+    .nu-footer {
+        display: none;
+    }
+}
+
