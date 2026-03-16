@@ -126,6 +126,10 @@ php artisan vendor:publish --tag=northwestern-filament-theme-views
 
 This publishes to `resources/views/vendor/northwestern-filament-theme/footer.blade.php`.
 
+## External CDN Dependency
+
+This theme loads fonts, icons, the favicon, and the default brand logo from Northwestern's shared asset CDN (`common.northwestern.edu`). Your application requires network access to this CDN at runtime. If your environment restricts external requests or enforces a strict Content Security Policy, you will need to allowlist `https://common.northwestern.edu`.
+
 ## License
 
 The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
