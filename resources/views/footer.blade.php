@@ -32,7 +32,7 @@
 
         <div class="nu-footer-col">
             <dl class="nu-contact-group">
-                <dt class="nu-pin address-pin"><span class="sr-only">Office Address</span></dt>
+                <dt class="nu-pin nu-pin-address"><span class="sr-only">Office Address</span></dt>
                 <dd>
                     <address class="nu-address">
                         <strong>{{ $officeName }}</strong>
@@ -43,21 +43,21 @@
             </dl>
 
             <dl class="nu-contact-group">
-                <dt class="nu-pin phone-pin"><span class="sr-only">Phone Number</span></dt>
+                <dt class="nu-pin nu-pin-phone"><span class="sr-only">Phone Number</span></dt>
                 <dd>{{ $officePhone }}</dd>
             </dl>
 
             <dl class="nu-contact-group">
-                <dt class="nu-pin email-pin"><span class="sr-only">Email Address</span></dt>
+                <dt class="nu-pin nu-pin-email"><span class="sr-only">Email Address</span></dt>
                 <dd><a href="mailto:{{ $officeEmail }}">{{ $officeEmail }}</a></dd>
             </dl>
         </div>
 
         <div class="nu-footer-col">
             <p>Social Media</p>
-            <a href="https://www.facebook.com/NorthwesternU" class="social facebook">Facebook</a>
-            <a href="https://instagram.com/northwesternu" class="social instagram">Instagram</a>
-            <a href="https://www.youtube.com/user/NorthwesternU" class="social youtube">YouTube</a>
+            <a href="https://www.facebook.com/NorthwesternU" class="nu-social nu-social-facebook">Facebook</a>
+            <a href="https://instagram.com/northwesternu" class="nu-social nu-social-instagram">Instagram</a>
+            <a href="https://www.youtube.com/user/NorthwesternU" class="nu-social nu-social-youtube">YouTube</a>
         </div>
     </div>
 </footer>
