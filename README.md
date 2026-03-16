@@ -26,7 +26,7 @@ composer require northwestern-sysdev/northwestern-filament-theme
 
 ## Usage
 
-Register the plugin in your Filament panel provider alongside your existing `viteTheme`:
+Register the plugin in your Filament panel provider:
 
 ```php
 use Northwestern\FilamentTheme\NorthwesternTheme;
@@ -38,7 +38,6 @@ public function panel(Panel $panel): Panel
             NorthwesternTheme::make(),
             // ... other plugins
         ])
-        ->viteTheme('resources/css/filament/administration/theme.css')
         // ... rest of panel config
     ;
 }
@@ -50,9 +49,9 @@ Then publish the theme assets:
 php artisan filament:assets
 ```
 
-> [!IMPORTANT]
+> [!NOTE]
 >
-> The `->viteTheme()` call is still required. It provides the Tailwind build that generates Filament's utility classes. The Northwestern theme is an **additive CSS layer** on top of Tailwind, it does not replace it.
+> If your panel has a [custom theme](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme) via `->viteTheme()`, it will continue to work alongside this plugin. The Northwestern theme is an **additive CSS layer** registered separately through Filament's asset system — it does not replace your custom theme.
 
 ## Dark Mode
 
