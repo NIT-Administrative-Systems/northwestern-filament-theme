@@ -47,8 +47,7 @@
 .fi-ta-ctn,
 .fi-fo-file-upload,
 .fi-input-wrp,
-.fi-toggle-input,
-.fi-ac-panel {
+.fi-fo-toggle {
     --tw-shadow: 0 0 #0000;
     --tw-ring-offset-shadow: 0 0 #0000;
 }
@@ -65,17 +64,17 @@
     border-radius: 50% !important;
 }
 
-.fi-sidebar-item-button:focus-visible {
+.fi-sidebar-item-btn:focus-visible {
     outline: 2px solid var(--nu-focus-ring);
     outline-offset: -2px;
 }
 
-.fi-dropdown-list-item-button:focus-visible {
+.fi-dropdown-list-item:focus-visible {
     outline: 2px solid var(--nu-focus-ring);
     outline-offset: -2px;
 }
 
-.fi-tabs-item-button:focus-visible {
+.fi-tabs-item:focus-visible {
     outline: 2px solid var(--nu-focus-ring);
     outline-offset: 2px;
 }
@@ -95,12 +94,12 @@
     outline-offset: 2px;
 }
 
-.fi-toggle-input:focus-visible {
+.fi-fo-toggle:focus-visible {
     outline: 2px solid var(--nu-focus-ring);
     outline-offset: 2px;
 }
 
-.fi-tabs-item-button {
+.fi-tabs-item {
     transition: background-color var(--nu-transition-fast), color var(--nu-transition-fast);
 }
 

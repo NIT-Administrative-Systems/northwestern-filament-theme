@@ -35,7 +35,7 @@
     border: 1px solid var(--nu-border-color);
 }
 
-.fi-dropdown-list-item-button {
+.fi-dropdown-list-item {
     border-radius: var(--nu-border-radius) !important;
     transition: background-color var(--nu-transition-fast);
 }
@@ -76,11 +76,7 @@
     border-bottom: 1px solid var(--nu-border-color);
 }
 
-.fi-in-entry-wrp {
-    border-radius: var(--nu-border-radius) !important;
-}
-
-.fi-ac-panel {
+.fi-in-entry {
     border-radius: var(--nu-border-radius) !important;
 }
 
