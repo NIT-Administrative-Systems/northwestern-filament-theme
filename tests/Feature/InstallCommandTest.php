@@ -6,6 +6,7 @@ use Filament\Facades\Filament;
 use Filament\FilamentManager;
 use Filament\Panel;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 beforeEach(function () {
     $this->themeCssDir = resource_path('css/filament/admin');
@@ -79,7 +80,15 @@ it('exits when no panels are registered', function () {
 it('shows error when theme file cannot be created', function () {
     mockSinglePanel();
 
-    // Replace MakeThemeCommand with a no-op that doesn't create any files
+    Log::shouldReceive('debug')
+        ->once()
+        ->withArgs(function (string $message, array $context) {
+            return $message === 'MakeThemeCommand did not succeed'
+                && $context['panel_id'] === 'admin'
+                && isset($context['exception'], $context['exception_class']);
+        });
+
+    // Replace MakeThemeCommand with a stub that throws
     $this->app->instance(
         Filament\Commands\MakeThemeCommand::class,
         new class extends Illuminate\Console\Command
@@ -88,7 +97,7 @@ it('shows error when theme file cannot be created', function () {
 
             public function handle(): int
             {
-                return self::SUCCESS;
+                throw new RuntimeException('Simulated failure');
             }
         },
     );

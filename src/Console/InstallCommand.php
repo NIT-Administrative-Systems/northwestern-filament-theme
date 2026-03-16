@@ -9,6 +9,7 @@ use Filament\Facades\Filament;
 use Filament\Panel;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\note;
@@ -66,8 +67,12 @@ class InstallCommand extends Command
             $this->components->task("Creating theme stylesheet for [{$panelId}] panel", function () use ($panelId) {
                 try {
                     $this->callSilently(MakeThemeCommand::class, ['panel' => $panelId]);
-                } catch (\Throwable) {
-                    // MakeThemeCommand may fail; the file-exists check below handles it.
+                } catch (\Throwable $e) {
+                    Log::debug('MakeThemeCommand did not succeed', [
+                        'panel_id' => $panelId,
+                        'exception' => $e->getMessage(),
+                        'exception_class' => get_class($e),
+                    ]);
                 }
 
                 return true;
