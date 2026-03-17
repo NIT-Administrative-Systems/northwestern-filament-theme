@@ -146,6 +146,10 @@ it('warns when theme CSS is double-loaded in local environment', function () {
     Illuminate\Support\Facades\Log::shouldReceive('warning')
         ->once()
         ->withArgs(fn (string $message) => str_contains($message, 'withoutAssetRegistration'));
+    // The legacy environment indicator stub class may persist from earlier tests.
+    Illuminate\Support\Facades\Log::shouldReceive('warning')
+        ->zeroOrMoreTimes()
+        ->withArgs(fn (string $message) => str_contains($message, 'pxlrbt/filament-environment-indicator'));
 
     $plugin->boot($panel);
 
