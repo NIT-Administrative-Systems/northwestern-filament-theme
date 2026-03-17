@@ -15,18 +15,35 @@ use Closure;
  */
 readonly class ImpersonationBannerConfig
 {
+    public string $leaveMethod;
+
     /**
      * @param  bool|Closure(): bool|null  $visible  Custom visibility logic. Defaults to auto-detection.
      * @param  string|Closure(): string|null  $label  Custom banner label.
      * @param  string|Closure(): string|null  $leaveUrl  URL for the "Leave Impersonation" form action.
+     * @param  string|Closure(): string|null  $leaveLabel  Custom leave button text. Defaults to "Leave Impersonation".
      * @param  string  $leaveMethod  HTTP method for the leave form (e.g. POST, DELETE, GET).
      */
     public function __construct(
         public bool|Closure|null $visible = null,
         public string|Closure|null $label = null,
         public string|Closure|null $leaveUrl = null,
-        public string $leaveMethod = 'POST',
+        public string|Closure|null $leaveLabel = null,
+        string $leaveMethod = 'POST',
     ) {
+        $this->leaveMethod = strtoupper($leaveMethod);
+    }
+
+    /** Resolve the leave button label, evaluating closures. */
+    public function resolveLeaveLabel(): string
+    {
+        $leaveLabel = $this->leaveLabel;
+
+        if ($leaveLabel instanceof Closure) {
+            return (string) $leaveLabel();
+        }
+
+        return $leaveLabel ?? 'Leave Impersonation';
     }
 
     /** Resolve visibility, falling back to lab404 auto-detection. */
@@ -89,7 +106,7 @@ readonly class ImpersonationBannerConfig
         // Auto-detect lab404 route
         try {
             return route('impersonate.leave');
-        } catch (\Throwable) {
+        } catch (\Symfony\Component\Routing\Exception\RouteNotFoundException) {
             return null;
         }
     }

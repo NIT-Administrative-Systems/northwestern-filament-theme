@@ -129,6 +129,63 @@ it('falls back to default label with user name', function () {
     expect($label)->toContain('Impersonating user');
 });
 
+it('falls back to full_name in default label', function () {
+    $user = new class
+    {
+        public string $full_name = 'Jane Doe';
+
+        public string $name = 'jane';
+
+        public string $email = 'jane@example.com';
+    };
+
+    Illuminate\Support\Facades\Auth::shouldReceive('user')->once()->andReturn($user);
+
+    $config = new ImpersonationBannerConfig();
+
+    expect($config->resolveLabel())->toBe('Impersonating user · Jane Doe');
+});
+
+it('falls back to name when full_name is absent', function () {
+    $user = new class
+    {
+        public string $name = 'jane';
+
+        public string $email = 'jane@example.com';
+    };
+
+    Illuminate\Support\Facades\Auth::shouldReceive('user')->once()->andReturn($user);
+
+    $config = new ImpersonationBannerConfig();
+
+    expect($config->resolveLabel())->toBe('Impersonating user · jane');
+});
+
+it('falls back to email when name and full_name are absent', function () {
+    $user = new class
+    {
+        public string $email = 'jane@example.com';
+    };
+
+    Illuminate\Support\Facades\Auth::shouldReceive('user')->once()->andReturn($user);
+
+    $config = new ImpersonationBannerConfig();
+
+    expect($config->resolveLabel())->toBe('Impersonating user · jane@example.com');
+});
+
+it('falls back to Unknown when user has no name properties', function () {
+    $user = new class
+    {
+    };
+
+    Illuminate\Support\Facades\Auth::shouldReceive('user')->once()->andReturn($user);
+
+    $config = new ImpersonationBannerConfig();
+
+    expect($config->resolveLabel())->toBe('Impersonating user · Unknown');
+});
+
 it('resolves a custom leave URL', function () {
     $config = new ImpersonationBannerConfig(leaveUrl: '/custom/leave');
 
@@ -144,9 +201,15 @@ it('resolves a closure leave URL', function () {
 it('returns null leave URL when no route is available', function () {
     $config = new ImpersonationBannerConfig();
 
-    // Without lab404 installed, route('impersonate.leave') will throw
+    // Without lab404 installed, route('impersonate.leave') throws RouteNotFoundException
     expect($config->resolveLeaveUrl())->toBeNull();
 });
+
+it('propagates non-route exceptions from resolveLeaveUrl', function () {
+    $config = new ImpersonationBannerConfig(leaveUrl: fn () => throw new RuntimeException('unexpected error'));
+
+    $config->resolveLeaveUrl();
+})->throws(RuntimeException::class, 'unexpected error');
 
 // --- Legacy detection tests ---
 
@@ -177,6 +240,27 @@ it('skips legacy impersonation banner detection when banner is disabled', functi
     Illuminate\Support\Facades\Log::shouldReceive('warning')->never();
 
     $method->invoke($plugin);
+});
+
+it('logs warning when legacy impersonation banner view exists', function () {
+    // Register a fake view so view()->exists() returns true.
+    $tmpDir = sys_get_temp_dir();
+    @mkdir($tmpDir . '/components/filament', recursive: true);
+    file_put_contents($tmpDir . '/components/filament/impersonation-banner.blade.php', '');
+    app('view')->getFinder()->addLocation($tmpDir);
+
+    $plugin = NorthwesternTheme::make();
+    $method = new ReflectionMethod($plugin, 'detectLegacyImpersonationBanner');
+
+    Illuminate\Support\Facades\App::shouldReceive('isLocal')->once()->andReturn(true);
+    Illuminate\Support\Facades\Log::shouldReceive('warning')->once()->withArgs(fn (string $msg) => str_contains($msg, 'components.filament.impersonation-banner'));
+
+    $method->invoke($plugin);
+
+    // Cleanup
+    @unlink(sys_get_temp_dir() . '/components/filament/impersonation-banner.blade.php');
+    @rmdir(sys_get_temp_dir() . '/components/filament');
+    @rmdir(sys_get_temp_dir() . '/components');
 });
 
 // --- View tests ---
@@ -234,6 +318,53 @@ it('defaults leaveMethod to POST', function () {
     expect($html)
         ->toContain('method="POST"')
         ->toContain('name="_token"');
+});
+
+it('resolves default leave label', function () {
+    $config = new ImpersonationBannerConfig();
+
+    expect($config->resolveLeaveLabel())->toBe('Leave Impersonation');
+});
+
+it('resolves a custom string leave label', function () {
+    $config = new ImpersonationBannerConfig(leaveLabel: 'Stop Impersonating');
+
+    expect($config->resolveLeaveLabel())->toBe('Stop Impersonating');
+});
+
+it('resolves a closure leave label', function () {
+    $config = new ImpersonationBannerConfig(leaveLabel: fn () => 'Return to Admin');
+
+    expect($config->resolveLeaveLabel())->toBe('Return to Admin');
+});
+
+it('renders custom leave label in the view', function () {
+    $config = new ImpersonationBannerConfig(label: 'Test', leaveUrl: '/leave', leaveLabel: 'Exit Session');
+    $html = view('northwestern-filament-theme::impersonation-banner', ['config' => $config])->render();
+
+    expect($html)
+        ->toContain('Exit Session')
+        ->not->toContain('Leave Impersonation');
+});
+
+it('normalizes leaveMethod to uppercase', function () {
+    $config = new ImpersonationBannerConfig(leaveMethod: 'delete');
+    expect($config->leaveMethod)->toBe('DELETE');
+
+    $config = new ImpersonationBannerConfig(leaveMethod: 'get');
+    expect($config->leaveMethod)->toBe('GET');
+
+    $config = new ImpersonationBannerConfig(leaveMethod: 'post');
+    expect($config->leaveMethod)->toBe('POST');
+});
+
+it('renders correctly with lowercase leaveMethod input', function () {
+    $config = new ImpersonationBannerConfig(label: 'Test', leaveUrl: '/leave', leaveMethod: 'delete');
+    $html = view('northwestern-filament-theme::impersonation-banner', ['config' => $config])->render();
+
+    expect($html)
+        ->toContain('method="POST"')
+        ->toContain('value="DELETE"');
 });
 
 it('renders inline styles for the banner', function () {
