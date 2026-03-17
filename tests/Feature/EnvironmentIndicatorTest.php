@@ -119,7 +119,7 @@ it('displays the current environment name', function () {
     expect($html)->toContain('Environment: ' . ucfirst(app()->environment()));
 });
 
-it('detects the legacy pxlrbt environment indicator class', function () {
+it('does not log warning when legacy indicator is absent', function () {
     $plugin = NorthwesternTheme::make();
     $method = new ReflectionMethod($plugin, 'detectLegacyEnvironmentIndicator');
 
@@ -135,6 +135,21 @@ it('skips legacy environment indicator detection in non-local environments', fun
 
     Illuminate\Support\Facades\App::shouldReceive('isLocal')->once()->andReturn(false);
     Illuminate\Support\Facades\Log::shouldReceive('warning')->never();
+
+    $method->invoke($plugin);
+});
+
+it('logs warning when legacy environment indicator package is installed', function () {
+    // Define the stub class so class_exists() returns true.
+    if (! class_exists(Pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin::class, autoload: false)) {
+        eval('namespace Pxlrbt\FilamentEnvironmentIndicator; class EnvironmentIndicatorPlugin {}');
+    }
+
+    $plugin = NorthwesternTheme::make();
+    $method = new ReflectionMethod($plugin, 'detectLegacyEnvironmentIndicator');
+
+    Illuminate\Support\Facades\App::shouldReceive('isLocal')->once()->andReturn(true);
+    Illuminate\Support\Facades\Log::shouldReceive('warning')->once()->withArgs(fn (string $msg) => str_contains($msg, 'pxlrbt/filament-environment-indicator'));
 
     $method->invoke($plugin);
 });

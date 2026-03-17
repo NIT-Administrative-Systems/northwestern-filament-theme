@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Northwestern\FilamentTheme\EnvironmentIndicator\EnvironmentIndicatorConfig;
 use Northwestern\FilamentTheme\Footer\FooterConfig;
+use Northwestern\FilamentTheme\ImpersonationBanner\ImpersonationBannerConfig;
 
 /**
  * Filament plugin that applies Northwestern branding.
@@ -22,6 +23,7 @@ use Northwestern\FilamentTheme\Footer\FooterConfig;
  * @see Colors
  * @see EnvironmentIndicatorConfig
  * @see FooterConfig
+ * @see ImpersonationBannerConfig
  */
 class NorthwesternTheme implements Plugin
 {
@@ -30,6 +32,10 @@ class NorthwesternTheme implements Plugin
     protected bool $environmentIndicatorEnabled = true;
 
     protected ?FooterConfig $footerConfig = null;
+
+    protected ?ImpersonationBannerConfig $impersonationBannerConfig = null;
+
+    protected bool $impersonationBannerEnabled = true;
 
     protected bool $registerAssets = true;
 
@@ -82,7 +88,6 @@ class NorthwesternTheme implements Plugin
      * Skip CSS asset registration via FilamentAsset.
      *
      * Use when importing theme CSS in a Vite panel theme.
-     * Footer CSS is still registered separately.
      */
     public function withoutAssetRegistration(): static
     {
@@ -121,6 +126,46 @@ class NorthwesternTheme implements Plugin
         return $this;
     }
 
+    /**
+     * Enable the impersonation banner.
+     *
+     * Auto-detects `lab404/laravel-impersonate` when no custom
+     * visibility closure is provided. The banner renders a fixed
+     * red bar at the top of the page during impersonation sessions.
+     *
+     * @param  bool|Closure(): bool|null  $visible  Custom visibility logic. Defaults to auto-detection.
+     * @param  string|Closure(): string|null  $label  Custom banner label.
+     * @param  string|Closure(): string|null  $leaveUrl  URL for the "Leave Impersonation" form action.
+     * @param  string|Closure(): string|null  $leaveLabel  Custom leave button text. Defaults to "Leave Impersonation".
+     * @param  string  $leaveMethod  HTTP method for the leave form (e.g. POST, DELETE, GET).
+     */
+    public function impersonationBanner(
+        bool|Closure|null $visible = null,
+        string|Closure|null $label = null,
+        string|Closure|null $leaveUrl = null,
+        string|Closure|null $leaveLabel = null,
+        string $leaveMethod = 'POST',
+    ): static {
+        $this->impersonationBannerEnabled = true;
+        $this->impersonationBannerConfig = new ImpersonationBannerConfig(
+            visible: $visible,
+            label: $label,
+            leaveUrl: $leaveUrl,
+            leaveLabel: $leaveLabel,
+            leaveMethod: $leaveMethod,
+        );
+
+        return $this;
+    }
+
+    /** Disable the impersonation banner. */
+    public function withoutImpersonationBanner(): static
+    {
+        $this->impersonationBannerEnabled = false;
+
+        return $this;
+    }
+
     /** Register brand colors and CSS assets with the panel. */
     public function register(Panel $panel): void
     {
@@ -143,10 +188,6 @@ class NorthwesternTheme implements Plugin
             $assets[] = Css::make('nu-theme', $distPath . '/theme.css');
         }
 
-        if ($this->footerConfig instanceof FooterConfig) {
-            $assets[] = Css::make('nu-footer', $distPath . '/footer.css');
-        }
-
         if ($assets !== []) {
             FilamentAsset::register($assets, 'northwestern-sysdev/northwestern-filament-theme');
         }
@@ -162,6 +203,7 @@ class NorthwesternTheme implements Plugin
     {
         $this->detectDoubleLoad($panel);
         $this->detectLegacyEnvironmentIndicator();
+        $this->detectLegacyImpersonationBanner();
 
         if (! $panel->getFavicon()) {
             $panel->favicon('https://common.northwestern.edu/v8/icons/favicon-32.png');
@@ -184,10 +226,21 @@ class NorthwesternTheme implements Plugin
             );
         }
 
+        if ($this->impersonationBannerEnabled) {
+            $bannerConfig = $this->impersonationBannerConfig ?? new ImpersonationBannerConfig();
+
+            FilamentView::registerRenderHook(
+                PanelsRenderHook::TOPBAR_BEFORE,
+                fn (): string => $bannerConfig->isVisible()
+                    ? view('northwestern-filament-theme::impersonation-banner', ['config' => $bannerConfig])->render()
+                    : '',
+            );
+        }
+
         if ($this->footerConfig instanceof FooterConfig) {
             $footerConfig = $this->footerConfig;
 
-            $panel->renderHook(
+            FilamentView::registerRenderHook(
                 PanelsRenderHook::BODY_END,
                 fn (): string => $footerConfig->isEnabled()
                     ? view('northwestern-filament-theme::footer', ['config' => $footerConfig])->render()
@@ -211,7 +264,29 @@ class NorthwesternTheme implements Plugin
         if (class_exists(\Pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin::class)) {
             Log::warning(
                 'The pxlrbt/filament-environment-indicator package is installed, but the Northwestern theme includes a built-in environment indicator. '
-                . 'You can remove pxlrbt/filament-environment-indicator from your composer.json and remove EnvironmentIndicatorPlugin::make() from your panel provider(s).',
+                . 'Remove pxlrbt/filament-environment-indicator from your composer.json and remove EnvironmentIndicatorPlugin::make() from your panel provider(s).',
+            );
+        }
+    }
+
+    /**
+     * Warn if a custom impersonation banner view exists.
+     *
+     * The northwestern-laravel-starter ships a manual
+     * impersonation banner Blade component. When the
+     * theme's built-in banner is enabled, the manual
+     * one should be removed.
+     */
+    protected function detectLegacyImpersonationBanner(): void
+    {
+        if (! $this->impersonationBannerEnabled || ! App::isLocal()) {
+            return;
+        }
+
+        if (view()->exists('components.filament.impersonation-banner')) { // @phpstan-ignore method.impossibleType (view exists in consuming apps, not this package)
+            Log::warning(
+                'A custom impersonation banner view [components.filament.impersonation-banner] was detected, but the Northwestern theme\'s built-in impersonation banner is enabled. '
+                . 'Remove the custom view and its FilamentView::registerRenderHook() call from your FilamentServiceProvider to avoid duplicate banners.',
             );
         }
     }

@@ -53,15 +53,13 @@ it('skips theme CSS when withoutAssetRegistration is called', function () {
     expect($registeredIds)->not->toContain('nu-theme');
 });
 
-it('registers footer CSS when footer is enabled', function () {
-    $panel = app(Panel::class)->id('test-with-footer');
-    $plugin = NorthwesternTheme::make()->footer();
-    $plugin->register($panel);
+it('renders footer with inline styles', function () {
+    $config = new FooterConfig(enabled: true);
+    $html = view('northwestern-filament-theme::footer', ['config' => $config])->render();
 
-    $styles = FilamentAsset::getStyles(['northwestern-sysdev/northwestern-filament-theme']);
-    $registeredIds = array_map(fn (Filament\Support\Assets\Css $asset) => $asset->getId(), $styles);
-
-    expect($registeredIds)->toContain('nu-footer');
+    expect($html)
+        ->toContain('<style>')
+        ->toContain('.nu-footer');
 });
 
 it('sets default favicon when panel has none', function () {
@@ -106,25 +104,15 @@ it('does not override a panel-configured brand logo', function () {
     expect($panel->getBrandLogo())->toBe('https://example.com/custom-logo.svg');
 });
 
-it('registers footer render hook on the panel not globally', function () {
-    $panelWithFooter = app(Panel::class)->id('test-scoped-footer');
-    $panelWithoutFooter = app(Panel::class)->id('test-no-footer-panel');
+it('registers footer render hook when footer is enabled', function () {
+    $panel = app(Panel::class)->id('test-footer-hook');
+    $plugin = NorthwesternTheme::make()->footer();
+    $plugin->register($panel);
+    $plugin->boot($panel);
 
-    $pluginWithFooter = NorthwesternTheme::make()->footer();
-    $pluginWithFooter->register($panelWithFooter);
-    $pluginWithFooter->boot($panelWithFooter);
+    $hooks = (new ReflectionProperty(Filament\Support\Facades\FilamentView::getFacadeRoot(), 'renderHooks'))->getValue(Filament\Support\Facades\FilamentView::getFacadeRoot());
 
-    $pluginWithoutFooter = NorthwesternTheme::make();
-    $pluginWithoutFooter->register($panelWithoutFooter);
-    $pluginWithoutFooter->boot($panelWithoutFooter);
-
-    $getHooks = fn (Panel $panel) => (new ReflectionProperty($panel, 'renderHooks'))->getValue($panel);
-
-    $hooksWithFooter = $getHooks($panelWithFooter);
-    $hooksWithoutFooter = $getHooks($panelWithoutFooter);
-
-    expect($hooksWithFooter)->toHaveKey(Filament\View\PanelsRenderHook::BODY_END);
-    expect($hooksWithoutFooter)->not->toHaveKey(Filament\View\PanelsRenderHook::BODY_END);
+    expect($hooks)->toHaveKey(Filament\View\PanelsRenderHook::BODY_END);
 });
 
 it('renders the footer view with custom office info', function () {
@@ -158,6 +146,10 @@ it('warns when theme CSS is double-loaded in local environment', function () {
     Illuminate\Support\Facades\Log::shouldReceive('warning')
         ->once()
         ->withArgs(fn (string $message) => str_contains($message, 'withoutAssetRegistration'));
+    // The legacy environment indicator stub class may persist from earlier tests.
+    Illuminate\Support\Facades\Log::shouldReceive('warning')
+        ->zeroOrMoreTimes()
+        ->withArgs(fn (string $message) => str_contains($message, 'pxlrbt/filament-environment-indicator'));
 
     $plugin->boot($panel);
 

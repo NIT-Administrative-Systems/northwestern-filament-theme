@@ -48,13 +48,13 @@
     }
 
     .dark .nu-env-indicator {
-        background-color: var(--nu-dark-gold);
+        background-color: #A76616;
         color: #fff;
         border-color: rgb(255 255 255 / 25%);
     }
 
     .dark .fi-topbar {
-        border-top-color: var(--nu-dark-gold);
+        border-top-color: #A76616;
     }
 
 </style>

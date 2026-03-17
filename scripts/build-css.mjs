@@ -2,7 +2,6 @@
 
 /**
  * Concatenates individual CSS source files into dist/theme.css,
- * copies footer.css into dist/ for conditional loading,
  * and generates dist/tailwind-tokens.css from variables.css.
  */
 
@@ -42,11 +41,6 @@ for (const file of files) {
   }
 }
 
-if (!existsSync('resources/css/footer.css')) {
-  console.error(c.red('\n  Missing source file: resources/css/footer.css\n'));
-  process.exit(1);
-}
-
 const start = performance.now();
 
 if (!checkOnly) {
@@ -62,12 +56,6 @@ const themeContent = banner + '\n' + css;
 const themeChanged = fileChanged('dist/theme.css', themeContent);
 if (!checkOnly) writeFileSync('dist/theme.css', themeContent);
 results.push({ path: 'dist/theme.css', size: themeContent.length, changed: themeChanged });
-
-// --- dist/footer.css ---
-const footerContent = readFileSync('resources/css/footer.css', 'utf8');
-const footerChanged = fileChanged('dist/footer.css', footerContent);
-if (!checkOnly) writeFileSync('dist/footer.css', footerContent);
-results.push({ path: 'dist/footer.css', size: footerContent.length, changed: footerChanged });
 
 // --- dist/tailwind-tokens.css ---
 const variablesCss = readFileSync('resources/css/variables.css', 'utf8');
