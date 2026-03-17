@@ -11,8 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Built-in environment indicator with gold badge and top-border (replaces `pxlrbt/filament-environment-indicator`)
+- Built-in environment indicator with gold badge and top-border (replaces [`pxlrbt/filament-environment-indicator`](https://github.com/pxlrbt/filament-environment-indicator))
 - `environmentIndicator()` and `withoutEnvironmentIndicator()` fluent methods with optional custom label and visibility
+- Built-in impersonation banner with auto-detection of [`lab404/laravel-impersonate`](https://github.com/404labfr/laravel-impersonate)
+- `impersonationBanner()` and `withoutImpersonationBanner()` fluent methods with optional custom visibility, label, and leave URL
+- Deprecation warning when a legacy custom impersonation banner view is detected alongside the built-in banner
 
 ### Fixed
 

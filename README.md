@@ -160,6 +160,62 @@ NorthwesternTheme::make()
 >
 > If you are using [`pxlrbt/filament-environment-indicator`](https://github.com/pxlrbt/filament-environment-indicator), you can remove that package. Remove `EnvironmentIndicatorPlugin::make()` from your panel provider and the theme handles the rest.
 
+## Impersonation Banner
+
+The theme includes a built-in impersonation banner that renders a red bar above the topbar when a user is being impersonated. It is registered by default and shows automatically when [`lab404/laravel-impersonate`](https://github.com/404labfr/laravel-impersonate) is installed and an impersonation session is active. Without lab404, the banner will not appear unless you provide a custom `visible` closure.
+
+### Custom Visibility
+
+If you are not using [`lab404/laravel-impersonate`](https://github.com/404labfr/laravel-impersonate), or want to override the default detection, provide your own visibility logic:
+
+```php
+NorthwesternTheme::make()
+    ->impersonationBanner(
+        visible: fn () => session()->has('impersonating'),
+    )
+```
+
+### Custom Label
+
+```php
+NorthwesternTheme::make()
+    ->impersonationBanner(
+        label: fn () => 'Acting as ' . auth()->user()->name,
+    )
+```
+
+### Custom Leave URL
+
+```php
+NorthwesternTheme::make()
+    ->impersonationBanner(
+        leaveUrl: '/my-app/stop-impersonating',
+    )
+```
+
+### Custom Leave Method
+
+The leave form defaults to `POST`. If your leave endpoint expects a different HTTP method:
+
+```php
+NorthwesternTheme::make()
+    ->impersonationBanner(
+        leaveUrl: '/my-app/stop-impersonating',
+        leaveMethod: 'DELETE',
+    )
+```
+
+### Disabling the Banner
+
+```php
+NorthwesternTheme::make()
+    ->withoutImpersonationBanner()
+```
+
+> [!NOTE]
+>
+> If your application has a custom impersonation banner registered, remove it when enabling the built-in banner to avoid duplicates. A deprecation notice is triggered in local environments when both are detected.
+
 ## Footer
 
 The footer is disabled by default. Your application may have multiple Filament panels, some internal where a footer would just be noise, others end-user-facing where institutional branding matters. You opt in per panel by chaining `->footer()`:
@@ -208,7 +264,7 @@ NorthwesternTheme::make()
 
 ## Customizing Views
 
-To modify the environment indicator or footer markup, publish the views:
+To modify the environment indicator, impersonation banner, or footer markup, publish the views:
 
 ```bash
 php artisan vendor:publish --tag=northwestern-filament-theme-views
@@ -217,6 +273,7 @@ php artisan vendor:publish --tag=northwestern-filament-theme-views
 This publishes the following templates to `resources/views/vendor/northwestern-filament-theme/`:
 
 - `environment-indicator.blade.php` — the topbar badge and border
+- `impersonation-banner.blade.php` — the impersonation session banner
 - `footer.blade.php` — the institutional footer
 
 ## External CDN Dependency
