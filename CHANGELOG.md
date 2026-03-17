@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-03-17
+
+### Added
+
+- Laravel 13 support
+
+### Changed
+
+- Minimum PHP version raised from 8.2 to 8.3
+- Dropped Laravel 11 support
+
 ## [2.1.1] - 2026-03-17
 
 ### Fixed
@@ -76,7 +87,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.1...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v1.0.2...v2.0.0
