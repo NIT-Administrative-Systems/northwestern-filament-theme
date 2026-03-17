@@ -136,12 +136,14 @@ class NorthwesternTheme implements Plugin
      * @param  bool|Closure(): bool|null  $visible  Custom visibility logic. Defaults to auto-detection.
      * @param  string|Closure(): string|null  $label  Custom banner label.
      * @param  string|Closure(): string|null  $leaveUrl  URL for the "Leave Impersonation" form action.
+     * @param  string|Closure(): string|null  $leaveLabel  Custom leave button text. Defaults to "Leave Impersonation".
      * @param  string  $leaveMethod  HTTP method for the leave form (e.g. POST, DELETE, GET).
      */
     public function impersonationBanner(
         bool|Closure|null $visible = null,
         string|Closure|null $label = null,
         string|Closure|null $leaveUrl = null,
+        string|Closure|null $leaveLabel = null,
         string $leaveMethod = 'POST',
     ): static {
         $this->impersonationBannerEnabled = true;
@@ -149,6 +151,7 @@ class NorthwesternTheme implements Plugin
             visible: $visible,
             label: $label,
             leaveUrl: $leaveUrl,
+            leaveLabel: $leaveLabel,
             leaveMethod: $leaveMethod,
         );
 

@@ -193,6 +193,15 @@ NorthwesternTheme::make()
     )
 ```
 
+### Custom Leave Label
+
+```php
+NorthwesternTheme::make()
+    ->impersonationBanner(
+        leaveLabel: 'Return to Admin',
+    )
+```
+
 ### Custom Leave Method
 
 The leave form defaults to `POST`. If your leave endpoint expects a different HTTP method:
@@ -214,7 +223,7 @@ NorthwesternTheme::make()
 
 > [!NOTE]
 >
-> If your application has a custom impersonation banner registered, remove it when enabling the built-in banner to avoid duplicates. A deprecation notice is triggered in local environments when both are detected.
+> If your application has a custom impersonation banner registered, remove it when enabling the built-in banner to avoid duplicates. A warning is logged in local environments when both are detected.
 
 ## Footer
 
