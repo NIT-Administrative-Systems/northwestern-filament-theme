@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.1] - 2026-03-17
+
+### Fixed
+
+- Install command now detects custom `viteTheme()` paths instead of only looking in `resources/css/filament/{panel}/theme.css`
+- Table header selection cell (bulk-select checkbox) now receives the purple header background and border
+- Filter badge no longer overlaps the table container border on tables without search enabled
+
 ## [2.1.0] - 2026-03-16
 
 ### Added
@@ -68,7 +76,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.1...HEAD
+[2.1.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v1.0.2...v2.0.0
 [1.0.2]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v1.0.1...v1.0.2
