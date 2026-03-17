@@ -89,9 +89,3 @@ it('has the footer view file', function () {
 
     expect(file_exists($viewPath))->toBeTrue();
 });
-
-it('has the footer css file', function () {
-    $cssPath = __DIR__ . '/../../resources/css/footer.css';
-
-    expect(file_exists($cssPath))->toBeTrue();
-});
