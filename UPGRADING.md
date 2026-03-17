@@ -1,5 +1,60 @@
 # Upgrading
 
+## v2.0 to v2.1
+
+v2.1 adds a built-in environment indicator and impersonation banner. If you were using third-party packages or custom views for these features, you can remove them.
+
+### Environment Indicator
+
+If you are using [`pxlrbt/filament-environment-indicator`](https://github.com/pxlrbt/filament-environment-indicator):
+
+1. **Remove the package:**
+
+   ```bash
+   composer remove pxlrbt/filament-environment-indicator
+   ```
+
+2. **Remove the plugin registration** from your panel provider:
+
+   ```diff
+   - use Pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin;
+
+     return $panel
+         ->plugins([
+             NorthwesternTheme::make(),
+   -         EnvironmentIndicatorPlugin::make(),
+         ]);
+   ```
+
+The theme's indicator is enabled by default and hides in production. To customize or disable it, see the [Environment Indicator](README.md#environment-indicator) section.
+
+### Impersonation Banner
+
+If you have a custom impersonation banner (e.g. a Blade view registered via `FilamentView::registerRenderHook`):
+
+1. **Remove your custom banner view** and its render hook registration.
+
+2. The built-in banner auto-detects [`lab404/laravel-impersonate`](https://github.com/404labfr/laravel-impersonate) sessions. If you are using lab404, no configuration is needed. Just remove your custom implementation.
+
+3. If you have custom visibility, label, or leave URL logic, migrate it to the plugin API:
+
+   ```php
+   NorthwesternTheme::make()
+       ->impersonationBanner(
+           visible: fn () => session()->has('impersonating'),
+           label: fn () => 'Acting as ' . auth()->user()->name,
+           leaveUrl: '/stop-impersonating',
+       )
+   ```
+
+To disable the banner entirely, call `->withoutImpersonationBanner()`.
+
+### Footer
+
+Footer CSS is now inlined in the Blade view. If you previously needed to run `php artisan filament:assets` specifically for footer styles, that step is no longer necessary (though you should still run it for the main theme CSS unless you use Vite integration).
+
+---
+
 ## v1.x to v2.0
 
 v2.0 consolidates the theme's CSS into a single barrel file (`dist/theme.css`) instead of shipping individual module files.
