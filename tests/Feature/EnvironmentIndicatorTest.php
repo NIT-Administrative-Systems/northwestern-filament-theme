@@ -119,7 +119,7 @@ it('displays the current environment name', function () {
     expect($html)->toContain('Environment: ' . ucfirst(app()->environment()));
 });
 
-it('detects the legacy pxlrbt environment indicator class', function () {
+it('does not log warning when legacy indicator is absent', function () {
     $plugin = NorthwesternTheme::make();
     $method = new ReflectionMethod($plugin, 'detectLegacyEnvironmentIndicator');
 
