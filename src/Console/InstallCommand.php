@@ -51,6 +51,7 @@ class InstallCommand extends Command
             return;
         }
 
+        /** @var string $panelId */
         $panelId = count($panels) > 1
             ? select(
                 label: 'Which panel should receive the theme?',
@@ -61,7 +62,8 @@ class InstallCommand extends Command
             )
             : array_key_first($panels);
 
-        $themeCssPath = resource_path("css/filament/{$panelId}/theme.css");
+        $panel = $panels[$panelId];
+        $themeCssPath = $this->resolveThemeCssPath($panel, $panelId);
 
         if (! File::exists($themeCssPath)) {
             $this->components->task("Creating theme stylesheet for [{$panelId}] panel", function () use ($panelId) {
@@ -153,6 +155,25 @@ class InstallCommand extends Command
 
         $this->newLine();
         $this->components->success('Setup complete');
+    }
+
+    protected function resolveThemeCssPath(Panel $panel, string $panelId): string
+    {
+        $viteTheme = $panel->getViteTheme();
+
+        if (is_string($viteTheme)) {
+            return base_path($viteTheme);
+        }
+
+        if (is_array($viteTheme)) {
+            foreach ($viteTheme as $path) {
+                if (is_string($path) && str_ends_with($path, '.css')) {
+                    return base_path($path);
+                }
+            }
+        }
+
+        return resource_path("css/filament/{$panelId}/theme.css");
     }
 
     protected function injectThemeImport(string $themeCssPath, string $themeCss): void

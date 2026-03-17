@@ -9,7 +9,8 @@
 }
 
 .fi-ta-header-cell,
-.fi-ta-actions-header-cell {
+.fi-ta-actions-header-cell,
+th.fi-ta-selection-cell {
     background-color: var(--nu-purple-surface);
     border-bottom: 2px solid var(--nu-border-color);
 }
@@ -28,6 +29,10 @@
 
 .fi-pagination {
     border-top: 1px solid var(--nu-border-color);
+}
+
+.fi-ta-header-toolbar:not(:has(.fi-ta-search-field)) {
+    padding-top: 1rem !important;
 }
 
 .fi-ta-search-field {
@@ -102,7 +107,8 @@
 }
 
 .dark .fi-ta-header-cell,
-.dark .fi-ta-actions-header-cell {
+.dark .fi-ta-actions-header-cell,
+.dark th.fi-ta-selection-cell {
     background-color: rgb(78 42 132 / 15%);
     border-bottom-color: var(--nu-border-color);
 }

@@ -32,10 +32,11 @@ afterEach(function () {
     }
 });
 
-function mockSinglePanel(): void
+function mockSinglePanel(?string $viteTheme = null): void
 {
     $panel = Mockery::mock(Panel::class);
     $panel->shouldReceive('getId')->andReturn('admin');
+    $panel->shouldReceive('getViteTheme')->andReturn($viteTheme);
 
     Filament::shouldReceive('getPanels')->andReturn(['admin' => $panel]);
 }
@@ -43,9 +44,11 @@ function mockSinglePanel(): void
 it('prompts for panel selection when multiple panels exist', function () {
     $admin = Mockery::mock(Panel::class);
     $admin->shouldReceive('getId')->andReturn('admin');
+    $admin->shouldReceive('getViteTheme')->andReturn(null);
 
     $portal = Mockery::mock(Panel::class);
     $portal->shouldReceive('getId')->andReturn('portal');
+    $portal->shouldReceive('getViteTheme')->andReturn(null);
 
     Filament::shouldReceive('getPanels')->andReturn(['admin' => $admin, 'portal' => $portal]);
 
@@ -288,4 +291,37 @@ it('does not warn about published assets when none exist', function () {
         ->expectsConfirmation('Include Tailwind v4 design tokens?', 'no')
         ->doesntExpectOutputToContain('Removing previously published CSS assets')
         ->assertSuccessful();
+});
+
+it('detects theme file from panel viteTheme configuration', function () {
+    $customThemeDir = resource_path('sass/filament/administration');
+    $customThemePath = $customThemeDir . '/theme.css';
+
+    mockSinglePanel('resources/sass/filament/administration/theme.css');
+
+    File::ensureDirectoryExists($customThemeDir);
+    File::put($customThemePath, implode("\n", [
+        "@import 'tailwindcss';",
+        "@import '../../../../vendor/filament/filament/resources/css/index.css';",
+    ]));
+
+    $this->artisan('northwestern-theme:install')
+        ->expectsConfirmation('Include Tailwind v4 design tokens?', 'no')
+        ->expectsOutputToContain('Setup complete')
+        ->assertSuccessful();
+
+    $themeCssContents = File::get($customThemePath);
+
+    expect($themeCssContents)
+        ->toContain("@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';")
+        ->and(strpos(
+            $themeCssContents,
+            'vendor/filament/filament/resources/css/index.css'
+        ))->toBeLessThan(strpos(
+            $themeCssContents,
+            'northwestern-filament-theme/dist/theme.css'
+        ))
+        ->and(File::exists(resource_path('css/filament/admin/theme.css')))->toBeFalse();
+
+    File::deleteDirectory(resource_path('sass'));
 });
