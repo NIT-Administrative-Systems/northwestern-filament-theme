@@ -5,14 +5,14 @@ declare(strict_types=1);
 use Symfony\Component\Finder\Finder;
 
 it('only targets fi-* selectors that exist in Filament source', function () {
-    $cssDir = __DIR__ . '/../../resources/css';
+    $distFile = __DIR__ . '/../../dist/theme.css';
     $filamentDir = __DIR__ . '/../../vendor/filament';
 
+    expect($distFile)->toBeFile();
+
     $themeSelectors = [];
-    foreach (glob($cssDir . '/*.css') as $file) {
-        preg_match_all('/\bfi-[a-z][a-z0-9-]*/', file_get_contents($file), $matches);
-        $themeSelectors = array_merge($themeSelectors, $matches[0]);
-    }
+    preg_match_all('/\bfi-[a-z][a-z0-9-]*/', file_get_contents($distFile), $matches);
+    $themeSelectors = array_merge($themeSelectors, $matches[0]);
     $themeSelectors = array_unique($themeSelectors);
     sort($themeSelectors);
 
