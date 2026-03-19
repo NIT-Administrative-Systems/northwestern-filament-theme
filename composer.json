@@ -35,22 +35,27 @@
         "rector/rector": "^2.0"
     },
     "scripts": {
-        "format": "vendor/bin/pint",
         "rector": "vendor/bin/rector process --ansi",
         "rector:dry": "vendor/bin/rector process --dry-run --ansi",
+        "format": "vendor/bin/pint",
+        "format:check": "vendor/bin/pint --test",
         "analyse": "vendor/bin/phpstan analyse --memory-limit=2G",
         "test": "vendor/bin/pest",
-        "lint:css:fix": "pnpm lint:css:fix",
-        "lint:css": "pnpm lint:css",
-        "build:css": "pnpm build:css",
         "check": [
+            "@rector:dry",
+            "@format:check",
+            "pnpm format:check",
+            "pnpm lint:css",
+            "pnpm build:css:check",
+            "@analyse",
+            "@test"
+        ],
+        "fix": [
             "@rector",
             "@format",
-            "@lint:css:fix",
-            "@lint:css",
-            "@analyse",
-            "@build:css",
-            "@test"
+            "pnpm format",
+            "pnpm lint:css:fix",
+            "pnpm build:css"
         ]
     },
     "autoload": {
