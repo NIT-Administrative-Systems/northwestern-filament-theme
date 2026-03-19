@@ -2,7 +2,7 @@ name: Filament Compatibility Check
 
 on:
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: "0 6 * * 1"
   workflow_dispatch:
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        filament: ['^4.0', '^5.0']
+        filament: ["^4.0", "^5.0"]
 
     steps:
       - name: Checkout Repository
@@ -22,13 +22,12 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: "8.4"
           coverage: none
 
       - name: Install with Filament ${{ matrix.filament }}
         run: |
-          composer require filament/filament:${{ matrix.filament }} --no-interaction --no-update
-          composer update --no-interaction --prefer-dist
+          composer require filament/filament:${{ matrix.filament }} --no-interaction --prefer-dist
 
       - name: Run Selector Integrity Test
         run: ./vendor/bin/pest --filter=FilamentSelectorIntegrity

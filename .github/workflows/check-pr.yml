@@ -1,8 +1,9 @@
 name: Check PR
 
 env:
-  PHP_VERSION: '8.3'
-  NODE_VERSION: '24'
+  PHP_VERSION: "8.3"
+  NODE_VERSION: "24"
+  PNPM_VERSION: "10.x.x"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -10,9 +11,9 @@ concurrency:
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   lint-and-format:
@@ -56,24 +57,30 @@ jobs:
         run: composer rector:dry
 
       - name: Run Laravel Pint
-        run: composer format -- --test
+        run: composer format:check
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install pnpm
-        run: corepack enable && corepack prepare pnpm@latest --activate
+          cache: pnpm
 
       - name: Install Node Dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
-      - name: Check dist/ is up to date
-        run: pnpm build:css:check
+      - name: Run Prettier
+        run: pnpm format:check
 
       - name: Run Stylelint
         run: pnpm lint:css
+
+      - name: Check dist/ is up to date
+        run: pnpm build:css:check
 
       - name: PHPStan Result Cache
         uses: actions/cache@v5
@@ -103,18 +110,18 @@ jobs:
       fail-fast: true
       matrix:
         include:
-          - php: '8.3'
-            laravel: '12'
-            testbench: '10.*'
-          - php: '8.4'
-            laravel: '12'
-            testbench: '10.*'
-          - php: '8.4'
-            laravel: '13'
-            testbench: '11.*'
-          - php: '8.5'
-            laravel: '13'
-            testbench: '11.*'
+          - php: "8.3"
+            laravel: "12"
+            testbench: "10.*"
+          - php: "8.4"
+            laravel: "12"
+            testbench: "10.*"
+          - php: "8.4"
+            laravel: "13"
+            testbench: "11.*"
+          - php: "8.5"
+            laravel: "13"
+            testbench: "11.*"
 
     steps:
       - name: Checkout Repository
