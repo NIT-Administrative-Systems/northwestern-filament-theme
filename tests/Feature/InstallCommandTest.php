@@ -83,6 +83,7 @@ it('exits when no panels are registered', function () {
 it('shows error when theme file cannot be created', function () {
     mockSinglePanel();
 
+    Log::shouldReceive('channel')->andReturnSelf()->byDefault();
     Log::shouldReceive('debug')
         ->once()
         ->withArgs(function (string $message, array $context) {
