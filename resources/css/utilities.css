@@ -58,11 +58,16 @@
     border-radius: 0 !important;
 }
 
+.fi-dropdown-header > .fi-icon {
+    display: none;
+}
+
 .fi-avatar,
 .fi-user-avatar,
 .fi-tenant-avatar {
     border-radius: 0 !important;
     border: 1px solid var(--nu-border-color) !important;
+    background-color: var(--nu-purple-10);
     object-fit: cover;
     width: 2.25rem !important;
     height: 2.25rem !important;

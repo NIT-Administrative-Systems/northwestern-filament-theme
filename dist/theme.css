@@ -1065,6 +1065,11 @@ th.fi-ta-selection-cell {
    Components — Modals, Dropdowns, Badges, Notifications, Widgets, Sections
    ========================================================================== */
 
+.fi-ta-record-collapse-btn {
+    align-self: start;
+    margin-top: 0.75rem;
+}
+
 .fi-modal-window {
     border-radius: var(--nu-border-radius) !important;
     box-shadow: 0 4px 24px rgb(0 0 0 / 15%) !important;
@@ -1404,11 +1409,16 @@ th.fi-ta-selection-cell {
     border-radius: 0 !important;
 }
 
+.fi-dropdown-header > .fi-icon {
+    display: none;
+}
+
 .fi-avatar,
 .fi-user-avatar,
 .fi-tenant-avatar {
     border-radius: 0 !important;
     border: 1px solid var(--nu-border-color) !important;
+    background-color: var(--nu-purple-10);
     object-fit: cover;
     width: 2.25rem !important;
     height: 2.25rem !important;
