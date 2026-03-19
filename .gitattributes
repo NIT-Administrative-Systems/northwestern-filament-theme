@@ -16,6 +16,8 @@
 /.npmrc export-ignore
 /.nvmrc export-ignore
 /.stylelintrc.json export-ignore
+/.prettierrc.json export-ignore
+/.prettierignore export-ignore
 /package.json export-ignore
 /pnpm-lock.yaml export-ignore
 /scripts export-ignore

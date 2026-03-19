@@ -1,0 +1,22 @@
+{
+    "printWidth": 120,
+    "singleQuote": false,
+    "plugins": ["@shufo/prettier-plugin-blade", "prettier-plugin-packagejson", "@prettier/plugin-xml"],
+    "overrides": [
+        {
+            "files": ["*.blade.php"],
+            "options": {
+                "parser": "blade",
+                "tabWidth": 4,
+                "wrapAttributes": "force-aligned",
+                "wrapAttributesMinAttrs": 3,
+                "sortHtmlAttributes": "code-guide",
+                "phpVersion": "8.3",
+                "endOfLine": "lf",
+                "extraLiners": "",
+                "trailingCommaPHP": true,
+                "componentPrefix": "x-,livewire:"
+            }
+        }
+    ]
+}
