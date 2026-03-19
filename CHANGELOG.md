@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-03-19
+
+### Added
+
+- Prettier with Blade, XML, and package.json plugins for consistent formatting across all file types
+- Stylelint property ordering via `stylelint-config-recess-order`
+- CSS minification in dist build using LightningCSS
+- `composer check` (read-only) and `composer fix` (auto-fix) commands covering PHP and frontend tooling
+- Prettier check step in CI workflow
+
+### Changed
+
+- CI workflows now use `pnpm/action-setup@v4` with built-in store caching instead of corepack
+- Filament compatibility workflow uses single `composer require` instead of `--no-update` + `update`
+
 ## [2.2.1] - 2026-03-19
 
 ### Fixed
@@ -95,7 +110,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.2.1...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.3.0...HEAD
+[2.3.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.2.1...v2.3.0
 [2.2.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.0...v2.1.1
