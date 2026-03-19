@@ -103,7 +103,7 @@ jobs:
           title: "PHPStan Analysis Report"
 
   tests:
-    name: Tests — PHP ${{ matrix.php }} / Laravel ${{ matrix.laravel }}
+    name: Tests — PHP ${{ matrix.php }} / Laravel ${{ matrix.laravel }} (${{ matrix.stability }})
     runs-on: ubuntu-latest
     timeout-minutes: 10
     strategy:
@@ -113,15 +113,23 @@ jobs:
           - php: "8.3"
             laravel: "12"
             testbench: "10.*"
+            stability: "prefer-stable"
+          - php: "8.3"
+            laravel: "12"
+            testbench: "10.*"
+            stability: "prefer-lowest"
           - php: "8.4"
             laravel: "12"
             testbench: "10.*"
+            stability: "prefer-stable"
           - php: "8.4"
             laravel: "13"
             testbench: "11.*"
+            stability: "prefer-stable"
           - php: "8.5"
             laravel: "13"
             testbench: "11.*"
+            stability: "prefer-stable"
 
     steps:
       - name: Checkout Repository
@@ -136,15 +144,15 @@ jobs:
       - name: Install Dependencies
         run: |
           composer require "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer install --no-interaction --prefer-dist --optimize-autoloader
+          composer update --no-interaction --prefer-dist --${{ matrix.stability }}
 
       - name: PHPUnit Cache
         uses: actions/cache@v5
         with:
           path: ./.phpunit.cache
-          key: ${{ runner.os }}-phpunit-php${{ matrix.php }}-laravel${{ matrix.laravel }}-${{ hashFiles('phpunit.xml', 'composer.json') }}
+          key: ${{ runner.os }}-phpunit-php${{ matrix.php }}-laravel${{ matrix.laravel }}-${{ matrix.stability }}-${{ hashFiles('phpunit.xml', 'composer.json') }}
           restore-keys: |
-            ${{ runner.os }}-phpunit-php${{ matrix.php }}-laravel${{ matrix.laravel }}-
+            ${{ runner.os }}-phpunit-php${{ matrix.php }}-laravel${{ matrix.laravel }}-${{ matrix.stability }}-
 
       - name: Run Pest
         run: ./vendor/bin/pest --cache-result --cache-directory=.phpunit.cache
