@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.1] - 2026-03-19
+
+### Fixed
+
+- Default avatar now has a `nu-purple-10` background for better contrast against the topbar
+- Redundant placeholder icon hidden in user menu dropdown header
+- Table record collapse button aligned to top of row instead of center
+
 ## [2.2.0] - 2026-03-17
 
 ### Added
@@ -87,7 +95,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.2.1...HEAD
+[2.2.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.0.0...v2.1.0
