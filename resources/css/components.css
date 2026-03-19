@@ -13,8 +13,8 @@
 }
 
 .fi-modal-header {
-    border-bottom: 1px solid var(--nu-border-color);
     padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--nu-border-color);
 }
 
 .fi-modal-heading {
@@ -30,14 +30,14 @@
 }
 
 .fi-modal-footer {
-    border-top: 1px solid var(--nu-border-color);
     padding: 1rem 1.5rem;
+    border-top: 1px solid var(--nu-border-color);
 }
 
 .fi-dropdown-panel {
+    border: 1px solid var(--nu-border-color);
     border-radius: var(--nu-border-radius) !important;
     box-shadow: var(--nu-shadow-md) !important;
-    border: 1px solid var(--nu-border-color);
 }
 
 .fi-dropdown-list-item {
@@ -46,8 +46,8 @@
 }
 
 .fi-badge {
-    border-radius: var(--nu-border-radius) !important;
     border: 1px solid var(--nu-badge-border) !important;
+    border-radius: var(--nu-border-radius) !important;
     box-shadow: none !important;
 }
 
@@ -70,9 +70,9 @@
 }
 
 .fi-wi-stats-overview-stat {
+    border: 1px solid var(--nu-border-color);
     border-radius: var(--nu-border-radius) !important;
     box-shadow: none !important;
-    border: 1px solid var(--nu-border-color);
     --tw-ring-shadow: 0 0 #0000 !important;
 }
 
@@ -101,8 +101,8 @@
 
 .fi-callout-heading {
     font-family: var(--nu-font-heading);
-    font-weight: 600;
     font-size: 0.9375rem;
+    font-weight: 600;
 }
 
 .fi-callout-description {
@@ -133,30 +133,32 @@
 }
 
 .fi-sc-wizard-header {
-    border-bottom: 1px solid var(--nu-border-color);
     padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--nu-border-color);
 }
 
 .fi-sc-wizard-header-step-label {
     font-family: var(--nu-font-heading);
-    font-weight: 600;
     font-size: 0.875rem;
+    font-weight: 600;
 }
 
 .fi-sc-wizard-header-step-description {
     font-family: var(--nu-font-body);
-    color: var(--nu-color-text-muted);
     font-size: 0.8125rem;
+    color: var(--nu-color-text-muted);
 }
 
 .fi-sc-wizard-footer {
-    border-top: none;
     padding: 0;
+    border-top: none;
 }
 
 .fi-pagination-item-btn {
     border-radius: var(--nu-border-radius) !important;
-    transition: background-color var(--nu-transition-fast), color var(--nu-transition-fast);
+    transition:
+        background-color var(--nu-transition-fast),
+        color var(--nu-transition-fast);
 }
 
 .fi-pagination-item.fi-active .fi-pagination-item-btn {
@@ -173,8 +175,8 @@
 }
 
 .fi-sortable-ghost {
-    opacity: 0.6;
     background-color: var(--nu-purple-10);
+    opacity: 0.6;
 }
 
 .fi-loading-section {
@@ -183,8 +185,8 @@
 
 .fi-in-entry-label {
     font-family: var(--nu-font-body);
-    font-weight: 700;
     font-size: 0.8125rem;
+    font-weight: 700;
     color: var(--nu-color-text-muted);
 }
 
@@ -194,8 +196,8 @@
 }
 
 .fi-in-placeholder {
-    color: var(--nu-color-text-muted);
     font-style: italic;
+    color: var(--nu-color-text-muted);
 }
 
 .fi-in-repeatable-item,
@@ -270,7 +272,6 @@
 .dark .fi-sc-wizard-header {
     border-bottom-color: var(--nu-border-color);
 }
-
 
 .dark .fi-in-entry-label {
     color: var(--nu-black-20);

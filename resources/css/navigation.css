@@ -12,8 +12,8 @@
 }
 
 .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
-    background-color: var(--nu-purple-10) !important;
     color: var(--nu-purple-100);
+    background-color: var(--nu-purple-10) !important;
 }
 
 .fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-icon {
@@ -21,16 +21,16 @@
 }
 
 .fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-label {
-    color: var(--nu-purple-100);
     font-weight: 700;
+    color: var(--nu-purple-100);
 }
 
 .fi-sidebar-group-label {
-    text-transform: uppercase;
     font-size: 0.7rem;
-    letter-spacing: 0.08em;
     font-weight: 700;
     color: var(--nu-black-50);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
 
 .fi-breadcrumbs-item a {
@@ -55,8 +55,8 @@
 
 .fi-tenant-menu-trigger-tenant-name {
     font-family: var(--nu-font-heading);
-    font-weight: 600;
     font-size: 0.875rem;
+    font-weight: 600;
 }
 
 .dark .fi-sidebar-item-btn:hover {
@@ -64,8 +64,8 @@
 }
 
 .dark .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
-    background-color: rgb(78 42 132 / 20%) !important;
     color: var(--nu-purple-30);
+    background-color: rgb(78 42 132 / 20%) !important;
 }
 
 .dark .fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-icon,

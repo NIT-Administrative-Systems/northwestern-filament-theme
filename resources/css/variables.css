@@ -3,51 +3,51 @@
    ========================================================================== */
 
 :root {
-    --nu-purple-10: #E4E0EE;
-    --nu-purple-20: #CCC4DF;
-    --nu-purple-30: #B6ACD1;
-    --nu-purple-40: #A495C3;
-    --nu-purple-50: #9380B6;
-    --nu-purple-60: #836EAA;
-    --nu-purple-70: #765DA0;
-    --nu-purple-80: #684C96;
-    --nu-purple-90: #5B3B8C;
-    --nu-purple-100: #4E2A84;
+    --nu-purple-10: #e4e0ee;
+    --nu-purple-20: #ccc4df;
+    --nu-purple-30: #b6acd1;
+    --nu-purple-40: #a495c3;
+    --nu-purple-50: #9380b6;
+    --nu-purple-60: #836eaa;
+    --nu-purple-70: #765da0;
+    --nu-purple-80: #684c96;
+    --nu-purple-90: #5b3b8c;
+    --nu-purple-100: #4e2a84;
     --nu-purple-110: #482476;
-    --nu-purple-120: #401F68;
-    --nu-purple-130: #38175A;
-    --nu-purple-140: #30104E;
+    --nu-purple-120: #401f68;
+    --nu-purple-130: #38175a;
+    --nu-purple-140: #30104e;
     --nu-purple-150: #260841;
-    --nu-purple-160: #1D0235;
+    --nu-purple-160: #1d0235;
 
     --nu-black-100: #000;
-    --nu-black-80: #342F2E;
-    --nu-black-50: #716C6B;
-    --nu-black-20: #BBB8B8;
-    --nu-black-10: #D8D6D6;
+    --nu-black-80: #342f2e;
+    --nu-black-50: #716c6b;
+    --nu-black-20: #bbb8b8;
+    --nu-black-10: #d8d6d6;
 
-    --nu-green: #58B947;
-    --nu-teal: #7FCECD;
-    --nu-blue: #5091CD;
-    --nu-yellow: #EDE93B;
-    --nu-gold: #FFC520;
-    --nu-orange: #EF553F;
+    --nu-green: #58b947;
+    --nu-teal: #7fcecd;
+    --nu-blue: #5091cd;
+    --nu-yellow: #ede93b;
+    --nu-gold: #ffc520;
+    --nu-orange: #ef553f;
 
     --nu-dark-green: #008656;
-    --nu-dark-teal: #007FA4;
-    --nu-dark-blue: #0D2D6C;
-    --nu-dark-yellow: #D9C826;
-    --nu-dark-gold: #CA7C1B;
-    --nu-dark-orange: #D85820;
+    --nu-dark-teal: #007fa4;
+    --nu-dark-blue: #0d2d6c;
+    --nu-dark-yellow: #d9c826;
+    --nu-dark-gold: #ca7c1b;
+    --nu-dark-orange: #d85820;
 
     --nu-color-success: #008656;
-    --nu-color-info: #5091CD;
-    --nu-color-warning: #FFC520;
-    --nu-color-danger: #EF553F;
-    --nu-color-text: #342F2E;
-    --nu-color-text-muted: #716C6B;
-    --nu-color-link: #4E2A84;
-    --nu-color-link-hover: #401F68;
+    --nu-color-info: #5091cd;
+    --nu-color-warning: #ffc520;
+    --nu-color-danger: #ef553f;
+    --nu-color-text: #342f2e;
+    --nu-color-text-muted: #716c6b;
+    --nu-color-link: #4e2a84;
+    --nu-color-link-hover: #401f68;
 
     --nu-shadow-sm: 0 1px 2px rgb(0 0 0 / 6%);
     --nu-shadow-md: 0 2px 8px rgb(0 0 0 / 10%);
@@ -69,13 +69,13 @@
 
     --nu-body-bg: #f8fafc;
     --nu-sidebar-bg: #fff;
-    --nu-topbar-bg: #401F68;
+    --nu-topbar-bg: #401f68;
     --nu-topbar-text: #fff;
     --nu-border-color: #ccc;
     --nu-border-radius: 0;
 
-    --nu-font-body: 'Akkurat Pro', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;
-    --nu-font-heading: 'Poppins', 'Akkurat Pro', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;
+    --nu-font-body: "Akkurat Pro", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
+    --nu-font-heading: "Poppins", "Akkurat Pro", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
 
     --nu-focus-ring: var(--nu-purple-100);
     --nu-focus-border: #a795c2;

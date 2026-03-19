@@ -66,6 +66,7 @@ php artisan northwestern-theme:install
 ```
 
 This will:
+
 - Create a panel theme CSS file if one doesn't exist
 - Inject the Northwestern theme `@import` after the Filament base import
 - Optionally inject Tailwind v4 design tokens for color utilities
@@ -96,7 +97,7 @@ When you opt in to design tokens during `northwestern-theme:install`, the plugin
 Available token groups:
 
 | Group             | Examples                                                                   |
-|-------------------|----------------------------------------------------------------------------|
+| ----------------- | -------------------------------------------------------------------------- |
 | Purple scale      | `nu-purple-10` through `nu-purple-160`                                     |
 | Grays             | `nu-black-10`, `nu-black-20`, `nu-black-50`, `nu-black-80`, `nu-black-100` |
 | Brand colors      | `nu-green`, `nu-teal`, `nu-blue`, `nu-yellow`, `nu-gold`, `nu-orange`      |

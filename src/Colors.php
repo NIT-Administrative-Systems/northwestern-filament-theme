@@ -18,85 +18,85 @@ final class Colors
     // Primary: Northwestern Purple scale
     // -------------------------------------------------------------------------
 
-    public const PURPLE_10 = '#E4E0EE';
+    public const string PURPLE_10 = '#E4E0EE';
 
-    public const PURPLE_20 = '#CCC4DF';
+    public const string PURPLE_20 = '#CCC4DF';
 
-    public const PURPLE_30 = '#B6ACD1';
+    public const string PURPLE_30 = '#B6ACD1';
 
-    public const PURPLE_40 = '#A495C3';
+    public const string PURPLE_40 = '#A495C3';
 
-    public const PURPLE_50 = '#9380B6';
+    public const string PURPLE_50 = '#9380B6';
 
-    public const PURPLE_60 = '#836EAA';
+    public const string PURPLE_60 = '#836EAA';
 
-    public const PURPLE_70 = '#765DA0';
+    public const string PURPLE_70 = '#765DA0';
 
-    public const PURPLE_80 = '#684C96';
+    public const string PURPLE_80 = '#684C96';
 
-    public const PURPLE_90 = '#5B3B8C';
+    public const string PURPLE_90 = '#5B3B8C';
 
-    public const PURPLE_100 = '#4E2A84';
+    public const string PURPLE_100 = '#4E2A84';
 
-    public const PURPLE_110 = '#482476';
+    public const string PURPLE_110 = '#482476';
 
-    public const PURPLE_120 = '#401F68';
+    public const string PURPLE_120 = '#401F68';
 
-    public const PURPLE_130 = '#38175A';
+    public const string PURPLE_130 = '#38175A';
 
-    public const PURPLE_140 = '#30104E';
+    public const string PURPLE_140 = '#30104E';
 
-    public const PURPLE_150 = '#260841';
+    public const string PURPLE_150 = '#260841';
 
-    public const PURPLE_160 = '#1D0235';
+    public const string PURPLE_160 = '#1D0235';
 
     // -------------------------------------------------------------------------
     // Primary: Rich Black scale
     // -------------------------------------------------------------------------
 
-    public const RICH_BLACK_100 = '#000000';
+    public const string RICH_BLACK_100 = '#000000';
 
-    public const RICH_BLACK_80 = '#342F2E';
+    public const string RICH_BLACK_80 = '#342F2E';
 
-    public const RICH_BLACK_50 = '#716C6B';
+    public const string RICH_BLACK_50 = '#716C6B';
 
-    public const RICH_BLACK_20 = '#BBB8B8';
+    public const string RICH_BLACK_20 = '#BBB8B8';
 
-    public const RICH_BLACK_10 = '#D8D6D6';
+    public const string RICH_BLACK_10 = '#D8D6D6';
 
     // -------------------------------------------------------------------------
     // Secondary: Brights
     // -------------------------------------------------------------------------
 
-    public const GREEN = '#58B947';
+    public const string GREEN = '#58B947';
 
-    public const TEAL = '#7FCECD';
+    public const string TEAL = '#7FCECD';
 
-    public const BLUE = '#5091CD';
+    public const string BLUE = '#5091CD';
 
-    public const YELLOW = '#EDE93B';
+    public const string YELLOW = '#EDE93B';
 
-    public const GOLD = '#FFC520';
+    public const string GOLD = '#FFC520';
 
-    public const DANGER = '#dc3545';
+    public const string DANGER = '#dc3545';
 
-    public const ORANGE = '#EF553F';
+    public const string ORANGE = '#EF553F';
 
     // -------------------------------------------------------------------------
     // Secondary: Darks
     // -------------------------------------------------------------------------
 
-    public const DARK_GREEN = '#008656';
+    public const string DARK_GREEN = '#008656';
 
-    public const DARK_TEAL = '#007FA4';
+    public const string DARK_TEAL = '#007FA4';
 
-    public const DARK_BLUE = '#0D2D6C';
+    public const string DARK_BLUE = '#0D2D6C';
 
-    public const DARK_YELLOW = '#D9C826';
+    public const string DARK_YELLOW = '#D9C826';
 
-    public const DARK_GOLD = '#CA7C1B';
+    public const string DARK_GOLD = '#CA7C1B';
 
-    public const DARK_ORANGE = '#D85820';
+    public const string DARK_ORANGE = '#D85820';
 
     // -------------------------------------------------------------------------
     // Filament palette arrays (50–950 scales)
@@ -111,7 +111,7 @@ final class Colors
      *
      * @var array<int<50, 950>, non-empty-string>
      */
-    public const PRIMARY = [
+    public const array PRIMARY = [
         50 => '228, 224, 238',  // Purple 10
         100 => '204, 196, 223', // Purple 20
         200 => '182, 172, 209', // Purple 30
@@ -130,7 +130,7 @@ final class Colors
      *
      * @var array<int<50, 950>, non-empty-string>
      */
-    public const DANGER_PALETTE = [
+    public const array DANGER_PALETTE = [
         50 => 'oklch(0.9800 0.0162 21.239)',
         100 => 'oklch(0.9153 0.0471 21.239)',
         200 => 'oklch(0.8507 0.0781 21.239)',
@@ -149,7 +149,7 @@ final class Colors
      *
      * @var array<int<50, 950>, non-empty-string>
      */
-    public const SUCCESS_PALETTE = [
+    public const array SUCCESS_PALETTE = [
         50 => 'oklch(0.9800 0.0100 159.536)',
         100 => 'oklch(0.9078 0.0292 159.536)',
         200 => 'oklch(0.8357 0.0483 159.536)',
@@ -168,7 +168,7 @@ final class Colors
      *
      * @var array<int<50, 950>, non-empty-string>
      */
-    public const WARNING_PALETTE = [
+    public const array WARNING_PALETTE = [
         50 => 'oklch(0.9800 0.0135 86.169)',
         100 => 'oklch(0.9480 0.0524 86.169)',
         200 => 'oklch(0.9160 0.0913 86.169)',
@@ -190,7 +190,7 @@ final class Colors
      *
      * @var array<int<50, 950>, non-empty-string>
      */
-    public const GRAY_PALETTE = [
+    public const array GRAY_PALETTE = [
         50 => 'oklch(0.977 0 31.068)',
         100 => 'oklch(0.950 0 31.068)',
         200 => 'oklch(0.905 0 31.068)',
@@ -209,7 +209,7 @@ final class Colors
      *
      * @var array<int<50, 950>, non-empty-string>
      */
-    public const INFO_PALETTE = [
+    public const array INFO_PALETTE = [
         50 => 'oklch(0.9800 0.0086 227.119)',
         100 => 'oklch(0.9093 0.0252 227.119)',
         200 => 'oklch(0.8387 0.0418 227.119)',

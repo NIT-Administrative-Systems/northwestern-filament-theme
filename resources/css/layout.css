@@ -24,8 +24,8 @@ body.fi-body {
 }
 
 .fi-sidebar-footer {
-    border-top: 1px solid var(--nu-border-color);
     padding: 0.75rem 1rem;
+    border-top: 1px solid var(--nu-border-color);
 }
 
 .fi-topbar {
@@ -101,9 +101,9 @@ body.fi-body {
 }
 
 .fi-global-search-results-ctn {
+    border: 1px solid var(--nu-border-color);
     border-radius: var(--nu-border-radius) !important;
     box-shadow: var(--nu-shadow-lg) !important;
-    border: 1px solid var(--nu-border-color);
 }
 
 .fi-global-search-result:hover {
@@ -112,8 +112,8 @@ body.fi-body {
 
 .fi-global-search-result-heading {
     font-family: var(--nu-font-heading);
-    font-weight: 600;
     font-size: 0.875rem;
+    font-weight: 600;
 }
 
 .fi-global-search-no-results-message {
