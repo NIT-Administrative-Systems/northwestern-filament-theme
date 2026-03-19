@@ -1,10 +1,10 @@
 @php
     /** @var \Northwestern\FilamentTheme\Footer\FooterConfig $config */
-    $officeName = $config->officeName ?? config('northwestern-theme.office.name', 'Information Technology');
-    $officeAddr = $config->officeAddr ?? config('northwestern-theme.office.addr', '1800 Sherman Ave');
-    $officeCity = $config->officeCity ?? config('northwestern-theme.office.city', 'Evanston, IL 60201');
-    $officePhone = $config->officePhone ?? config('northwestern-theme.office.phone', '847-491-4357 (1-HELP)');
-    $officeEmail = $config->officeEmail ?? config('northwestern-theme.office.email', 'consultant@northwestern.edu');
+    $officeName = $config->officeName ?? config("northwestern-theme.office.name", "Information Technology");
+    $officeAddr = $config->officeAddr ?? config("northwestern-theme.office.addr", "1800 Sherman Ave");
+    $officeCity = $config->officeCity ?? config("northwestern-theme.office.city", "Evanston, IL 60201");
+    $officePhone = $config->officePhone ?? config("northwestern-theme.office.phone", "847-491-4357 (1-HELP)");
+    $officeEmail = $config->officeEmail ?? config("northwestern-theme.office.email", "consultant@northwestern.edu");
 @endphp
 
 <style>
@@ -60,7 +60,7 @@
         margin: 0 0 2rem;
     }
 
-    .nu-contact-group + .nu-contact-group {
+    .nu-contact-group+.nu-contact-group {
         margin-bottom: 1.5rem;
     }
 
@@ -148,13 +148,13 @@
         background-position: -156px 39px;
     }
 
-    @media (width <= 768px) {
+    @media (width <=768px) {
         .nu-footer-grid {
             grid-template-columns: 1fr;
         }
     }
 
-    @media (width >= 992px) {
+    @media (width >=992px) {
         .nu-pin {
             margin-left: -1rem;
         }
@@ -171,15 +171,13 @@
     <div class="nu-footer-grid">
         <div class="nu-footer-col">
             <a href="https://www.northwestern.edu">
-                <img
-                    src="https://common.northwestern.edu/v8/css/images/northwestern-university.svg"
-                    alt="Northwestern University"
-                    class="nu-branding"
-                >
+                <img class="nu-branding"
+                     src="https://common.northwestern.edu/v8/css/images/northwestern-university.svg"
+                     alt="Northwestern University">
             </a>
 
             <ul class="nu-footer-links">
-                <li>&copy; {{ date('Y') }} Northwestern University</li>
+                <li>&copy; {{ date("Y") }} Northwestern University</li>
                 <li><a href="https://www.northwestern.edu/contact.html">Contact Northwestern University</a></li>
                 <li><a href="https://www.northwestern.edu/hr/careers/">Careers</a></li>
                 <li><a href="https://www.northwestern.edu/disclaimer.html">Disclaimer</a></li>
@@ -215,9 +213,9 @@
 
         <div class="nu-footer-col">
             <p>Social Media</p>
-            <a href="https://www.facebook.com/NorthwesternU" class="nu-social nu-social-facebook">Facebook</a>
-            <a href="https://instagram.com/northwesternu" class="nu-social nu-social-instagram">Instagram</a>
-            <a href="https://www.youtube.com/user/NorthwesternU" class="nu-social nu-social-youtube">YouTube</a>
+            <a class="nu-social nu-social-facebook" href="https://www.facebook.com/NorthwesternU">Facebook</a>
+            <a class="nu-social nu-social-instagram" href="https://instagram.com/northwesternu">Instagram</a>
+            <a class="nu-social nu-social-youtube" href="https://www.youtube.com/user/NorthwesternU">YouTube</a>
         </div>
     </div>
 </footer>

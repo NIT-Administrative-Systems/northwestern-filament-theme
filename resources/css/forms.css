@@ -3,10 +3,12 @@
    ========================================================================== */
 
 .fi-input-wrp {
+    border: 1px solid var(--nu-border-color);
     border-radius: var(--nu-border-radius) !important;
     box-shadow: none !important;
-    border: 1px solid var(--nu-border-color);
-    transition: border-color var(--nu-transition-fast), box-shadow var(--nu-transition-fast);
+    transition:
+        border-color var(--nu-transition-fast),
+        box-shadow var(--nu-transition-fast);
 }
 
 .fi-input-wrp:focus-within {
@@ -30,8 +32,11 @@
 
 .fi-checkbox-input:focus {
     --tw-ring-color: var(--nu-purple-100) !important;
-    --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor) !important;
-    box-shadow: var(--tw-ring-shadow), 0 0 0 0.25rem var(--nu-focus-shadow-color) !important;
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(1px + var(--tw-ring-offset-width))
+        var(--tw-ring-color, currentcolor) !important;
+    box-shadow:
+        var(--tw-ring-shadow),
+        0 0 0 0.25rem var(--nu-focus-shadow-color) !important;
 }
 
 .fi-radio-input {
@@ -45,8 +50,11 @@
 
 .fi-radio-input:focus {
     --tw-ring-color: var(--nu-purple-100) !important;
-    --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor) !important;
-    box-shadow: var(--tw-ring-shadow), 0 0 0 0.25rem var(--nu-focus-shadow-color) !important;
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(1px + var(--tw-ring-offset-width))
+        var(--tw-ring-color, currentcolor) !important;
+    box-shadow:
+        var(--tw-ring-shadow),
+        0 0 0 0.25rem var(--nu-focus-shadow-color) !important;
 }
 
 .dark .fi-checkbox-input,
@@ -62,9 +70,9 @@
 
 .fi-checkbox-input:disabled,
 .fi-radio-input:disabled {
-    opacity: 0.5 !important;
-    cursor: not-allowed !important;
     pointer-events: auto !important;
+    cursor: not-allowed !important;
+    opacity: 0.5 !important;
 }
 
 .fi-checkbox-input:disabled + label,
@@ -86,8 +94,8 @@
 }
 
 .fi-toggle:disabled {
-    cursor: not-allowed !important;
     pointer-events: auto !important;
+    cursor: not-allowed !important;
     opacity: 0.5 !important;
 }
 
@@ -119,9 +127,9 @@
 }
 
 .fi-fo-date-time-picker-panel {
+    border: 1px solid var(--nu-border-color);
     border-radius: var(--nu-border-radius) !important;
     box-shadow: var(--nu-shadow-lg) !important;
-    border: 1px solid var(--nu-border-color);
 }
 
 .fi-fo-date-time-picker-calendar-day-today {
@@ -129,9 +137,9 @@
 }
 
 .fi-fo-color-picker-panel {
+    border: 1px solid var(--nu-border-color);
     border-radius: var(--nu-border-radius) !important;
     box-shadow: var(--nu-shadow-lg) !important;
-    border: 1px solid var(--nu-border-color);
 }
 
 .fi-fo-builder-item,
@@ -142,15 +150,15 @@
 
 .fi-fo-builder-item-header,
 .fi-fo-repeater-item-header {
-    border-bottom: 1px solid var(--nu-border-color);
     background-color: var(--nu-surface-muted);
+    border-bottom: 1px solid var(--nu-border-color);
 }
 
 .fi-fo-builder-item-header-label,
 .fi-fo-repeater-item-header-label {
     font-family: var(--nu-font-heading);
-    font-weight: 600;
     font-size: 0.875rem;
+    font-weight: 600;
 }
 
 .fi-fo-tags-input-wrp {
@@ -158,8 +166,8 @@
 }
 
 .fi-fo-key-value-add-action-ctn {
-    border-top: 1px solid var(--nu-border-color);
     padding: 0.5rem;
+    border-top: 1px solid var(--nu-border-color);
 }
 
 .fi-fo-markdown-editor,
@@ -183,9 +191,9 @@
 }
 
 .fi-fo-field-wrp-error-message {
-    color: var(--nu-color-danger);
     font-family: var(--nu-font-body);
     font-size: 0.8125rem;
+    color: var(--nu-color-danger);
 }
 
 .dark .fi-input-wrp {
@@ -204,8 +212,8 @@
 
 .dark .fi-fo-builder-item-header,
 .dark .fi-fo-repeater-item-header {
-    border-bottom-color: var(--nu-border-color);
     background-color: var(--nu-surface-muted);
+    border-bottom-color: var(--nu-border-color);
 }
 
 .dark .fi-fo-key-value-add-action-ctn {

@@ -34,9 +34,9 @@
 }
 
 .fi-simple-main-ctn {
+    border: 1px solid var(--nu-border-color);
     border-radius: var(--nu-border-radius) !important;
     box-shadow: 0 4px 24px rgb(0 0 0 / 8%) !important;
-    border: 1px solid var(--nu-border-color);
 }
 
 .fi-btn,
@@ -65,14 +65,14 @@
 .fi-avatar,
 .fi-user-avatar,
 .fi-tenant-avatar {
-    border-radius: 0 !important;
-    border: 1px solid var(--nu-border-color) !important;
-    background-color: var(--nu-purple-10);
-    object-fit: cover;
     width: 2.25rem !important;
     height: 2.25rem !important;
-    backface-visibility: hidden;
+    object-fit: cover;
+    background-color: var(--nu-purple-10);
+    border: 1px solid var(--nu-border-color) !important;
+    border-radius: 0 !important;
     transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .fi-sidebar-item-btn:focus-visible {
@@ -111,7 +111,9 @@
 }
 
 .fi-tabs-item {
-    transition: background-color var(--nu-transition-fast), color var(--nu-transition-fast);
+    transition:
+        background-color var(--nu-transition-fast),
+        color var(--nu-transition-fast);
 }
 
 .fi-ta-header-cell-sort-btn {

@@ -1,0 +1,6 @@
+.idea/
+dist/
+agents/
+vendor/
+node_modules/
+pnpm-lock.yaml

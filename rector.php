@@ -15,7 +15,7 @@ return RectorConfig::configure()
         __DIR__ . '/tests',
     ])
     ->withSets([
-        SetList::PHP_82,
+        SetList::PHP_83,
         SetList::CODE_QUALITY,
         SetList::DEAD_CODE,
         SetList::EARLY_RETURN,

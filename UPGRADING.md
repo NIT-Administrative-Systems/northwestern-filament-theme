@@ -10,21 +10,21 @@ If you are using [`pxlrbt/filament-environment-indicator`](https://github.com/px
 
 1. **Remove the package:**
 
-   ```bash
-   composer remove pxlrbt/filament-environment-indicator
-   ```
+    ```bash
+    composer remove pxlrbt/filament-environment-indicator
+    ```
 
 2. **Remove the plugin registration** from your panel provider:
 
-   ```diff
-   - use Pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin;
+    ```diff
+    - use Pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin;
 
-     return $panel
-         ->plugins([
-             NorthwesternTheme::make(),
-   -         EnvironmentIndicatorPlugin::make(),
-         ]);
-   ```
+      return $panel
+          ->plugins([
+              NorthwesternTheme::make(),
+    -         EnvironmentIndicatorPlugin::make(),
+          ]);
+    ```
 
 The theme's indicator is enabled by default and hides in production. To customize or disable it, see the [Environment Indicator](README.md#environment-indicator) section.
 
@@ -38,14 +38,14 @@ If you have a custom impersonation banner (e.g. a Blade view registered via `Fil
 
 3. If you have custom visibility, label, or leave URL logic, migrate it to the plugin API:
 
-   ```php
-   NorthwesternTheme::make()
-       ->impersonationBanner(
-           visible: fn () => session()->has('impersonating'),
-           label: fn () => 'Acting as ' . auth()->user()->name,
-           leaveUrl: '/stop-impersonating',
-       )
-   ```
+    ```php
+    NorthwesternTheme::make()
+        ->impersonationBanner(
+            visible: fn () => session()->has('impersonating'),
+            label: fn () => 'Acting as ' . auth()->user()->name,
+            leaveUrl: '/stop-impersonating',
+        )
+    ```
 
 To disable the banner entirely, call `->withoutImpersonationBanner()`.
 
@@ -63,21 +63,21 @@ v2.0 consolidates the theme's CSS into a single barrel file (`dist/theme.css`) i
 
 1. **Update the package:**
 
-   ```bash
-   composer require northwestern-sysdev/northwestern-filament-theme:^2.0
-   ```
+    ```bash
+    composer require northwestern-sysdev/northwestern-filament-theme:^2.0
+    ```
 
 2. **Clear previously published CSS assets:**
 
-   ```bash
-   rm -rf public/css/northwestern-sysdev
-   ```
+    ```bash
+    rm -rf public/css/northwestern-sysdev
+    ```
 
 3. **Re-publish assets:**
 
-   ```bash
-   php artisan filament:assets
-   ```
+    ```bash
+    php artisan filament:assets
+    ```
 
 That's it for the default integration path. The plugin will register the single `theme.css` file automatically through `@filamentStyles`.
 
@@ -89,31 +89,31 @@ If you already have a custom Filament panel theme (created via `php artisan make
 
 1. **Run the install command:**
 
-   ```bash
-   php artisan northwestern-theme:install
-   ```
+    ```bash
+    php artisan northwestern-theme:install
+    ```
 
-   This will:
-   - Create a panel theme CSS file if one doesn't exist
-   - Inject the Northwestern theme `@import` after the Filament base import
-   - Optionally inject Tailwind v4 design tokens for color utilities
+    This will:
+    - Create a panel theme CSS file if one doesn't exist
+    - Inject the Northwestern theme `@import` after the Filament base import
+    - Optionally inject Tailwind v4 design tokens for color utilities
 
 2. **Disable automatic asset registration** in your panel provider:
 
-   ```php
-   use Northwestern\FilamentTheme\NorthwesternTheme;
+    ```php
+    use Northwestern\FilamentTheme\NorthwesternTheme;
 
-   NorthwesternTheme::make()
-       ->withoutAssetRegistration()
-   ```
+    NorthwesternTheme::make()
+        ->withoutAssetRegistration()
+    ```
 
-   This prevents the theme CSS from loading twice. Once through your Vite bundle and once through `@filamentStyles`.
+    This prevents the theme CSS from loading twice. Once through your Vite bundle and once through `@filamentStyles`.
 
 3. **Compile your assets:**
 
-   ```bash
-   npm run build
-   ```
+    ```bash
+    npm run build
+    ```
 
 ### Breaking Changes
 

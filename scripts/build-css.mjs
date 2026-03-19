@@ -6,6 +6,7 @@
  */
 
 import { existsSync, readFileSync, writeFileSync, mkdirSync, statSync } from 'fs';
+import { transform } from 'lightningcss';
 import { colors, box } from 'consola/utils';
 
 const c = colors;
@@ -50,12 +51,16 @@ if (!checkOnly) {
 const results = [];
 
 // --- dist/theme.css ---
-const banner = '/* Northwestern Filament Theme — auto-generated, do not edit */\n';
 const css = files.map((f) => readFileSync(`resources/css/${f}.css`, 'utf8')).join('\n\n');
-const themeContent = banner + '\n' + css;
+const { code } = transform({
+  filename: 'theme.css',
+  code: Buffer.from(css),
+  minify: true,
+});
+const themeContent = `/* Northwestern Filament Theme — auto-generated, do not edit */\n` + code.toString();
 const themeChanged = fileChanged('dist/theme.css', themeContent);
 if (!checkOnly) writeFileSync('dist/theme.css', themeContent);
-results.push({ path: 'dist/theme.css', size: themeContent.length, changed: themeChanged });
+results.push({ path: 'dist/theme.css', size: themeContent.length, rawSize: css.length, changed: themeChanged });
 
 // --- dist/tailwind-tokens.css ---
 const variablesCss = readFileSync('resources/css/variables.css', 'utf8');
@@ -149,13 +154,14 @@ console.log(
 const maxPath = Math.max(...results.map((r) => r.path.length));
 const maxSize = Math.max(...results.map((r) => formatSize(r.size).length));
 
-for (const { path, size, changed } of results) {
+for (const { path, size, rawSize, changed } of results) {
   const icon = changed ? c.green('●') : c.dim('○');
   const label = changed ? c.green('updated') : c.dim('unchanged');
   const paddedPath = path.padEnd(maxPath);
   const paddedSize = formatSize(size).padStart(maxSize);
+  const minified = rawSize ? `  ${c.dim(`(${formatSize(rawSize)} → ${formatSize(size)})`)}` : '';
 
-  console.log(`  ${icon} ${c.cyan(paddedPath)}  ${c.dim(paddedSize)}  ${label}`);
+  console.log(`  ${icon} ${c.cyan(paddedPath)}  ${c.dim(paddedSize)}  ${label}${minified}`);
 }
 
 console.log();

@@ -5,7 +5,9 @@
 .fi-btn {
     border-radius: var(--nu-border-radius) !important;
     box-shadow: none !important;
-    transition: background-color var(--nu-transition-fast), border-color var(--nu-transition-fast);
+    transition:
+        background-color var(--nu-transition-fast),
+        border-color var(--nu-transition-fast);
 }
 
 .fi-btn:not(.fi-color) {
@@ -13,8 +15,8 @@
 }
 
 .fi-btn:not(.fi-color):hover {
-    box-shadow: inset 0 0 0 1px var(--nu-black-50) !important;
     background-color: var(--nu-hover-bg) !important;
+    box-shadow: inset 0 0 0 1px var(--nu-black-50) !important;
 }
 
 .fi-btn.fi-outlined.fi-color {
@@ -32,17 +34,17 @@
 }
 
 .fi-btn:active {
-    transform: none !important;
     box-shadow: none !important;
+    transform: none !important;
 }
 
 .fi-btn:disabled,
 .fi-btn[disabled],
 .fi-btn.fi-disabled:not(.fi-force-enabled),
 .fi-btn[disabled]:not(.fi-force-enabled) {
-    opacity: 0.65;
-    cursor: not-allowed !important;
     pointer-events: auto !important;
+    cursor: not-allowed !important;
+    opacity: 0.65;
     filter: none;
 }
 
@@ -65,8 +67,8 @@
 }
 
 .fi-icon-btn:hover {
-    transform: none !important;
     box-shadow: none !important;
+    transform: none !important;
 }
 
 .fi-icon-btn:focus-visible {
@@ -83,6 +85,6 @@
 }
 
 .dark .fi-btn:not(.fi-color):hover {
-    box-shadow: inset 0 0 0 1px var(--nu-black-20) !important;
     background-color: var(--nu-hover-bg) !important;
+    box-shadow: inset 0 0 0 1px var(--nu-black-20) !important;
 }
