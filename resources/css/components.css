@@ -2,6 +2,11 @@
    Components — Modals, Dropdowns, Badges, Notifications, Widgets, Sections
    ========================================================================== */
 
+.fi-ta-record-collapse-btn {
+    align-self: start;
+    margin-top: 0.75rem;
+}
+
 .fi-modal-window {
     border-radius: var(--nu-border-radius) !important;
     box-shadow: 0 4px 24px rgb(0 0 0 / 15%) !important;
