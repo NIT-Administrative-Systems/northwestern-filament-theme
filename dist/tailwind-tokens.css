@@ -27,14 +27,6 @@
     --color-nu-black-20: var(--nu-black-20);
     --color-nu-black-10: var(--nu-black-10);
 
-    /* Brand colors */
-    --color-nu-green: var(--nu-green);
-    --color-nu-teal: var(--nu-teal);
-    --color-nu-blue: var(--nu-blue);
-    --color-nu-yellow: var(--nu-yellow);
-    --color-nu-gold: var(--nu-gold);
-    --color-nu-orange: var(--nu-orange);
-
     /* Dark brand colors */
     --color-nu-dark-green: var(--nu-dark-green);
     --color-nu-dark-teal: var(--nu-dark-teal);
@@ -48,4 +40,12 @@
     --color-nu-info: var(--nu-color-info);
     --color-nu-warning: var(--nu-color-warning);
     --color-nu-danger: var(--nu-color-danger);
+
+    /* Brand colors */
+    --color-nu-green: var(--nu-green);
+    --color-nu-teal: var(--nu-teal);
+    --color-nu-blue: var(--nu-blue);
+    --color-nu-yellow: var(--nu-yellow);
+    --color-nu-gold: var(--nu-gold);
+    --color-nu-orange: var(--nu-orange);
 }
