@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Notifications
+   Covers: toast notifications, notification title styling.
+   ========================================================================== */
+
+.fi-no-notification {
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: var(--nu-shadow-md) !important;
+}
+
+.fi-no-notification-title {
+    font-weight: 550 !important;
+}
+
+.dark .fi-no-notification {
+    box-shadow: 0 4px 16px rgb(0 0 0 / 30%) !important;
+}

@@ -34,6 +34,13 @@ it('has all CSS module files', function () {
         'forms.css',
         'tables.css',
         'navigation.css',
+        'modals.css',
+        'dropdowns.css',
+        'badges.css',
+        'notifications.css',
+        'widgets.css',
+        'sections.css',
+        'pagination.css',
         'components.css',
         'utilities.css',
     ];

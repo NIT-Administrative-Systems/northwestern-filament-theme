@@ -1,0 +1,24 @@
+/* ==========================================================================
+   Pagination
+   Covers: pagination buttons, previous/next nav, records-per-page select.
+   ========================================================================== */
+
+.fi-pagination-item-btn {
+    border-radius: var(--nu-border-radius) !important;
+    transition:
+        background-color var(--nu-transition-fast),
+        color var(--nu-transition-fast);
+}
+
+.fi-pagination-item.fi-active .fi-pagination-item-btn {
+    font-weight: 700;
+}
+
+.fi-pagination-previous-btn,
+.fi-pagination-next-btn {
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-pagination-records-per-page-select-ctn {
+    font-size: 0.8125rem;
+}

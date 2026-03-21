@@ -1,0 +1,29 @@
+/* ==========================================================================
+   Widgets
+   Covers: stats overview, account widget, chart containers.
+   ========================================================================== */
+
+.fi-wi-stats-overview-stat {
+    border: 1px solid var(--nu-border-color);
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+.fi-account-widget {
+    border: 1px solid var(--nu-border-color);
+    border-radius: var(--nu-border-radius) !important;
+}
+
+.fi-account-widget-heading {
+    font-family: var(--nu-font-heading);
+    font-weight: 600;
+}
+
+.dark .fi-wi-stats-overview-stat {
+    border-color: var(--nu-border-color);
+}
+
+.dark .fi-account-widget {
+    border-color: var(--nu-border-color);
+}

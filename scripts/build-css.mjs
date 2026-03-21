@@ -35,6 +35,13 @@ const SOURCE_FILES = [
   'forms',
   'tables',
   'navigation',
+  'modals',
+  'dropdowns',
+  'badges',
+  'notifications',
+  'widgets',
+  'sections',
+  'pagination',
   'components',
   'utilities',
 ];
