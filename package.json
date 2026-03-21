@@ -3,6 +3,7 @@
     "scripts": {
         "build:css": "node scripts/build-css.mjs",
         "build:css:check": "node scripts/build-css.mjs --check",
+        "build:css:watch": "node scripts/build-css.mjs --watch",
         "format": "prettier --write \"**/*.{blade.php,css,md,json,yml,xml}\"",
         "format:check": "prettier --check \"**/*.{blade.php,css,md,json,yml,xml}\"",
         "lint:css": "stylelint \"resources/css/**/*.css\"",
