@@ -32,7 +32,7 @@ afterEach(function () {
     }
 });
 
-function mockSinglePanel(?string $viteTheme = null): void
+function mockSinglePanel(string|array|null $viteTheme = null): void
 {
     $panel = Mockery::mock(Panel::class);
     $panel->shouldReceive('getId')->andReturn('admin');
@@ -326,4 +326,99 @@ it('detects theme file from panel viteTheme configuration', function () {
         ->and(File::exists(resource_path('css/filament/admin/theme.css')))->toBeFalse();
 
     File::deleteDirectory(resource_path('sass'));
+});
+
+it('detects theme file from viteTheme array with multiple paths', function () {
+    $customThemeDir = resource_path('css/filament/admin');
+    $customThemePath = $customThemeDir . '/theme.css';
+
+    mockSinglePanel([
+        'resources/js/filament/admin/app.js',
+        'resources/css/filament/admin/theme.css',
+    ]);
+
+    File::ensureDirectoryExists($customThemeDir);
+    File::put($customThemePath, implode("\n", [
+        "@import 'tailwindcss';",
+        "@import '../../../../vendor/filament/filament/resources/css/theme.css';",
+    ]));
+
+    $this->artisan('northwestern-theme:install')
+        ->expectsConfirmation('Include Tailwind v4 design tokens?', 'no')
+        ->expectsOutputToContain('Setup complete')
+        ->assertSuccessful();
+
+    $themeCssContents = File::get($customThemePath);
+
+    expect($themeCssContents)
+        ->toContain("@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';");
+});
+
+it('falls back to default path when viteTheme array has no CSS files', function () {
+    mockSinglePanel([
+        'resources/js/filament/admin/app.js',
+        'resources/js/filament/admin/extra.js',
+    ]);
+
+    File::ensureDirectoryExists($this->themeCssDir);
+    File::put($this->themeCssPath, implode("\n", [
+        "@import 'tailwindcss';",
+        "@import '../../../../vendor/filament/filament/resources/css/theme.css';",
+    ]));
+
+    $this->artisan('northwestern-theme:install')
+        ->expectsConfirmation('Include Tailwind v4 design tokens?', 'no')
+        ->expectsOutputToContain('Setup complete')
+        ->assertSuccessful();
+
+    $themeCssContents = File::get($this->themeCssPath);
+
+    expect($themeCssContents)
+        ->toContain("@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';");
+});
+
+it('injects tokens after theme import on the fallback append path', function () {
+    mockSinglePanel();
+
+    File::ensureDirectoryExists($this->themeCssDir);
+    File::put($this->themeCssPath, "@import 'tailwindcss';\n");
+
+    $this->artisan('northwestern-theme:install')
+        ->expectsConfirmation('Include Tailwind v4 design tokens?', 'yes')
+        ->expectsOutputToContain('Could not find the Filament base theme import')
+        ->assertSuccessful();
+
+    $themeCssContents = File::get($this->themeCssPath);
+
+    $themeImport = "@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';";
+    $tokensImport = "@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/tailwind-tokens.css';";
+
+    expect($themeCssContents)
+        ->toContain($themeImport)
+        ->toContain($tokensImport)
+        ->and(strpos($themeCssContents, $themeImport))
+        ->toBeLessThan(strpos($themeCssContents, $tokensImport));
+});
+
+it('does not duplicate theme import on re-run', function () {
+    mockSinglePanel();
+
+    $themeImport = "@import '../../../../vendor/northwestern-sysdev/northwestern-filament-theme/dist/theme.css';";
+
+    File::ensureDirectoryExists($this->themeCssDir);
+    File::put($this->themeCssPath, implode("\n", [
+        "@import 'tailwindcss';",
+        "@import '../../../../vendor/filament/filament/resources/css/theme.css';",
+        $themeImport,
+    ]));
+
+    // Re-run, decline tokens
+    $this->artisan('northwestern-theme:install')
+        ->expectsOutputToContain('ALREADY INSTALLED')
+        ->expectsConfirmation('Include Tailwind v4 design tokens?')
+        ->assertSuccessful();
+
+    $themeCssContents = File::get($this->themeCssPath);
+
+    expect(substr_count($themeCssContents, $themeImport))->toBe(1);
 });
