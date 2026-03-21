@@ -134,7 +134,10 @@ class NorthwesternTheme implements Plugin
         if ($themeCssContents !== false && str_contains($themeCssContents, 'northwestern-filament-theme')) {
             Log::warning(
                 "Northwestern theme CSS is imported in your Vite theme [{$themeCssPath}] but asset registration is still active. "
-                . 'This causes styles to load twice. Call ->withoutAssetRegistration() on the NorthwesternTheme plugin to fix this.',
+                . "This causes styles to load twice.\n\n"
+                . "Add ->withoutAssetRegistration() to your NorthwesternTheme::make() call:\n\n"
+                . "    NorthwesternTheme::make()\n"
+                . "        ->withoutAssetRegistration()\n",
             );
         }
     }
