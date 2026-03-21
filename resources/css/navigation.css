@@ -26,7 +26,7 @@
 }
 
 .fi-sidebar-group-label {
-    font-size: 0.7rem;
+    font-size: var(--nu-text-2xs);
     font-weight: 700;
     color: var(--nu-black-50);
     text-transform: uppercase;
@@ -55,17 +55,17 @@
 
 .fi-tenant-menu-trigger-tenant-name {
     font-family: var(--nu-font-heading);
-    font-size: 0.875rem;
+    font-size: var(--nu-text-base);
     font-weight: 600;
 }
 
 .dark .fi-sidebar-item-btn:hover {
-    background-color: rgb(78 42 132 / 15%) !important;
+    background-color: var(--nu-purple-tint) !important;
 }
 
 .dark .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
     color: var(--nu-purple-30);
-    background-color: rgb(78 42 132 / 20%) !important;
+    background-color: var(--nu-purple-tint-strong) !important;
 }
 
 .dark .fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-icon,

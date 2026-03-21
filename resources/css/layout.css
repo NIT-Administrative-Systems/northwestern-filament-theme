@@ -112,7 +112,7 @@ body.fi-body {
 
 .fi-global-search-result-heading {
     font-family: var(--nu-font-heading);
-    font-size: 0.875rem;
+    font-size: var(--nu-text-base);
     font-weight: 600;
 }
 
@@ -176,7 +176,7 @@ body.fi-body {
 }
 
 .dark .fi-global-search-result:hover {
-    background-color: rgb(78 42 132 / 15%);
+    background-color: var(--nu-purple-tint);
 }
 
 .dark .fi-header-heading {

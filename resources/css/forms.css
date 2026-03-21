@@ -157,7 +157,7 @@
 .fi-fo-builder-item-header-label,
 .fi-fo-repeater-item-header-label {
     font-family: var(--nu-font-heading);
-    font-size: 0.875rem;
+    font-size: var(--nu-text-base);
     font-weight: 600;
 }
 
@@ -183,7 +183,7 @@
 .fi-fo-checkbox-list-option-label,
 .fi-fo-radio-label-text {
     font-family: var(--nu-font-body);
-    font-size: 0.875rem;
+    font-size: var(--nu-text-base);
 }
 
 .fi-fo-toggle-buttons-btn-ctn {
@@ -192,7 +192,7 @@
 
 .fi-fo-field-wrp-error-message {
     font-family: var(--nu-font-body);
-    font-size: 0.8125rem;
+    font-size: var(--nu-text-sm);
     color: var(--nu-color-danger);
 }
 

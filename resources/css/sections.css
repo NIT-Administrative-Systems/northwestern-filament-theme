@@ -28,7 +28,7 @@
 
 .fi-callout-heading {
     font-family: var(--nu-font-heading);
-    font-size: 0.9375rem;
+    font-size: var(--nu-text-lg);
     font-weight: 600;
 }
 
@@ -66,13 +66,13 @@
 
 .fi-sc-wizard-header-step-label {
     font-family: var(--nu-font-heading);
-    font-size: 0.875rem;
+    font-size: var(--nu-text-base);
     font-weight: 600;
 }
 
 .fi-sc-wizard-header-step-description {
     font-family: var(--nu-font-body);
-    font-size: 0.8125rem;
+    font-size: var(--nu-text-sm);
     color: var(--nu-color-text-muted);
 }
 
@@ -83,14 +83,14 @@
 
 .fi-in-entry-label {
     font-family: var(--nu-font-body);
-    font-size: 0.8125rem;
+    font-size: var(--nu-text-sm);
     font-weight: 700;
     color: var(--nu-color-text-muted);
 }
 
 .fi-in-entry-content {
     font-family: var(--nu-font-body);
-    font-size: 0.875rem;
+    font-size: var(--nu-text-base);
 }
 
 .fi-in-placeholder {
@@ -125,7 +125,7 @@
 }
 
 .dark .fi-empty-state-icon-bg {
-    background-color: rgb(78 42 132 / 15%);
+    background-color: var(--nu-purple-tint);
 }
 
 .dark .fi-sc-wizard-header {

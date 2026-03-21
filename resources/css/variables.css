@@ -49,10 +49,19 @@
     --nu-color-link: #4e2a84;
     --nu-color-link-hover: #401f68;
 
+    --nu-text-2xs: 0.7rem;
+    --nu-text-xs: 0.75rem;
+    --nu-text-sm: 0.8125rem;
+    --nu-text-base: 0.875rem;
+    --nu-text-md: 0.9rem;
+    --nu-text-lg: 0.9375rem;
+
     --nu-shadow-sm: 0 1px 2px rgb(0 0 0 / 6%);
     --nu-shadow-md: 0 2px 8px rgb(0 0 0 / 10%);
     --nu-shadow-lg: 0 4px 16px rgb(0 0 0 / 12%);
     --nu-shadow-xl: 0 8px 24px rgb(0 0 0 / 15%);
+    --nu-shadow-dark-md: 0 4px 16px rgb(0 0 0 / 30%);
+    --nu-shadow-dark-xl: 0 4px 24px rgb(0 0 0 / 40%);
     --nu-transition-fast: 150ms ease;
     --nu-transition-default: 200ms ease;
     --nu-transition-slow: 300ms ease-in-out;
@@ -83,6 +92,8 @@
 
     --nu-purple-surface: #f3f0f7;
     --nu-purple-surface-subtle: #f7f5f9;
+    --nu-purple-tint: rgb(78 42 132 / 15%);
+    --nu-purple-tint-strong: rgb(78 42 132 / 20%);
     --nu-surface-muted: #f9fafb;
     --nu-hover-bg: #f3f4f6;
     --nu-disabled-bg: #e9ecef;

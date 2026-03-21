@@ -16,5 +16,5 @@
 
 .dark .fi-dropdown-panel {
     border-color: var(--nu-border-color);
-    box-shadow: 0 4px 16px rgb(0 0 0 / 30%) !important;
+    box-shadow: var(--nu-shadow-dark-md) !important;
 }

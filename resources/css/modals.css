@@ -31,7 +31,7 @@
 }
 
 .dark .fi-modal-window {
-    box-shadow: 0 4px 24px rgb(0 0 0 / 40%) !important;
+    box-shadow: var(--nu-shadow-dark-xl) !important;
 }
 
 .dark .fi-modal-header {

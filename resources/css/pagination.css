@@ -20,5 +20,5 @@
 }
 
 .fi-pagination-records-per-page-select-ctn {
-    font-size: 0.8125rem;
+    font-size: var(--nu-text-sm);
 }
