@@ -19,6 +19,10 @@
     border-radius: var(--nu-border-radius) !important;
 }
 
+.fi-pagination {
+    font-variant-numeric: tabular-nums;
+}
+
 .fi-pagination-records-per-page-select-ctn {
     font-size: var(--nu-text-sm);
 }
