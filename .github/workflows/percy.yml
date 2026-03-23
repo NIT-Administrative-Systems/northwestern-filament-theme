@@ -19,7 +19,6 @@ env:
 jobs:
   percy:
     name: Visual Snapshots
-    if: ${{ secrets.PERCY_TOKEN != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
