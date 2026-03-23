@@ -4,6 +4,7 @@ includes:
 parameters:
     paths:
         - src
+        - demo/app
     level: 10
     tmpDir: /tmp/phpstan
     treatPhpDocTypesAsCertain: false

@@ -13,6 +13,10 @@ return RectorConfig::configure()
     ->withPaths([
         __DIR__ . '/src',
         __DIR__ . '/tests',
+        __DIR__ . '/demo/app',
+        __DIR__ . '/demo/bootstrap',
+        __DIR__ . '/demo/config',
+        __DIR__ . '/demo/routes',
     ])
     ->withSets([
         SetList::PHP_83,

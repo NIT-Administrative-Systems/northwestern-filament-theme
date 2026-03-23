@@ -1,0 +1,93 @@
+name: Percy Visual Review
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * 1"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PHP_VERSION: "8.3"
+  NODE_VERSION: "24"
+  PNPM_VERSION: "10.x.x"
+
+jobs:
+  percy:
+    name: Visual Snapshots
+    if: ${{ secrets.PERCY_TOKEN != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          coverage: none
+
+      - name: Composer Cache
+        uses: actions/cache@v5
+        with:
+          path: demo/vendor
+          key: ${{ runner.os }}-demo-composer-${{ hashFiles('demo/composer.lock') }}
+          restore-keys: ${{ runner.os }}-demo-composer-
+
+      - name: Install Composer Dependencies
+        working-directory: demo
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: demo/pnpm-lock.yaml
+
+      - name: Install Node Dependencies
+        working-directory: demo
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Publish Filament Assets
+        working-directory: demo
+        run: php artisan filament:assets
+
+      - name: Build Vite Assets
+        working-directory: demo
+        run: pnpm build
+
+      - name: Prepare Environment
+        working-directory: demo
+        run: |
+          cp .env.example .env
+          touch database/database.sqlite
+          php artisan key:generate
+
+      - name: Playwright Cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('demo/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-playwright-
+
+      - name: Install Playwright Browsers
+        working-directory: demo
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Percy Snapshots
+        working-directory: demo
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+        run: pnpm exec percy exec --allowed-hostname common.northwestern.edu -- pnpm exec playwright test

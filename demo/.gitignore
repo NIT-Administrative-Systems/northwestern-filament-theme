@@ -1,0 +1,14 @@
+vendor/
+node_modules/
+bootstrap/cache/
+public/build/
+public/css/
+public/js/
+public/fonts/
+public/hot
+storage/*.key
+.env
+package-lock.json
+test-results/
+playwright-report/
+database/database.sqlite

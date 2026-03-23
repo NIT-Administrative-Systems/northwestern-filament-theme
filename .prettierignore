@@ -3,4 +3,5 @@ dist/
 agents/
 vendor/
 node_modules/
+demo/public/
 pnpm-lock.yaml

@@ -22,6 +22,7 @@
 /pnpm-lock.yaml export-ignore
 /scripts export-ignore
 /art export-ignore
+/demo export-ignore
 /CHANGELOG.md export-ignore
 /CONTRIBUTING.md export-ignore
 /UPGRADING.md export-ignore
