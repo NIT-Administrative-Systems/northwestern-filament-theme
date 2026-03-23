@@ -71,6 +71,7 @@ jobs:
         working-directory: demo
         run: |
           cp .env.example .env
+          mkdir -p database storage/framework/{cache/data,sessions,views} storage/logs
           touch database/database.sqlite
           php artisan key:generate
 

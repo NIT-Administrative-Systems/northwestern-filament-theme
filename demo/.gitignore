@@ -7,7 +7,7 @@ public/css/
 public/js/
 public/fonts/
 public/hot
-storage/*.key
+storage/
 .env
 package-lock.json
 test-results/
