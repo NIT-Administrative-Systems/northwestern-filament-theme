@@ -116,3 +116,12 @@
     --nu-hover-bg: rgb(255 255 255 / 10%);
     --nu-disabled-bg: #343a40;
 }
+
+@media (prefers-reduced-motion: reduce) {
+    :root,
+    .dark {
+        --nu-transition-fast: 0.01ms ease;
+        --nu-transition-default: 0.01ms ease;
+        --nu-transition-slow: 0.01ms ease;
+    }
+}

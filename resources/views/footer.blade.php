@@ -121,6 +121,12 @@
         width: 39px;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+        .nu-footer .nu-social {
+            transition: none;
+        }
+    }
+
     .nu-footer .nu-social-facebook {
         background: url('https://common.northwestern.edu/v8/css/images/icons/social-media-icons.png');
         background-position: 0 0;
