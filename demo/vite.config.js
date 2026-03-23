@@ -7,6 +7,10 @@ export default defineConfig({
     resolve: {
         alias: {
             "nu-theme": path.resolve(__dirname, "../dist/theme.css"),
+            "filament-base": path.resolve(
+                __dirname,
+                "vendor/filament/filament/resources/css/index.css"
+            ),
         },
     },
     plugins: [

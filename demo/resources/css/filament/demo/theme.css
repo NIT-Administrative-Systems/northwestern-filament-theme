@@ -1,7 +1,7 @@
 @import "tailwindcss";
-@import "../../../../../vendor/filament/filament/resources/css/index.css";
+@import "filament-base";
 @import "nu-theme";
 
-@source '../../../../../app/Filament/**/*';
-@source '../../../../../resources/views/filament/**/*';
-@source '../../../../../vendor/filament/**/*';
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+@source '../../../../vendor/filament/**/*';
