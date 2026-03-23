@@ -1,0 +1,19 @@
+/* ==========================================================================
+   Badges
+   Covers: badge variants, status indicators, warning button dark mode.
+   ========================================================================== */
+
+.fi-badge {
+    border: 1px solid var(--nu-badge-border) !important;
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: none !important;
+}
+
+.dark .fi-badge {
+    border-color: var(--nu-border-color) !important;
+}
+
+.dark .fi-btn:not(.fi-outlined).fi-color-warning {
+    --dark-text: oklch(25% 0.08 86.169deg) !important;
+    --dark-hover-text: oklch(25% 0.08 86.169deg) !important;
+}

@@ -1,0 +1,15 @@
+vendor/
+node_modules/
+bootstrap/cache/*
+!bootstrap/cache/.gitkeep
+public/build/
+public/css/
+public/js/
+public/fonts/
+public/hot
+storage/
+.env
+package-lock.json
+test-results/
+playwright-report/
+database/database.sqlite

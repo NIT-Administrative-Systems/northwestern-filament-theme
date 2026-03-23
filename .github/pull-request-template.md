@@ -1,19 +1,14 @@
 ## Overview
 
-<!--
-Provide a brief overview of your changes.
+## Screenshots (if visual change)
 
-A screenshot is worth a thousand words -- pictures of UI changes are great to include.
-
-When you open the PR, create it as a draft pull request if you aren't done & don't want changes merged.
--->
+| Before | After |
+| ------ | ----- |
+|        |       |
 
 ## Checklist
 
-<!--
-Run through this checklist. Check off items once you've considered them & decided you have them covered in the PR, or they are not applicable.
--->
-
-- [ ] `tests/` added or updated
-- [ ] CSS changes visually verified in a consuming application
-- [ ] Relevant documentation is updated (`README.md`)
+- [ ] `composer check` passes
+- [ ] Tests added/updated for behavioral changes
+- [ ] CHANGELOG.md updated (if user-facing)
+- [ ] Screenshots included (if CSS change, show both light and dark mode)

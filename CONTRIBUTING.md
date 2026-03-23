@@ -33,7 +33,7 @@ scripts/build-css.mjs    # CSS build script
 tests/Feature/           # Pest test suite
 ```
 
-CSS lives in individual files organized by concern (`buttons.css`, `forms.css`, `tables.css`, etc.). The build script concatenates and minifies these into `dist/theme.css` using [LightningCSS](https://lightningcss.dev/).
+CSS lives in individual files organized by concern (`buttons.css`, `forms.css`, `modals.css`, `tables.css`, etc.). The build script concatenates and minifies these into `dist/theme.css` using [LightningCSS](https://lightningcss.dev/). See `SOURCE_FILES` in `scripts/build-css.mjs` for the full list and concatenation order.
 
 ## Making changes
 

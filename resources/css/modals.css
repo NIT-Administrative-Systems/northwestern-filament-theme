@@ -1,0 +1,43 @@
+/* ==========================================================================
+   Modals
+   Covers: modal containers, overlays, headers, footers, close buttons.
+   ========================================================================== */
+
+.fi-modal-window {
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: 0 4px 24px rgb(0 0 0 / 15%) !important;
+}
+
+.fi-modal-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--nu-border-color);
+}
+
+.fi-modal-heading {
+    color: var(--nu-purple-100);
+}
+
+.dark .fi-modal-heading {
+    color: var(--nu-purple-40);
+}
+
+.fi-modal-content {
+    padding: 1rem 1.5rem;
+}
+
+.fi-modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--nu-border-color);
+}
+
+.dark .fi-modal-window {
+    box-shadow: var(--nu-shadow-dark-xl) !important;
+}
+
+.dark .fi-modal-header {
+    border-bottom-color: var(--nu-border-color);
+}
+
+.dark .fi-modal-footer {
+    border-top-color: var(--nu-border-color);
+}

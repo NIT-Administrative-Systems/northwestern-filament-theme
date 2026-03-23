@@ -10,7 +10,7 @@
  * @typedef {{ group: string, test: (name: string) => boolean, rename?: (name: string) => string }} TokenGroupRule
  */
 
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, watch } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import { transform } from 'lightningcss';
 import { colors } from 'consola/utils';
@@ -35,6 +35,13 @@ const SOURCE_FILES = [
   'forms',
   'tables',
   'navigation',
+  'modals',
+  'dropdowns',
+  'badges',
+  'notifications',
+  'widgets',
+  'sections',
+  'pagination',
   'components',
   'utilities',
 ];
@@ -57,6 +64,7 @@ const TOKEN_GROUP_RULES = [
 
 const c = colors;
 const checkOnly = process.argv.includes('--check');
+const watchMode = process.argv.includes('--watch');
 
 /** @param {number} bytes */
 function formatSize(bytes) {
@@ -154,88 +162,114 @@ function generateTokensCss(groups) {
   return { content: lines.join('\n'), tokenCount };
 }
 
-for (const file of SOURCE_FILES) {
-  const path = `${config.srcDir}/${file}.css`;
-  if (!existsSync(path)) {
-    console.error(c.red(`\n  Missing source file: ${path}\n`));
+/** Run a full build and print results. */
+function build() {
+  for (const file of SOURCE_FILES) {
+    const path = `${config.srcDir}/${file}.css`;
+    if (!existsSync(path)) {
+      console.error(c.red(`\n  Missing source file: ${path}\n`));
+      process.exit(1);
+    }
+  }
+
+  const start = performance.now();
+
+  if (!checkOnly) {
+    mkdirSync(config.distDir, { recursive: true });
+  }
+
+  /** @type {BuildResult[]} */
+  const results = [];
+
+  const { raw, minified } = buildThemeCss();
+  const themePath = `${config.distDir}/theme.css`;
+  const themeChanged = fileChanged(themePath, minified);
+  if (!checkOnly) writeFileSync(themePath, minified);
+  results.push({
+    path: themePath,
+    size: minified.length,
+    gzipSize: gzipSync(minified).length,
+    rawSize: raw.length,
+    changed: themeChanged,
+  });
+
+  const variablesCss = readFileSync(`${config.srcDir}/variables.css`, 'utf8');
+  const vars = parseRootVariables(variablesCss);
+  const groups = groupTokens(vars);
+  const { content: tokensContent, tokenCount } = generateTokensCss(groups);
+  const tokensPath = `${config.distDir}/tailwind-tokens.css`;
+  const tokensChanged = fileChanged(tokensPath, tokensContent);
+  if (!checkOnly) writeFileSync(tokensPath, tokensContent);
+  results.push({
+    path: tokensPath,
+    size: tokensContent.length,
+    gzipSize: gzipSync(tokensContent).length,
+    changed: tokensChanged,
+    meta: `${tokenCount} tokens`,
+  });
+
+  if (results[0].size < 100) {
+    console.error(c.red(`\n  ${themePath} is too small (${results[0].size}B) — check source files\n`));
     process.exit(1);
   }
-}
 
-const start = performance.now();
+  const elapsed = (performance.now() - start).toFixed(0);
+  const changedCount = results.filter((r) => r.changed).length;
 
-if (!checkOnly) {
-  mkdirSync(config.distDir, { recursive: true });
-}
-
-/** @type {BuildResult[]} */
-const results = [];
-
-const { raw, minified } = buildThemeCss();
-const themePath = `${config.distDir}/theme.css`;
-const themeChanged = fileChanged(themePath, minified);
-if (!checkOnly) writeFileSync(themePath, minified);
-results.push({
-  path: themePath,
-  size: minified.length,
-  gzipSize: gzipSync(minified).length,
-  rawSize: raw.length,
-  changed: themeChanged,
-});
-
-const variablesCss = readFileSync(`${config.srcDir}/variables.css`, 'utf8');
-const vars = parseRootVariables(variablesCss);
-const groups = groupTokens(vars);
-const { content: tokensContent, tokenCount } = generateTokensCss(groups);
-const tokensPath = `${config.distDir}/tailwind-tokens.css`;
-const tokensChanged = fileChanged(tokensPath, tokensContent);
-if (!checkOnly) writeFileSync(tokensPath, tokensContent);
-results.push({
-  path: tokensPath,
-  size: tokensContent.length,
-  gzipSize: gzipSync(tokensContent).length,
-  changed: tokensChanged,
-  meta: `${tokenCount} tokens`,
-});
-
-if (results[0].size < 100) {
-  console.error(c.red(`\n  ${themePath} is too small (${results[0].size}B) — check source files\n`));
-  process.exit(1);
-}
-
-const elapsed = (performance.now() - start).toFixed(0);
-const changedCount = results.filter((r) => r.changed).length;
-
-console.log();
-console.log(`  ${c.magenta(c.bold('NU'))} ${c.dim('❯')} ${c.bold(config.banner)}`);
-console.log();
-console.log(`  ${c.green('✓')} ${SOURCE_FILES.length} source files ${c.dim('→')} ${results.length} dist outputs`);
-console.log(`  ${c.green('✓')} ${tokenCount} design tokens extracted`);
-console.log();
-
-const maxName = Math.max(...results.map((r) => r.path.split('/').pop().length));
-const maxSize = Math.max(...results.map((r) => formatSize(r.size).length));
-
-for (const { path, size, gzipSize, changed, meta } of results) {
-  const dir = path.substring(0, path.lastIndexOf('/') + 1);
-  const name = path.substring(path.lastIndexOf('/') + 1);
-  const paddedName = name.padEnd(maxName);
-  const paddedSize = formatSize(size).padStart(maxSize);
-  const gzip = gzipSize ? `${c.dim('│')} gzip: ${formatSize(gzipSize)}` : '';
-  const extra = meta ? `${c.dim('│')} ${meta}` : gzip;
-  const icon = changed ? c.green('✓') : c.dim('✓');
-
-  console.log(`  ${icon} ${c.dim(dir)}${c.cyan(paddedName)}  ${c.bold(paddedSize)}  ${extra}`);
-}
-
-console.log();
-if (checkOnly && changedCount > 0) {
-  console.log(`  ${c.red('✗')} ${c.red(`${changedCount} file(s) out of date`)} ${c.dim('—')} run ${c.cyan('pnpm build:css')} and commit`);
   console.log();
-  process.exit(1);
-} else if (changedCount > 0) {
-  console.log(`  ${c.dim(`Built in ${c.bold(elapsed + 'ms')} — ${changedCount} file(s) updated`)}`);
-} else {
-  console.log(`  ${c.dim(`Built in ${c.bold(elapsed + 'ms')} — all files up to date`)}`);
+  console.log(`  ${c.magenta(c.bold('NU'))} ${c.dim('❯')} ${c.bold(config.banner)}`);
+  console.log();
+  console.log(`  ${c.green('✓')} ${SOURCE_FILES.length} source files ${c.dim('→')} ${results.length} dist outputs`);
+  console.log(`  ${c.green('✓')} ${tokenCount} design tokens extracted`);
+  console.log();
+
+  const maxName = Math.max(...results.map((r) => r.path.split('/').pop().length));
+  const maxSize = Math.max(...results.map((r) => formatSize(r.size).length));
+
+  for (const { path, size, gzipSize, changed, meta } of results) {
+    const dir = path.substring(0, path.lastIndexOf('/') + 1);
+    const name = path.substring(path.lastIndexOf('/') + 1);
+    const paddedName = name.padEnd(maxName);
+    const paddedSize = formatSize(size).padStart(maxSize);
+    const gzip = gzipSize ? `${c.dim('│')} gzip: ${formatSize(gzipSize)}` : '';
+    const extra = meta ? `${c.dim('│')} ${meta}` : gzip;
+    const icon = changed ? c.green('✓') : c.dim('✓');
+
+    console.log(`  ${icon} ${c.dim(dir)}${c.cyan(paddedName)}  ${c.bold(paddedSize)}  ${extra}`);
+  }
+
+  console.log();
+  if (checkOnly && changedCount > 0) {
+    console.log(`  ${c.red('✗')} ${c.red(`${changedCount} file(s) out of date`)} ${c.dim('—')} run ${c.cyan('pnpm build:css')} and commit`);
+    console.log();
+    process.exit(1);
+  } else if (changedCount > 0) {
+    console.log(`  ${c.dim(`Built in ${c.bold(elapsed + 'ms')} — ${changedCount} file(s) updated`)}`);
+  } else {
+    console.log(`  ${c.dim(`Built in ${c.bold(elapsed + 'ms')} — all files up to date`)}`);
+  }
+  console.log();
 }
-console.log();
+
+build();
+
+if (watchMode) {
+  let debounceTimer;
+
+  console.log(`  ${c.magenta(c.bold('NU'))} ${c.dim('❯')} Watching ${c.cyan(config.srcDir)} for changes…`);
+  console.log();
+
+  watch(config.srcDir, { recursive: true }, (event, filename) => {
+    if (!filename?.endsWith('.css')) return;
+
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      console.log(`  ${c.dim('⟳')} ${c.dim(filename)} changed, rebuilding…`);
+      try {
+        build();
+      } catch (err) {
+        console.error(c.red(`\n  Build error: ${err.message}\n`));
+      }
+    }, 50);
+  });
+}

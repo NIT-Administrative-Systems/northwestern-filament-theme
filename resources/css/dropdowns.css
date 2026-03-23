@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Dropdowns
+   Covers: dropdown panels, list items, action group menus.
+   ========================================================================== */
+
+.fi-dropdown-panel {
+    border: 1px solid var(--nu-border-color);
+    border-radius: var(--nu-border-radius) !important;
+    box-shadow: var(--nu-shadow-md) !important;
+}
+
+.fi-dropdown-list-item {
+    border-radius: var(--nu-border-radius) !important;
+    transition: background-color var(--nu-transition-fast);
+}
+
+.dark .fi-dropdown-panel {
+    border-color: var(--nu-border-color);
+    box-shadow: var(--nu-shadow-dark-md) !important;
+}

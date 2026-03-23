@@ -108,7 +108,7 @@
 
 body.fi-body {
     font-family: var(--nu-font-body);
-    font-size: 0.9rem;
+    font-size: var(--nu-text-md);
     line-height: 1.6;
     color: var(--nu-color-text);
 }
@@ -160,12 +160,12 @@ body.fi-body {
 
 .fi-sidebar-item-label {
     font-family: var(--nu-font-body);
-    font-size: 0.875rem;
+    font-size: var(--nu-text-base);
 }
 
 .fi-breadcrumbs {
     font-family: var(--nu-font-body);
-    font-size: 0.8125rem;
+    font-size: var(--nu-text-sm);
 }
 
 .fi-wi-stats-overview-stat-value {
@@ -176,7 +176,7 @@ body.fi-body {
 
 .fi-ta-header-cell {
     font-family: var(--nu-font-body);
-    font-size: 0.75rem;
+    font-size: var(--nu-text-xs);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -189,7 +189,7 @@ body.fi-body {
 
 .fi-body .fi-main a:not([class*="fi-"], .filament-breadcrumbs-link) {
     text-decoration: underline;
-    transition: color 0.15s ease;
+    transition: color var(--nu-transition-fast);
 }
 
 .fi-body .fi-main a:not([class*="fi-"], .filament-breadcrumbs-link):hover {

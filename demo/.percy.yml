@@ -1,0 +1,14 @@
+version: 2
+snapshot:
+  widths:
+    - 1440
+  browsers:
+    - chrome
+    - firefox
+  percy-css: |
+    *, *::before, *::after {
+      transition: none !important;
+      animation: none !important;
+      -webkit-font-smoothing: antialiased !important;
+      -moz-osx-font-smoothing: grayscale !important;
+    }

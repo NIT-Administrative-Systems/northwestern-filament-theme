@@ -53,7 +53,7 @@ th.fi-ta-selection-cell {
 
 .fi-ta-col-manager-heading {
     font-family: var(--nu-font-body);
-    font-size: 0.7rem;
+    font-size: var(--nu-text-2xs);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -66,7 +66,7 @@ th.fi-ta-selection-cell {
 
 .fi-ta-filter-indicators-label {
     font-family: var(--nu-font-body);
-    font-size: 0.75rem;
+    font-size: var(--nu-text-xs);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -78,13 +78,13 @@ th.fi-ta-selection-cell {
 
 .fi-ta-group-heading {
     font-family: var(--nu-font-heading);
-    font-size: 0.875rem;
+    font-size: var(--nu-text-base);
     font-weight: 600;
 }
 
 .fi-ta-group-description {
     font-family: var(--nu-font-body);
-    font-size: 0.8125rem;
+    font-size: var(--nu-text-sm);
     color: var(--nu-color-text-muted);
 }
 
@@ -109,7 +109,7 @@ th.fi-ta-selection-cell {
 .dark .fi-ta-header-cell,
 .dark .fi-ta-actions-header-cell,
 .dark th.fi-ta-selection-cell {
-    background-color: rgb(78 42 132 / 15%);
+    background-color: var(--nu-purple-tint);
     border-bottom-color: var(--nu-border-color);
 }
 
@@ -142,7 +142,7 @@ th.fi-ta-selection-cell {
 }
 
 .dark .fi-ta-selection-indicator {
-    background-color: rgb(78 42 132 / 15%);
+    background-color: var(--nu-purple-tint);
     border-color: rgb(78 42 132 / 30%);
 }
 

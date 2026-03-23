@@ -160,6 +160,18 @@
         }
     }
 
+    .nu-footer .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+
     @media print {
         .nu-footer {
             display: none;
@@ -170,7 +182,7 @@
 <footer class="nu-footer">
     <div class="nu-footer-grid">
         <div class="nu-footer-col">
-            <a href="https://www.northwestern.edu">
+            <a href="https://www.northwestern.edu" rel="noopener">
                 <img class="nu-branding"
                      src="https://common.northwestern.edu/v8/css/images/northwestern-university.svg"
                      alt="Northwestern University">
@@ -178,12 +190,15 @@
 
             <ul class="nu-footer-links">
                 <li>&copy; {{ date("Y") }} Northwestern University</li>
-                <li><a href="https://www.northwestern.edu/contact.html">Contact Northwestern University</a></li>
-                <li><a href="https://www.northwestern.edu/hr/careers/">Careers</a></li>
-                <li><a href="https://www.northwestern.edu/disclaimer.html">Disclaimer</a></li>
-                <li><a href="https://www.northwestern.edu/emergency/index.html">Campus Emergency Information</a></li>
-                <li><a href="https://policies.northwestern.edu/">University Policies</a></li>
-                <li><a href="https://www.northwestern.edu/accessibility/about/report-accessibility-issue.html">Report an
+                <li><a href="https://www.northwestern.edu/contact.html" rel="noopener">Contact Northwestern
+                        University</a></li>
+                <li><a href="https://www.northwestern.edu/hr/careers/" rel="noopener">Careers</a></li>
+                <li><a href="https://www.northwestern.edu/disclaimer.html" rel="noopener">Disclaimer</a></li>
+                <li><a href="https://www.northwestern.edu/emergency/index.html" rel="noopener">Campus Emergency
+                        Information</a></li>
+                <li><a href="https://policies.northwestern.edu/" rel="noopener">University Policies</a></li>
+                <li><a href="https://www.northwestern.edu/accessibility/about/report-accessibility-issue.html"
+                       rel="noopener">Report an
                         Accessibility Issue</a></li>
             </ul>
         </div>
@@ -213,9 +228,18 @@
 
         <div class="nu-footer-col">
             <p>Social Media</p>
-            <a class="nu-social nu-social-facebook" href="https://www.facebook.com/NorthwesternU">Facebook</a>
-            <a class="nu-social nu-social-instagram" href="https://instagram.com/northwesternu">Instagram</a>
-            <a class="nu-social nu-social-youtube" href="https://www.youtube.com/user/NorthwesternU">YouTube</a>
+            <a class="nu-social nu-social-facebook"
+               href="https://www.facebook.com/NorthwesternU"
+               aria-label="Northwestern University on Facebook"
+               rel="noopener">Facebook</a>
+            <a class="nu-social nu-social-instagram"
+               href="https://instagram.com/northwesternu"
+               aria-label="Northwestern University on Instagram"
+               rel="noopener">Instagram</a>
+            <a class="nu-social nu-social-youtube"
+               href="https://www.youtube.com/user/NorthwesternU"
+               aria-label="Northwestern University on YouTube"
+               rel="noopener">YouTube</a>
         </div>
     </div>
 </footer>
