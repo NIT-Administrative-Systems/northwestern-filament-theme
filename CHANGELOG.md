@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-03-23
+
+### Added
+
+- Percy visual regression testing with a minimal demo Laravel app and Playwright (30 snapshots across light/dark mode)
+- CSS watch mode via `pnpm build:css:watch` for live-reloading during development
+- `rel="noopener"` on external footer links and `aria-label` on social icon links
+
+### Changed
+
+- CSS architecture modularized into focused files (`badges`, `dropdowns`, `modals`, `notifications`, `pagination`, `sections`, `widgets`) with shared `variables.css` design tokens
+- `NorthwesternTheme` internals extracted into `HasFooter`, `HasEnvironmentIndicator`, and `HasImpersonationBanner` traits
+- Double-load detection warning now includes an actionable code example
+
 ## [2.3.0] - 2026-03-19
 
 ### Added
@@ -110,7 +124,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.4.0...HEAD
+[2.4.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.2.1...v2.3.0
 [2.2.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.1.1...v2.2.0

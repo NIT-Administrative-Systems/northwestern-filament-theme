@@ -1,6 +1,7 @@
 vendor/
 node_modules/
-bootstrap/cache/
+bootstrap/cache/*
+!bootstrap/cache/.gitkeep
 public/build/
 public/css/
 public/js/
