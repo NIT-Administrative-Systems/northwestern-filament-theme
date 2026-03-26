@@ -92,6 +92,17 @@ it('sets default brand logo when panel has none', function () {
     expect($panel->getBrandLogo())->toBe('https://common.northwestern.edu/v8/css/images/northwestern.svg');
 });
 
+it('resolves a relative lockup path through the asset helper', function () {
+    config()->set('northwestern-theme.lockup', 'images/lockup.svg');
+
+    $panel = app(Panel::class)->id('test-logo-asset');
+    $plugin = NorthwesternTheme::make();
+    $plugin->register($panel);
+    $plugin->boot($panel);
+
+    expect($panel->getBrandLogo())->toBe(asset('images/lockup.svg'));
+});
+
 it('does not override a panel-configured brand logo', function () {
     $panel = app(Panel::class)
         ->id('test-logo-custom')
