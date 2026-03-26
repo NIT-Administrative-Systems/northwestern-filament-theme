@@ -15,6 +15,10 @@ th.fi-ta-selection-cell {
     border-bottom: 2px solid var(--nu-border-color);
 }
 
+.fi-ta-cell {
+    font-variant-numeric: tabular-nums;
+}
+
 .fi-ta-row {
     border-bottom: 1px solid var(--nu-border-color);
 }

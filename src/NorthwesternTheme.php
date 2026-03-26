@@ -108,7 +108,7 @@ class NorthwesternTheme implements Plugin
         if (! $panel->getBrandLogo()) {
             /** @var string $lockup */
             $lockup = config('northwestern-theme.lockup', 'https://common.northwestern.edu/v8/css/images/northwestern.svg');
-            $panel->brandLogo($lockup);
+            $panel->brandLogo(asset($lockup));
         }
     }
 

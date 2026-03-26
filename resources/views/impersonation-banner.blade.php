@@ -100,6 +100,12 @@
         background-color: oklch(95% 0.02 21.239);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+        .nu-impersonate-banner-btn {
+            transition: none;
+        }
+    }
+
     .nu-impersonate-banner-btn:focus-visible {
         outline: 2px solid #fff;
         outline-offset: 2px;
