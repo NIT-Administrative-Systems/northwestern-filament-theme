@@ -4,13 +4,24 @@
    ========================================================================== */
 
 .fi-badge {
+    font-weight: 600;
+    letter-spacing: 0.02em;
     border: 1px solid var(--nu-badge-border) !important;
     border-radius: var(--nu-border-radius) !important;
     box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+.fi-badge.fi-color {
+    border-color: color-mix(in srgb, var(--color-600) 30%, transparent) !important;
 }
 
 .dark .fi-badge {
     border-color: var(--nu-border-color) !important;
+}
+
+.dark .fi-badge.fi-color {
+    border-color: color-mix(in srgb, var(--color-400) 30%, transparent) !important;
 }
 
 .dark .fi-btn:not(.fi-outlined).fi-color-warning {
