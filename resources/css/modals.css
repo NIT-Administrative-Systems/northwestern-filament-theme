@@ -30,6 +30,14 @@
     border-top: 1px solid var(--nu-border-color);
 }
 
+.fi-modal-window:not(.fi-modal-window-has-content) .fi-modal-header {
+    border-bottom: none;
+}
+
+.fi-modal-window:not(.fi-modal-window-has-content) .fi-modal-footer {
+    border-top: none;
+}
+
 .dark .fi-modal-window {
     box-shadow: var(--nu-shadow-dark-xl) !important;
 }
