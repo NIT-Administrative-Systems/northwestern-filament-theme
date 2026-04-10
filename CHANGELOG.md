@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Table loading spinner barely visible in dark mode on column headers and search input
+
 ## [2.5.0] - 2026-04-09
 
 ### Added
