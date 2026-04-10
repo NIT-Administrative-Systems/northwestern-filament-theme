@@ -29,8 +29,20 @@ it('only targets fi-* selectors that exist in Filament source', function () {
         $filamentSource .= $file->getContents() . "\n";
     }
 
+    // Selectors generated dynamically at runtime (e.g. "fi-status-{$status}")
+    $dynamicSelectors = [
+        'fi-status-danger',
+        'fi-status-info',
+        'fi-status-success',
+        'fi-status-warning',
+    ];
+
     $missingSelectors = [];
     foreach ($themeSelectors as $selector) {
+        if (in_array($selector, $dynamicSelectors, true)) {
+            continue;
+        }
+
         if (! str_contains($filamentSource, $selector)) {
             $missingSelectors[] = $selector;
         }
