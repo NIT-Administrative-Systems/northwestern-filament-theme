@@ -48,7 +48,9 @@ jobs:
         run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Check dist/ is up to date
-        run: pnpm build:css:check
+        run: |
+          pnpm build
+          git diff --exit-code dist/
 
       - name: Check version doesn't already exist
         env:

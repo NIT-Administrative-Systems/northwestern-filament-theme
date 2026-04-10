@@ -158,6 +158,12 @@ th.fi-ta-selection-cell {
     border-color: rgb(78 42 132 / 30%);
 }
 
+.dark .fi-ta-header-cell .fi-loading-indicator,
+.dark .fi-ta-actions-header-cell .fi-loading-indicator,
+.dark .fi-ta-search-field .fi-loading-indicator {
+    color: rgb(219 208 240 / 90%);
+}
+
 .dark .fi-ta-reordering .fi-ta-row {
     background-color: var(--nu-purple-surface-subtle);
 }

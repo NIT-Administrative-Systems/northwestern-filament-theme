@@ -80,7 +80,9 @@ jobs:
         run: pnpm lint:css
 
       - name: Check dist/ is up to date
-        run: pnpm build:css:check
+        run: |
+          pnpm build
+          git diff --exit-code dist/
 
       - name: PHPStan Result Cache
         uses: actions/cache@v5

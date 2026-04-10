@@ -4,34 +4,6 @@ import percySnapshot from "@percy/playwright";
 const SHOWCASE_URL = "/theme-showcase";
 
 /**
- * Sections to screenshot individually.
- *
- * Each entry maps a human-readable name to the heading text Playwright
- * will use to locate the section on the page. Percy receives one snapshot
- * per section per color scheme (light + dark).
- */
-const sections: Array<{ name: string; testId: string }> = [
-    { name: "Theme Preview", testId: "theme-preview" },
-    { name: "Color Palette", testId: "color-palette" },
-    { name: "Typography", testId: "typography" },
-    { name: "Buttons", testId: "buttons" },
-    { name: "Badges", testId: "badges" },
-    { name: "Notifications", testId: "notifications" },
-    { name: "Modals", testId: "modals" },
-    { name: "Stats Overview", testId: "stats-overview" },
-    { name: "Table Preview", testId: "table-preview" },
-    { name: "Sections & Cards", testId: "sections-cards" },
-    { name: "Form Components", testId: "form-components" },
-    { name: "Infolist / Read-Only Display", testId: "infolist" },
-    { name: "Empty State", testId: "empty-state" },
-    { name: "Callouts", testId: "callouts" },
-    { name: "Inline Alerts", testId: "inline-alerts" },
-    { name: "Loading & Disabled States", testId: "loading-disabled" },
-    { name: "Dropdowns", testId: "dropdowns" },
-    { name: "Navigation Elements", testId: "navigation" },
-];
-
-/**
  * Use Filament's theme switcher buttons to toggle between light and dark mode.
  * The switcher renders three buttons: light, dark, and system.
  */
@@ -53,21 +25,6 @@ async function setColorScheme(page: Page, scheme: "light" | "dark") {
     }
 }
 
-async function snapshotSection(
-    page: Page,
-    name: string,
-    testId: string,
-    scheme: string
-) {
-    const section = page.locator(`[data-testid="${testId}"]`);
-
-    await section.scrollIntoViewIfNeeded();
-
-    await percySnapshot(page, `${name} [${scheme}]`, {
-        scope: `[data-testid="${testId}"]`,
-    });
-}
-
 test("full page - light mode", async ({ page }) => {
     await page.goto(SHOWCASE_URL, { waitUntil: "load" });
     await setColorScheme(page, "light");
@@ -79,20 +36,6 @@ test("full page - dark mode", async ({ page }) => {
     await setColorScheme(page, "dark");
     await percySnapshot(page, "Theme Showcase [dark]", {});
 });
-
-for (const { name, testId } of sections) {
-    test(`${name} - light`, async ({ page }) => {
-        await page.goto(SHOWCASE_URL, { waitUntil: "load" });
-        await setColorScheme(page, "light");
-        await snapshotSection(page, name, testId, "light");
-    });
-
-    test(`${name} - dark`, async ({ page }) => {
-        await page.goto(SHOWCASE_URL, { waitUntil: "load" });
-        await setColorScheme(page, "dark");
-        await snapshotSection(page, name, testId, "dark");
-    });
-}
 
 test("footer - light", async ({ page }) => {
     await page.goto(SHOWCASE_URL, { waitUntil: "load" });
