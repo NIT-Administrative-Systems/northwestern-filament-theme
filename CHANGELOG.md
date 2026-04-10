@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.0] - 2026-04-09
+
+### Added
+
+- 3px left border accent on active sidebar items
+- Status-tinted backgrounds on notifications (success, danger, warning, info)
+- Color-aware borders on badges that reflect each badge's color
+- Heading color hierarchy: page and section headings in purple, descriptions in neutral black
+- Purple surface background on table group header row cells
+
+### Changed
+
+- Notifications use a 4px left accent border per status instead of the default ring
+- Callouts use a 3px left accent border with tinted background instead of an all-around border
+- Callout headings use small uppercase text with tight letter-spacing
+- Badges use `font-weight: 600` and `letter-spacing: 0.02em`
+- Modal header/footer borders hidden when the modal has no body content (e.g. confirmation dialogs)
+- `--nu-purple-surface` shifted from `#f3f0f7` to `#f9f6ff`
+
 ## [2.4.0] - 2026-03-23
 
 ### Added
@@ -124,7 +143,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.4.0...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.5.0...HEAD
+[2.5.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.2.1...v2.3.0
 [2.2.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.2.0...v2.2.1

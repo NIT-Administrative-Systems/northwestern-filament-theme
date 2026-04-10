@@ -328,6 +328,33 @@
         </x-filament::button>
     </x-filament::section>
 
+    {{-- Modals --}}
+    <x-filament::section data-testid="modals">
+        <x-slot name="heading">Modals</x-slot>
+        <x-slot name="description">Modal dialogs with different content and interaction patterns</x-slot>
+
+        <div class="space-y-4">
+            <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-300">Content Modals
+            </h3>
+            <div class="flex flex-wrap items-center gap-2">
+                {{ $this->simpleModalAction }}
+                {{ $this->wideModalAction }}
+                {{ $this->longContentModalAction }}
+            </div>
+
+            <h3 class="mt-6 text-sm font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-300">
+                Interactive Modals</h3>
+            <div class="flex flex-wrap items-center gap-2">
+                {{ $this->confirmationModalAction }}
+                {{ $this->formModalAction }}
+                {{ $this->iconModalAction }}
+                {{ $this->footerActionsModalAction }}
+            </div>
+        </div>
+
+        <x-filament-actions::modals />
+    </x-filament::section>
+
     {{-- Stats Overview --}}
     <x-filament::section data-testid="stats-overview">
         <x-slot name="heading">Stats Overview</x-slot>
@@ -474,6 +501,59 @@
             <p class="fi-empty-state-description mt-1 text-sm text-gray-500 dark:text-gray-400">Try adjusting your
                 search or filter criteria.</p>
             <div class="mt-4"><x-filament::button icon="heroicon-o-plus">Create Record</x-filament::button></div>
+        </div>
+    </x-filament::section>
+
+    {{-- Callouts --}}
+    <x-filament::section data-testid="callouts">
+        <x-slot name="heading">Callouts</x-slot>
+        <x-slot name="description">Filament's built-in callout component in all color variants</x-slot>
+
+        <div class="space-y-3">
+            <x-filament::callout color="info"
+                                 icon="heroicon-o-information-circle"
+                                 heading="Information"
+                                 description="This is an informational callout for general guidance or tips." />
+
+            <x-filament::callout color="success"
+                                 icon="heroicon-o-check-circle"
+                                 heading="Success"
+                                 description="Operation completed successfully. All changes have been saved." />
+
+            <x-filament::callout color="warning"
+                                 icon="heroicon-o-exclamation-triangle"
+                                 heading="Warning"
+                                 description="Please review before continuing. This action may have side effects." />
+
+            <x-filament::callout color="danger"
+                                 icon="heroicon-o-x-circle"
+                                 heading="Error"
+                                 description="Something went wrong. Please try again or contact support." />
+
+            <x-filament::callout color="gray"
+                                 icon="heroicon-o-chat-bubble-left-ellipsis"
+                                 heading="Note"
+                                 description="A neutral callout for general notes or supplementary context." />
+
+            <x-filament::callout color="primary"
+                                 icon="heroicon-o-academic-cap"
+                                 heading="Tip"
+                                 description="A primary-colored callout for highlighting best practices or recommendations." />
+
+            <x-filament::callout color="warning"
+                                 icon="heroicon-o-exclamation-triangle"
+                                 description="A callout with no heading — useful for brief inline messages." />
+
+            <x-filament::callout color="info"
+                                 icon="heroicon-o-light-bulb"
+                                 heading="With footer action">
+                <x-slot name="description">Callouts can include footer actions for additional interactivity.</x-slot>
+                <x-slot name="footer">
+                    <x-filament::link href="#"
+                                      color="info"
+                                      icon="heroicon-o-arrow-top-right-on-square">Learn more</x-filament::link>
+                </x-slot>
+            </x-filament::callout>
         </div>
     </x-filament::section>
 

@@ -16,14 +16,19 @@ const sections: Array<{ name: string; testId: string }> = [
     { name: "Typography", testId: "typography" },
     { name: "Buttons", testId: "buttons" },
     { name: "Badges", testId: "badges" },
+    { name: "Notifications", testId: "notifications" },
+    { name: "Modals", testId: "modals" },
     { name: "Stats Overview", testId: "stats-overview" },
     { name: "Table Preview", testId: "table-preview" },
     { name: "Sections & Cards", testId: "sections-cards" },
     { name: "Form Components", testId: "form-components" },
     { name: "Infolist / Read-Only Display", testId: "infolist" },
     { name: "Empty State", testId: "empty-state" },
+    { name: "Callouts", testId: "callouts" },
     { name: "Inline Alerts", testId: "inline-alerts" },
     { name: "Loading & Disabled States", testId: "loading-disabled" },
+    { name: "Dropdowns", testId: "dropdowns" },
+    { name: "Navigation Elements", testId: "navigation" },
 ];
 
 /**

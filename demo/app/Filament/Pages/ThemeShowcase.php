@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Pages;
 
+use Filament\Actions\Action;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\CheckboxList;
@@ -35,6 +36,8 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Schema;
+use Filament\Support\Enums\Alignment;
+use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 
 /**
@@ -417,6 +420,137 @@ class ThemeShowcase extends Page implements HasForms
                 ]),
             ])
             ->statePath('formData');
+    }
+
+    public function simpleModalAction(): Action
+    {
+        return Action::make('simpleModal')
+            ->label('Simple Modal')
+            ->icon(Heroicon::OutlinedInformationCircle)
+            ->modalHeading('Simple Modal')
+            ->modalDescription('A basic modal with a heading, description, and a close button.')
+            ->modalContent(view('filament.pages.modals.simple'))
+            ->modalSubmitAction(false)
+            ->modalCancelActionLabel('Close');
+    }
+
+    public function confirmationModalAction(): Action
+    {
+        return Action::make('confirmationModal')
+            ->label('Confirmation')
+            ->color('danger')
+            ->icon(Heroicon::OutlinedExclamationTriangle)
+            ->requiresConfirmation()
+            ->modalHeading('Delete Record')
+            ->modalDescription('Are you sure you want to delete this record? This action cannot be undone.')
+            ->modalIcon(Heroicon::OutlinedTrash)
+            ->modalIconColor('danger')
+            ->action(fn () => Notification::make()->title('Record deleted.')->danger()->send());
+    }
+
+    public function formModalAction(): Action
+    {
+        return Action::make('formModal')
+            ->label('With Form')
+            ->icon(Heroicon::OutlinedPencilSquare)
+            ->modalHeading('Edit Profile')
+            ->modalDescription('Update your profile information below.')
+            ->form([
+                Grid::make(2)->schema([
+                    TextInput::make('name')
+                        ->label('Full Name')
+                        ->default('Jane Cooper')
+                        ->required(),
+                    TextInput::make('email')
+                        ->label('Email Address')
+                        ->email()
+                        ->default('jane@northwestern.edu')
+                        ->required(),
+                ]),
+                Select::make('department')
+                    ->label('Department')
+                    ->options([
+                        'cs' => 'Computer Science',
+                        'ee' => 'Electrical Engineering',
+                        'mech' => 'Mechanical Engineering',
+                    ])
+                    ->default('cs'),
+                Textarea::make('bio')
+                    ->label('Bio')
+                    ->rows(3)
+                    ->default('Professor of Computer Science at Northwestern University.'),
+            ])
+            ->modalSubmitActionLabel('Save Changes')
+            ->action(fn () => Notification::make()->title('Profile updated.')->success()->send());
+    }
+
+    public function wideModalAction(): Action
+    {
+        return Action::make('wideModal')
+            ->label('Wide Modal')
+            ->icon(Heroicon::OutlinedArrowsPointingOut)
+            ->color('gray')
+            ->modalHeading('Wide Modal')
+            ->modalDescription('This modal uses a wider max-width for content that needs more space.')
+            ->modalWidth(Width::FiveExtraLarge)
+            ->modalContent(view('filament.pages.modals.wide'))
+            ->modalSubmitAction(false)
+            ->modalCancelActionLabel('Close');
+    }
+
+    public function footerActionsModalAction(): Action
+    {
+        return Action::make('footerActionsModal')
+            ->label('Custom Footer')
+            ->icon(Heroicon::OutlinedRectangleStack)
+            ->color('success')
+            ->modalHeading('Custom Footer Actions')
+            ->modalDescription('This modal demonstrates custom footer alignment and extra actions.')
+            ->modalContent(view('filament.pages.modals.simple'))
+            ->modalFooterActionsAlignment(Alignment::End)
+            ->modalSubmitActionLabel('Confirm')
+            ->modalCancelActionLabel('Cancel')
+            ->extraModalFooterActions([
+                Action::make('secondaryAction')
+                    ->label('Save as Draft')
+                    ->color('gray')
+                    ->action(fn () => Notification::make()->title('Saved as draft.')->info()->send()),
+            ])
+            ->action(fn () => Notification::make()->title('Confirmed.')->success()->send());
+    }
+
+    public function longContentModalAction(): Action
+    {
+        return Action::make('longContentModal')
+            ->label('Scrollable')
+            ->icon(Heroicon::OutlinedDocumentText)
+            ->color('warning')
+            ->modalHeading('Terms & Conditions')
+            ->modalDescription('Please read the following terms carefully.')
+            ->modalContent(view('filament.pages.modals.long-content'))
+            ->modalSubmitActionLabel('I Accept')
+            ->modalCancelActionLabel('Decline')
+            ->action(fn () => Notification::make()->title('Terms accepted.')->success()->send());
+    }
+
+    public function iconModalAction(): Action
+    {
+        return Action::make('iconModal')
+            ->label('With Icon')
+            ->icon(Heroicon::OutlinedShieldCheck)
+            ->color('info')
+            ->modalHeading('Security Check')
+            ->modalDescription('Your account requires additional verification.')
+            ->modalIcon(Heroicon::OutlinedShieldCheck)
+            ->modalIconColor('info')
+            ->form([
+                TextInput::make('verification_code')
+                    ->label('Verification Code')
+                    ->placeholder('Enter the 6-digit code')
+                    ->required(),
+            ])
+            ->modalSubmitActionLabel('Verify')
+            ->action(fn () => Notification::make()->title('Verification successful.')->success()->send());
     }
 
     #[\Override]

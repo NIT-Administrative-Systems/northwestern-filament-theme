@@ -80,6 +80,10 @@ th.fi-ta-selection-cell {
     background-color: var(--nu-purple-surface);
 }
 
+.fi-ta-row.fi-ta-group-header-row > td {
+    background-color: var(--nu-purple-surface) !important;
+}
+
 .fi-ta-group-heading {
     font-family: var(--nu-font-heading);
     font-size: var(--nu-text-base);
@@ -139,6 +143,10 @@ th.fi-ta-selection-cell {
 
 .dark .fi-ta-group-header {
     background-color: var(--nu-purple-surface);
+}
+
+.dark .fi-ta-row.fi-ta-group-header-row > td {
+    background-color: var(--nu-purple-surface) !important;
 }
 
 .dark .fi-ta-group-description {

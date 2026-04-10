@@ -3,8 +3,11 @@
    ========================================================================== */
 
 .fi-sidebar-item-btn {
+    border-left: 3px solid transparent;
     border-radius: var(--nu-border-radius) !important;
-    transition: background-color var(--nu-transition-fast);
+    transition:
+        background-color var(--nu-transition-fast),
+        border-color var(--nu-transition-fast);
 }
 
 .fi-sidebar-item-btn:hover {
@@ -13,7 +16,8 @@
 
 .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
     color: var(--nu-purple-100);
-    background-color: var(--nu-purple-10) !important;
+    background-color: var(--nu-purple-surface) !important;
+    border-left-color: var(--nu-color-link);
 }
 
 .fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-icon {
@@ -66,6 +70,7 @@
 .dark .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
     color: var(--nu-purple-30);
     background-color: var(--nu-purple-tint-strong) !important;
+    border-left-color: var(--nu-purple-30);
 }
 
 .dark .fi-sidebar-item.fi-active .fi-sidebar-item-btn .fi-sidebar-item-icon,
