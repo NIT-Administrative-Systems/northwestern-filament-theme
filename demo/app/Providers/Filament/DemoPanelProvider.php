@@ -20,7 +20,10 @@ class DemoPanelProvider extends PanelProvider
             ->path('/')
             ->maxContentWidth('full')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
-            ->viteTheme('resources/css/filament/demo/theme.css')
+            ->viteTheme([
+                'resources/css/filament/demo/theme.css',
+                'resources/js/filament/demo/theme.js',
+            ])
             ->renderHook(
                 PanelsRenderHook::GLOBAL_SEARCH_AFTER,
                 fn (): string => Blade::render('<x-filament-panels::theme-switcher />'),

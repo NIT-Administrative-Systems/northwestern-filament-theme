@@ -27,13 +27,14 @@ pnpm install
 ```
 src/                     # PHP source (plugin, service provider, config classes)
 resources/css/           # Modular CSS source files
+resources/js/            # TypeScript source files
 resources/views/         # Blade templates (footer, indicator, banner)
-dist/                    # Built artifacts (theme.css, tailwind-tokens.css)
-scripts/build-css.mjs    # CSS build script
+dist/                    # Built artifacts (theme.css, JS, tailwind-tokens.css)
+vite.config.ts           # Package build config and custom Vite plugin
 tests/Feature/           # Pest test suite
 ```
 
-CSS lives in individual files organized by concern (`buttons.css`, `forms.css`, `modals.css`, `tables.css`, etc.). The build script concatenates and minifies these into `dist/theme.css` using [LightningCSS](https://lightningcss.dev/). See `SOURCE_FILES` in `scripts/build-css.mjs` for the full list and concatenation order.
+CSS lives in individual files organized by concern (`buttons.css`, `forms.css`, `modals.css`, `tables.css`, etc.). `resources/css/theme.css` imports them in the required order, and the package build emits `dist/theme.css`. The custom Vite plugin in `vite.config.ts` also emits `dist/tailwind-tokens.css`.
 
 ## Making changes
 

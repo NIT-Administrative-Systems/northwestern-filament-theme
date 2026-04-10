@@ -16,7 +16,10 @@ export default defineConfig({
     plugins: [
         tailwindcss(),
         laravel({
-            input: ["resources/css/filament/demo/theme.css"],
+            input: [
+                "resources/css/filament/demo/theme.css",
+                "resources/js/filament/demo/theme.js",
+            ],
             refresh: true,
         }),
     ],
