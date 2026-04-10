@@ -4,8 +4,35 @@
    ========================================================================== */
 
 .fi-no-notification {
+    border: 1px solid var(--nu-border-color);
+    border-left: 4px solid var(--nu-black-50);
     border-radius: var(--nu-border-radius) !important;
     box-shadow: var(--nu-shadow-md) !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+.fi-no-notification.fi-color {
+    border-left-color: var(--color-600);
+}
+
+.fi-no-notification.fi-status-success {
+    background-color: color-mix(in srgb, var(--nu-color-success) 8%, white) !important;
+    border-left-color: var(--nu-color-success);
+}
+
+.fi-no-notification.fi-status-danger {
+    background-color: color-mix(in srgb, var(--nu-color-danger) 8%, white) !important;
+    border-left-color: var(--nu-color-danger);
+}
+
+.fi-no-notification.fi-status-warning {
+    background-color: color-mix(in srgb, var(--nu-color-warning) 10%, white) !important;
+    border-left-color: var(--nu-color-warning);
+}
+
+.fi-no-notification.fi-status-info {
+    background-color: color-mix(in srgb, var(--nu-color-info) 8%, white) !important;
+    border-left-color: var(--nu-color-info);
 }
 
 .fi-no-notification-title {
@@ -13,5 +40,31 @@
 }
 
 .dark .fi-no-notification {
+    border-color: var(--nu-border-color);
+    border-left-color: var(--nu-black-50);
     box-shadow: var(--nu-shadow-dark-md) !important;
+}
+
+.dark .fi-no-notification.fi-color {
+    border-left-color: var(--color-400);
+}
+
+.dark .fi-no-notification.fi-status-success {
+    background-color: color-mix(in srgb, var(--nu-color-success) 10%, #111827) !important;
+    border-left-color: var(--nu-color-success);
+}
+
+.dark .fi-no-notification.fi-status-danger {
+    background-color: color-mix(in srgb, var(--nu-color-danger) 10%, #111827) !important;
+    border-left-color: var(--nu-color-danger);
+}
+
+.dark .fi-no-notification.fi-status-warning {
+    background-color: color-mix(in srgb, var(--nu-color-warning) 12%, #111827) !important;
+    border-left-color: var(--nu-color-warning);
+}
+
+.dark .fi-no-notification.fi-status-info {
+    background-color: color-mix(in srgb, var(--nu-color-info) 10%, #111827) !important;
+    border-left-color: var(--nu-color-info);
 }
