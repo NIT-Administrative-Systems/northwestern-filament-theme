@@ -138,14 +138,22 @@ body.fi-body {
 
 .fi-header-heading {
     font-weight: 700;
+    color: var(--nu-purple-120);
 }
 
 .fi-section-header-heading,
-.fi-modal-heading,
 .fi-ta-header-heading,
-.fi-sc-wizard-header-step-label,
-.fi-callout-heading {
+.fi-sc-wizard-header-step-label {
     font-weight: 600;
+    color: var(--nu-purple-120);
+}
+
+.fi-modal-heading {
+    font-weight: 600;
+}
+
+.fi-section-header-description {
+    color: var(--nu-black-80);
 }
 
 .fi-body .fi-main h1:not([class*="fi-"]),
@@ -185,6 +193,17 @@ body.fi-body {
 .fi-fo-field-label label {
     font-family: var(--nu-font-body);
     font-weight: 700;
+}
+
+.dark .fi-header-heading,
+.dark .fi-section-header-heading,
+.dark .fi-ta-header-heading,
+.dark .fi-sc-wizard-header-step-label {
+    color: var(--nu-purple-30);
+}
+
+.dark .fi-section-header-description {
+    color: var(--nu-color-text-muted);
 }
 
 .fi-body .fi-main a:not([class*="fi-"], .filament-breadcrumbs-link) {
