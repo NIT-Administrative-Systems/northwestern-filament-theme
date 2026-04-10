@@ -22,14 +22,22 @@
 }
 
 .fi-callout {
-    border: 1px solid var(--nu-border-color);
+    border: none;
+    border-inline-start: 3px solid var(--nu-black-50);
     border-radius: var(--nu-border-radius) !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+.fi-callout.fi-color {
+    border-inline-start-color: var(--color-600);
 }
 
 .fi-callout-heading {
     font-family: var(--nu-font-heading);
-    font-size: var(--nu-text-lg);
-    font-weight: 600;
+    font-size: var(--nu-text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
 .fi-callout-description {
@@ -113,7 +121,11 @@
 }
 
 .dark .fi-callout {
-    border-color: var(--nu-border-color);
+    border-inline-start-color: var(--nu-black-50);
+}
+
+.dark .fi-callout.fi-color {
+    border-inline-start-color: var(--color-400);
 }
 
 .dark .fi-fieldset {
