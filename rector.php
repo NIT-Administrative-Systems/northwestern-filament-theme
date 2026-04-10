@@ -27,6 +27,8 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         __DIR__ . '/vendor',
+        __DIR__ . '/demo/vendor',
+        __DIR__ . '/demo/bootstrap/cache',
         AddClosureVoidReturnTypeWhereNoReturnRector::class,
         ClosureReturnTypeRector::class,
         AddArrowFunctionReturnTypeRector::class,
