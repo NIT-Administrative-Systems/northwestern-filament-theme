@@ -12,7 +12,7 @@
         background-color: var(--nu-purple-100);
         color: #fff;
         font-family: var(--nu-font-body);
-        font-size: 0.875rem;
+        font-size: var(--nu-text-sm);
         line-height: 1.6;
         min-height: 350px;
         padding-top: 3em;
