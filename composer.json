@@ -46,7 +46,7 @@
             "@format:check",
             "pnpm format:check",
             "pnpm lint:css",
-            "pnpm build:css:check",
+            "pnpm build:check",
             "@analyse",
             "@test"
         ],
@@ -55,7 +55,7 @@
             "@format",
             "pnpm format",
             "pnpm lint:css:fix",
-            "pnpm build:css"
+            "pnpm build"
         ]
     },
     "autoload": {

@@ -4,4 +4,6 @@ agents/
 vendor/
 node_modules/
 demo/public/
+demo/test-results/
+demo/playwright-report/
 pnpm-lock.yaml
