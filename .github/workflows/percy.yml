@@ -86,6 +86,13 @@ jobs:
         working-directory: demo
         run: pnpm exec playwright install --with-deps chromium
 
+      - name: Configure Percy Browser
+        working-directory: demo
+        run: |
+          browser="$(node -e 'console.log(require("@playwright/test").chromium.executablePath())')"
+          test -x "$browser"
+          echo "PERCY_BROWSER_EXECUTABLE=$browser" >> "$GITHUB_ENV"
+
       - name: Run Percy Snapshots
         working-directory: demo
         env:
