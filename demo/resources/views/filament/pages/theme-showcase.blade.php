@@ -562,18 +562,62 @@
         <x-slot name="heading">Inline Alerts</x-slot>
 
         <div class="space-y-3">
-            @foreach ([["info", "heroicon-o-information-circle", "Information", "This is an informational alert."], ["success", "heroicon-o-check-circle", "Success", "Operation completed successfully."], ["warning", "heroicon-o-exclamation-triangle", "Warning", "Please review before continuing."], ["danger", "heroicon-o-x-circle", "Error", "Something went wrong. Please try again."]] as [$alertColor, $alertIcon, $alertTitle, $alertBody])
-                <div
-                     class="border-{{ $alertColor }}-300 bg-{{ $alertColor }}-50 dark:border-{{ $alertColor }}-500/30 dark:bg-{{ $alertColor }}-500/10 rounded-lg border p-4">
+            @foreach ([
+        [
+            "container" => "border-info-300 bg-info-50 dark:border-info-500/30 dark:bg-info-500/10",
+            "icon" => "text-info-600 dark:text-info-400",
+            "title" => "text-info-800 dark:text-info-200",
+            "body" => "text-info-700 dark:text-info-300",
+            "iconName" => "heroicon-o-information-circle",
+            "titleText" => "Information",
+            "bodyText" => "This is an informational alert.",
+        ],
+        [
+            "container" => "border-success-300 bg-success-50 dark:border-success-500/30 dark:bg-success-500/10",
+            "icon" => "text-success-600 dark:text-success-400",
+            "title" => "text-success-800 dark:text-success-200",
+            "body" => "text-success-700 dark:text-success-300",
+            "iconName" => "heroicon-o-check-circle",
+            "titleText" => "Success",
+            "bodyText" => "Operation completed successfully.",
+        ],
+        [
+            "container" => "border-warning-300 bg-warning-50 dark:border-warning-500/30 dark:bg-warning-500/10",
+            "icon" => "text-warning-600 dark:text-warning-400",
+            "title" => "text-warning-800 dark:text-warning-200",
+            "body" => "text-warning-700 dark:text-warning-300",
+            "iconName" => "heroicon-o-exclamation-triangle",
+            "titleText" => "Warning",
+            "bodyText" => "Please review before continuing.",
+        ],
+        [
+            "container" => "border-danger-300 bg-danger-50 dark:border-danger-500/30 dark:bg-danger-500/10",
+            "icon" => "text-danger-600 dark:text-danger-400",
+            "title" => "text-danger-800 dark:text-danger-200",
+            "body" => "text-danger-700 dark:text-danger-300",
+            "iconName" => "heroicon-o-x-circle",
+            "titleText" => "Error",
+            "bodyText" => "Something went wrong. Please try again.",
+        ],
+    ] as $alert)
+                @php
+                    $alertContainer = $alert["container"];
+                    $alertIconClass = $alert["icon"];
+                    $alertTitleClass = $alert["title"];
+                    $alertBodyClass = $alert["body"];
+                    $alertIconName = $alert["iconName"];
+                    $alertTitleText = $alert["titleText"];
+                    $alertBodyText = $alert["bodyText"];
+                @endphp
+
+                <div class="{{ $alertContainer }} rounded-lg border p-4">
                     <div class="flex items-start gap-3">
-                        <x-filament::icon class="text-{{ $alertColor }}-600 dark:text-{{ $alertColor }}-400 mt-0.5 h-5 w-5 shrink-0"
-                                          :icon="$alertIcon" />
+                        <x-filament::icon class="{{ $alertIconClass }} mt-0.5 h-5 w-5 shrink-0" :icon="$alertIconName" />
                         <div>
-                            <p
-                               class="text-{{ $alertColor }}-800 dark:text-{{ $alertColor }}-200 text-sm font-semibold">
-                                {{ $alertTitle }}</p>
-                            <p class="text-{{ $alertColor }}-700 dark:text-{{ $alertColor }}-300 mt-0.5 text-sm">
-                                {{ $alertBody }}</p>
+                            <p class="{{ $alertTitleClass }} text-sm font-semibold">
+                                {{ $alertTitleText }}</p>
+                            <p class="{{ $alertBodyClass }} mt-0.5 text-sm">
+                                {{ $alertBodyText }}</p>
                         </div>
                     </div>
                 </div>
