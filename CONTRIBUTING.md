@@ -66,13 +66,13 @@ composer test            # Pest
 Edit files in `resources/css/`, then rebuild:
 
 ```bash
-pnpm build:css
+pnpm build
 ```
 
 The build concatenates all source files, minifies with LightningCSS, and writes `dist/theme.css`. You must commit the updated dist file with your changes.
 
 > [!IMPORTANT]
-> CI checks that `dist/theme.css` matches the source files. If you edit CSS and forget to rebuild, your PR will fail the `build:css:check` step.
+> CI checks that `dist/theme.css` matches the source files. If you edit CSS and forget to rebuild, your PR will fail the `build:check` step.
 
 Lint and format CSS separately if needed:
 

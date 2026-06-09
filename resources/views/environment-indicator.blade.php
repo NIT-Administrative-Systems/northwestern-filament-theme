@@ -26,7 +26,7 @@
         gap: 0.375rem;
         padding: 0.3rem 0.75rem;
         font-family: var(--nu-font-body);
-        font-size: 0.875rem;
+        font-size: var(--nu-text-sm);
         font-weight: 600;
         letter-spacing: 0.01em;
         line-height: 1.5;

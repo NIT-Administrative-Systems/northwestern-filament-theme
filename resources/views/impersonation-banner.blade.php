@@ -68,7 +68,7 @@
         justify-content: center;
         gap: 0 0.5rem;
         text-align: center;
-        font-size: 0.875rem;
+        font-size: var(--nu-text-sm);
         font-weight: 500;
         color: #fff;
     }
@@ -86,7 +86,7 @@
         flex-shrink: 0;
         padding: 0.5rem 0.875rem;
         font-family: var(--nu-font-body);
-        font-size: 0.875rem;
+        font-size: var(--nu-text-sm);
         font-weight: 600;
         color: oklch(0.5400 0.2020 21.239);
         background-color: #fff;
