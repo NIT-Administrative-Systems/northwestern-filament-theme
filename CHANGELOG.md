@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.1] - 2026-06-18
+
+### Changed
+
+- Restored compact typography token values while keeping Tailwind text-size variables as the source for overlapping `--nu-text-*` tokens
+
 ## [3.0.0] - 2026-06-09
 
 This is a breaking release. The theme now raises the default typography floor to 16px by overriding Tailwind text-size tokens used by Filament and by this package's own CSS.
@@ -156,7 +162,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.1...HEAD
+[3.0.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.5.0...v3.0.0
 [2.5.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.3.0...v2.4.0
