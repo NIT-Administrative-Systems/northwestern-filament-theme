@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.2] - 2026-06-18
+
+### Changed
+
+- Removed Tailwind text-size token overrides and restored Northwestern typography tokens to direct compact values, closely matching the pre-3.0.0 scale
+
 ## [3.0.1] - 2026-06-18
 
 ### Changed
@@ -162,7 +168,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.1...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.2...HEAD
+[3.0.2]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.5.0...v3.0.0
 [2.5.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.4.0...v2.5.0
