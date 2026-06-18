@@ -279,7 +279,7 @@ it('renders the impersonation banner view', function () {
 });
 
 it('renders the banner without the leave button when no URL is available', function () {
-    $config = new ImpersonationBannerConfig(label: 'Test User', leaveUrl: null);
+    $config = new ImpersonationBannerConfig(label: 'Test User');
     $html = view('northwestern-filament-theme::impersonation-banner', ['config' => $config])->render();
 
     expect($html)
