@@ -33,7 +33,7 @@ jobs:
           coverage: none
 
       - name: Composer Cache
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: demo/vendor
           key: ${{ runner.os }}-demo-composer-${{ hashFiles('demo/composer.lock') }}
@@ -76,7 +76,7 @@ jobs:
           php artisan key:generate
 
       - name: Playwright Cache
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('demo/pnpm-lock.yaml') }}
