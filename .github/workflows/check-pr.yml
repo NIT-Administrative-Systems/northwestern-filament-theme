@@ -20,6 +20,9 @@ jobs:
     name: Lint, Format & Analyse
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
+      checks: write
 
     steps:
       - name: Checkout Repository
