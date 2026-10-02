@@ -16,6 +16,9 @@ env:
   NODE_VERSION: "24"
   PNPM_VERSION: "10.x.x"
 
+permissions:
+  contents: read
+
 jobs:
   percy:
     name: Visual Snapshots
