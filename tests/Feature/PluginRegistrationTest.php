@@ -68,7 +68,7 @@ it('sets default favicon when panel has none', function () {
     $plugin->register($panel);
     $plugin->boot($panel);
 
-    expect($panel->getFavicon())->toBe('https://common.northwestern.edu/v8/icons/favicon-32.png');
+    expect($panel->getFavicon())->toBe('https://common.northwestern.edu/favicon.ico');
 });
 
 it('does not override a panel-configured favicon', function () {
@@ -83,13 +83,46 @@ it('does not override a panel-configured favicon', function () {
     expect($panel->getFavicon())->toBe('https://example.com/custom-favicon.png');
 });
 
-it('sets default brand logo when panel has none', function () {
-    $panel = app(Panel::class)->id('test-logo-default');
+it('sets the inline dept 4.0 wordmark as the brand logo when panel has none', function () {
+    // The test app does not boot Filament's panel provider, which normally loads this namespace.
+    app('translator')->addNamespace('filament-panels', __DIR__ . '/../../vendor/filament/filament/resources/lang');
+
+    $panel = app(Panel::class)->id('test-logo-default')->brandName('Test App');
     $plugin = NorthwesternTheme::make();
     $plugin->register($panel);
     $plugin->boot($panel);
 
-    expect($panel->getBrandLogo())->toBe('https://common.northwestern.edu/v8/css/images/northwestern.svg');
+    $logo = $panel->getBrandLogo();
+
+    expect($logo)->toBeInstanceOf(Illuminate\Contracts\Support\Htmlable::class)
+        ->and($logo->toHtml())
+        ->toContain('class="nu-wordmark"')
+        ->toContain('viewBox="0 0 201.1 25.5"')
+        ->toContain('fill="currentColor"')
+        ->toContain('aria-label="Test App logo"')
+        ->not->toContain('common.northwestern.edu');
+});
+
+it('falls back to the wordmark when the lockup config is empty', function () {
+    config()->set('northwestern-theme.lockup', '');
+
+    $panel = app(Panel::class)->id('test-logo-empty-config');
+    $plugin = NorthwesternTheme::make();
+    $plugin->register($panel);
+    $plugin->boot($panel);
+
+    expect($panel->getBrandLogo())->toBeInstanceOf(Illuminate\Contracts\Support\Htmlable::class);
+});
+
+it('uses an absolute lockup URL from config as the brand logo', function () {
+    config()->set('northwestern-theme.lockup', 'https://example.com/unit-lockup.svg');
+
+    $panel = app(Panel::class)->id('test-logo-config-url');
+    $plugin = NorthwesternTheme::make();
+    $plugin->register($panel);
+    $plugin->boot($panel);
+
+    expect($panel->getBrandLogo())->toBe('https://example.com/unit-lockup.svg');
 });
 
 it('resolves a relative lockup path through the asset helper', function () {

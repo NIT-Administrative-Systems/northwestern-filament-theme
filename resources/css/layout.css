@@ -23,6 +23,18 @@ body.fi-body {
     filter: none !important;
 }
 
+.fi-logo .nu-wordmark {
+    display: block;
+    width: auto;
+    height: 100%;
+    color: var(--nu-purple-100);
+}
+
+.fi-topbar .fi-logo .nu-wordmark,
+.dark .fi-logo .nu-wordmark {
+    color: var(--nu-topbar-text);
+}
+
 .fi-sidebar-footer {
     padding: 0.75rem 1rem;
     border-top: 1px solid var(--nu-border-color);
