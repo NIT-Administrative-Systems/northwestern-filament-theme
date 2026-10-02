@@ -36,6 +36,8 @@ This is a breaking release that moves the theme from Northwestern's `v8` global 
 - The brand palette, semantic colors, font stacks and `--nu-border-radius` come from [`@nu-appdev/northwestern-tokens`](https://github.com/NIT-Administrative-Systems/northwestern-tokens) 1.0, bundled at build time. Values are unchanged
 - `dist/tailwind-tokens.css` is the tokens package's `tailwind.css`. Existing `--color-nu-*` names are unchanged
 - Tailwind's `--radius-*` scale follows `--nu-border-radius`
+- Development dependencies upgraded, clearing the open Dependabot security alerts: Pest `^4.0||^5.0` (Pest 5 on PHP 8.4+), current Rector, Larastan and Pint, the latest npm tooling (Vite 8.3, TypeScript 7, Prettier 3.9, Stylelint 17.16), and the demo app on Vite 8 and laravel-vite-plugin 3. Runtime requirements are unchanged
+- GitHub Actions bumped to their latest releases (checkout v7, cache v6, setup-node v7, checkstyle v4) and pinned to commit SHAs
 
 ### Fixed
 
