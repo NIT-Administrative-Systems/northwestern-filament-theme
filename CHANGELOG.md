@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+This is a breaking release that moves the theme from Northwestern's `v8` global template to **Department Templates 4.0**. The footer is now on by default, and the fonts, wordmark and footer markup all change. See [UPGRADING.md](UPGRADING.md#v3x-to-v40). Breaking changes are marked **Breaking**.
+
+### Added
+
+- `Footer\RequiredLink` enum with the nine links the Web Style Guide requires in every footer, with their current URLs. `RequiredLink::RESOURCES` and `RequiredLink::LEGAL` give the two groups, and each case has `label()` and `url()`, so other surfaces such as a mail footer can read the same list
+- Building Access, Privacy Statement and Report a Concern links in the footer
+- `<x-northwestern-filament-theme::footer />` Blade component that renders the footer without Filament, auth or the database, for public and error pages
+- `links` parameter on `footer()` and the component for app links (label => URL), shown under "Quick Links" alongside the required links
+- Optional `officeFax` parameter on `footer()` and `office.fax` config key
+- `dist/tokens.css`: the dept 4.0 `@font-face` rules and `--nu-*` custom properties on their own, for pages that render without Filament
+- `font-nu-body`, `font-nu-heading` and `font-nu-display` utilities and the radius scale in `dist/tailwind-tokens.css`
+- Noto Serif (`--nu-font-display`) and Poppins 500 faces
+- Environment indicator on simple pages such as login, through `PanelsRenderHook::SIMPLE_LAYOUT_START`
+- `NorthwesternTheme::FAVICON_URL` constant
+
+### Changed
+
+- **Breaking:** the footer is on by default for every panel. Opt out with `->footer(enabled: false)`
+- **Breaking:** the footer renders through `PanelsRenderHook::FOOTER` instead of `BODY_END`. On full pages it now sits in the content column beside the sidebar instead of spanning the window
+- **Breaking:** the footer is rebuilt to the dept 4.0 structure with new markup and class names: wordmark and unit name, then contact, Connect, Quick Links and Northwestern Resources columns on Purple 120, and a Purple 100 bottom bar with the copyright, Accessibility, Disclaimer, Privacy Statement and Report a Concern. Published copies of `footer.blade.php` no longer match
+- **Breaking:** fonts load from `common.northwestern.edu/dept/4.0/` as `.woff2` instead of `v8` `.woff`. Poppins 400 now uses the regular face instead of light, so headings set at that weight render slightly heavier
+- **Breaking:** when no `northwestern-theme.lockup` is configured, the default brand logo is the dept 4.0 "Northwestern" wordmark as inline SVG instead of the `v8` SVG URL, so `getBrandLogo()` returns an `Htmlable`. It is purple on light backgrounds and white in the topbar and in dark mode
+- **Breaking:** the default favicon is `common.northwestern.edu/favicon.ico` instead of `v8/icons/favicon-32.png` (same artwork)
+- The footer's Accessibility link is labeled "Accessibility" and points at `/accessibility/report/`. Careers and Campus Emergency Information point at their current URLs instead of redirects
+- Footer office fields that resolve to an empty string are hidden instead of rendering an empty row
+- Footer icons and the wordmark are inline SVG instead of the `v8` PNG sprite and remote images. Footer styles use the tokens package's custom properties
+- The brand palette, semantic colors, font stacks and `--nu-border-radius` come from [`@nu-appdev/northwestern-tokens`](https://github.com/NIT-Administrative-Systems/northwestern-tokens) 1.0, bundled at build time. Values are unchanged
+- `dist/tailwind-tokens.css` is the tokens package's `tailwind.css`. Existing `--color-nu-*` names are unchanged
+- Tailwind's `--radius-*` scale follows `--nu-border-radius`
+
+### Fixed
+
+- The login card border and shadow targeted the full-width `.fi-simple-main-ctn` wrapper instead of the `.fi-simple-main` card
+
 ## [3.0.2] - 2026-06-18
 
 ### Changed

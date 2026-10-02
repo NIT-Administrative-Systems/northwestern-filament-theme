@@ -1,5 +1,94 @@
 # Upgrading
 
+## v3.x to v4.0
+
+v4.0 moves the theme from Northwestern's `v8` global template to **Department Templates 4.0**. The footer is on by default, and the fonts, the default wordmark and the footer markup all change. Panel interiors look the same apart from the details below.
+
+1. **Update the package:**
+
+    ```bash
+    composer require northwestern-sysdev/northwestern-filament-theme:^4.0
+    ```
+
+2. **Re-publish assets** if you use automatic asset registration:
+
+    ```bash
+    php artisan filament:assets
+    ```
+
+    If you import the theme in a Vite panel theme, rebuild instead (`npm run build`).
+
+### The footer is on by default
+
+Every panel that registers the plugin now renders the Northwestern footer. It used to be opt-in through `->footer()`.
+
+- To keep a panel without a footer, opt out:
+
+    ```php
+    NorthwesternTheme::make()
+        ->footer(enabled: false)
+    ```
+
+- `->footer()` with no arguments is now the default, so you can delete that call. Calls with office arguments keep working.
+- The footer renders through `PanelsRenderHook::FOOTER` instead of `BODY_END`. On full pages it sits at the bottom of the content column, beside the sidebar, instead of spanning the window. On simple pages such as login it spans the page below the card.
+- If you rendered the footer yourself, for example through your own `BODY_END` render hook, remove that hook to avoid two footers.
+
+### The footer has new markup
+
+The footer follows the dept 4.0 structure and adds the three required links the `v8` footer was missing: Building Access, Privacy Statement and Report a Concern. Its class names changed, for example from `.nu-footer-grid` and `.nu-pin-*` to `.nu-footer-columns` and `.nu-footer-icon`. The outer `.nu-footer` element is unchanged.
+
+- **Published views:** if you published `footer.blade.php`, delete your copy, or re-publish and re-apply your edits:
+
+    ```bash
+    php artisan vendor:publish --tag=northwestern-filament-theme-views --force
+    ```
+
+- **Custom CSS:** rules that targeted the old footer classes no longer match.
+- **Required links can't be removed.** To add your own, pass `links`. They render under "Quick Links":
+
+    ```php
+    NorthwesternTheme::make()
+        ->footer(links: [
+            'Help' => 'https://example.northwestern.edu/help',
+        ])
+    ```
+
+- **Outside a panel:** use `<x-northwestern-filament-theme::footer />`. It renders without Filament, auth or the database. On a page without the theme CSS, load `dist/tokens.css` too (see below).
+
+### Office configuration
+
+The office fields still resolve from `->footer()`, then `config('northwestern-theme.office.*')`, then the Information Technology defaults. There is one addition:
+
+```php
+// config/northwestern-theme.php
+'office' => [
+    // ...
+    'fax' => env('NU_THEME_OFFICE_FAX'), // optional; hidden when empty
+],
+```
+
+Or pass `officeFax:` to `->footer()`. A field that resolves to an empty string is now hidden instead of rendering an empty row.
+
+### Fonts and wordmark
+
+- **Fonts** load as `.woff2` from `https://common.northwestern.edu/dept/4.0/css/fonts/` instead of `v8`. The CDN host is the same, so CSP allowlists don't change. Poppins 400 now uses the regular face instead of light, so text at that weight renders slightly heavier. Noto Serif is new and is available as `--nu-font-display`.
+- **Default brand logo.** When `config('northwestern-theme.lockup')` is not set, the logo is the dept 4.0 "Northwestern" wordmark as inline SVG instead of `v8/css/images/northwestern.svg`, so `$panel->getBrandLogo()` returns an `Htmlable`. It is Northwestern Purple on light backgrounds and white in the topbar and in dark mode.
+- **Configured lockups win.** If your `config/northwestern-theme.php` sets `lockup` to the `v8` URL (the `northwestern-laravel-ui` default), you keep the `v8` image. Set it to `null` to use the dept 4.0 wordmark.
+- **Favicon.** The default is `https://common.northwestern.edu/favicon.ico` instead of `v8/icons/favicon-32.png`. The artwork is the same.
+
+### New `dist/` files
+
+- **`dist/tokens.css`** is new. It contains the dept 4.0 `@font-face` rules and the `--nu-*` custom properties, with no Filament selectors, for pages that render outside Filament such as an error layout. `dist/theme.css` already includes it, so panels don't need it.
+- **`dist/tailwind-tokens.css`** keeps its name and its `--color-nu-*` utilities, and adds `font-nu-body`, `font-nu-heading`, `font-nu-display` and the square-corner radius scale. It still needs the custom properties from `theme.css` or `tokens.css`.
+
+The palette now comes from [`@nu-appdev/northwestern-tokens`](https://github.com/NIT-Administrative-Systems/northwestern-tokens), bundled at build time. You don't need to install it: everything ships in `dist/`. The `--nu-*` names and values are unchanged.
+
+### Environment indicator on simple pages
+
+The environment indicator now also renders at the top of simple pages, such as login, through `PanelsRenderHook::SIMPLE_LAYOUT_START`. It follows the same `->environmentIndicator()` settings. `->withoutEnvironmentIndicator()` removes it from both places.
+
+---
+
 ## v2.0 to v2.1
 
 v2.1 adds a built-in environment indicator and impersonation banner. If you were using third-party packages or custom views for these features, you can remove them.
