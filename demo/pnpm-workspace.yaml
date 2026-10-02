@@ -1,0 +1,5 @@
+# The demo is its own pnpm root, separate from the package's lockfile.
+# pnpm reads its own settings from here; pnpm 11 ignores them in .npmrc and package.json.
+minimumReleaseAge: 4320
+overrides:
+  fast-xml-parser@<5.7.0: ^5.7.0
