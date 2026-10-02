@@ -20,5 +20,10 @@
     "engines": {
         "node": ">= 22.0.0",
         "pnpm": ">= 10.0.0"
+    },
+    "pnpm": {
+        "overrides": {
+            "fast-xml-parser@<5.7.0": "^5.7.0"
+        }
     }
 }
