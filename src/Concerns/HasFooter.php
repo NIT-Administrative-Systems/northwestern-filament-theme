@@ -16,9 +16,10 @@ trait HasFooter
     /**
      * Configure the Northwestern footer.
      *
-     * All office parameters default to null, falling back to
-     * `config('northwestern-theme.office.*')` values at
-     * render time.
+     * The footer is on by default. All office parameters default to
+     * null, falling back to `config('northwestern-theme.office.*')`
+     * values at render time. The required university links always
+     * render; `$links` adds to them.
      *
      * @param  bool|Closure(): bool  $enabled  Toggle footer rendering.
      * @param  non-empty-string|null  $officeName  Display name for the office block.
@@ -26,6 +27,8 @@ trait HasFooter
      * @param  non-empty-string|null  $officeCity  City, state, and ZIP line.
      * @param  non-empty-string|null  $officePhone  Phone number (displayed as-is).
      * @param  non-empty-string|null  $officeEmail  Contact email address.
+     * @param  non-empty-string|null  $officeFax  Fax number (displayed as-is).
+     * @param  array<string, string>  $links  Extra links as label => URL, shown under "Quick Links".
      */
     public function footer(
         bool|Closure $enabled = true,
@@ -34,6 +37,8 @@ trait HasFooter
         ?string $officeCity = null,
         ?string $officePhone = null,
         ?string $officeEmail = null,
+        ?string $officeFax = null,
+        array $links = [],
     ): static {
         $this->footerConfig = new FooterConfig(
             enabled: $enabled,
@@ -42,22 +47,24 @@ trait HasFooter
             officeCity: $officeCity,
             officePhone: $officePhone,
             officeEmail: $officeEmail,
+            officeFax: $officeFax,
+            links: $links,
         );
 
         return $this;
     }
 
-    /** Register the footer render hook. */
+    /** Register the footer render hook on full and simple layouts. */
     protected function registerFooter(): void
     {
-        if (! $this->footerConfig instanceof FooterConfig) {
+        $footerConfig = $this->footerConfig ?? new FooterConfig();
+
+        if ($footerConfig->enabled === false) {
             return;
         }
 
-        $footerConfig = $this->footerConfig;
-
         FilamentView::registerRenderHook(
-            PanelsRenderHook::BODY_END,
+            PanelsRenderHook::FOOTER,
             fn (): string => $footerConfig->isEnabled()
                 ? view('northwestern-filament-theme::footer', ['config' => $footerConfig])->render()
                 : '',

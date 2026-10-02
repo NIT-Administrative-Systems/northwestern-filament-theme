@@ -202,3 +202,11 @@ body.fi-body {
 .dark .fi-simple-header-heading {
     color: var(--nu-purple-40);
 }
+
+/* The footer's own styles are inlined by footer.blade.php. These rules
+   place it in the two Filament layouts: full width, pinned to the bottom. */
+.fi-main-ctn > .nu-footer,
+.fi-simple-layout > .nu-footer {
+    align-self: stretch;
+    margin-top: auto;
+}

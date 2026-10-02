@@ -2,25 +2,56 @@
 
 declare(strict_types=1);
 
+use Filament\Panel;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Support\Facades\Blade;
 use Northwestern\FilamentTheme\Footer\FooterConfig;
+use Northwestern\FilamentTheme\Footer\RequiredLink;
 use Northwestern\FilamentTheme\NorthwesternTheme;
 
-it('is disabled by default', function () {
-    $plugin = NorthwesternTheme::make();
+function registeredRenderHooks(): array
+{
+    $view = FilamentView::getFacadeRoot();
 
-    $reflection = new ReflectionProperty($plugin, 'footerConfig');
+    return (new ReflectionProperty($view, 'renderHooks'))->getValue($view);
+}
 
-    expect($reflection->getValue($plugin))->toBeNull();
+function bootPluginOnPanel(NorthwesternTheme $plugin, string $panelId): Panel
+{
+    $panel = app(Panel::class)->id($panelId);
+    $plugin->register($panel);
+    $plugin->boot($panel);
+
+    return $panel;
+}
+
+it('registers the footer on the FOOTER render hook by default', function () {
+    bootPluginOnPanel(NorthwesternTheme::make(), 'test-footer-default');
+
+    expect(registeredRenderHooks())
+        ->toHaveKey(PanelsRenderHook::FOOTER)
+        ->not->toHaveKey(PanelsRenderHook::BODY_END);
 });
 
-it('enables the footer when footer() is called', function () {
-    $plugin = NorthwesternTheme::make()->footer();
+it('does not register the footer when disabled', function () {
+    bootPluginOnPanel(NorthwesternTheme::make()->footer(enabled: false), 'test-footer-disabled');
 
-    $reflection = new ReflectionProperty($plugin, 'footerConfig');
-    $config = $reflection->getValue($plugin);
+    expect(registeredRenderHooks())->not->toHaveKey(PanelsRenderHook::FOOTER);
+});
 
-    expect($config)->toBeInstanceOf(FooterConfig::class);
-    expect($config->isEnabled())->toBeTrue();
+it('evaluates a closure for the enabled state at render time', function () {
+    $enabled = false;
+
+    bootPluginOnPanel(NorthwesternTheme::make()->footer(enabled: function () use (&$enabled) {
+        return $enabled;
+    }), 'test-footer-closure');
+
+    expect(FilamentView::renderHook(PanelsRenderHook::FOOTER)->toHtml())->toBe('');
+
+    $enabled = true;
+
+    expect(FilamentView::renderHook(PanelsRenderHook::FOOTER)->toHtml())->toContain('<footer class="nu-footer">');
 });
 
 it('can be explicitly disabled', function () {
@@ -44,48 +75,170 @@ it('stores office information', function () {
         officeCity: 'Evanston, IL 60201',
         officePhone: '847-555-0000',
         officeEmail: 'test@northwestern.edu',
+        officeFax: '847-555-0001',
     );
 
-    expect($config->officeName)->toBe('Test Office');
-    expect($config->officeAddr)->toBe('123 Main St');
-    expect($config->officeCity)->toBe('Evanston, IL 60201');
-    expect($config->officePhone)->toBe('847-555-0000');
-    expect($config->officeEmail)->toBe('test@northwestern.edu');
+    expect($config->office())->toBe([
+        'name' => 'Test Office',
+        'addr' => '123 Main St',
+        'city' => 'Evanston, IL 60201',
+        'phone' => '847-555-0000',
+        'fax' => '847-555-0001',
+        'email' => 'test@northwestern.edu',
+    ]);
 });
 
-it('defaults office fields to null', function () {
-    $config = new FooterConfig();
+it('falls back to config and then to the default office', function () {
+    config()->set('northwestern-theme.office', [
+        'name' => 'Config Office',
+        'fax' => '847-555-0002',
+        'phone' => '',
+    ]);
 
-    expect($config->officeName)->toBeNull();
-    expect($config->officeAddr)->toBeNull();
-    expect($config->officeCity)->toBeNull();
-    expect($config->officePhone)->toBeNull();
-    expect($config->officeEmail)->toBeNull();
+    $office = (new FooterConfig(officeEmail: 'plugin@northwestern.edu'))->office();
+
+    expect($office)->toBe([
+        'name' => 'Config Office',
+        'addr' => FooterConfig::DEFAULT_OFFICE['addr'],
+        'city' => FooterConfig::DEFAULT_OFFICE['city'],
+        'phone' => null,
+        'fax' => '847-555-0002',
+        'email' => 'plugin@northwestern.edu',
+    ]);
 });
 
-it('passes office overrides through the fluent api', function () {
+it('has no fax by default', function () {
+    expect((new FooterConfig())->office()['fax'])->toBeNull();
+});
+
+it('passes office overrides and links through the fluent api', function () {
     $plugin = NorthwesternTheme::make()->footer(
         officeName: 'My Office',
         officeEmail: 'me@northwestern.edu',
+        officeFax: '847-555-1111',
+        links: ['Help' => 'https://example.com/help'],
     );
 
-    $reflection = new ReflectionProperty($plugin, 'footerConfig');
-    $config = $reflection->getValue($plugin);
+    $config = (new ReflectionProperty($plugin, 'footerConfig'))->getValue($plugin);
 
-    expect($config->officeName)->toBe('My Office');
-    expect($config->officeEmail)->toBe('me@northwestern.edu');
-    expect($config->officeAddr)->toBeNull();
+    expect($config->officeName)->toBe('My Office')
+        ->and($config->officeEmail)->toBe('me@northwestern.edu')
+        ->and($config->officeFax)->toBe('847-555-1111')
+        ->and($config->officeAddr)->toBeNull()
+        ->and($config->links)->toBe(['Help' => 'https://example.com/help']);
 });
 
 it('returns the plugin instance for chaining', function () {
     $plugin = NorthwesternTheme::make();
-    $chainedPlugin = $plugin->footer();
 
-    expect($chainedPlugin)->toBe($plugin);
+    expect($plugin->footer())->toBe($plugin);
 });
 
-it('has the footer view file', function () {
-    $viewPath = __DIR__ . '/../../resources/views/footer.blade.php';
+it('defines the nine required links once each', function () {
+    expect(RequiredLink::cases())->toHaveCount(9)
+        ->and([...RequiredLink::RESOURCES, ...RequiredLink::LEGAL])->toEqualCanonicalizing(RequiredLink::cases());
 
-    expect(file_exists($viewPath))->toBeTrue();
+    foreach (RequiredLink::cases() as $link) {
+        expect($link->url())->toStartWith('https://')
+            ->and($link->url())->not->toEndWith('index.html')
+            ->and($link->label())->not->toBeEmpty();
+    }
+
+    expect(RequiredLink::Accessibility->url())->toBe('https://www.northwestern.edu/accessibility/report/')
+        ->and(RequiredLink::PrivacyStatement->url())->toBe('https://www.northwestern.edu/privacy/');
+});
+
+it('renders every required link', function () {
+    $html = view('northwestern-filament-theme::footer', ['config' => new FooterConfig()])->render();
+
+    foreach (RequiredLink::cases() as $link) {
+        expect($html)->toContain('<a href="' . $link->url() . '">' . e($link->label()) . '</a>');
+    }
+
+    expect($html)
+        ->toContain('Northwestern Resources')
+        ->toContain('&copy; ' . date('Y') . ' Northwestern University')
+        ->toContain('<a class="nu-footer-wordmark" href="https://www.northwestern.edu/">');
+});
+
+it('renders app links in addition to the required links', function () {
+    $html = view('northwestern-filament-theme::footer', ['config' => new FooterConfig(
+        links: ['Help & Support' => 'https://example.com/help'],
+    )])->render();
+
+    expect($html)
+        ->toContain('Quick Links')
+        ->toContain('<a href="https://example.com/help">Help &amp; Support</a>')
+        ->toContain(RequiredLink::ReportAConcern->url());
+});
+
+it('omits the quick links section when the app adds none', function () {
+    $html = view('northwestern-filament-theme::footer', ['config' => new FooterConfig()])->render();
+
+    expect($html)->not->toContain('Quick Links');
+});
+
+it('renders office details including an optional fax', function () {
+    $html = view('northwestern-filament-theme::footer', ['config' => new FooterConfig(
+        officeName: 'Test Office',
+        officeEmail: 'test@northwestern.edu',
+        officeFax: '847-555-0001',
+    )])->render();
+
+    expect($html)
+        ->toContain('<h2 class="nu-footer-unit">Test Office</h2>')
+        ->toContain('Fax number')
+        ->toContain('847-555-0001')
+        ->toContain('<a href="mailto:test@northwestern.edu">test@northwestern.edu</a>');
+});
+
+it('hides the fax row when there is no fax', function () {
+    $html = view('northwestern-filament-theme::footer', ['config' => new FooterConfig()])->render();
+
+    expect($html)->not->toContain('Fax number');
+});
+
+it('uses inline SVG instead of remote images', function () {
+    $html = view('northwestern-filament-theme::footer', ['config' => new FooterConfig()])->render();
+
+    expect($html)
+        ->toContain('<svg class="nu-wordmark nu-wordmark-university"')
+        ->not->toContain('<img')
+        ->not->toContain('common.northwestern.edu')
+        ->not->toContain('/v8/');
+});
+
+it('inlines the token-based footer stylesheet', function () {
+    $html = view('northwestern-filament-theme::footer', ['config' => new FooterConfig()])->render();
+
+    expect($html)
+        ->toContain('<style>')
+        ->toContain('.nu-footer {')
+        ->toContain('var(--nu-purple-120)');
+});
+
+it('renders as a Blade component outside Filament', function () {
+    $html = Blade::render(
+        '<x-northwestern-filament-theme::footer office-name="Error Page Office" office-fax="847-555-0003" :links="$links" />',
+        ['links' => ['Status' => 'https://status.example.com']],
+    );
+
+    expect($html)
+        ->toContain('<footer class="nu-footer">')
+        ->toContain('Error Page Office')
+        ->toContain('847-555-0003')
+        ->toContain('<a href="https://status.example.com">Status</a>')
+        ->toContain(RequiredLink::Accessibility->url());
+});
+
+it('keeps the footer markup free of Filament, auth and database calls', function () {
+    $sources = file_get_contents(__DIR__ . '/../../resources/views/footer.blade.php')
+        . file_get_contents(__DIR__ . '/../../resources/views/components/footer.blade.php')
+        . file_get_contents(__DIR__ . '/../../resources/views/wordmark.blade.php');
+
+    expect($sources)
+        ->not->toContain('filament(')
+        ->not->toContain('Filament\\')
+        ->not->toContain('auth(')
+        ->not->toContain('DB::');
 });
