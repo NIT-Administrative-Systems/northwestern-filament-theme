@@ -30,7 +30,7 @@ Every panel that registers the plugin now renders the Northwestern footer. It us
     ```
 
 - `->footer()` with no arguments is now the default, so you can delete that call. Calls with office arguments keep working.
-- The footer renders through `PanelsRenderHook::FOOTER` instead of `BODY_END`. On full pages it sits at the bottom of the content column, beside the sidebar, instead of spanning the window. On simple pages such as login it spans the page below the card.
+- On full pages the footer still renders at `PanelsRenderHook::BODY_END`, after the layout, so it spans the window below the sidebar and the content. On simple pages such as login it now renders inside the simple layout through `PanelsRenderHook::SIMPLE_LAYOUT_END`, so it sits below the card instead of after the full-height layout.
 - If you rendered the footer yourself, for example through your own `BODY_END` render hook, remove that hook to avoid two footers.
 
 ### The footer has new markup

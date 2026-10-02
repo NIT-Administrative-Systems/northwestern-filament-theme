@@ -25,7 +25,7 @@ This is a breaking release that moves the theme from Northwestern's `v8` global 
 ### Changed
 
 - **Breaking:** the footer is on by default for every panel. Opt out with `->footer(enabled: false)`
-- **Breaking:** the footer renders through `PanelsRenderHook::FOOTER` instead of `BODY_END`. On full pages it now sits in the content column beside the sidebar instead of spanning the window
+- On simple pages the footer renders inside the simple layout through `PanelsRenderHook::SIMPLE_LAYOUT_END` instead of after it at `BODY_END`, so it sits below the card. Full pages still render it at `BODY_END`, spanning the window below the sidebar and the content
 - **Breaking:** the footer is rebuilt to the dept 4.0 structure with new markup and class names: wordmark and unit name, then contact, Connect, Quick Links and Northwestern Resources columns on Purple 120, and a Purple 100 bottom bar with the copyright, Accessibility, Disclaimer, Privacy Statement and Report a Concern. Published copies of `footer.blade.php` no longer match
 - **Breaking:** fonts load from `common.northwestern.edu/dept/4.0/` as `.woff2` instead of `v8` `.woff`. Poppins 400 now uses the regular face instead of light, so headings set at that weight render slightly heavier
 - **Breaking:** when no `northwestern-theme.lockup` is configured, the default brand logo is the dept 4.0 "Northwestern" wordmark as inline SVG instead of the `v8` SVG URL, so `getBrandLogo()` returns an `Htmlable`. It is purple on light backgrounds and white in the topbar and in dark mode

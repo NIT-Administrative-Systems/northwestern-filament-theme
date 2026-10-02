@@ -203,9 +203,9 @@ body.fi-body {
     color: var(--nu-purple-40);
 }
 
-/* The footer's own styles are inlined by footer.blade.php. These rules
-   place it in the two Filament layouts: full width, pinned to the bottom. */
-.fi-main-ctn > .nu-footer,
+/* The footer's own styles are inlined by footer.blade.php. On full pages it
+   renders after the layout at BODY_END and needs no placement rules; on simple
+   pages it renders inside the simple layout, so pin it there full width. */
 .fi-simple-layout > .nu-footer {
     align-self: stretch;
     margin-top: auto;

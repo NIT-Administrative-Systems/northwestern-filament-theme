@@ -26,18 +26,38 @@ function bootPluginOnPanel(NorthwesternTheme $plugin, string $panelId): Panel
     return $panel;
 }
 
-it('registers the footer on the FOOTER render hook by default', function () {
+it('registers the footer after the layout on full pages and inside the simple layout', function () {
     bootPluginOnPanel(NorthwesternTheme::make(), 'test-footer-default');
 
     expect(registeredRenderHooks())
-        ->toHaveKey(PanelsRenderHook::FOOTER)
-        ->not->toHaveKey(PanelsRenderHook::BODY_END);
+        ->toHaveKey(PanelsRenderHook::BODY_END)
+        ->toHaveKey(PanelsRenderHook::SIMPLE_LAYOUT_END)
+        ->not->toHaveKey(PanelsRenderHook::FOOTER);
+});
+
+it('renders the footer once on full pages', function () {
+    bootPluginOnPanel(NorthwesternTheme::make(), 'test-footer-full');
+
+    expect(FilamentView::renderHook(PanelsRenderHook::BODY_END)->toHtml())
+        ->toContain('<footer class="nu-footer">');
+});
+
+it('renders the footer once on simple pages', function () {
+    bootPluginOnPanel(NorthwesternTheme::make(), 'test-footer-simple');
+
+    // The simple layout renders before the body around it.
+    expect(FilamentView::renderHook(PanelsRenderHook::SIMPLE_LAYOUT_END)->toHtml())
+        ->toContain('<footer class="nu-footer">')
+        ->and(FilamentView::renderHook(PanelsRenderHook::BODY_END)->toHtml())
+        ->toBe('');
 });
 
 it('does not register the footer when disabled', function () {
     bootPluginOnPanel(NorthwesternTheme::make()->footer(enabled: false), 'test-footer-disabled');
 
-    expect(registeredRenderHooks())->not->toHaveKey(PanelsRenderHook::FOOTER);
+    expect(registeredRenderHooks())
+        ->not->toHaveKey(PanelsRenderHook::BODY_END)
+        ->not->toHaveKey(PanelsRenderHook::SIMPLE_LAYOUT_END);
 });
 
 it('evaluates a closure for the enabled state at render time', function () {
@@ -47,11 +67,11 @@ it('evaluates a closure for the enabled state at render time', function () {
         return $enabled;
     }), 'test-footer-closure');
 
-    expect(FilamentView::renderHook(PanelsRenderHook::FOOTER)->toHtml())->toBe('');
+    expect(FilamentView::renderHook(PanelsRenderHook::BODY_END)->toHtml())->toBe('');
 
     $enabled = true;
 
-    expect(FilamentView::renderHook(PanelsRenderHook::FOOTER)->toHtml())->toContain('<footer class="nu-footer">');
+    expect(FilamentView::renderHook(PanelsRenderHook::BODY_END)->toHtml())->toContain('<footer class="nu-footer">');
 });
 
 it('can be explicitly disabled', function () {

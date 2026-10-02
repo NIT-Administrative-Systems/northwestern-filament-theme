@@ -246,7 +246,7 @@ Every panel gets the Northwestern footer, built to the Department Templates 4.0 
 - your own links under "Quick Links", if you add any
 - the links the university's Web Style Guide requires, which can't be removed: Building Access, Campus Emergency Information, Careers, Contact Northwestern University, University Policies, Accessibility, Disclaimer, Privacy Statement and Report a Concern
 
-The footer renders through Filament's `FOOTER` render hook, on full pages and on simple pages such as login.
+On full pages the footer renders after the layout, through Filament's `BODY_END` render hook, so it spans the window below the sidebar and the content. On simple pages such as login it renders inside the layout through `SIMPLE_LAYOUT_END`, below the card.
 
 ### Office Information
 

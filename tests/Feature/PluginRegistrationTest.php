@@ -156,7 +156,7 @@ it('registers footer render hook when footer is enabled', function () {
 
     $hooks = (new ReflectionProperty(Filament\Support\Facades\FilamentView::getFacadeRoot(), 'renderHooks'))->getValue(Filament\Support\Facades\FilamentView::getFacadeRoot());
 
-    expect($hooks)->toHaveKey(Filament\View\PanelsRenderHook::FOOTER);
+    expect($hooks)->toHaveKey(Filament\View\PanelsRenderHook::BODY_END);
 });
 
 it('renders the footer view with custom office info', function () {
