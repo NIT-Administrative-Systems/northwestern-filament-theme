@@ -5,38 +5,41 @@ declare(strict_types=1);
 namespace Northwestern\FilamentTheme\Footer;
 
 use Closure;
+use Northwestern\FilamentTheme\ConfigResolver;
 
 /**
- * Configuration for the Northwestern footer.
+ * Per-panel footer settings, and the footer content the view renders.
  *
- * Empty office fields fall back to
- * config('northwestern-theme.office.*').
+ * The content comes from config('northwestern-filament-theme.*'). The office
+ * and links values here are the deprecated `->footer()` arguments and footer
+ * component props, which still take precedence. See ConfigResolver for the
+ * full resolution order.
  */
 readonly class FooterConfig
 {
     /**
-     * Office details shown when neither the plugin nor config sets them.
+     * Office details shown when nothing else sets them.
      *
      * @var array{name: string, addr: string, city: string, phone: string, fax: null, email: string}
      */
     public const array DEFAULT_OFFICE = [
-        'name' => 'Information Technology',
-        'addr' => '1800 Sherman Ave',
-        'city' => 'Evanston, IL 60201',
-        'phone' => '847-491-4357 (1-HELP)',
-        'fax' => null,
-        'email' => 'consultant@northwestern.edu',
+        'name' => ConfigResolver::DEFAULT_UNIT['name'],
+        'addr' => ConfigResolver::DEFAULT_UNIT['address'],
+        'city' => ConfigResolver::DEFAULT_UNIT['city'],
+        'phone' => ConfigResolver::DEFAULT_UNIT['phone'],
+        'fax' => ConfigResolver::DEFAULT_UNIT['fax'],
+        'email' => ConfigResolver::DEFAULT_UNIT['email'],
     ];
 
     /**
      * @param  bool|Closure(): bool  $enabled  Whether the footer renders.
-     * @param  non-empty-string|null  $officeName  Display name for the office block.
-     * @param  non-empty-string|null  $officeAddr  Street address line.
-     * @param  non-empty-string|null  $officeCity  City, state, and ZIP line.
-     * @param  non-empty-string|null  $officePhone  Phone number (displayed as-is).
-     * @param  non-empty-string|null  $officeEmail  Contact email address.
-     * @param  non-empty-string|null  $officeFax  Fax number (displayed as-is). Hidden when empty.
-     * @param  array<string, string>  $links  Extra links as label => URL, shown under "Quick Links".
+     * @param  non-empty-string|null  $officeName  Deprecated: set `unit.name` in config/northwestern-filament-theme.php.
+     * @param  non-empty-string|null  $officeAddr  Deprecated: set `unit.address` in config/northwestern-filament-theme.php.
+     * @param  non-empty-string|null  $officeCity  Deprecated: set `unit.city` in config/northwestern-filament-theme.php.
+     * @param  non-empty-string|null  $officePhone  Deprecated: set `unit.phone` in config/northwestern-filament-theme.php.
+     * @param  non-empty-string|null  $officeEmail  Deprecated: set `unit.email` in config/northwestern-filament-theme.php.
+     * @param  non-empty-string|null  $officeFax  Deprecated: set `unit.fax` in config/northwestern-filament-theme.php.
+     * @param  array<string, string>  $links  Deprecated: set `footer.links` in config/northwestern-filament-theme.php.
      */
     public function __construct(
         public bool|Closure $enabled = true,
@@ -59,33 +62,49 @@ readonly class FooterConfig
     }
 
     /**
-     * Resolve the office details: plugin values first, then
-     * config('northwestern-theme.office.*'), then DEFAULT_OFFICE.
-     *
-     * An empty string in config hides that field.
+     * The unit's contact details, keyed as in the legacy `office` config so
+     * that footer views published from v4.0 keep working. A null field is hidden.
      *
      * @return array{name: ?non-empty-string, addr: ?non-empty-string, city: ?non-empty-string, phone: ?non-empty-string, fax: ?non-empty-string, email: ?non-empty-string}
      */
     public function office(): array
     {
+        $unit = ConfigResolver::unit([
+            'name' => $this->officeName,
+            'address' => $this->officeAddr,
+            'city' => $this->officeCity,
+            'phone' => $this->officePhone,
+            'fax' => $this->officeFax,
+            'email' => $this->officeEmail,
+        ]);
+
         return [
-            'name' => $this->resolveOfficeField('name', $this->officeName),
-            'addr' => $this->resolveOfficeField('addr', $this->officeAddr),
-            'city' => $this->resolveOfficeField('city', $this->officeCity),
-            'phone' => $this->resolveOfficeField('phone', $this->officePhone),
-            'fax' => $this->resolveOfficeField('fax', $this->officeFax),
-            'email' => $this->resolveOfficeField('email', $this->officeEmail),
+            'name' => $unit['name'],
+            'addr' => $unit['address'],
+            'city' => $unit['city'],
+            'phone' => $unit['phone'],
+            'fax' => $unit['fax'],
+            'email' => $unit['email'],
         ];
     }
 
     /**
-     * @param  key-of<self::DEFAULT_OFFICE>  $field
-     * @return ?non-empty-string
+     * The links under "Quick Links", as label => URL.
+     *
+     * @return array<string, string>
      */
-    protected function resolveOfficeField(string $field, ?string $value): ?string
+    public function quickLinks(): array
     {
-        $value ??= config("northwestern-theme.office.{$field}", self::DEFAULT_OFFICE[$field]);
+        return ConfigResolver::links($this->links);
+    }
 
-        return is_string($value) && $value !== '' ? $value : null;
+    /**
+     * The "Connect" accounts, as network => URL. Empty hides the section.
+     *
+     * @return array<value-of<SocialNetwork>, string>
+     */
+    public function social(): array
+    {
+        return ConfigResolver::social();
     }
 }

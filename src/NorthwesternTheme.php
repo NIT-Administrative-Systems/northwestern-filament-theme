@@ -106,8 +106,8 @@ class NorthwesternTheme implements Plugin
     /**
      * Set default favicon and brand logo when the panel has none.
      *
-     * The brand logo is `config('northwestern-theme.lockup')` when it
-     * is set, and the inline dept 4.0 wordmark otherwise.
+     * The brand logo is the configured lockup when there is one (see
+     * ConfigResolver::lockup()), and the inline dept 4.0 wordmark otherwise.
      */
     protected function applyBranding(Panel $panel): void
     {
@@ -119,9 +119,9 @@ class NorthwesternTheme implements Plugin
             return;
         }
 
-        $lockup = config('northwestern-theme.lockup');
+        $lockup = ConfigResolver::lockup();
 
-        if (is_string($lockup) && $lockup !== '') {
+        if ($lockup !== null) {
             $panel->brandLogo(asset($lockup));
 
             return;

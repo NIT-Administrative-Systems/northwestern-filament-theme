@@ -11,7 +11,7 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 /**
- * Registers the theme's view, command, and publishable assets.
+ * Registers the theme's config, views, command, and publishable assets.
  */
 class NorthwesternThemeServiceProvider extends PackageServiceProvider
 {
@@ -19,6 +19,7 @@ class NorthwesternThemeServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('northwestern-filament-theme')
+            ->hasConfigFile()
             ->hasViews('northwestern-filament-theme')
             ->hasCommand(InstallCommand::class);
     }

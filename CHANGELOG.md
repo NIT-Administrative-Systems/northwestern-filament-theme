@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+The theme now owns its configuration. Nothing changes for an app that changes nothing: `config/northwestern-theme.php` from `northwestern-laravel-ui` is still read, and existing `->footer()` arguments and component props still win. See [UPGRADING.md](UPGRADING.md#v40-to-v41).
+
+### Added
+
+- `config/northwestern-filament-theme.php`, published with the `northwestern-filament-theme-config` tag: `lockup`, `unit.*` (name, address, city, phone, fax, email), `footer.links` and `footer.social`, with the `NU_LOCKUP` and `NU_UNIT_*` env vars
+- Configurable "Connect" accounts through `footer.social` (network => URL), with the Department Templates 4.0 icons for Bluesky, Facebook, Flickr, Instagram, LinkedIn, Pinterest, RSS, Spotify, Threads, TikTok, Tumblr, Vimeo, WordPress, X and YouTube. It defaults to Northwestern's Facebook, Instagram and YouTube accounts; `[]` hides the section
+- `Footer\SocialNetwork` enum and the publishable `social-icon.blade.php` view
+- `FooterConfig::quickLinks()` and `FooterConfig::social()`, which the footer view uses to read the resolved links and accounts
+
+### Changed
+
+- The lockup and each footer value resolve from a `->footer()` argument or component prop, then the new config, then the legacy `northwestern-theme.*` key, then the built-in default. The legacy file is still supported in 4.x
+- `<x-northwestern-filament-theme::footer />` with no props renders from the new config
+- The composer `suggest` entry describes `northwestern-laravel-ui` as an optional, still-supported legacy source of configuration
+- pnpm settings (`minimumReleaseAge`, its `@nu-appdev/*` exclusion and the demo's overrides) moved to `pnpm-workspace.yaml`, because pnpm 11 ignores them in `.npmrc` and `package.json`
+
+### Deprecated
+
+- The `officeName`, `officeAddr`, `officeCity`, `officePhone`, `officeEmail`, `officeFax` and `links` arguments of `->footer()`, and the matching footer component props. Use the `unit.*` and `footer.links` config keys. They will be removed in a future major release. `->footer(enabled:)` is not deprecated
+
 ## [4.0.0] - 2026-10-02
 
 This is a breaking release that moves the theme from Northwestern's `v8` global template to **Department Templates 4.0**. The footer is now on by default, and the fonts, wordmark and footer markup all change. See [UPGRADING.md](UPGRADING.md#v3x-to-v40). Breaking changes are marked **Breaking**.

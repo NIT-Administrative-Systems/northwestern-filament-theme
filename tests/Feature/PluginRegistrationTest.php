@@ -136,6 +136,30 @@ it('resolves a relative lockup path through the asset helper', function () {
     expect($panel->getBrandLogo())->toBe(asset('images/lockup.svg'));
 });
 
+it('prefers the theme config lockup over the legacy one', function () {
+    config()->set('northwestern-theme.lockup', 'images/legacy-lockup.png');
+    config()->set('northwestern-filament-theme.lockup', 'https://example.com/unit-lockup.svg');
+
+    $panel = app(Panel::class)->id('test-logo-theme-config');
+    $plugin = NorthwesternTheme::make();
+    $plugin->register($panel);
+    $plugin->boot($panel);
+
+    expect($panel->getBrandLogo())->toBe('https://example.com/unit-lockup.svg');
+});
+
+it('uses the wordmark when the theme config lockup is empty, even with a legacy lockup', function () {
+    config()->set('northwestern-theme.lockup', 'images/legacy-lockup.png');
+    config()->set('northwestern-filament-theme.lockup', '');
+
+    $panel = app(Panel::class)->id('test-logo-theme-config-empty');
+    $plugin = NorthwesternTheme::make();
+    $plugin->register($panel);
+    $plugin->boot($panel);
+
+    expect($panel->getBrandLogo())->toBeInstanceOf(Illuminate\Contracts\Support\Htmlable::class);
+});
+
 it('does not override a panel-configured brand logo', function () {
     $panel = app(Panel::class)
         ->id('test-logo-custom')

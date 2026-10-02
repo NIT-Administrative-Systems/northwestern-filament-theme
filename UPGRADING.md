@@ -1,5 +1,27 @@
 # Upgrading
 
+## v4.0 to v4.1
+
+v4.1 is a minor release with no breaking changes. The theme now ships its own config file, `config/northwestern-filament-theme.php`, for the lockup, your unit's footer details, the footer's Quick Links and its social accounts.
+
+**You don't have to change anything.** The theme still reads `config/northwestern-theme.php` from `northwestern-sysdev/northwestern-laravel-ui`, and `->footer()` arguments and footer component props still take precedence. The footer and brand logo render exactly as they did in 4.0.
+
+Moving to the new config is optional in 4.x:
+
+1. Publish it:
+
+    ```bash
+    php artisan vendor:publish --tag=northwestern-filament-theme-config
+    ```
+
+2. Copy your values across. `office.addr` becomes `unit.address`, and the `NU_THEME_OFFICE_*` env vars become `NU_UNIT_*`. The README has the [full key map](README.md#moving-from-northwestern-themephp). Values in the new file win over the legacy file, so you can move one field at a time.
+
+3. Move `->footer()` office and links arguments, and footer component props, into the config. These are deprecated and will be removed only in a future major release, after `northwestern-laravel-ui` is retired. `->footer(enabled:)` is not deprecated.
+
+If you published `footer.blade.php`, it keeps working, but it hardcodes the social accounts and ignores `footer.links` from the config. Re-publish it to pick those up.
+
+---
+
 ## v3.x to v4.0
 
 v4.0 moves the theme from Northwestern's `v8` global template to **Department Templates 4.0**. The footer is on by default, and the fonts, the default wordmark and the footer markup all change. Panel interiors look the same apart from the details below.
