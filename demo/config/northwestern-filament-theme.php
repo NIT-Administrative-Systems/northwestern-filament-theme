@@ -2,25 +2,35 @@
 
 declare(strict_types=1);
 
-/*
- * Branding content for the Northwestern Filament theme. It describes the unit
- * that runs the application; per-panel behavior, such as turning the footer
- * off, stays on the NorthwesternTheme plugin.
- *
- * A null value falls back to the legacy config/northwestern-theme.php from
- * northwestern-sysdev/northwestern-laravel-ui, then to the built-in default.
- * An empty string hides the field.
- */
 return [
-    // A unit lockup for the panel's brand logo: a full URL or a path in public/.
-    // null falls back to the legacy northwestern-theme.lockup key, then to the
-    // Department Templates 4.0 "Northwestern" wordmark.
+
+    /*
+    |--------------------------------------------------------------------------
+    | Unit Lockup
+    |--------------------------------------------------------------------------
+    |
+    | This value is the unit lockup shown as the brand logo of every panel. It
+    | may be a full URL or a path within the public directory. If null, the
+    | legacy lockup is used, then the Department Templates 4.0 wordmark.
+    |
+    */
+
     'lockup' => env('NU_LOCKUP'),
 
-    // The unit responsible for the application. The Web Style Guide requires its
-    // address, phone, fax (if any) and email in the footer. A null field falls back
-    // to the legacy northwestern-theme.office.* key, then to the built-in default
-    // (Information Technology, with no fax).
+    /*
+    |--------------------------------------------------------------------------
+    | Unit Information
+    |--------------------------------------------------------------------------
+    |
+    | These values describe the unit responsible for this application.
+    | The Web Style Guide requires its address, phone, fax (if any)
+    | and email to appear in the footer of every page it serves.
+    |
+    | A null value falls back to the legacy northwestern-theme office key,
+    | then to Information Technology. An empty string hides that field.
+    |
+    */
+
     'unit' => [
         'name' => env('NU_UNIT_NAME'),
         'address' => env('NU_UNIT_ADDRESS'),
@@ -30,21 +40,31 @@ return [
         'email' => env('NU_UNIT_EMAIL'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Footer Links
+    |--------------------------------------------------------------------------
+    |
+    | Quick links are label => URL pairs shown beside the required links,
+    | which can't be removed. Social accounts are network => URL pairs
+    | shown under "Connect", and an empty array hides that section.
+    |
+    | Supported: "bluesky", "facebook", "flickr", "instagram", "linkedin",
+    |            "pinterest", "rss", "spotify", "threads", "tiktok",
+    |            "tumblr", "vimeo", "wordpress", "x", "youtube"
+    |
+    */
+
     'footer' => [
-        // Shown under "Quick Links", as label => URL. The links the Web Style
-        // Guide requires always render and can't be removed.
         'links' => [
             'Theme Showcase' => '/theme-showcase',
         ],
 
-        // The "Connect" accounts, as network => URL, in display order. [] hides
-        // the section. Networks: bluesky, facebook, flickr, instagram, linkedin,
-        // pinterest, rss, spotify, threads, tiktok, tumblr, vimeo, wordpress, x
-        // and youtube.
         'social' => [
             'facebook' => 'https://www.facebook.com/NorthwesternU',
             'instagram' => 'https://instagram.com/northwesternu',
             'youtube' => 'https://www.youtube.com/user/NorthwesternU',
         ],
     ],
+
 ];
