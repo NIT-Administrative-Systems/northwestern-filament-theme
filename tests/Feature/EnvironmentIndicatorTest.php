@@ -24,7 +24,37 @@ it('registers the environment indicator render hook by default', function () {
 
     $hooks = (new ReflectionProperty(FilamentView::getFacadeRoot(), 'renderHooks'))->getValue(FilamentView::getFacadeRoot());
 
-    expect($hooks)->toHaveKey(PanelsRenderHook::GLOBAL_SEARCH_BEFORE);
+    expect($hooks)
+        ->toHaveKey(PanelsRenderHook::GLOBAL_SEARCH_BEFORE)
+        ->toHaveKey(PanelsRenderHook::SIMPLE_LAYOUT_START);
+});
+
+it('renders the indicator at the top of simple pages', function () {
+    $panel = app(Panel::class)->id('test-env-simple');
+    $plugin = NorthwesternTheme::make()->environmentIndicator(visible: true, label: 'Environment: Staging');
+    $plugin->register($panel);
+    $plugin->boot($panel);
+
+    $html = FilamentView::renderHook(PanelsRenderHook::SIMPLE_LAYOUT_START)->toHtml();
+
+    expect($html)
+        ->toContain('<div class="nu-env-indicator-simple">')
+        ->toContain('Environment: Staging');
+});
+
+it('renders nothing on simple pages when the indicator is hidden', function () {
+    $panel = app(Panel::class)->id('test-env-simple-hidden');
+    $plugin = NorthwesternTheme::make()->environmentIndicator(visible: false);
+    $plugin->register($panel);
+    $plugin->boot($panel);
+
+    expect(FilamentView::renderHook(PanelsRenderHook::SIMPLE_LAYOUT_START)->toHtml())->toBe('');
+});
+
+it('does not render the simple-page wrapper in the topbar', function () {
+    $html = view('northwestern-filament-theme::environment-indicator', ['config' => new EnvironmentIndicatorConfig()])->render();
+
+    expect($html)->not->toContain('<div class="nu-env-indicator-simple">');
 });
 
 it('does not register the render hook when disabled', function () {
@@ -35,7 +65,9 @@ it('does not register the render hook when disabled', function () {
 
     $hooks = (new ReflectionProperty(FilamentView::getFacadeRoot(), 'renderHooks'))->getValue(FilamentView::getFacadeRoot());
 
-    expect($hooks)->not->toHaveKey(PanelsRenderHook::GLOBAL_SEARCH_BEFORE);
+    expect($hooks)
+        ->not->toHaveKey(PanelsRenderHook::GLOBAL_SEARCH_BEFORE)
+        ->not->toHaveKey(PanelsRenderHook::SIMPLE_LAYOUT_START);
 });
 
 it('returns the plugin instance for chaining from environmentIndicator()', function () {

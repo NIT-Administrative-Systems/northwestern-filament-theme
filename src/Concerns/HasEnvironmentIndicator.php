@@ -47,7 +47,10 @@ trait HasEnvironmentIndicator
         return $this;
     }
 
-    /** Register the environment indicator render hook. */
+    /**
+     * Register the environment indicator render hooks: in the topbar
+     * of full pages, and at the top of simple pages such as login.
+     */
     protected function registerEnvironmentIndicator(): void
     {
         if (! $this->environmentIndicatorEnabled) {
@@ -56,12 +59,22 @@ trait HasEnvironmentIndicator
 
         $envConfig = $this->environmentIndicatorConfig ?? new EnvironmentIndicatorConfig();
 
-        FilamentView::registerRenderHook(
-            PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
-            fn (): string => $envConfig->isVisible()
-                ? view('northwestern-filament-theme::environment-indicator', ['config' => $envConfig])->render()
-                : '',
-        );
+        $placements = [
+            'topbar' => PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+            'simple' => PanelsRenderHook::SIMPLE_LAYOUT_START,
+        ];
+
+        foreach ($placements as $placement => $hook) {
+            FilamentView::registerRenderHook(
+                $hook,
+                fn (): string => $envConfig->isVisible()
+                    ? view('northwestern-filament-theme::environment-indicator', [
+                        'config' => $envConfig,
+                        'placement' => $placement,
+                    ])->render()
+                    : '',
+            );
+        }
     }
 
     /**
