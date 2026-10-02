@@ -32,10 +32,13 @@ PERCY_TOKEN=<your-token> pnpm exec percy exec --allowed-hostname common.northwes
 
 ## Snapshots
 
-30 Percy snapshots are captured per run:
+Each run captures these snapshots in Chrome and Firefox at 1440px:
 
-| Category                  | Snapshots         |
-| ------------------------- | ----------------- |
-| Full page                 | Light + Dark      |
-| Per-section (13 sections) | Light + Dark each |
-| Footer                    | Light + Dark      |
+| Snapshot               | Page                         |
+| ---------------------- | ---------------------------- |
+| Theme Showcase [light] | Full page                    |
+| Theme Showcase [dark]  | Full page                    |
+| Footer [light]         | Footer only                  |
+| Footer [dark]          | Footer only                  |
+| Login [light]          | Simple page, with the footer |
+| Login [dark]           | Simple page, with the footer |
