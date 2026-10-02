@@ -31,11 +31,7 @@ class DemoPanelProvider extends PanelProvider
             )
             ->plugins([
                 NorthwesternTheme::make()
-                    ->withoutAssetRegistration()
-                    ->footer(
-                        officeFax: '847-555-0100',
-                        links: ['Theme Showcase' => '/theme-showcase'],
-                    ),
+                    ->withoutAssetRegistration(),
             ]);
     }
 }
