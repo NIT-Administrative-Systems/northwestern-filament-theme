@@ -2,13 +2,14 @@
     "private": true,
     "scripts": {
         "build": "vite build",
-        "build:check": "tmp=$(mktemp) && git diff -- dist/theme.css dist/tailwind-tokens.css > \"$tmp\" && vite build && git diff -- dist/theme.css dist/tailwind-tokens.css | diff -u \"$tmp\" -; status=$?; rm -f \"$tmp\"; exit $status",
+        "build:check": "tmp=$(mktemp) && git diff -- dist/theme.css dist/tokens.css dist/tailwind-tokens.css > \"$tmp\" && vite build && git diff -- dist/theme.css dist/tokens.css dist/tailwind-tokens.css | diff -u \"$tmp\" -; status=$?; rm -f \"$tmp\"; exit $status",
         "format": "prettier --write \"**/*.{blade.php,css,md,json,yml,xml}\"",
         "format:check": "prettier --check \"**/*.{blade.php,css,md,json,yml,xml}\"",
         "lint:css": "stylelint \"resources/css/**/*.css\"",
         "lint:css:fix": "stylelint \"resources/css/**/*.css\" --fix"
     },
     "devDependencies": {
+        "@nu-appdev/northwestern-tokens": "^1.0.1",
         "@prettier/plugin-xml": "^3.4.2",
         "@shufo/prettier-plugin-blade": "^1.16.2",
         "@types/node": "^25.6.0",

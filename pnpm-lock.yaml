@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@nu-appdev/northwestern-tokens':
+        specifier: ^1.0.1
+        version: 1.0.1
       '@prettier/plugin-xml':
         specifier: ^3.4.2
         version: 3.4.2(prettier@3.8.1)
@@ -324,6 +327,9 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@nu-appdev/northwestern-tokens@1.0.1':
+    resolution: {integrity: sha512-RKY2Ljt0ocDJeAbFkwtDgQjJeZWUw/7c+lFX5YiRusLs7hAaBLmmcXkdq1ZTfO7y98cZNPMa7JUQSs5rWRr34Q==}
 
   '@one-ini/wasm@0.1.1':
     resolution: {integrity: sha512-XuySG1E38YScSJoMlqovLru4KTUNSjgVTIjyh7qMX6aNN5HY5Ct5LhRJdxO79JtTzKfzV/bnWpz+zquYrISsvw==}
@@ -1704,6 +1710,8 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
+
+  '@nu-appdev/northwestern-tokens@1.0.1': {}
 
   '@one-ini/wasm@0.1.1': {}
 
