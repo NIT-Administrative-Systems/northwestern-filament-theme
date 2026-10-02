@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0] - 2026-10-02
+
 This is a breaking release that moves the theme from Northwestern's `v8` global template to **Department Templates 4.0**. The footer is now on by default, and the fonts, wordmark and footer markup all change. See [UPGRADING.md](UPGRADING.md#v3x-to-v40). Breaking changes are marked **Breaking**.
 
 ### Added
@@ -204,7 +206,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.2...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.2...v4.0.0
 [3.0.2]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v2.5.0...v3.0.0
