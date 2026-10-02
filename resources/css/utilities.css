@@ -33,7 +33,7 @@
     background-color: var(--nu-body-bg);
 }
 
-.fi-simple-main-ctn {
+.fi-simple-main {
     border: 1px solid var(--nu-border-color);
     border-radius: var(--nu-border-radius) !important;
     box-shadow: 0 4px 24px rgb(0 0 0 / 8%) !important;
@@ -130,7 +130,7 @@
     background-color: var(--nu-body-bg);
 }
 
-.dark .fi-simple-main-ctn {
+.dark .fi-simple-main {
     border-color: var(--nu-border-color);
     box-shadow: 0 4px 24px rgb(0 0 0 / 30%) !important;
 }
