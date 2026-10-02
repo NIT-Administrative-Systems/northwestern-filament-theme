@@ -18,6 +18,7 @@ class DemoPanelProvider extends PanelProvider
             ->default()
             ->id('demo')
             ->path('/')
+            ->login()
             ->maxContentWidth('full')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->viteTheme([
@@ -31,7 +32,10 @@ class DemoPanelProvider extends PanelProvider
             ->plugins([
                 NorthwesternTheme::make()
                     ->withoutAssetRegistration()
-                    ->footer(),
+                    ->footer(
+                        officeFax: '847-555-0100',
+                        links: ['Theme Showcase' => '/theme-showcase'],
+                    ),
             ]);
     }
 }

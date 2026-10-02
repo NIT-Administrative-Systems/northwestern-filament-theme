@@ -8,8 +8,10 @@ use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\HtmlString;
 use Northwestern\FilamentTheme\Concerns\HasEnvironmentIndicator;
 use Northwestern\FilamentTheme\Concerns\HasFooter;
 use Northwestern\FilamentTheme\Concerns\HasImpersonationBanner;
@@ -27,6 +29,9 @@ class NorthwesternTheme implements Plugin
     use HasEnvironmentIndicator;
     use HasFooter;
     use HasImpersonationBanner;
+
+    /** The favicon that Department Templates 4.0 pages declare as their shortcut icon. */
+    public const string FAVICON_URL = 'https://common.northwestern.edu/favicon.ico';
 
     protected bool $registerAssets = true;
 
@@ -98,18 +103,39 @@ class NorthwesternTheme implements Plugin
         $this->registerFooter();
     }
 
-    /** Set default favicon and brand logo when the panel has none. */
+    /**
+     * Set default favicon and brand logo when the panel has none.
+     *
+     * The brand logo is `config('northwestern-theme.lockup')` when it
+     * is set, and the inline dept 4.0 wordmark otherwise.
+     */
     protected function applyBranding(Panel $panel): void
     {
         if (! $panel->getFavicon()) {
-            $panel->favicon('https://common.northwestern.edu/v8/icons/favicon-32.png');
+            $panel->favicon(self::FAVICON_URL);
         }
 
-        if (! $panel->getBrandLogo()) {
-            /** @var string $lockup */
-            $lockup = config('northwestern-theme.lockup', 'https://common.northwestern.edu/v8/css/images/northwestern.svg');
-            $panel->brandLogo(asset($lockup));
+        if ($panel->getBrandLogo()) {
+            return;
         }
+
+        $lockup = config('northwestern-theme.lockup');
+
+        if (is_string($lockup) && $lockup !== '') {
+            $panel->brandLogo(asset($lockup));
+
+            return;
+        }
+
+        $panel->brandLogo(function () use ($panel): Htmlable {
+            $brandName = $panel->getBrandName();
+
+            return new HtmlString(view('northwestern-filament-theme::wordmark', [
+                'label' => __('filament-panels::layout.logo.alt', [
+                    'name' => $brandName instanceof Htmlable ? strip_tags($brandName->toHtml()) : $brandName,
+                ]),
+            ])->render());
+        });
     }
 
     /**

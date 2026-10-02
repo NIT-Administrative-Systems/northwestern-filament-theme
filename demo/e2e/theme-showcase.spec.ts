@@ -58,3 +58,27 @@ test("footer - dark", async ({ page }) => {
         scope: ".nu-footer",
     });
 });
+
+/**
+ * The login page has no theme switcher, so set Filament's stored theme
+ * before the page loads.
+ */
+async function gotoLogin(page: Page, scheme: "light" | "dark") {
+    await page.addInitScript((value) => {
+        localStorage.setItem("theme", value);
+    }, scheme);
+    await page.goto("/login", { waitUntil: "load" });
+}
+
+test("simple page - light", async ({ page }) => {
+    await gotoLogin(page, "light");
+    await percySnapshot(page, "Login [light]", {});
+});
+
+test("simple page - dark", async ({ page }) => {
+    await gotoLogin(page, "dark");
+    await page.waitForFunction(() =>
+        document.documentElement.classList.contains("dark")
+    );
+    await percySnapshot(page, "Login [dark]", {});
+});

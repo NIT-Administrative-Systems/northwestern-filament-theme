@@ -20,16 +20,19 @@ jobs:
     name: Lint, Format & Analyse
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
+      checks: write
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
@@ -38,7 +41,7 @@ jobs:
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Rector Cache
-        uses: actions/cache@v5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: /tmp/rector
           key: ${{ runner.os }}-rector-${{ hashFiles('rector.php', 'composer.json') }}
@@ -46,7 +49,7 @@ jobs:
             ${{ runner.os }}-rector-
 
       - name: Pint Cache
-        uses: actions/cache@v5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ./storage/pint.cache
           key: ${{ runner.os }}-pint-${{ hashFiles('pint.json', 'composer.json') }}
@@ -60,12 +63,12 @@ jobs:
         run: composer format:check
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
         with:
           version: ${{ env.PNPM_VERSION }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
@@ -85,7 +88,7 @@ jobs:
           git diff --exit-code dist/
 
       - name: PHPStan Result Cache
-        uses: actions/cache@v5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: /tmp/phpstan
           key: phpstan-results-${{ hashFiles('phpstan.neon', 'composer.json') }}
@@ -98,7 +101,7 @@ jobs:
 
       - name: Publish PHPStan Report
         if: github.actor != 'dependabot[bot]' && always()
-        uses: lcollins/checkstyle-github-action@v3.2.0
+        uses: lcollins/checkstyle-github-action@832a70dc40e28517ddb45ac5ac8b2ad1279bd54d # v4.0.0
         with:
           name: "PHPStan Analysis Report"
           path: "phpstan-report.xml"
@@ -135,10 +138,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
         with:
           php-version: ${{ matrix.php }}
           coverage: none
@@ -149,7 +152,7 @@ jobs:
           composer update --no-interaction --prefer-dist --${{ matrix.stability }}
 
       - name: PHPUnit Cache
-        uses: actions/cache@v5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ./.phpunit.cache
           key: ${{ runner.os }}-phpunit-php${{ matrix.php }}-laravel${{ matrix.laravel }}-${{ matrix.stability }}-${{ hashFiles('phpunit.xml', 'composer.json') }}

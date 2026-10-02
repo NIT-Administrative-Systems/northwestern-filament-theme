@@ -23,6 +23,18 @@ body.fi-body {
     filter: none !important;
 }
 
+.fi-logo .nu-wordmark {
+    display: block;
+    width: auto;
+    height: 100%;
+    color: var(--nu-purple-100);
+}
+
+.fi-topbar .fi-logo .nu-wordmark,
+.dark .fi-logo .nu-wordmark {
+    color: var(--nu-topbar-text);
+}
+
 .fi-sidebar-footer {
     padding: 0.75rem 1rem;
     border-top: 1px solid var(--nu-border-color);
@@ -189,4 +201,12 @@ body.fi-body {
 
 .dark .fi-simple-header-heading {
     color: var(--nu-purple-40);
+}
+
+/* The footer's own styles are inlined by footer.blade.php. On full pages it
+   renders after the layout at BODY_END and needs no placement rules; on simple
+   pages it renders inside the simple layout, so pin it there full width. */
+.fi-simple-layout > .nu-footer {
+    align-self: stretch;
+    margin-top: auto;
 }

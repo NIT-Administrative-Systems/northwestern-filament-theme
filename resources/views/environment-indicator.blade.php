@@ -1,7 +1,12 @@
 @php
     /** @var \Northwestern\FilamentTheme\EnvironmentIndicator\EnvironmentIndicatorConfig $config */
+    // "topbar" on full pages, "simple" at the top of simple pages such as login.
+    $placement ??= "topbar";
 @endphp
 
+@if ($placement === "simple")
+    <div class="nu-env-indicator-simple">
+@endif
 <div class="nu-env-indicator" role="status">
     <svg class="nu-env-indicator-icon"
          aria-hidden="true"
@@ -14,6 +19,9 @@
     </svg>
     {{ $config->resolveLabel() }}
 </div>
+@if ($placement === "simple")
+    </div>
+@endif
 
 <style>
     .fi-topbar {
@@ -60,6 +68,22 @@
     }
 
     .dark .fi-topbar {
+        border-top-color: #A76616;
+    }
+
+    .nu-env-indicator-simple {
+        display: flex;
+        align-self: stretch;
+        justify-content: center;
+        padding: 1rem 1rem 0;
+        border-top: 4px solid var(--nu-gold);
+    }
+
+    .nu-env-indicator-simple .nu-env-indicator {
+        display: inline-flex;
+    }
+
+    .dark .nu-env-indicator-simple {
         border-top-color: #A76616;
     }
 </style>

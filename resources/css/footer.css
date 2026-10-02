@@ -1,0 +1,205 @@
+/* ==========================================================================
+   Footer — Department Templates 4.0 structure
+   Inlined by resources/views/footer.blade.php, not bundled into theme.css,
+   so the footer also works on pages without Filament. It uses only the
+   custom properties from @nu-appdev/northwestern-tokens (dist/tokens.css).
+   Light only: it looks the same in dark mode.
+   ========================================================================== */
+
+.nu-footer {
+    font-family: var(--nu-font-body);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: #fff;
+    text-align: start;
+    background-color: var(--nu-purple-120);
+}
+
+.nu-footer *,
+.nu-footer *::before,
+.nu-footer *::after {
+    box-sizing: border-box;
+}
+
+.nu-footer-main {
+    padding: 3rem 1rem;
+}
+
+.nu-footer-container {
+    max-width: 70rem;
+    margin: 0 auto;
+}
+
+.nu-footer a {
+    font-weight: 700;
+    color: #fff;
+    text-decoration: underline;
+}
+
+.nu-footer a:hover {
+    text-decoration: none;
+}
+
+.nu-footer a:focus-visible {
+    color: #000;
+    outline: 3px solid #fff;
+    background-color: #fff;
+}
+
+.nu-footer h2 {
+    margin: 0 0 1rem;
+    font-family: var(--nu-font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #fff;
+}
+
+.nu-footer ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.nu-footer-wordmark {
+    display: inline-block;
+    max-width: 100%;
+}
+
+.nu-footer-wordmark .nu-wordmark {
+    display: block;
+    width: 24.375rem;
+    max-width: 100%;
+    height: auto;
+    color: #fff;
+}
+
+.nu-footer .nu-footer-unit {
+    margin: 1rem 0 2rem;
+    font-family: var(--nu-font-body);
+    font-size: 1.25rem;
+}
+
+.nu-footer-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 2.5rem 2rem;
+}
+
+.nu-footer-section li {
+    padding-bottom: 0.8rem;
+}
+
+.nu-footer-section li:last-child {
+    padding-bottom: 0;
+}
+
+.nu-footer-contact-item {
+    position: relative;
+    margin: 0 0 2rem 2rem;
+    overflow-wrap: anywhere;
+}
+
+.nu-footer-contact-item:last-child {
+    margin-bottom: 0;
+}
+
+.nu-footer-contact-item p,
+.nu-footer-contact-item address {
+    margin: 0;
+    font-style: normal;
+}
+
+.nu-footer-contact-item strong {
+    font-weight: 700;
+}
+
+.nu-footer-icon {
+    position: absolute;
+    top: 0;
+    left: -2rem;
+    display: block;
+    width: 1.125rem;
+    height: 1.5rem;
+    color: #fff;
+}
+
+.nu-footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 0.6rem;
+}
+
+.nu-footer-social a {
+    display: block;
+    width: 2.5625rem;
+    height: 2.5625rem;
+    color: var(--nu-purple-120);
+    border-radius: 50%;
+    transition: transform 0.2s ease-in-out;
+}
+
+.nu-footer-social a:hover {
+    transform: scale(1.2);
+}
+
+.nu-footer-social svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.nu-footer-bottom {
+    padding: 0.75rem 1rem;
+    background-color: var(--nu-purple-100);
+}
+
+.nu-footer-bottom ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+}
+
+.nu-footer-copyright {
+    margin-right: 1rem;
+}
+
+.nu-footer .nu-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    border-width: 0;
+    clip-path: inset(50%);
+}
+
+@media (width <= 61.25em) {
+    .nu-footer h2 {
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid #fff;
+    }
+
+    .nu-footer .nu-footer-unit {
+        padding-bottom: 0;
+        border-bottom: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nu-footer-social a {
+        transition: none;
+    }
+
+    .nu-footer-social a:hover {
+        transform: none;
+    }
+}
+
+@media print {
+    .nu-footer {
+        display: none;
+    }
+}
