@@ -228,7 +228,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.0.0...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.0...HEAD
+[4.1.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.2...v4.0.0
 [3.0.2]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.0...v3.0.1
