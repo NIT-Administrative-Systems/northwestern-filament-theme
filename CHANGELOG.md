@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.0] - 2026-10-02
+
 The theme now owns its configuration. Nothing changes for an app that changes nothing: `config/northwestern-theme.php` from `northwestern-laravel-ui` is still read, and existing `->footer()` arguments and component props still win. See [UPGRADING.md](UPGRADING.md#v40-to-v41).
 
 ### Added
