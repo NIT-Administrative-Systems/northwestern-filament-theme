@@ -1,0 +1,4 @@
+# pnpm reads its own settings from here; pnpm 11 ignores them in .npmrc.
+minimumReleaseAge: 4320
+minimumReleaseAgeExclude:
+  - "@nu-appdev/*"

@@ -17,21 +17,25 @@ trait HasFooter
     protected ?FooterConfig $footerConfig = null;
 
     /**
-     * Configure the Northwestern footer.
+     * Configure the Northwestern footer for this panel.
      *
-     * The footer is on by default. All office parameters default to
-     * null, falling back to `config('northwestern-theme.office.*')`
-     * values at render time. The required university links always
-     * render; `$links` adds to them.
+     * The footer is on by default. Its content (the unit's details and the
+     * Quick Links) comes from config/northwestern-filament-theme.php; the
+     * required university links always render.
+     *
+     * The office and links parameters are deprecated since 4.1 and will be
+     * removed in a future major. They still take precedence over the config.
+     * Set `unit.*` and `footer.links` in config/northwestern-filament-theme.php
+     * instead.
      *
      * @param  bool|Closure(): bool  $enabled  Toggle footer rendering.
-     * @param  non-empty-string|null  $officeName  Display name for the office block.
-     * @param  non-empty-string|null  $officeAddr  Street address line.
-     * @param  non-empty-string|null  $officeCity  City, state, and ZIP line.
-     * @param  non-empty-string|null  $officePhone  Phone number (displayed as-is).
-     * @param  non-empty-string|null  $officeEmail  Contact email address.
-     * @param  non-empty-string|null  $officeFax  Fax number (displayed as-is).
-     * @param  array<string, string>  $links  Extra links as label => URL, shown under "Quick Links".
+     * @param  non-empty-string|null  $officeName  Deprecated: use the `unit.name` config key.
+     * @param  non-empty-string|null  $officeAddr  Deprecated: use the `unit.address` config key.
+     * @param  non-empty-string|null  $officeCity  Deprecated: use the `unit.city` config key.
+     * @param  non-empty-string|null  $officePhone  Deprecated: use the `unit.phone` config key.
+     * @param  non-empty-string|null  $officeEmail  Deprecated: use the `unit.email` config key.
+     * @param  non-empty-string|null  $officeFax  Deprecated: use the `unit.fax` config key.
+     * @param  array<string, string>  $links  Deprecated: use the `footer.links` config key.
      */
     public function footer(
         bool|Closure $enabled = true,

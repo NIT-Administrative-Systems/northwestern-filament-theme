@@ -2,29 +2,13 @@
 
 declare(strict_types=1);
 
-use Filament\Panel;
 use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\Facades\Blade;
 use Northwestern\FilamentTheme\Footer\FooterConfig;
 use Northwestern\FilamentTheme\Footer\RequiredLink;
+use Northwestern\FilamentTheme\Footer\SocialNetwork;
 use Northwestern\FilamentTheme\NorthwesternTheme;
-
-function registeredRenderHooks(): array
-{
-    $view = FilamentView::getFacadeRoot();
-
-    return (new ReflectionProperty($view, 'renderHooks'))->getValue($view);
-}
-
-function bootPluginOnPanel(NorthwesternTheme $plugin, string $panelId): Panel
-{
-    $panel = app(Panel::class)->id($panelId);
-    $plugin->register($panel);
-    $plugin->boot($panel);
-
-    return $panel;
-}
 
 it('registers the footer after the layout on full pages and inside the simple layout', function () {
     bootPluginOnPanel(NorthwesternTheme::make(), 'test-footer-default');
@@ -261,4 +245,102 @@ it('keeps the footer markup free of Filament, auth and database calls', function
         ->not->toContain('Filament\\')
         ->not->toContain('auth(')
         ->not->toContain('DB::');
+});
+
+it('renders the unit and quick links from the theme config', function () {
+    config()->set('northwestern-filament-theme.unit', [
+        'name' => 'Feinberg IT',
+        'address' => '420 E Superior St',
+        'city' => 'Chicago, IL 60611',
+        'phone' => '312-503-0000',
+        'fax' => '312-503-0001',
+        'email' => 'feinberg-it@northwestern.edu',
+    ]);
+    config()->set('northwestern-filament-theme.footer.links', ['Service Status' => 'https://status.example.com']);
+
+    $html = view('northwestern-filament-theme::footer', ['config' => new FooterConfig()])->render();
+
+    expect($html)
+        ->toContain('<h2 class="nu-footer-unit">Feinberg IT</h2>')
+        ->toContain('420 E Superior St')
+        ->toContain('312-503-0001')
+        ->toContain('<a href="mailto:feinberg-it@northwestern.edu">feinberg-it@northwestern.edu</a>')
+        ->toContain('<a href="https://status.example.com">Service Status</a>')
+        ->not->toContain(FooterConfig::DEFAULT_OFFICE['name']);
+});
+
+it('lets deprecated plugin arguments override the theme config', function () {
+    config()->set('northwestern-filament-theme.unit.name', 'Config Unit');
+    config()->set('northwestern-filament-theme.footer.links', ['Config Link' => '/config']);
+
+    bootPluginOnPanel(NorthwesternTheme::make()->footer(officeName: 'Plugin Office', links: ['Plugin Link' => '/plugin']), 'test-footer-deprecated-args');
+
+    expect(FilamentView::renderHook(PanelsRenderHook::BODY_END)->toHtml())
+        ->toContain('<h2 class="nu-footer-unit">Plugin Office</h2>')
+        ->toContain('<a href="/plugin">Plugin Link</a>')
+        ->not->toContain('Config Unit')
+        ->not->toContain('Config Link');
+});
+
+it('renders the configured social accounts in order, with icons and accessible names', function () {
+    config()->set('northwestern-filament-theme.footer.social', [
+        'linkedin' => 'https://www.linkedin.com/company/unit',
+        'facebook' => 'https://www.facebook.com/NorthwesternU',
+        'bluesky' => 'https://bsky.app/profile/unit',
+    ]);
+
+    $html = view('northwestern-filament-theme::footer', ['config' => new FooterConfig()])->render();
+
+    expect($html)
+        ->toContain('<span class="nu-sr-only">LinkedIn</span>')
+        ->toContain('<span class="nu-sr-only">Northwestern University on Facebook</span>')
+        ->toContain('<span class="nu-sr-only">Bluesky</span>')
+        ->not->toContain('instagram.com')
+        ->and(strpos($html, 'linkedin.com'))->toBeLessThan(strpos($html, 'facebook.com'))
+        ->and(substr_count($html, '<svg aria-hidden="true"'))->toBeGreaterThanOrEqual(3);
+});
+
+it('has an icon for every social network', function () {
+    foreach (SocialNetwork::cases() as $network) {
+        $svg = view('northwestern-filament-theme::social-icon', ['network' => $network->value])->render();
+
+        expect(substr_count($svg, '<svg aria-hidden="true"'))->toBe(1, $network->value)
+            ->and($svg)->not->toContain('class=');
+    }
+});
+
+it('hides the connect section when social is empty', function () {
+    config()->set('northwestern-filament-theme.footer.social', []);
+
+    $html = view('northwestern-filament-theme::footer', ['config' => new FooterConfig()])->render();
+
+    expect($html)
+        ->not->toContain('<h2>Connect</h2>')
+        ->not->toContain('<ul class="nu-footer-social">')
+        ->toContain(RequiredLink::Accessibility->url());
+});
+
+it('renders the component from the theme config with no props and no Filament panel', function () {
+    config()->set('northwestern-filament-theme.unit.name', 'Error Page Unit');
+    config()->set('northwestern-filament-theme.footer.links', ['Status' => 'https://status.example.com']);
+
+    $html = Blade::render('<x-northwestern-filament-theme::footer />');
+
+    expect(app()->providerIsLoaded(Filament\FilamentServiceProvider::class))->toBeFalse()
+        ->and(registeredRenderHooks())->toBe([])
+        ->and($html)
+        ->toContain('<footer class="nu-footer">')
+        ->toContain('<h2 class="nu-footer-unit">Error Page Unit</h2>')
+        ->toContain('<a href="https://status.example.com">Status</a>')
+        ->toContain('Northwestern University on Instagram');
+});
+
+it('lets deprecated component props override the theme config', function () {
+    config()->set('northwestern-filament-theme.unit.name', 'Config Unit');
+
+    $html = Blade::render('<x-northwestern-filament-theme::footer office-name="Prop Office" />');
+
+    expect($html)
+        ->toContain('<h2 class="nu-footer-unit">Prop Office</h2>')
+        ->not->toContain('Config Unit');
 });

@@ -69,7 +69,7 @@
         }
     },
     "suggest": {
-        "northwestern-sysdev/northwestern-laravel-ui": "Provides Northwestern brand lockup and office contact configuration automatically."
+        "northwestern-sysdev/northwestern-laravel-ui": "Optional. Its config/northwestern-theme.php is still supported as a fallback for the lockup and office details; the theme's own config/northwestern-filament-theme.php takes precedence."
     },
     "extra": {
         "laravel": {
