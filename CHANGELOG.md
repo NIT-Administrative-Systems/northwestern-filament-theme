@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- The unread count on the top bar's notifications bell no longer touches the user menu: the bell gets end margin while it shows a badge
+- Table placeholder text uses the muted text color, as infolist placeholders do. Filament's gray-400 fails color contrast on white
+- The top bar's Northwestern wordmark lines up with the application name instead of sitting low beside it
+
 ## [4.1.0] - 2026-10-02
 
 The theme now owns its configuration. Nothing changes for an app that changes nothing: `config/northwestern-theme.php` from `northwestern-laravel-ui` is still read, and existing `->footer()` arguments and component props still win. See [UPGRADING.md](UPGRADING.md#v40-to-v41).

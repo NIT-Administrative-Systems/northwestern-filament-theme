@@ -167,3 +167,9 @@ th.fi-ta-selection-cell {
 .dark .fi-ta-reordering .fi-ta-row {
     background-color: var(--nu-purple-surface-subtle);
 }
+
+/* Filament draws placeholder text in gray-400, which fails color contrast on white. Infolist
+   placeholders already use the muted text color. */
+.fi-ta-placeholder {
+    color: var(--nu-color-text-muted);
+}
