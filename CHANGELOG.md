@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.2.1] - 2026-10-06
+
+### Fixed
+
+- Red text in dark mode, such as a stats card's description, meets color contrast on dark cards: the danger palette's 400 shade is lighter
+
 ## [4.2.0] - 2026-10-06
 
 ### Added
@@ -248,7 +254,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.2.0...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.2.1...HEAD
+[4.2.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.2.0...v4.2.1
 [4.2.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.2...v4.2.0
 [4.1.2]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.1...v4.1.2
 [4.1.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.0...v4.1.1
