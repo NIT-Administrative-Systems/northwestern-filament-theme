@@ -35,6 +35,12 @@ body.fi-body {
     color: var(--nu-topbar-text);
 }
 
+/* The wordmark's lowercase letters sit low in its box, so centering the box leaves it looking low
+   beside the application name. Lifting it by a tenth of its height lines up the visual centers. */
+.fi-topbar .fi-logo .nu-wordmark {
+    translate: 0 -10%;
+}
+
 .fi-sidebar-footer {
     padding: 0.75rem 1rem;
     border-top: 1px solid var(--nu-border-color);
@@ -72,6 +78,11 @@ body.fi-body {
 .dark .fi-topbar .fi-global-search-field .fi-input-wrp {
     background-color: var(--nu-sidebar-bg) !important;
     border-color: var(--nu-border-color) !important;
+}
+
+/* Filament hangs the unread-count badge half off the bell's edge, where it touches the user menu. */
+.fi-topbar .fi-topbar-database-notifications-btn:has(.fi-icon-btn-badge-ctn) {
+    margin-inline-end: 0.5rem;
 }
 
 .fi-topbar-item.fi-active .fi-topbar-item-btn {

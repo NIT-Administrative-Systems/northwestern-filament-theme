@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.1] - 2026-10-06
+
+### Fixed
+
+- The unread count on the top bar's notifications bell no longer touches the user menu: the bell gets end margin while it shows a badge
+- Table placeholder text uses the muted text color, as infolist placeholders do. Filament's gray-400 fails color contrast on white
+- The top bar's Northwestern wordmark lines up with the application name instead of sitting low beside it
+
 ## [4.1.0] - 2026-10-02
 
 The theme now owns its configuration. Nothing changes for an app that changes nothing: `config/northwestern-theme.php` from `northwestern-laravel-ui` is still read, and existing `->footer()` arguments and component props still win. See [UPGRADING.md](UPGRADING.md#v40-to-v41).
@@ -228,7 +236,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.0...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.1...HEAD
+[4.1.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.0...v4.1.1
 [4.1.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.2...v4.0.0
 [3.0.2]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.1...v3.0.2
