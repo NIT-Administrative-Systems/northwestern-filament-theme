@@ -400,6 +400,27 @@ NorthwesternTheme::make()
     ->footer(enabled: fn () => auth()->user()?->isStudent())
 ```
 
+## Date Range Filter
+
+`DateRangeFilter` builds a table filter with **From** and **To** dates, its query and its indicators. Both dates use the browser's own date input: Filament's custom picker nests its input inside a button, which screen readers can't operate and axe reports as a nested interactive control.
+
+```php
+use Northwestern\FilamentTheme\Filters\DateRangeFilter;
+
+public static function table(Table $table): Table
+{
+    return $table->filters([
+        resolve(DateRangeFilter::class)->make(
+            name: 'created_at_range',
+            label: 'Date Range',
+            column: 'created_at',
+        ),
+    ]);
+}
+```
+
+By default it compares timestamps from the start of the From day to the end of the To day. Pass `mode: DateRangeFilter::ModeDate` for a date column. `icon`, `limitUntilToToday`, `fromLabel`, `untilLabel`, `fromField` and `untilField` adjust the fields, and `showIndicators: false` keeps Filament's default indicator.
+
 ## Customizing Views
 
 To modify the environment indicator, impersonation banner, or footer markup, publish the views:
