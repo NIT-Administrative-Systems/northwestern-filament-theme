@@ -61,7 +61,8 @@ it('takes field names, labels, an icon and a limit of today', function () {
     expect([$from->getName(), $from->getLabel(), $until->getName(), $until->getLabel()])->toBe(['start', 'Start', 'end', 'End'])
         ->and($from->getPrefixIcon())->toBe(Heroicon::OutlinedCalendar)
         ->and($until->getPrefixIcon())->toBe(Heroicon::OutlinedCalendar)
-        ->and($until->getMaxDate())->toBe('2026-10-06 00:00:00');
+        // Filament stores the limit as the start or end of the day depending on its version.
+        ->and($until->getMaxDate())->toStartWith('2026-10-06 ');
 });
 
 it('filters timestamps from the start of the From day to the end of the To day', function () {
