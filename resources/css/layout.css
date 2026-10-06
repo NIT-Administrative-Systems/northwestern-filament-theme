@@ -165,6 +165,8 @@ body.fi-body {
     color: var(--nu-color-text-muted);
 }
 
+.fi-topbar .fi-btn:focus-visible,
+.fi-topbar .fi-icon-btn:focus-visible,
 .fi-topbar .fi-user-menu-trigger:focus-visible {
     outline: 2px solid var(--nu-topbar-text);
     outline-offset: 2px;
