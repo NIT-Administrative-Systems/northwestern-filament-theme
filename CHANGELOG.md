@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.2] - 2026-10-06
+
+### Fixed
+
+- Keyboard focus on the top bar's buttons, such as the notifications bell and the sidebar toggles, is now visible: the focus outline uses the top bar's text color instead of purple on the purple bar
+
 ## [4.1.1] - 2026-10-06
 
 ### Fixed
@@ -236,7 +242,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.1...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.2...HEAD
+[4.1.2]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.1...v4.1.2
 [4.1.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.0...v4.1.1
 [4.1.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v3.0.2...v4.0.0
