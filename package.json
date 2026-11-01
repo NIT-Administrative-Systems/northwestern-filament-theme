@@ -11,18 +11,18 @@
     "devDependencies": {
         "@nu-appdev/northwestern-tokens": "^1.0.1",
         "@prettier/plugin-xml": "^3.4.2",
-        "@shufo/prettier-plugin-blade": "^1.16.2",
-        "@types/node": "^26.6.4",
+        "@shufo/prettier-plugin-blade": "^1.16.3",
+        "@types/node": "^26.6.6",
         "consola": "^3.4.2",
         "esbuild": "^0.28.2",
-        "prettier": "^3.9.9",
-        "prettier-plugin-packagejson": "^3.0.2",
+        "prettier": "^3.9.10",
+        "prettier-plugin-packagejson": "^3.0.3",
         "stylelint": "^17.16.0",
-        "stylelint-config-recess-order": "^7.8.0",
+        "stylelint-config-recess-order": "^7.9.0",
         "stylelint-config-standard": "^40.0.0",
-        "stylelint-order": "^8.1.1",
+        "stylelint-order": "^8.1.2",
         "typescript": "^7.0.2",
-        "vite": "^8.3.2"
+        "vite": "^8.3.5"
     },
     "engines": {
         "node": ">= 24.0.0",
