@@ -2,11 +2,28 @@
 
 declare(strict_types=1);
 
+use Filament\Actions\Action;
 use Filament\Panel;
 use Filament\Support\Facades\FilamentAsset;
 use Northwestern\FilamentTheme\Colors;
 use Northwestern\FilamentTheme\Footer\FooterConfig;
 use Northwestern\FilamentTheme\NorthwesternTheme;
+
+it('marks an empty Filters badge so the theme CSS hides it', function () {
+    NorthwesternTheme::make()->register(app(Panel::class)->id('test-filters-badge'));
+
+    // The table view passes its active filter count, which PHP turns into a string there.
+    expect(Action::make('openFilters')->badge('0')->getBadgeColor())->toBe('nu-empty')
+        ->and(Action::make('openFilters')->badge('2')->getBadgeColor())->toBeNull()
+        ->and(Action::make('edit')->badge('0')->getBadgeColor())->toBeNull()
+        ->and((string) file_get_contents(__DIR__ . '/../../resources/css/tables.css'))->toContain('.fi-icon-btn-badge-ctn:has(> .fi-color-nu-empty)');
+});
+
+it('keeps a badge color the table sets on its Filters button', function () {
+    NorthwesternTheme::make()->register(app(Panel::class)->id('test-filters-badge-custom'));
+
+    expect(Action::make('openFilters')->badgeColor('danger')->badge('0')->getBadgeColor())->toBe('danger');
+});
 
 it('registers brand colors on the panel', function () {
     $panel = app(Panel::class)->id('test-colors');
