@@ -85,6 +85,135 @@ body.fi-body {
     margin-inline-end: 0.5rem;
 }
 
+/* Below lg, Filament hides the start of the top bar, and with it the wordmark and anything on
+   TOPBAR_LOGO_AFTER, such as an application name. The brand needs the wordmark on every page,
+   so keep it at every width, a little smaller, and let what follows it truncate instead. On a
+   360px phone with search, notifications and the user menu, that leaves about 3rem for a name. */
+@media (width < 64rem) {
+    .fi-topbar-start {
+        display: flex;
+        flex: 0 1 auto;
+        min-width: 0;
+        margin-inline-end: 0.75rem;
+    }
+
+    /* The desktop collapse buttons. The bar's own open and close buttons do that job here. */
+    .fi-topbar-start .fi-topbar-collapse-sidebar-btn-ctn {
+        display: none;
+    }
+
+    .fi-topbar-start > a:has(> .fi-logo),
+    .fi-topbar-start > .fi-logo {
+        flex-shrink: 0;
+    }
+
+    .fi-topbar-start .fi-logo {
+        margin-inline-start: 0;
+    }
+
+    /* Filament sets the logo's height inline. A configured lockup keeps its height. */
+    .fi-topbar-start .fi-logo:has(> .nu-wordmark) {
+        height: 1rem !important;
+    }
+
+    .fi-topbar-start > :not(a:has(> .fi-logo), .fi-logo) {
+        min-width: 0;
+    }
+
+    /* Filament lets the buttons at the end shrink, which pushes the user menu off the bar. */
+    .fi-topbar-end {
+        flex-shrink: 0;
+        column-gap: 0.5rem;
+    }
+
+    .fi-topbar .fi-topbar-open-sidebar-btn,
+    .fi-topbar .fi-topbar-close-sidebar-btn {
+        margin-inline-end: 0.75rem !important;
+    }
+}
+
+/* On phones, global search folds to its magnifying glass so the bar fits at 360px. Tapping it
+   focuses the field, which then opens across the bar until focus leaves the search. */
+@media (width < 40rem) {
+    .fi-topbar .fi-global-search-field .fi-input-wrp,
+    .dark .fi-topbar .fi-global-search-field .fi-input-wrp {
+        position: relative;
+        justify-content: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        background-color: transparent !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .fi-topbar .fi-global-search-field .fi-input-wrp-prefix {
+        padding-inline: 0;
+    }
+
+    .fi-topbar .fi-global-search-field .fi-input-wrp-prefix .fi-icon {
+        color: var(--nu-topbar-text) !important;
+    }
+
+    .fi-topbar .fi-global-search-field .fi-input-wrp-content-ctn {
+        position: absolute;
+        inset: 0;
+    }
+
+    .fi-topbar .fi-global-search-field .fi-input {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        opacity: 0;
+    }
+
+    .fi-topbar .fi-global-search-field .fi-input-wrp-suffix {
+        display: none;
+    }
+
+    .fi-topbar .fi-global-search:is(:focus-within, :has(.fi-input:not(:placeholder-shown))) .fi-global-search-field {
+        position: absolute;
+        inset-inline: 1rem;
+        top: 50%;
+        z-index: 20;
+        translate: 0 -50%;
+    }
+
+    .fi-topbar .fi-global-search:is(:focus-within, :has(.fi-input:not(:placeholder-shown))) .fi-input-wrp {
+        justify-content: flex-start;
+        width: 100%;
+        height: 2.5rem;
+        background-color: #fff !important;
+    }
+
+    .dark .fi-topbar .fi-global-search:is(:focus-within, :has(.fi-input:not(:placeholder-shown))) .fi-input-wrp {
+        background-color: var(--nu-sidebar-bg) !important;
+    }
+
+    .fi-topbar .fi-global-search:is(:focus-within, :has(.fi-input:not(:placeholder-shown))) .fi-input-wrp-prefix {
+        padding-inline: 0.75rem 0.5rem;
+    }
+
+    .fi-topbar
+        .fi-global-search:is(:focus-within, :has(.fi-input:not(:placeholder-shown)))
+        .fi-input-wrp-prefix
+        .fi-icon {
+        color: var(--nu-color-text-muted) !important;
+    }
+
+    .fi-topbar .fi-global-search:is(:focus-within, :has(.fi-input:not(:placeholder-shown))) .fi-input-wrp-content-ctn {
+        position: static;
+    }
+
+    .fi-topbar .fi-global-search:is(:focus-within, :has(.fi-input:not(:placeholder-shown))) .fi-input {
+        cursor: text;
+        opacity: 1;
+    }
+
+    .fi-topbar .fi-global-search-results-ctn {
+        top: 100%;
+    }
+}
+
 .fi-topbar-item.fi-active .fi-topbar-item-btn {
     background-color: rgb(255 255 255 / 15%) !important;
 }
