@@ -33,6 +33,8 @@ function comparableFooter(string $html): string
 {
     $html = (string) preg_replace('#<style>.*?</style>#s', '', $html);
     $html = (string) preg_replace('/&copy; \d{4}/', '&copy; YEAR', $html);
+    // 4.3 added a line-break opportunity after the @ in the email address; the text is the same.
+    $html = str_replace('<wbr>', '', $html);
     $html = (string) preg_replace('/>\s+</', '><', $html);
 
     return trim((string) preg_replace('/\s+/', ' ', $html));

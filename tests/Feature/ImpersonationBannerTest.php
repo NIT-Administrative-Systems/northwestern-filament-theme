@@ -383,6 +383,34 @@ it('hides the banner on print', function () {
     expect($html)->toContain('@media print');
 });
 
+it('fits the banner in one 56px row at every width', function () {
+    $html = view('northwestern-filament-theme::impersonation-banner', ['config' => new ImpersonationBannerConfig(label: 'Test')])->render();
+
+    expect($html)
+        ->toContain('--nu-impersonate-banner-height: 56px;')
+        ->not->toContain('90px')
+        ->not->toContain('flex-direction: column');
+});
+
+it('renders the banner component outside a panel with the same props as the plugin', function () {
+    // The test case boots only the theme's service provider, not Filament's.
+    expect(app()->bound('filament'))->toBeFalse();
+
+    $html = Blade::render('<x-northwestern-filament-theme::impersonation-banner :visible="true" label="Impersonating Jane Doe" leave-url="/impersonate/leave" leave-label="Stop" leave-method="delete" />');
+
+    expect($html)
+        ->toContain('class="nu-impersonate-banner"')
+        ->toContain('Impersonating Jane Doe')
+        ->toContain('action="/impersonate/leave"')
+        ->toContain('value="DELETE"')
+        ->toContain('Stop');
+});
+
+it('renders nothing from the banner component when no one is impersonating', function () {
+    expect(trim(Blade::render('<x-northwestern-filament-theme::impersonation-banner />')))->toBe('')
+        ->and(trim(Blade::render('<x-northwestern-filament-theme::impersonation-banner :visible="false" />')))->toBe('');
+});
+
 it('has the impersonation banner view file', function () {
     $viewPath = __DIR__ . '/../../resources/views/impersonation-banner.blade.php';
 

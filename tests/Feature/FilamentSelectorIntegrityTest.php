@@ -35,6 +35,8 @@ it('only targets fi-* selectors that exist in Filament source', function () {
         'fi-status-info',
         'fi-status-success',
         'fi-status-warning',
+        // "fi-color-{$color}" for the badge color NorthwesternTheme gives an empty Filters badge
+        'fi-color-nu-empty',
     ];
 
     $missingSelectors = [];

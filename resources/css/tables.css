@@ -173,3 +173,12 @@ th.fi-ta-selection-cell {
 .fi-ta-placeholder {
     color: var(--nu-color-text-muted);
 }
+
+/* Filament gives the table's Filters button a badge with the active filter count even when it
+   is 0. The theme marks a 0 count with the nu-empty badge color (see NorthwesternTheme), and
+   that badge is hidden here. */
+.fi-ac-icon-btn-action .fi-icon-btn-badge-ctn:has(> .fi-color-nu-empty),
+.fi-ac-btn-action .fi-btn-badge-ctn:has(> .fi-color-nu-empty),
+.fi-ac-link-action .fi-link-badge-ctn:has(> .fi-color-nu-empty) {
+    display: none;
+}

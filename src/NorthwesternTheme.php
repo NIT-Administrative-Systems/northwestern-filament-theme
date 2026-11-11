@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Northwestern\FilamentTheme;
 
+use Filament\Actions\Action;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Assets\Css;
@@ -33,6 +34,9 @@ class NorthwesternTheme implements Plugin
     /** The favicon that Department Templates 4.0 pages declare as their shortcut icon. */
     public const string FAVICON_URL = 'https://common.northwestern.edu/favicon.ico';
 
+    /** The badge color that marks an empty Filters badge for the theme CSS to hide. */
+    private const string EMPTY_BADGE_COLOR = 'nu-empty';
+
     protected bool $registerAssets = true;
 
     public static function make(): static
@@ -44,6 +48,21 @@ class NorthwesternTheme implements Plugin
     public function getId(): string
     {
         return 'northwestern-theme';
+    }
+
+    /**
+     * The configured unit lockup as a URL, or null when there is none.
+     *
+     * The lockup comes from `northwestern-filament-theme.lockup` (`NU_LOCKUP`), then the
+     * legacy `northwestern-theme.lockup`. It is the white version the panels' purple top
+     * bar shows, so use it on purple. The `<x-northwestern-filament-theme::lockup />`
+     * component renders it, or the wordmark when this is null.
+     */
+    public static function lockupUrl(): ?string
+    {
+        $lockup = ConfigResolver::lockup();
+
+        return $lockup === null ? null : asset($lockup);
     }
 
     /**
@@ -83,6 +102,25 @@ class NorthwesternTheme implements Plugin
         if ($assets !== []) {
             FilamentAsset::register($assets, 'northwestern-sysdev/northwestern-filament-theme');
         }
+
+        $this->hideEmptyFiltersBadge();
+    }
+
+    /**
+     * Mark a 0 on a table's Filters button so the theme CSS can hide it.
+     *
+     * Filament gives the button a badge with the active filter count even when
+     * nothing is filtered. CSS can't read the count, so a 0 gets the nu-empty badge
+     * color, which tables.css hides. A table that sets its own badge color keeps it.
+     * Each panel that registers the plugin adds the same check, which is harmless.
+     */
+    protected function hideEmptyFiltersBadge(): void
+    {
+        Action::configureUsing(function (Action $action): void {
+            if ($action->getName() === 'openFilters') {
+                $action->badgeColor(fn (Action $action): ?string => $action->getBadge() === '0' ? self::EMPTY_BADGE_COLOR : null);
+            }
+        });
     }
 
     /**
@@ -119,10 +157,10 @@ class NorthwesternTheme implements Plugin
             return;
         }
 
-        $lockup = ConfigResolver::lockup();
+        $lockup = self::lockupUrl();
 
         if ($lockup !== null) {
-            $panel->brandLogo(asset($lockup));
+            $panel->brandLogo($lockup);
 
             return;
         }

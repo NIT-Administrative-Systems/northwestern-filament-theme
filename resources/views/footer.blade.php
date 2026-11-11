@@ -101,7 +101,8 @@
                                       d="M5.8,22.2l.1.3,1.3,6.9a1.44,1.44,0,0,0,.9,1.1,1.6,1.6,0,0,0,1.5-.1,39.18,39.18,0,0,0,4-2.7Z" />
                             </svg>
                             <span class="nu-sr-only">Email address</span>
-                            <p><a href="mailto:{{ $office["email"] }}">{{ $office["email"] }}</a></p>
+                            {{-- <wbr> lets a long address wrap after the @ instead of inside the domain. --}}
+                            <p><a href="mailto:{{ $office["email"] }}">{!! str_replace("@", "@<wbr>", e($office["email"])) !!}</a></p>
                         </div>
                     @endif
                 </address>

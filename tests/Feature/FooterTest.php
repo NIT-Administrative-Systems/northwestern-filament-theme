@@ -193,7 +193,17 @@ it('renders office details including an optional fax', function () {
         ->toContain('<h2 class="nu-footer-unit">Test Office</h2>')
         ->toContain('Fax number')
         ->toContain('847-555-0001')
-        ->toContain('<a href="mailto:test@northwestern.edu">test@northwestern.edu</a>');
+        ->toContain('<a href="mailto:test@northwestern.edu">test@<wbr>northwestern.edu</a>');
+});
+
+it('escapes the email address around its line break', function () {
+    $html = view('northwestern-filament-theme::footer', ['config' => new FooterConfig(
+        officeEmail: '<b>help</b>@northwestern.edu',
+    )])->render();
+
+    expect($html)
+        ->toContain('&lt;b&gt;help&lt;/b&gt;@<wbr>northwestern.edu')
+        ->not->toContain('<b>help</b>');
 });
 
 it('hides the fax row when there is no fax', function () {
@@ -264,7 +274,7 @@ it('renders the unit and quick links from the theme config', function () {
         ->toContain('<h2 class="nu-footer-unit">Feinberg IT</h2>')
         ->toContain('420 E Superior St')
         ->toContain('312-503-0001')
-        ->toContain('<a href="mailto:feinberg-it@northwestern.edu">feinberg-it@northwestern.edu</a>')
+        ->toContain('<a href="mailto:feinberg-it@northwestern.edu">feinberg-it@<wbr>northwestern.edu</a>')
         ->toContain('<a href="https://status.example.com">Service Status</a>')
         ->not->toContain(FooterConfig::DEFAULT_OFFICE['name']);
 });

@@ -61,10 +61,12 @@ test("footer - dark", async ({ page }) => {
 
 /**
  * The login page has no theme switcher, so set Filament's stored theme
- * before the page loads.
+ * before the page loads. Filament 5 reads `filament:theme:mode`; Filament 4
+ * read `theme`.
  */
 async function gotoLogin(page: Page, scheme: "light" | "dark") {
     await page.addInitScript((value) => {
+        localStorage.setItem("filament:theme:mode", value);
         localStorage.setItem("theme", value);
     }, scheme);
     await page.goto("/login", { waitUntil: "load" });

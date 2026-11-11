@@ -4,14 +4,10 @@
 @endphp
 
 <style>
+    /* Standalone: the banner also renders outside Filament (the impersonation-banner component),
+       so every theme variable it reads has a fallback. One row at every width. */
     :root {
-        --nu-impersonate-banner-height: 90px;
-    }
-
-    @media (min-width: 640px) {
-        :root {
-            --nu-impersonate-banner-height: 56px;
-        }
+        --nu-impersonate-banner-height: 56px;
     }
 
     .nu-impersonate-banner {
@@ -19,7 +15,7 @@
         top: 0;
         z-index: 29;
         background-color: oklch(0.5400 0.2020 21.239);
-        font-family: var(--nu-font-body);
+        font-family: var(--nu-font-body, "Akkurat Pro", Arial, sans-serif);
     }
 
     .fi-topbar-ctn {
@@ -27,34 +23,32 @@
     }
 
     .nu-impersonate-banner-inner {
+        box-sizing: border-box;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
+        justify-content: space-between;
+        gap: 0.75rem;
         min-height: var(--nu-impersonate-banner-height);
         max-width: 80rem;
         margin: 0 auto;
-        padding: 0 1rem;
+        padding: 0.5rem 1rem;
     }
 
     @media (min-width: 640px) {
         .nu-impersonate-banner-inner {
-            flex-direction: row;
-            justify-content: space-between;
-            gap: 0.75rem;
-            padding: 0 1.5rem;
+            padding: 0.5rem 1.5rem;
         }
     }
 
     .nu-impersonate-banner-info {
         display: flex;
         align-items: center;
-        justify-content: center;
         gap: 0.75rem;
+        min-width: 0;
     }
 
     .nu-impersonate-banner-icon {
+        display: none;
         width: 1.25rem;
         height: 1.25rem;
         flex-shrink: 0;
@@ -62,21 +56,16 @@
     }
 
     .nu-impersonate-banner-text {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 0 0.5rem;
-        text-align: center;
-        font-size: var(--nu-text-sm);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        min-width: 0;
+        overflow: hidden;
+        text-align: start;
+        font-size: var(--nu-text-sm, 0.8125rem);
         font-weight: 500;
+        line-height: 1.3;
         color: #fff;
-    }
-
-    @media (min-width: 640px) {
-        .nu-impersonate-banner-text {
-            text-align: left;
-        }
     }
 
     .nu-impersonate-banner-btn {
@@ -84,10 +73,12 @@
         align-items: center;
         gap: 0.5rem;
         flex-shrink: 0;
-        padding: 0.5rem 0.875rem;
-        font-family: var(--nu-font-body);
-        font-size: var(--nu-text-sm);
+        padding: 0.375rem 0.75rem;
+        font-family: inherit;
+        font-size: var(--nu-text-sm, 0.8125rem);
         font-weight: 600;
+        line-height: 1.3;
+        white-space: nowrap;
         color: oklch(0.5400 0.2020 21.239);
         background-color: #fff;
         border: none;
@@ -112,8 +103,21 @@
     }
 
     .nu-impersonate-banner-btn-icon {
+        display: none;
         width: 1rem;
         height: 1rem;
+    }
+
+    @media (min-width: 640px) {
+
+        .nu-impersonate-banner-icon,
+        .nu-impersonate-banner-btn-icon {
+            display: block;
+        }
+
+        .nu-impersonate-banner-btn {
+            padding: 0.5rem 0.875rem;
+        }
     }
 
     @media print {

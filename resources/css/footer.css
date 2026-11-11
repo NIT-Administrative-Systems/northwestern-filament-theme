@@ -97,7 +97,7 @@
 .nu-footer-contact-item {
     position: relative;
     margin: 0 0 2rem 2rem;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
 }
 
 .nu-footer-contact-item:last-child {

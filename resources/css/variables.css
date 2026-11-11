@@ -2,10 +2,21 @@
    Theme Tokens
    The brand palette, font stacks and --nu-border-radius come from
    @nu-appdev/northwestern-tokens (imported in theme.css). This file holds
-   the interface tokens the package does not define.
+   the interface tokens the package does not define, and the Rich Black
+   tints the package has not caught up with yet.
    ========================================================================== */
 
 :root {
+    /* Rich Black tints from the current brand palette:
+       https://www.northwestern.edu/brand/visual-identity/color-palettes/
+       @nu-appdev/northwestern-tokens 1.0.1 still has the older values, so
+       dist/tokens.css carries them until the package is updated. Remove
+       these four once it is. */
+    --nu-black-80: #1f1f1f;
+    --nu-black-50: #606060;
+    --nu-black-20: #b8b8b8;
+    --nu-black-10: #dadada;
+
     --nu-color-text: var(--nu-black-80);
     --nu-color-text-muted: var(--nu-black-50);
     --nu-color-link: var(--nu-purple-100);
