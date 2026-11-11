@@ -63,3 +63,18 @@ it('defines all hex color constants', function () {
     expect(Colors::GOLD)->toBe('#FFC520');
     expect(Colors::BLUE)->toBe('#5091CD');
 });
+
+it('uses the current Rich Black tints from the brand palette', function () {
+    expect(Colors::RICH_BLACK_80)->toBe('#1F1F1F')
+        ->and(Colors::RICH_BLACK_50)->toBe('#606060')
+        ->and(Colors::RICH_BLACK_20)->toBe('#B8B8B8')
+        ->and(Colors::RICH_BLACK_10)->toBe('#DADADA');
+});
+
+it('gives the theme CSS the same Rich Black tints as Colors', function () {
+    $css = (string) file_get_contents(__DIR__ . '/../../resources/css/variables.css');
+
+    foreach (['80' => Colors::RICH_BLACK_80, '50' => Colors::RICH_BLACK_50, '20' => Colors::RICH_BLACK_20, '10' => Colors::RICH_BLACK_10] as $tint => $hex) {
+        expect($css)->toContain("--nu-black-{$tint}: " . strtolower($hex) . ';');
+    }
+});

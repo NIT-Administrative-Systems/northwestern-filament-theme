@@ -10,7 +10,7 @@ namespace Northwestern\FilamentTheme;
  * Palette arrays use Filament's 50–950 shade scale.
  * Hex values follow official brand guidelines.
  *
- * @see https://www.northwestern.edu/brand/visual-identity/color/index.html
+ * @see https://www.northwestern.edu/brand/visual-identity/color-palettes/
  */
 final class Colors
 {
@@ -56,13 +56,13 @@ final class Colors
 
     public const string RICH_BLACK_100 = '#000000';
 
-    public const string RICH_BLACK_80 = '#342F2E';
+    public const string RICH_BLACK_80 = '#1F1F1F';
 
-    public const string RICH_BLACK_50 = '#716C6B';
+    public const string RICH_BLACK_50 = '#606060';
 
-    public const string RICH_BLACK_20 = '#BBB8B8';
+    public const string RICH_BLACK_20 = '#B8B8B8';
 
-    public const string RICH_BLACK_10 = '#D8D6D6';
+    public const string RICH_BLACK_10 = '#DADADA';
 
     // -------------------------------------------------------------------------
     // Secondary: Brights
