@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.3.0] - 2026-11-11
+
+### Added
+
+- `<x-northwestern-filament-theme::impersonation-banner />` renders the impersonation banner outside a panel, such as on a public layout. Its props match `->impersonationBanner()`, and it renders nothing unless someone is impersonating
+- `<x-northwestern-filament-theme::lockup />` renders the configured unit lockup, or the white wordmark when none is set, for a purple header outside a panel. It keeps clear space of half its height and does not shrink in a flex row
+- `NorthwesternTheme::lockupUrl()` returns the configured `lockup` as a URL, or `null`
+
+### Changed
+
+- Below 1024px the top bar keeps the wordmark, at `1rem` tall, and anything on `TOPBAR_LOGO_AFTER` truncates beside it. Filament hides both there by default
+- Below 640px global search in the top bar folds to its magnifying glass and opens across the bar when it has focus, so the bar fits at 360px
+- The impersonation banner is one 56px row on phones too, instead of 90px over two rows
+- `Colors::RICH_BLACK_80`, `RICH_BLACK_50`, `RICH_BLACK_20` and `RICH_BLACK_10` are the current brand palette's `#1F1F1F`, `#606060`, `#B8B8B8` and `#DADADA`, and `dist/theme.css` uses them for `--nu-black-*`
+
+### Fixed
+
+- The footer's email address wraps after the `@` instead of inside the domain
+- A table's Filters button no longer shows a "0" badge when no filters are active
+
 ## [4.2.1] - 2026-10-06
 
 ### Fixed
@@ -254,7 +274,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.2.1...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.3.0...HEAD
+[4.3.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.2.1...v4.3.0
 [4.2.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.2.0...v4.2.1
 [4.2.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.2...v4.2.0
 [4.1.2]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.1...v4.1.2

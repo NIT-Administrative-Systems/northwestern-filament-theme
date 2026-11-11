@@ -186,6 +186,8 @@ The palette, fonts and radius come from [`@nu-appdev/northwestern-tokens`](https
 
 `dist/tokens.css` contains only the Northwestern `@font-face` rules and the `--nu-*` custom properties, with no Filament selectors. Use it on pages that render outside a panel, such as an error layout, together with the [footer component](#outside-a-panel). Inside a panel you don't need it: `dist/theme.css` already includes it.
 
+`dist/tokens.css` is copied from `@nu-appdev/northwestern-tokens`, which still has the older Rich Black tints. `dist/theme.css` overrides `--nu-black-80`, `--nu-black-50`, `--nu-black-20` and `--nu-black-10` with the [current palette](https://www.northwestern.edu/brand/visual-identity/color-palettes/) (`#1F1F1F`, `#606060`, `#B8B8B8`, `#DADADA`), the same values as `Colors::RICH_BLACK_*`.
+
 ## Dark Mode
 
 The theme adapts to Filament's dark mode setting automatically. No extra configuration needed.
@@ -201,6 +203,22 @@ The brand logo is resolved in the following order:
 3. The Department Templates 4.0 "Northwestern" wordmark, as inline SVG. It is Northwestern Purple on light backgrounds and white in the topbar and in dark mode.
 
 The default favicon is `https://common.northwestern.edu/favicon.ico`, the icon dept 4.0 pages use.
+
+Below 1024px, where Filament hides the start of the top bar, the theme keeps it: the wordmark shrinks to `1rem` tall, a configured lockup keeps its height, and anything on `PanelsRenderHook::TOPBAR_LOGO_AFTER`, such as an application name, truncates to the room left. Below 640px global search folds to its magnifying glass and opens across the bar when it has focus, so the bar fits at 360px.
+
+### Lockup Outside a Panel
+
+`NorthwesternTheme::lockupUrl()` returns the configured `lockup` passed through `asset()`, or `null` when none is set. It is the white version the panels' purple top bar shows.
+
+The `<x-northwestern-filament-theme::lockup />` component renders that lockup, or the white dept 4.0 wordmark when none is set, for a purple header outside a panel, such as a public page:
+
+```blade
+<header class="bg-nu-purple-120 flex items-center px-4">
+    <x-northwestern-filament-theme::lockup href="https://www.northwestern.edu/" />
+</header>
+```
+
+`href` wraps it in a link, `height` sets its height (default `1.5rem`, the panels' logo height) and `label` its accessible name (default "Northwestern University", followed by the unit name when a lockup is set). It keeps clear space of half its height above, below and after it, and it does not shrink in a flex row. It reads only config, so error pages can render it.
 
 If your application uses [`northwestern-sysdev/northwestern-laravel-ui`](https://github.com/NIT-Administrative-Systems/northwestern-laravel-ui), its legacy `northwestern-theme.lockup` value still applies when the new `lockup` is unset. Its default is the `v8` wordmark URL, so set the legacy `lockup` to `null`, or move to the new config, to get the dept 4.0 wordmark.
 
@@ -301,6 +319,18 @@ NorthwesternTheme::make()
 NorthwesternTheme::make()
     ->withoutImpersonationBanner()
 ```
+
+### Outside a Panel
+
+The `<x-northwestern-filament-theme::impersonation-banner />` component renders the same banner on pages outside a panel, such as a public layout. It renders nothing unless someone is impersonating, and it needs no Filament panel. Its props match `->impersonationBanner()` and default the same way:
+
+```blade
+<x-northwestern-filament-theme::impersonation-banner />
+
+<x-northwestern-filament-theme::impersonation-banner leave-url="/my-app/stop-impersonating" leave-method="DELETE" />
+```
+
+Put it before the page header: it sticks to the top of the window and is `--nu-impersonate-banner-height` (56px) tall at every width.
 
 > [!NOTE]
 >
@@ -435,6 +465,8 @@ This publishes the following templates to `resources/views/vendor/northwestern-f
 - `impersonation-banner.blade.php` — the impersonation session banner
 - `footer.blade.php` — the institutional footer
 - `components/footer.blade.php` — the `<x-northwestern-filament-theme::footer />` component
+- `components/impersonation-banner.blade.php` — the `<x-northwestern-filament-theme::impersonation-banner />` component
+- `components/lockup.blade.php` — the `<x-northwestern-filament-theme::lockup />` component
 - `social-icon.blade.php` — the "Connect" icons
 - `wordmark.blade.php` — the inline dept 4.0 wordmarks
 
