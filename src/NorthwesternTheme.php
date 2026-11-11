@@ -51,6 +51,21 @@ class NorthwesternTheme implements Plugin
     }
 
     /**
+     * The configured unit lockup as a URL, or null when there is none.
+     *
+     * The lockup comes from `northwestern-filament-theme.lockup` (`NU_LOCKUP`), then the
+     * legacy `northwestern-theme.lockup`. It is the white version the panels' purple top
+     * bar shows, so use it on purple. The `<x-northwestern-filament-theme::lockup />`
+     * component renders it, or the wordmark when this is null.
+     */
+    public static function lockupUrl(): ?string
+    {
+        $lockup = ConfigResolver::lockup();
+
+        return $lockup === null ? null : asset($lockup);
+    }
+
+    /**
      * Skip CSS asset registration via FilamentAsset.
      *
      * Use when importing theme CSS in a Vite panel theme.
@@ -142,10 +157,10 @@ class NorthwesternTheme implements Plugin
             return;
         }
 
-        $lockup = ConfigResolver::lockup();
+        $lockup = self::lockupUrl();
 
         if ($lockup !== null) {
-            $panel->brandLogo(asset($lockup));
+            $panel->brandLogo($lockup);
 
             return;
         }
