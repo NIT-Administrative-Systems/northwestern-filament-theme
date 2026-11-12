@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.4.0] - 2026-11-12
+
 ### Added
 
 - `nu-topbar-icon-below-xl`, for an application's own top-bar control such as a Help menu, shows only the control's icon below 1280px and keeps the rest for screen readers
@@ -294,7 +296,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.3.0...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.4.0...HEAD
+[4.4.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.3.0...v4.4.0
 [4.3.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.2.1...v4.3.0
 [4.2.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.2.0...v4.2.1
 [4.2.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.2...v4.2.0
