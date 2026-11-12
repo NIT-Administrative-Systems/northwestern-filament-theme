@@ -2,6 +2,9 @@
     /** @var \Northwestern\FilamentTheme\EnvironmentIndicator\EnvironmentIndicatorConfig $config */
     // "topbar" on full pages, "simple" at the top of simple pages such as login.
     $placement ??= "topbar";
+    $label = $config->resolveLabel();
+    // The top bar shows the short label below xl, where the full one crowds it.
+    $shortLabel = $placement === "topbar" ? $config->resolveShortLabel() : $label;
 @endphp
 
 @if ($placement === "simple")
@@ -17,7 +20,12 @@
               d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495ZM10 5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 5Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
               clip-rule="evenodd" />
     </svg>
-    {{ $config->resolveLabel() }}
+    @if ($shortLabel === $label)
+        {{ $label }}
+    @else
+        <span class="nu-env-indicator-label">{{ $label }}</span>
+        <span class="nu-env-indicator-label-short">{{ $shortLabel }}</span>
+    @endif
 </div>
 @if ($placement === "simple")
     </div>
@@ -58,6 +66,20 @@
     @media (min-width: 640px) {
         .nu-env-indicator {
             display: inline-flex !important;
+        }
+    }
+
+    .nu-env-indicator-label-short {
+        display: none;
+    }
+
+    @media (max-width: 1279.98px) {
+        .nu-env-indicator-label {
+            display: none;
+        }
+
+        .nu-env-indicator-label-short {
+            display: inline;
         }
     }
 

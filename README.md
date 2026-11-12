@@ -204,7 +204,37 @@ The brand logo is resolved in the following order:
 
 The default favicon is `https://common.northwestern.edu/favicon.ico`, the icon dept 4.0 pages use.
 
-Below 1024px, where Filament hides the start of the top bar, the theme keeps it: the wordmark shrinks to `1rem` tall, a configured lockup keeps its height, and anything on `PanelsRenderHook::TOPBAR_LOGO_AFTER`, such as an application name, truncates to the room left. Below 640px global search folds to its magnifying glass and opens across the bar when it has focus, so the bar fits at 360px.
+The top bar fits from 320px to desktop widths. The wordmark and the buttons at its end keep their size, and when the bar runs short, global search narrows to `9rem` and anything on `PanelsRenderHook::TOPBAR_LOGO_AFTER`, such as an application name, truncates to the room left. Below 1024px, where Filament hides the start of the top bar, the theme keeps it, with the wordmark `1rem` tall, or `0.875rem` below 384px; a configured lockup keeps its height. Below 640px global search folds to its magnifying glass and opens across the bar when it has focus. At 320px the bar has room for the wordmark, search, notifications and the user menu; hide anything else your application adds there in its own theme.
+
+### Your Own Top Bar Items
+
+An item your application adds to the top bar, such as a Help menu on `PanelsRenderHook::GLOBAL_SEARCH_AFTER`, can show only its icon below 1280px (Tailwind's `xl`), where the bar has less room. Put `nu-topbar-icon-below-xl` on the item's control, make the icon the control's first child, and give the control an `aria-label`. The rest of its content leaves the screen but stays in the page for screen readers.
+
+```blade
+<x-filament::dropdown placement="bottom-end" teleport>
+    <x-slot name="trigger">
+        <button class="nu-topbar-icon-below-xl flex h-9 items-center gap-1.5 px-3 text-sm text-white" type="button"
+            aria-label="Help">
+            <x-filament::icon class="size-5" icon="heroicon-o-question-mark-circle" />
+            <span>Help</span>
+            <x-filament::icon class="size-4" icon="heroicon-m-chevron-down" />
+        </button>
+    </x-slot>
+
+    {{-- ... --}}
+</x-filament::dropdown>
+```
+
+### Focus on Purple
+
+Keyboard focus on the top bar, the footer and the lockup is a 3px white outline set 2px off the control, because the purple focus ring the theme uses elsewhere would vanish on purple. Your own markup on purple, such as a public page's header, gets the same ring with the `nu-focus-on-purple` class, on the link or button itself or on any element around them. The class comes with `dist/theme.css`. The ring is also available as two custom properties, `--nu-focus-outline-on-purple` (`3px solid #fff`) and `--nu-focus-outline-offset-on-purple` (`2px`):
+
+```css
+.my-purple-banner a:focus-visible {
+    outline: var(--nu-focus-outline-on-purple);
+    outline-offset: var(--nu-focus-outline-offset-on-purple);
+}
+```
 
 ### Lockup Outside a Panel
 
@@ -213,7 +243,7 @@ Below 1024px, where Filament hides the start of the top bar, the theme keeps it:
 The `<x-northwestern-filament-theme::lockup />` component renders that lockup, or the white dept 4.0 wordmark when none is set, for a purple header outside a panel, such as a public page:
 
 ```blade
-<header class="bg-nu-purple-120 flex items-center px-4">
+<header class="bg-nu-purple-120 nu-focus-on-purple flex items-center px-4">
     <x-northwestern-filament-theme::lockup href="https://www.northwestern.edu/" />
 </header>
 ```
@@ -226,7 +256,7 @@ If your application uses [`northwestern-sysdev/northwestern-laravel-ui`](https:/
 
 The theme includes a built-in environment indicator that displays a gold badge and a colored top border on non-production environments: in the topbar of full pages, and at the top of simple pages such as login. This is enabled by default.
 
-The indicator automatically hides in production. The topbar badge also hides on small screens.
+The indicator automatically hides in production. The topbar badge also hides on small screens, and below 1280px it shows only the environment's name, such as "Staging", so it does not crowd the bar. Simple pages show the full label at every width.
 
 ### Disabling the Indicator
 
@@ -248,7 +278,7 @@ NorthwesternTheme::make()
 
 ### Custom Label
 
-By default, the badge reads "Environment: Local" (or whatever `APP_ENV` is set to). To customize:
+By default, the badge reads "Environment: Local" (or whatever `APP_ENV` is set to), and "Local" in the top bar below 1280px. A custom label shows at every width. To customize:
 
 ```php
 NorthwesternTheme::make()

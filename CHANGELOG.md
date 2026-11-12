@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.4.0] - 2026-11-12
+
+### Added
+
+- `nu-topbar-icon-below-xl`, for an application's own top-bar control such as a Help menu, shows only the control's icon below 1280px and keeps the rest for screen readers
+- `nu-focus-on-purple` gives an application's own links and buttons on Northwestern Purple the top bar's focus ring, which `--nu-focus-outline-on-purple` and `--nu-focus-outline-offset-on-purple` also expose
+- `EnvironmentIndicatorConfig::resolveShortLabel()` returns the environment's name alone, or the custom label when one is set
+- Filament's simple pages, such as sign-in and lockdown, give the card a Northwestern Purple top border and keep a 1rem gutter around it on phones. On touch screens their buttons, links and fields are at least 44px tall, with a link's label centered in it
+
+### Changed
+
+- The top bar fits from 320px to 1440px. The wordmark and the buttons at its end keep their size, global search narrows to `9rem`, and anything on `TOPBAR_LOGO_AFTER` truncates to the room left. `.fi-topbar-start` lays out its children in the bar itself (`display: contents`), so CSS that sizes `.fi-topbar-start` no longer applies
+- Below 384px the top bar's wordmark is `0.875rem` tall and its gaps are narrower
+- Below 1280px the top bar's environment badge shows only the environment's name, such as "Staging"
+- Keyboard focus on the top bar, the lockup and the footer's links is one ring: a 3px white outline set 2px off the control
+- Between 768px and 1024px the footer's content sits 24px from the edge, as the page content does
+
+### Fixed
+
+- A badge in a table column or infolist entry marked `->wrap()` wraps instead of running past its cell or being cut off
+- The top bar's environment badge no longer covers the wordmark at 768px, global search no longer covers it at 320px, and the user menu is no longer pushed past the edge at 1024px
+
 ## [4.3.0] - 2026-11-11
 
 ### Added
@@ -274,7 +296,8 @@ This is a breaking release. See the [Upgrading Guide](UPGRADING.md) for migratio
 - Optional footer with configurable office contact information
 - Default favicon and brand logo with automatic fallback
 
-[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.3.0...HEAD
+[Unreleased]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.4.0...HEAD
+[4.4.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.3.0...v4.4.0
 [4.3.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.2.1...v4.3.0
 [4.2.1]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.2.0...v4.2.1
 [4.2.0]: https://github.com/NIT-Administrative-Systems/northwestern-filament-theme/compare/v4.1.2...v4.2.0

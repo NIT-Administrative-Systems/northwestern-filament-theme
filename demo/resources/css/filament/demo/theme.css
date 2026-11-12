@@ -3,5 +3,14 @@
 @import "nu-theme";
 
 @source '../../../../app/Filament/**/*';
-@source '../../../../resources/views/filament/**/*';
+@source '../../../../resources/views/**/*';
 @source '../../../../vendor/filament/**/*';
+
+/* The application's own decision, as the starter makes it: below 368px
+   the top bar has no room for Help beside search, notifications and
+   the user menu, so Help is left out and everything else fits. */
+@media (width < 23rem) {
+    .fi-topbar-end [data-testid="help-menu"] {
+        display: none;
+    }
+}

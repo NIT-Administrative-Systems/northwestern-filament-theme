@@ -77,6 +77,7 @@ jobs:
           mkdir -p database storage/framework/{cache/data,sessions,views} storage/logs
           touch database/database.sqlite
           php artisan key:generate
+          php artisan migrate --seed --force
 
       - name: Playwright Cache
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0

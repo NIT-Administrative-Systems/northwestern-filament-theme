@@ -59,6 +59,10 @@
     --nu-focus-border: #a795c2;
     --nu-focus-shadow-color: rgb(78 42 132 / 25%);
 
+    /* The focus ring on Northwestern Purple, for the top bar and nu-focus-on-purple. */
+    --nu-focus-outline-on-purple: 3px solid #fff;
+    --nu-focus-outline-offset-on-purple: 2px;
+
     --nu-purple-surface: #f9f6ff;
     --nu-purple-surface-subtle: #f3f0f7;
     --nu-purple-tint: rgb(78 42 132 / 15%);

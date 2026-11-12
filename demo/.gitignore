@@ -13,3 +13,4 @@ package-lock.json
 test-results/
 playwright-report/
 database/database.sqlite
+e2e/.auth/

@@ -85,26 +85,79 @@ body.fi-body {
     margin-inline-end: 0.5rem;
 }
 
-/* Below lg, Filament hides the start of the top bar, and with it the wordmark and anything on
-   TOPBAR_LOGO_AFTER, such as an application name. The brand needs the wordmark on every page,
-   so keep it at every width, a little smaller, and let what follows it truncate instead. On a
-   360px phone with search, notifications and the user menu, that leaves about 3rem for a name. */
-@media (width < 64rem) {
-    .fi-topbar-start {
-        display: flex;
-        flex: 0 1 auto;
-        min-width: 0;
-        margin-inline-end: 0.75rem;
-    }
+/* The top bar keeps the wordmark at every width. Filament hides the bar's
+   start below lg, and with it the wordmark and anything on the hook
+   TOPBAR_LOGO_AFTER, such as an application name, but the brand
+   needs the wordmark on every page. Laying out the start's own
+   children in the bar lets each give way on its own: the name
+   truncates and search narrows, while the wordmark and the
+   buttons at the end keep their size, so nothing covers
+   the wordmark and the user menu stays on the bar. */
+.fi-topbar-start {
+    display: contents;
+}
 
-    /* The desktop collapse buttons. The bar's own open and close buttons do that job here. */
+.fi-topbar-start > a:has(> .fi-logo),
+.fi-topbar-start > .fi-logo {
+    flex-shrink: 0;
+}
+
+.fi-topbar-start > :not(a:has(> .fi-logo), .fi-logo) {
+    min-width: 0;
+}
+
+.fi-topbar .fi-topbar-open-sidebar-btn,
+.fi-topbar .fi-topbar-close-sidebar-btn {
+    flex-shrink: 0;
+}
+
+/* The start's own end margin is gone with its box, so the end keeps the gap. */
+.fi-topbar-end {
+    padding-inline-start: 0.75rem;
+}
+
+/* An avatar's max-width of 100% would count the user menu as 2px wide. */
+.fi-topbar-end > * {
+    flex-shrink: 0;
+    min-width: max-content;
+}
+
+.fi-topbar-end > .fi-global-search-ctn {
+    flex-shrink: 1;
+    min-width: 2.25rem;
+}
+
+.fi-topbar-end
+    > .fi-global-search-ctn
+    :is(.fi-global-search, .fi-global-search-field, .fi-input-wrp, .fi-input-wrp-content-ctn, .fi-input) {
+    min-width: 0;
+}
+
+@media (width >= 40rem) {
+    .fi-topbar-end > .fi-global-search-ctn {
+        min-width: 9rem;
+    }
+}
+
+/* An application's own item in the bar, such as a Help menu, shows only its
+   icon below xl, when its control has this class and an aria-label, and
+   the icon is the control's first child. The rest leaves the screen
+   but stays in the page for screen readers that skip aria-label. */
+@media (width < 80rem) {
+    .fi-topbar .nu-topbar-icon-below-xl > :not(:first-child) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        white-space: nowrap;
+        clip-path: inset(50%);
+    }
+}
+
+@media (width < 64rem) {
+    /* Below lg the bar's own open and close buttons replace the collapse buttons. */
     .fi-topbar-start .fi-topbar-collapse-sidebar-btn-ctn {
         display: none;
-    }
-
-    .fi-topbar-start > a:has(> .fi-logo),
-    .fi-topbar-start > .fi-logo {
-        flex-shrink: 0;
     }
 
     .fi-topbar-start .fi-logo {
@@ -116,19 +169,21 @@ body.fi-body {
         height: 1rem !important;
     }
 
-    .fi-topbar-start > :not(a:has(> .fi-logo), .fi-logo) {
-        min-width: 0;
-    }
-
-    /* Filament lets the buttons at the end shrink, which pushes the user menu off the bar. */
     .fi-topbar-end {
-        flex-shrink: 0;
         column-gap: 0.5rem;
     }
+}
 
-    .fi-topbar .fi-topbar-open-sidebar-btn,
-    .fi-topbar .fi-topbar-close-sidebar-btn {
-        margin-inline-end: 0.75rem !important;
+/* Below 384px the wordmark is smaller and the gaps narrower, so a 320px
+   bar has room for the wordmark, search, notifications and user menu. */
+@media (width < 24rem) {
+    .fi-topbar-start .fi-logo:has(> .nu-wordmark) {
+        height: 0.875rem !important;
+    }
+
+    .fi-topbar-end {
+        column-gap: 0.375rem;
+        padding-inline-start: 0.25rem;
     }
 }
 
@@ -294,11 +349,16 @@ body.fi-body {
     color: var(--nu-color-text-muted);
 }
 
-.fi-topbar .fi-btn:focus-visible,
-.fi-topbar .fi-icon-btn:focus-visible,
-.fi-topbar .fi-user-menu-trigger:focus-visible {
-    outline: 2px solid var(--nu-topbar-text);
-    outline-offset: 2px;
+/* One focus ring on Northwestern Purple, the footer's: a 3px white outline
+   set 2px off the control. The purple ring used elsewhere would vanish on
+   the purple, so the top bar uses it, and so can an application's own
+   markup on purple, such as a site header, with nu-focus-on-purple. */
+.fi-topbar :is(a, button, [tabindex]):not(.fi-dropdown-panel *):focus-visible,
+.nu-focus-on-purple:is(a, button, [tabindex]):focus-visible,
+.nu-focus-on-purple :is(a, button, [tabindex]):not(.fi-dropdown-panel *):focus-visible {
+    outline: var(--nu-focus-outline-on-purple);
+    outline-offset: var(--nu-focus-outline-offset-on-purple);
+    box-shadow: none;
 }
 
 .fi-main {

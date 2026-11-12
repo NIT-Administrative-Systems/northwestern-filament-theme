@@ -38,6 +38,19 @@ readonly class EnvironmentIndicatorConfig
         return $label ?? 'Environment: ' . ucfirst(App::environment());
     }
 
+    /**
+     * Resolve the top bar's label below xl, where the full label crowds it:
+     * the environment's name alone, or the custom label when one is set.
+     */
+    public function resolveShortLabel(): string
+    {
+        if ($this->label !== null) {
+            return $this->resolveLabel();
+        }
+
+        return ucfirst(App::environment());
+    }
+
     /** Resolve visibility, evaluating closures. */
     public function isVisible(): bool
     {

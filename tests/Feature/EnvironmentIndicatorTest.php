@@ -151,6 +151,37 @@ it('displays the current environment name', function () {
     expect($html)->toContain('Environment: ' . ucfirst(app()->environment()));
 });
 
+it('gives the top bar a short label of the environment name alone', function () {
+    $config = new EnvironmentIndicatorConfig();
+    $html = view('northwestern-filament-theme::environment-indicator', ['config' => $config])->render();
+
+    expect($config->resolveShortLabel())->toBe(ucfirst(app()->environment()))
+        ->and($html)
+        ->toContain('<span class="nu-env-indicator-label">Environment: ' . ucfirst(app()->environment()) . '</span>')
+        ->toContain('<span class="nu-env-indicator-label-short">' . ucfirst(app()->environment()) . '</span>');
+});
+
+it('keeps a custom label as the short label', function () {
+    $config = new EnvironmentIndicatorConfig(label: fn (): string => 'Staging copy');
+    $html = view('northwestern-filament-theme::environment-indicator', ['config' => $config])->render();
+
+    expect($config->resolveShortLabel())->toBe('Staging copy')
+        ->and($html)
+        ->toContain('Staging copy')
+        ->not->toContain('nu-env-indicator-label-short">');
+});
+
+it('shows only the full label on simple pages', function () {
+    $html = view('northwestern-filament-theme::environment-indicator', [
+        'config' => new EnvironmentIndicatorConfig(),
+        'placement' => 'simple',
+    ])->render();
+
+    expect($html)
+        ->toContain('Environment: ' . ucfirst(app()->environment()))
+        ->not->toContain('nu-env-indicator-label-short">');
+});
+
 it('does not log warning when legacy indicator is absent', function () {
     $plugin = NorthwesternTheme::make();
     $method = new ReflectionMethod($plugin, 'detectLegacyEnvironmentIndicator');
