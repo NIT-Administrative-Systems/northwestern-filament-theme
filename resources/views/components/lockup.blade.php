@@ -52,8 +52,8 @@
     }
 
     a.nu-lockup:focus-visible {
-        outline: 2px solid #fff;
-        outline-offset: 2px;
+        outline: var(--nu-focus-outline-on-purple, 3px solid #fff);
+        outline-offset: var(--nu-focus-outline-offset-on-purple, 2px);
     }
 </style>
 

@@ -134,3 +134,27 @@
     border-color: var(--nu-border-color);
     box-shadow: 0 4px 24px rgb(0 0 0 / 30%) !important;
 }
+
+/* Sign-in, lockdown and Filament's other simple pages: a Northwestern Purple
+   accent on the card, and a gutter that keeps it a card on phones, where
+   Filament otherwise runs it from one edge of the screen to the other. */
+.fi-simple-main,
+.dark .fi-simple-main {
+    border-top: 4px solid var(--nu-purple-100);
+}
+
+.fi-simple-main-ctn {
+    padding-inline: 1rem;
+}
+
+/* On touch screens, the card's buttons, links and fields are at least 44px tall. */
+@media (pointer: coarse) {
+    .fi-simple-main :is(.fi-btn, .fi-link, .fi-input-wrp) {
+        min-height: 2.75rem;
+    }
+
+    /* Filament pins a link's label to the baseline, at the top of the taller link. */
+    .fi-simple-main .fi-link > .fi-link-label {
+        align-self: center;
+    }
+}

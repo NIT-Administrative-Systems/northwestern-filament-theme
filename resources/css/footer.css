@@ -42,7 +42,8 @@
 
 .nu-footer a:focus-visible {
     color: #000;
-    outline: 3px solid #fff;
+    outline: var(--nu-focus-outline-on-purple, 3px solid #fff);
+    outline-offset: var(--nu-focus-outline-offset-on-purple, 2px);
     background-color: #fff;
 }
 
@@ -174,6 +175,15 @@
     white-space: nowrap;
     border-width: 0;
     clip-path: inset(50%);
+}
+
+/* Between md and lg, Filament's page content and an application's own
+   header sit 24px from the edge, so the footer's content does too. */
+@media (48rem <= width < 64rem) {
+    .nu-footer-main,
+    .nu-footer-bottom {
+        padding-inline: 1.5rem;
+    }
 }
 
 @media (width <= 61.25em) {
